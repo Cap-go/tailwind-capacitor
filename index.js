@@ -1,0 +1,11 @@
+export const colors = require('./src/plugin-colors.js');
+export const preloader = require('./src/plugin-preloader.js');
+export const hairlines = require('./src/plugin-hairlines.js');
+export const touchRipple = require('./src/plugin-touch-ripple.js');
+export const iosMaterial = require('./src/plugin-ios-material.js'); 
+export const lineClamp = require('./src/plugin-line-clamp.js');
+export const safeAreas = require('./src/plugin-safe-areas.js');
+export const translucent = require('./src/plugin-translucent.js');
+export const range = require('./src/plugin-range.js');
+export const touch = require('./src/plugin-touch.js');
+export const noScrollbar = require('./src/plugin-no-scrollbar.js');

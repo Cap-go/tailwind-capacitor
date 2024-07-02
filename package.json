@@ -1,0 +1,27 @@
+{
+  "name": "tailwind-capacitor",
+  "version": "1.0.1",
+  "description": "Tailwind plugin for Capacitor apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cap-go/tailwind-capacitor.git"
+  },
+  "keywords": [
+    "tailwind",
+    "capacitor",
+    "plugin"
+  ],
+  "author": "Martin Donadieu (martin@capgo.app)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Cap-go/tailwind-capacitor/issues"
+  },
+  "homepage": "https://github.com/Cap-go/tailwind-capacitor#readme",
+  "dependencies": {
+    "tailwindcss": "^3.4.4"
+  }
+}
