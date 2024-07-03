@@ -18,7 +18,7 @@ module.exports = (({ addComponents }) => {
           'c-material-preloader-circle-rotate 5.6s ease-in-out infinite',
       },
 
-      '@keyframes k-ios-preloader-spin': {
+      '@keyframes c-ios-preloader-spin': {
         '0%': {
           transform: 'rotate(0deg)',
         },
@@ -27,7 +27,7 @@ module.exports = (({ addComponents }) => {
         },
       },
 
-      '@keyframes k-material-preloader-rotate': {
+      '@keyframes c-material-preloader-rotate': {
         '0%': {
           transform: 'rotate(0deg)',
         },
@@ -36,7 +36,7 @@ module.exports = (({ addComponents }) => {
         },
       },
 
-      '@keyframes k-material-preloader-circle-rotate': {
+      '@keyframes c-material-preloader-circle-rotate': {
         '0%': {
           transform: 'rotate(-90deg)',
           'stroke-dashoffset': '100px',

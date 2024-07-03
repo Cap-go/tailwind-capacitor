@@ -28,7 +28,7 @@ module.exports = (({ addUtilities, addBase, theme }) => {
           animation: 'c-touch-ripple-out 300ms forwards',
         },
       },
-      '@keyframes k-touch-ripple-in': {
+      '@keyframes c-touch-ripple-in': {
         from: {
           transform: 'translate3d(0px, 0px, 0) scale(0)',
         },
@@ -36,7 +36,7 @@ module.exports = (({ addUtilities, addBase, theme }) => {
           transform: 'var(--c-ripple-transform)',
         },
       },
-      '@keyframes k-touch-ripple-out': {
+      '@keyframes c-touch-ripple-out': {
         from: {
           opacity: '1',
         },
