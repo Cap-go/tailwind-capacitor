@@ -51,11 +51,11 @@ export const calcPopoverPosition = ({
   // eslint-disable-next-line
   const targetElStyles = window.getComputedStyle(targetEl);
   let safeAreaTop =
-    parseInt(targetElStyles.getPropertyValue('--k-safe-area-top'), 10) || 0;
+    parseInt(targetElStyles.getPropertyValue('--c-safe-area-top'), 10) || 0;
   let safeAreaLeft =
-    parseInt(targetElStyles.getPropertyValue('--k-safe-area-left'), 10) || 0;
+    parseInt(targetElStyles.getPropertyValue('--c-safe-area-left'), 10) || 0;
   let safeAreaRight =
-    parseInt(targetElStyles.getPropertyValue('--k-safe-area-right'), 10) || 0;
+    parseInt(targetElStyles.getPropertyValue('--c-safe-area-right'), 10) || 0;
   if (Number.isNaN(safeAreaTop)) safeAreaTop = 0;
   if (Number.isNaN(safeAreaLeft)) safeAreaLeft = 0;
   if (Number.isNaN(safeAreaRight)) safeAreaRight = 0;

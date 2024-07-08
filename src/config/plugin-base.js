@@ -1,4 +1,3 @@
-const plugin = require('tailwindcss/plugin');
 const hexToRgb = require('./hex-to-rgb.js');
 const iosColors = require('./ios-colors.js');
 const mdColors = require('./md-colors.js');

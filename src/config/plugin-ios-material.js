@@ -32,6 +32,7 @@ module.exports = (({ addVariant, e }) => {
         )}:active`;
       });
     });
+  
     addVariant('ios-active', ({ modifySelectors, separator }) => {
       modifySelectors(({ className }) => {
         return `.c-ios .${e(`ios-active${separator}${className}`)}:active`;

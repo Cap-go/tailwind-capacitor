@@ -46,7 +46,7 @@ export class TouchRipple {
       margin-top:-${diameter / 2}px;
       margin-left:-${diameter / 2}px;
       left:${center.x}px;
-      top:${center.y}px; --k-ripple-transform: ${ripple.rippleTransform}`;
+      top:${center.y}px; --c-ripple-transform: ${ripple.rippleTransform}`;
 
     el.insertAdjacentElement('afterbegin', ripple.rippleWaveEl);
 
