@@ -13,7 +13,7 @@ How to use
 
 1. Add the plugin to your project
 ```bash
-npm install --save-dev @tailwindcss/capacitor
+npm install --save-dev @capgo/capacitor
 ```
 
 2. Add the plugin to your tailwind config
@@ -21,16 +21,16 @@ npm install --save-dev @tailwindcss/capacitor
 // tailwind.config.js
 module.exports = {
   plugins: [
-    require('@tailwindcss/capacitor').safeAreas,
-    require('@tailwindcss/capacitor').colors,
-    require('@tailwindcss/capacitor').hairlines,
-    require('@tailwindcss/capacitor').touchRipple,
-    require('@tailwindcss/capacitor').iosMaterial,
-    require('@tailwindcss/capacitor').lineClamp,
-    require('@tailwindcss/capacitor').translucent,
-    require('@tailwindcss/capacitor').range,
-    require('@tailwindcss/capacitor').touch,
-    require('@tailwindcss/capacitor').noScrollbar,
+    require('@capgo/capacitor').safeAreas,
+    require('@capgo/capacitor').colors,
+    require('@capgo/capacitor').hairlines,
+    require('@capgo/capacitor').touchRipple,
+    require('@capgo/capacitor').iosMaterial,
+    require('@capgo/capacitor').lineClamp,
+    require('@capgo/capacitor').translucent,
+    require('@capgo/capacitor').range,
+    require('@capgo/capacitor').touch,
+    require('@capgo/capacitor').noScrollbar,
   ],
 }
 ```
