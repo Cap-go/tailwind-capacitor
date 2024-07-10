@@ -12,7 +12,21 @@ On devices with safe areas (like with top screen notch), app UI must include add
 If your app targets full screen mobile devices, make sure you have `viewport-fit=cover` in your `<meta name="viewport">`, e.g.:
 
 ```html
-<!DOCTYPE html> <html lang="en"> <head> ... <!-- Make sure you have viewport-fit=cover in content --> <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" /> </head> <body> ... </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    ...
+    <!-- Make sure you have viewport-fit=cover in content -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+  </head>
+
+  <body>
+    ...
+  </body>
+</html>
 ```
 
 ## [](/safe-areas#safe-areas)Safe Areas
@@ -20,13 +34,32 @@ If your app targets full screen mobile devices, make sure you have `viewport-fit
 To tell our components that our app is a full screen app and we need to consider safe areas, we need to add `safe-areas` class to Tailwind Capacitor components parent element, preferably to the root app element.
 
 ```html
-<!-- App.vue --> <template> <!-- add "safe-areas" class to the app root element --> <div id="my-app" class="safe-areas">...</div> </template>
+<!-- App.vue  -->
+<template>
+  <!-- add "safe-areas" class to the app root element -->
+  <div id="my-app" class="safe-areas">...</div>
+</template>
 ```
 
 This is how `safe-areas` class defined in CSS:
 
 ```css
-:root: { --c-safe-area-left: 0px; --c-safe-area-right: 0px; --c-safe-area-top: 0px; --c-safe-area-bottom: 0px; } @supports (left: env(safe-area-inset-left)): { .safe-areas: { --c-safe-area-left: env(safe-area-inset-left); --c-safe-area-right: env(safe-area-inset-right); --c-safe-area-top: env(safe-area-inset-top); --c-safe-area-bottom: env(safe-area-inset-bottom); } }
+:root: {
+  --c-safe-area-left: 0px;
+  --c-safe-area-right: 0px;
+  --c-safe-area-top: 0px;
+  --c-safe-area-bottom: 0px;
+}
+
+@supports (left: env(safe-area-inset-left)):  {
+  .safe-areas: {
+    --c-safe-area-left: env(safe-area-inset-left);
+    --c-safe-area-right: env(safe-area-inset-right);
+    --c-safe-area-top: env(safe-area-inset-top);
+    --c-safe-area-bottom: env(safe-area-inset-bottom);
+  }
+}
+
 ```
 
 ## [](/safe-areas#disable-safe-areas)Disable Safe Areas
@@ -46,7 +79,27 @@ We can disable safe areas on certain elements with the following utility classes
 This is how `no-safe-areas` classes defined in CSS:
 
 ```css
-@supports (left: env(safe-area-inset-left)): { .no-safe-areas: { --c-safe-area-left: 0px; --c-safe-area-right: 0px; --c-safe-area-top: 0px; --c-safe-area-bottom: 0px; } .no-safe-areas-top: { --c-safe-area-top: 0px; } .no-safe-areas-right: { --c-safe-area-right: 0px; } .no-safe-areas-bottom: { --c-safe-area-bottom: 0px; } .no-safe-areas-left: { --c-safe-area-left: 0px; } }
+@supports (left: env(safe-area-inset-left)):  {
+  .no-safe-areas: {
+    --c-safe-area-left: 0px;
+    --c-safe-area-right: 0px;
+    --c-safe-area-top: 0px;
+    --c-safe-area-bottom: 0px;
+  }
+  .no-safe-areas-top: {
+    --c-safe-area-top: 0px;
+  }
+  .no-safe-areas-right: {
+    --c-safe-area-right: 0px;
+  }
+  .no-safe-areas-bottom: {
+    --c-safe-area-bottom: 0px;
+  }
+  .no-safe-areas-left: {
+    --c-safe-area-left: 0px;
+  }
+}
+
 ```
 
 ## [](/safe-areas#safe-spacing-placement)Safe Spacing & Placement
