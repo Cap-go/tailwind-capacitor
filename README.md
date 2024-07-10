@@ -30,16 +30,16 @@ module.exports = {
 ```
 
 Documentation for each plugin can be found here:
-- [Safe Areas](/doc/safearea.md)
-- [Colors](/doc/colors.md)
-- [Hairlines](/doc/hairlines.md)
-- [Touch Ripple](/doc/touch-ripple.md)
-- [iOS Material](/doc/ios-material.md)
-- [Line Clamp](/doc/line-clamp.md)
-- [Translucent](/doc/translucent.md)
-- [Range](/doc/range.md)
-- [Touch](/doc/touch.md)
-- [No Scrollbar](/doc/no-scrollbar.md)
+- [Safe Areas](/blob/main/doc/safearea.md)
+- [Colors](/blob/main/doc/colors.md)
+- [Hairlines](/blob/main/doc/hairlines.md)
+- [Touch Ripple](/blob/main/doc/touch-ripple.md)
+- [iOS Material](/blob/main/doc/ios-material.md)
+- [Line Clamp](/blob/main/doc/line-clamp.md)
+- [Translucent](/blob/main/doc/translucent.md)
+- [Range](/blob/main/doc/range.md)
+- [Touch](/blob/main/doc/touch.md)
+- [No Scrollbar](/blob/main/doc/no-scrollbar.md)
 
 # Credits
 

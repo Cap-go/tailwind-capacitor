@@ -1,6 +1,6 @@
 {
   "name": "tailwind-capacitor",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Tailwind plugin for Capacitor apps",
   "main": "index.js",
   "scripts": {
