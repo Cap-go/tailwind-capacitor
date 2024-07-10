@@ -27,6 +27,7 @@ module.exports = {
     require('@tailwindcss/capacitor').noScrollbar,
   ],
 }
+```
 
 Documentation for each plugin can be found here:
 - [Safe Areas](/doc/safearea.md)
@@ -39,7 +40,6 @@ Documentation for each plugin can be found here:
 - [Range](/doc/range.md)
 - [Touch](/doc/touch.md)
 - [No Scrollbar](/doc/no-scrollbar.md)
-
 
 # Credits
 
