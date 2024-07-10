@@ -30,16 +30,16 @@ module.exports = {
 ```
 
 Documentation for each plugin can be found here:
-- [Safe Areas](/blob/main/doc/safearea.md)
-- [Colors](/blob/main/doc/colors.md)
-- [Hairlines](/blob/main/doc/hairlines.md)
-- [Touch Ripple](/blob/main/doc/touch-ripple.md)
-- [iOS Material](/blob/main/doc/ios-material.md)
-- [Line Clamp](/blob/main/doc/line-clamp.md)
-- [Translucent](/blob/main/doc/translucent.md)
-- [Range](/blob/main/doc/range.md)
-- [Touch](/blob/main/doc/touch.md)
-- [No Scrollbar](/blob/main/doc/no-scrollbar.md)
+- [Safe Areas](https://github.com/Cap-go/tailwind-capacitor/blob/main/doc/safearea.md)
+- [Colors](https://github.com/Cap-go/tailwind-capacitor/blob/main/doc/colors.md)
+- [Hairlines](https://github.com/Cap-go/tailwind-capacitor/blob/main/doc/hairlines.md)
+- [Touch Ripple](https://github.com/Cap-go/tailwind-capacitor/blob/main/doc/touch-ripple.md)
+- [iOS Material](https://github.com/Cap-go/tailwind-capacitor/blob/main/doc/ios-material.md)
+- [Line Clamp](https://github.com/Cap-go/tailwind-capacitor/blob/main/doc/line-clamp.md)
+- [Translucent](https://github.com/Cap-go/tailwind-capacitor/blob/main/doc/translucent.md)
+- [Range](https://github.com/Cap-go/tailwind-capacitor/blob/main/doc/range.md)
+- [Touch](https://github.com/Cap-go/tailwind-capacitor/blob/main/doc/touch.md)
+- [No Scrollbar](https://github.com/Cap-go/tailwind-capacitor/blob/main/doc/no-scrollbar.md)
 
 # Credits
 
