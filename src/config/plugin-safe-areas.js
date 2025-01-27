@@ -1,4 +1,4 @@
-module.exports = (({ addUtilities, addBase, theme, e }) => {
+module.exports = (({ addUtilities, addBase, theme }) => {
     const base = {
       ':root': {
         '--c-safe-area-left': '0px',
@@ -53,13 +53,13 @@ module.exports = (({ addUtilities, addBase, theme, e }) => {
 
       Object.keys(spacing).forEach((key) => {
         const value = spacing[key];
-        safe[`.p${first}-${e(key)}-safe`] = {
+        safe[`.p${first}-${key}-safe`] = {
           [`padding${upper}`]: `calc(var(--c-safe-area-${side}) + ${value})`,
         };
-        safe[`.m${first}-${e(key)}-safe`] = {
+        safe[`.m${first}-${key}-safe`] = {
           [`margin${upper}`]: `calc(var(--c-safe-area-${side}) + ${value})`,
         };
-        safe[`.${side}-${e(key)}-safe`] = {
+        safe[`.${side}-${key}-safe`] = {
           [side]: `calc(var(--c-safe-area-${side}) + ${value})`,
         };
       });
@@ -79,13 +79,13 @@ module.exports = (({ addUtilities, addBase, theme, e }) => {
 
       Object.keys(spacing).forEach((key) => {
         const value = spacing[key];
-        safe[`.p${first}-${e(key)}-safe`] = {
+        safe[`.p${first}-${key}-safe`] = {
           [`padding-inline-${side}`]: `calc(var(--c-safe-area-${areaSide}) + ${value})`,
         };
-        safe[`.m${first}-${e(key)}-safe`] = {
+        safe[`.m${first}-${key}-safe`] = {
           [`margin-inline-${side}`]: `calc(var(--c-safe-area-${areaSide}) + ${value})`,
         };
-        safe[`.${side}-${e(key)}-safe`] = {
+        safe[`.${side}-${key}-safe`] = {
           [`inset-inline-${side}`]: `calc(var(--c-safe-area-${areaSide}) + ${value})`,
         };
       });
