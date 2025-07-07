@@ -21,6 +21,7 @@ npm install --save-dev tailwind-capacitor
 // tailwind.config.js
 module.exports = {
   plugins: [
+    require('tailwind-capacitor').platform,
     require('tailwind-capacitor').safeAreas,
     require('tailwind-capacitor').colors,
     require('tailwind-capacitor').hairlines,

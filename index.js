@@ -10,3 +10,6 @@ export const safeAreas = require('./src/config/plugin-safe-areas.js');
 export const touchRipple = require('./src/config/plugin-touch-ripple.js');
 export const touch = require('./src/config/plugin-touch.js');
 export const translucent = require('./src/config/plugin-translucent.js');
+export const platform = require('./src/config/plugin-platform.js');
+
+export default safeAreas;
