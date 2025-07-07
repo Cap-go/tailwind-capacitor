@@ -37,6 +37,7 @@ module.exports = {
 ```
 
 Documentation for each plugin can be found here:
+- [Platform](https://github.com/Cap-go/tailwind-capacitor/blob/main/docs/platform.md)
 - [Safe Areas](https://github.com/Cap-go/tailwind-capacitor/blob/main/docs/safe-areas.md)
 - [Colors](https://github.com/Cap-go/tailwind-capacitor/blob/main/docs/colors.md)
 - [Hairlines](https://github.com/Cap-go/tailwind-capacitor/blob/main/docs/hairlines.md)
