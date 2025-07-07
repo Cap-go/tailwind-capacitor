@@ -7,16 +7,36 @@
 
 Tailwind plugin for capacitor apps
 
+## Version Compatibility
 
-How to use
-----------
+- **Use v4** for Tailwind CSS 4.x
+- **Use v1.0.8** for Tailwind CSS 3.x
+
+## How to use
 
 1. Add the plugin to your project
 ```bash
 npm install --save-dev tailwind-capacitor
 ```
 
-2. Add the plugin to your tailwind config
+2. Add the plugin to your CSS (Tailwind CSS 4.x)
+```css
+@import "tailwindcss";
+@plugin "@capgo/tailwind-capacitor/colors";
+@plugin "@capgo/tailwind-capacitor/hairlines";
+@plugin "@capgo/tailwind-capacitor/ios-material";
+@plugin "@capgo/tailwind-capacitor/line-clamp";
+@plugin "@capgo/tailwind-capacitor/no-scrollbar";
+@plugin "@capgo/tailwind-capacitor/preloader";
+@plugin "@capgo/tailwind-capacitor/range";
+@plugin "@capgo/tailwind-capacitor/safe-areas";
+@plugin "@capgo/tailwind-capacitor/touch-ripple";
+@plugin "@capgo/tailwind-capacitor/touch";
+@plugin "@capgo/tailwind-capacitor/translucent";
+@plugin "@capgo/tailwind-capacitor/platform";
+```
+
+Or for Tailwind CSS 3.x config style, add to your tailwind config:
 ```js
 // tailwind.config.js
 module.exports = {
@@ -34,6 +54,44 @@ module.exports = {
     require('tailwind-capacitor').noScrollbar,
   ],
 }
+```
+
+## Basic Example
+
+```vue
+<template>
+  <TailwindCapacitorProvider>
+    <App>
+      <Page>
+        <Navbar title="My App" />
+        
+        <Block>
+          <Button fill="ios:outline md:fill">
+            My Button
+          </Button>
+          
+          <List>
+            <ListItem title="Item 1" />
+            <ListItem title="Item 2" />
+          </List>
+        </Block>
+      </Page>
+    </App>
+  </TailwindCapacitorProvider>
+</template>
+
+<script setup>
+import { 
+  TailwindCapacitorProvider,
+  App, 
+  Page, 
+  Navbar, 
+  Block, 
+  Button, 
+  List, 
+  ListItem 
+} from 'tailwind-capacitor/vue'
+</script>
 ```
 
 Documentation for each plugin can be found here:

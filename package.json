@@ -1,8 +1,25 @@
 {
   "name": "@capgo/tailwind-capacitor",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Tailwind plugin for Capacitor apps",
   "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./vue": "./src/vue/capacitor-vue.js",
+    "./base": "./src/config/plugin-base.js",
+    "./colors": "./src/config/plugin-colors.js",
+    "./hairlines": "./src/config/plugin-hairlines.js",
+    "./ios-material": "./src/config/plugin-ios-material.js",
+    "./line-clamp": "./src/config/plugin-line-clamp.js",
+    "./no-scrollbar": "./src/config/plugin-no-scrollbar.js",
+    "./preloader": "./src/config/plugin-preloader.js",
+    "./range": "./src/config/plugin-range.js",
+    "./safe-areas": "./src/config/plugin-safe-areas.js",
+    "./touch-ripple": "./src/config/plugin-touch-ripple.js",
+    "./touch": "./src/config/plugin-touch.js",
+    "./translucent": "./src/config/plugin-translucent.js",
+    "./platform": "./src/config/plugin-platform.js"
+  },
   "scripts": {
     "test": "test"
   },
