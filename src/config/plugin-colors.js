@@ -3,7 +3,7 @@ const iosColors = require('./ios-colors.js');
 const mdColors = require('./md-colors.js');
 
 const rulesForColor = (name, hex) => {
-  if (!hex.includes('#') || name === 'primary') return {};
+  if (!hex?.includes('#') || name === 'primary') return {};
   const data = {};
   const colors = {
     primary: hex,
