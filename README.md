@@ -23,6 +23,10 @@ npm install --save-dev tailwind-capacitor
 2. Add the plugin to your CSS (Tailwind CSS 4.x)
 ```css
 @import "tailwindcss";
+// minimum
+@plugin "@capgo/tailwind-capacitor/platform";
+@plugin "@capgo/tailwind-capacitor/safe-areas";
+// recommended
 @plugin "@capgo/tailwind-capacitor/colors";
 @plugin "@capgo/tailwind-capacitor/hairlines";
 @plugin "@capgo/tailwind-capacitor/ios-material";
@@ -30,11 +34,9 @@ npm install --save-dev tailwind-capacitor
 @plugin "@capgo/tailwind-capacitor/no-scrollbar";
 @plugin "@capgo/tailwind-capacitor/preloader";
 @plugin "@capgo/tailwind-capacitor/range";
-@plugin "@capgo/tailwind-capacitor/safe-areas";
 @plugin "@capgo/tailwind-capacitor/touch-ripple";
 @plugin "@capgo/tailwind-capacitor/touch";
 @plugin "@capgo/tailwind-capacitor/translucent";
-@plugin "@capgo/tailwind-capacitor/platform";
 ```
 
 Or for Tailwind CSS 3.x config style, add to your tailwind config:
