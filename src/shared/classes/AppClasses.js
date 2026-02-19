@@ -4,7 +4,7 @@ import { positionClass } from '../position-class.js';
 export const AppClasses = (props, currentTheme, classes) => {
   const { safeAreas } = props;
   return cls(
-    currentTheme === 'ios' && `k-ios`,
+    currentTheme === 'ios' && `c-ios`,
     currentTheme === 'material' && 'c-material',
     'c-app w-full h-full min-h-screen',
     safeAreas && 'safe-areas',

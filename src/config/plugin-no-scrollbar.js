@@ -1,14 +1,15 @@
+const plugin = require('tailwindcss/plugin');
 
-module.exports = (({ addUtilities }) => {
-    const noScrollbar = {
-      '.no-scrollbar': {
-        'scrollbar-width': 'none',
-      },
-      '.no-scrollbar::-webkit-scrollbar': {
+module.exports = plugin(function({ addUtilities }) {
+  const noScrollbarUtilities = {
+    '.no-scrollbar': {
+      'scrollbar-width': 'none',
+      '-ms-overflow-style': 'none',
+      '&::-webkit-scrollbar': {
         display: 'none',
-        opacity: '0',
       },
-    };
+    },
+  };
 
-    addUtilities(noScrollbar);
-  });
+  addUtilities(noScrollbarUtilities);
+});

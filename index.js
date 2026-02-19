@@ -1,18 +1,21 @@
-export { default as base } from './src/config/plugin-base.js';
-export { default as colors } from './src/config/plugin-colors.js';
-export { default as hairlines } from './src/config/plugin-hairlines.js';
-export { default as iosMaterial } from './src/config/plugin-ios-material.js'; 
-export { default as lineClamp } from './src/config/plugin-line-clamp.js';
-export { default as noScrollbar } from './src/config/plugin-no-scrollbar.js';
-export { default as preloader } from './src/config/plugin-preloader.js';
-export { default as range } from './src/config/plugin-range.js';
-export { default as safeAreas } from './src/config/plugin-safe-areas.js';
-export { default as touchRipple } from './src/config/plugin-touch-ripple.js';
-export { default as touch } from './src/config/plugin-touch.js';
-export { default as translucent } from './src/config/plugin-translucent.js';
-export { default as platform } from './src/config/plugin-platform.js';
+const plugin = require('tailwindcss/plugin');
 
-export default [
+const base = require('./src/config/plugin-base.js');
+const colors = require('./src/config/plugin-colors.js');
+const hairlines = require('./src/config/plugin-hairlines.js');
+const iosMaterial = require('./src/config/plugin-ios-material.js');
+const lineClamp = require('./src/config/plugin-line-clamp.js');
+const noScrollbar = require('./src/config/plugin-no-scrollbar.js');
+const preloader = require('./src/config/plugin-preloader.js');
+const range = require('./src/config/plugin-range.js');
+const safeAreas = require('./src/config/plugin-safe-areas.js');
+const touchRipple = require('./src/config/plugin-touch-ripple.js');
+const touch = require('./src/config/plugin-touch.js');
+const translucent = require('./src/config/plugin-translucent.js');
+const platform = require('./src/config/plugin-platform.js');
+
+// Export individual plugins
+module.exports = {
   base,
   colors,
   hairlines,
@@ -25,5 +28,25 @@ export default [
   touchRipple,
   touch,
   translucent,
-  platform
-];
+  platform,
+  
+  // Default export combines all plugins
+  default: plugin.withOptions((options = {}) => {
+    return function(pluginApi) {
+      // Apply all plugins
+      base(pluginApi);
+      colors(pluginApi);
+      hairlines(pluginApi);
+      iosMaterial(pluginApi);
+      lineClamp(pluginApi);
+      noScrollbar(pluginApi);
+      preloader(pluginApi);
+      range(pluginApi);
+      safeAreas(pluginApi);
+      touchRipple(pluginApi);
+      touch(pluginApi);
+      translucent(pluginApi);
+      platform(pluginApi);
+    };
+  })
+}; 

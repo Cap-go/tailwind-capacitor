@@ -2,8 +2,8 @@ In addition to Tailwind CSS variants, there is a theme variant added in Tailwind
 
 | Theme prefix | Applied for | CSS |
 | --- | --- | --- |
-| `ios` | iOS theme | `.k-ios ...` |
-| `material` | Material theme | `.k-material ...` |
+| `ios` | iOS theme | `.c-ios ...` |
+| `material` | Material theme | `.c-material ...` |
 
 For example:
 

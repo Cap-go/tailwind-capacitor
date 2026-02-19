@@ -1,0 +1,60 @@
+<template>
+  <component :is="component" :class="classes">
+    <tailwind-capacitor-provider
+      :theme="currentTheme"
+      :dark="dark"
+      :touch-ripple="touchRipple"
+      :auto-theme-detection="false"
+    >
+      <slot />
+    </tailwind-capacitor-provider>
+  </component>
+</template>
+<script>
+  import { computed } from 'vue';
+
+  import TailwindCapacitorProvider from '../shared/TailwindCapacitorProvider.vue';
+  import { useAutoTheme } from '../shared/use-auto-theme.js';
+
+  import { AppClasses } from '../../shared/classes/AppClasses.js';
+
+  export default {
+    name: 'c-app',
+    components: {
+      TailwindCapacitorProvider,
+    },
+    props: {
+      component: {
+        type: String,
+        default: 'div',
+      },
+      theme: {
+        type: String,
+        default: 'material',
+      },
+      dark: {
+        type: Boolean,
+        default: true,
+      },
+      touchRipple: {
+        type: Boolean,
+        default: true,
+      },
+      safeAreas: {
+        type: Boolean,
+        default: true,
+      },
+    },
+    setup(props, ctx) {
+      const currentTheme = useAutoTheme(props);
+      const classes = computed(() =>
+        AppClasses(props, currentTheme.value, ctx.attrs.class)
+      );
+
+      return {
+        currentTheme,
+        classes,
+      };
+    },
+  };
+</script>

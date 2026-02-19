@@ -2,6 +2,8 @@
 
 Platform plugin adds `ios:` and `android:` variants to target platform-specific styles in Capacitor apps.
 
+This will work only when you used Ionic framework in your app
+
 ## Usage
 
 The plugin adds two variants:

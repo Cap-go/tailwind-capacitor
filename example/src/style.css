@@ -1,0 +1,22 @@
+/* Debug: CSS file loaded */
+@import "tailwindcss";
+/* Debug: Tailwind CSS imported */
+
+@plugin "@capgo/tailwind-capacitor";
+/* Debug: Our plugin loaded */
+
+/* Debug: Basic styles for testing */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+} 
+
+/* Debug: Test if our CSS custom properties are working */
+.debug-test {
+  background: var(--c-primary, red);
+  color: var(--c-light, blue);
+} 
