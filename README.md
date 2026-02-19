@@ -2,7 +2,8 @@
 <a href="https://capgo.app/"><img src='https://raw.githubusercontent.com/Cap-go/capgo/main/assets/capgo_banner.png' alt='Capgo - Instant updates for capacitor'/></a>
   
 <div align="center">
-<h2><a href="https://capgo.app/">Check out: Capgo — live updates for capacitor</a></h2>
+  <h2><a href="https://capgo.app/?ref=plugin"> ➡️ Get Instant updates for your App with Capgo</a></h2>
+  <h2><a href="https://capgo.app/consulting/?ref=plugin"> Missing a feature? We’ll build the plugin for you 💪</a></h2>
 </div>
 
 Tailwind plugin for capacitor apps
@@ -22,6 +23,10 @@ npm install --save-dev tailwind-capacitor
 2. Add the plugin to your CSS (Tailwind CSS 4.x)
 ```css
 @import "tailwindcss";
+// minimum
+@plugin "@capgo/tailwind-capacitor/platform";
+@plugin "@capgo/tailwind-capacitor/safe-areas";
+// recommended
 @plugin "@capgo/tailwind-capacitor/colors";
 @plugin "@capgo/tailwind-capacitor/hairlines";
 @plugin "@capgo/tailwind-capacitor/ios-material";
@@ -29,11 +34,9 @@ npm install --save-dev tailwind-capacitor
 @plugin "@capgo/tailwind-capacitor/no-scrollbar";
 @plugin "@capgo/tailwind-capacitor/preloader";
 @plugin "@capgo/tailwind-capacitor/range";
-@plugin "@capgo/tailwind-capacitor/safe-areas";
 @plugin "@capgo/tailwind-capacitor/touch-ripple";
 @plugin "@capgo/tailwind-capacitor/touch";
 @plugin "@capgo/tailwind-capacitor/translucent";
-@plugin "@capgo/tailwind-capacitor/platform";
 ```
 
 Or for Tailwind CSS 3.x config style, add to your tailwind config:
