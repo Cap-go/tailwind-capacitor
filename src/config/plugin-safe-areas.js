@@ -1,4 +1,5 @@
 const plugin = require('tailwindcss/plugin');
+const joinSafeClassSelector = require('./join-safe-class-selector.js');
 
 module.exports = plugin(function({ addUtilities, addBase, theme }) {
   const base = {
@@ -55,13 +56,13 @@ module.exports = plugin(function({ addUtilities, addBase, theme }) {
 
     Object.keys(spacing).forEach((key) => {
       const value = spacing[key];
-      safe[`.p${first}-${key}-safe`] = {
+      safe[joinSafeClassSelector(`p${first}`, key, 'safe')] = {
         [`padding${upper}`]: `calc(var(--c-safe-area-${side}) + ${value})`,
       };
-      safe[`.m${first}-${key}-safe`] = {
+      safe[joinSafeClassSelector(`m${first}`, key, 'safe')] = {
         [`margin${upper}`]: `calc(var(--c-safe-area-${side}) + ${value})`,
       };
-      safe[`.${side}-${key}-safe`] = {
+      safe[joinSafeClassSelector(side, key, 'safe')] = {
         [side]: `calc(var(--c-safe-area-${side}) + ${value})`,
       };
     });
@@ -81,13 +82,13 @@ module.exports = plugin(function({ addUtilities, addBase, theme }) {
 
     Object.keys(spacing).forEach((key) => {
       const value = spacing[key];
-      safe[`.p${first}-${key}-safe`] = {
+      safe[joinSafeClassSelector(`p${first}`, key, 'safe')] = {
         [`padding-inline-${side}`]: `calc(var(--c-safe-area-${areaSide}) + ${value})`,
       };
-      safe[`.m${first}-${key}-safe`] = {
+      safe[joinSafeClassSelector(`m${first}`, key, 'safe')] = {
         [`margin-inline-${side}`]: `calc(var(--c-safe-area-${areaSide}) + ${value})`,
       };
-      safe[`.${side}-${key}-safe`] = {
+      safe[joinSafeClassSelector(side, key, 'safe')] = {
         [`inset-inline-${side}`]: `calc(var(--c-safe-area-${areaSide}) + ${value})`,
       };
     });

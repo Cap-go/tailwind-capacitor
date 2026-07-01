@@ -21,7 +21,7 @@
     "./platform": "./src/config/plugin-platform.js"
   },
   "scripts": {
-    "test": "test"
+    "test": "node scripts/verify-safe-area-selectors.js"
   },
   "repository": {
     "type": "git",
@@ -39,6 +39,9 @@
   },
   "homepage": "https://github.com/Cap-go/tailwind-capacitor#readme",
   "dependencies": {
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "3.4.17"
+  },
+  "devDependencies": {
+    "postcss": "8"
   }
 }
