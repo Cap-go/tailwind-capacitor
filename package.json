@@ -39,10 +39,10 @@
   },
   "homepage": "https://github.com/Cap-go/tailwind-capacitor#readme",
   "dependencies": {
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
     "postcss": "8.5.26",
-    "tailwindcss": "3.4.17"
+    "tailwindcss": "3.4.19"
   }
 }
