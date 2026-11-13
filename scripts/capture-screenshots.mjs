@@ -51,6 +51,10 @@ async function captureSet({ cwd, port, shots }) {
     await page.setViewportSize({ width: shot.width, height: shot.height });
     await page.goto(url, { waitUntil: 'networkidle' });
     if (shot.theme) await applyTheme(page, shot.theme);
+    if (shot.scrollTo) {
+      await page.getByText(shot.scrollTo, { exact: true }).scrollIntoViewIfNeeded();
+      await sleep(200);
+    }
     await page.screenshot({ path: join(outDir, shot.name) });
   }
 
@@ -93,7 +97,13 @@ await captureSet({
   port: 4173,
   shots: [
     { name: 'after-desktop.png', width: 1280, height: 800, theme: { ios: true, light: true } },
-    { name: 'after-mobile.png', width: 390, height: 844, theme: { ios: true, light: true } },
+    {
+      name: 'after-mobile.png',
+      width: 390,
+      height: 844,
+      theme: { ios: true, light: true },
+      scrollTo: 'Fruit',
+    },
     {
       name: 'after-desktop-dark.png',
       width: 1280,
@@ -105,6 +115,7 @@ await captureSet({
       width: 1280,
       height: 800,
       theme: { material: true, light: true },
+      scrollTo: 'Fruit',
     },
   ],
 });

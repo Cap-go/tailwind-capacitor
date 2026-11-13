@@ -544,7 +544,7 @@
     },
     {
       "path": "src/shared/colors/AvatarColors.js",
-      "content": "import { cls } from '../cls.js';\n\nexport const AvatarColors = (colorsProp = {}, dark) => ({\n  bgIos: cls('bg-ios-light-primary', dark('dark:bg-ios-dark-primary')),\n  textIos: 'text-white',\n  bgMaterial: cls('bg-md-light-primary', dark('dark:bg-md-dark-primary')),\n  textMaterial: 'text-white',\n  ...colorsProp,\n});\n",
+      "content": "import { cls } from '../cls.js';\n\nexport const AvatarColors = (colorsProp = {}, dark) => ({\n  bgIos: cls('bg-primary', dark('dark:bg-primary')),\n  textIos: 'text-white',\n  bgMaterial: cls('bg-primary', dark('dark:bg-primary')),\n  textMaterial: 'text-white',\n  ...colorsProp,\n});\n",
       "type": "registry:file",
       "target": "src/capacitor/shared/colors/AvatarColors.js"
     },

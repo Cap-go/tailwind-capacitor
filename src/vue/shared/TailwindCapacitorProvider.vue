@@ -1,5 +1,7 @@
 <template>
-  <slot />
+  <div :class="wrapperClass">
+    <slot />
+  </div>
 </template>
 <script>
   import { computed, provide } from 'vue';
@@ -36,8 +38,13 @@
       }));
       provide('TailwindCapacitorContext', TailwindCapacitorContext);
 
+      const wrapperClass = computed(() =>
+        props.dark ? 'dark min-h-full w-full' : 'min-h-full w-full'
+      );
+
       return {
         currentTheme,
+        wrapperClass,
       };
     },
   };

@@ -33,8 +33,8 @@
               <AccordionItem>Section two</AccordionItem>
             </Accordion>
             <Segmented strong rounded class="w-full mb-3">
-              <SegmentedButton :active="tab === 'a'" @click="tab = 'a'">Tab A</SegmentedButton>
-              <SegmentedButton :active="tab === 'b'" @click="tab = 'b'">Tab B</SegmentedButton>
+              <SegmentedButton strong :active="tab === 'a'" @click="tab = 'a'">Tab A</SegmentedButton>
+              <SegmentedButton strong :active="tab === 'b'" @click="tab = 'b'">Tab B</SegmentedButton>
             </Segmented>
             <Textarea placeholder="Write notes here" />
             <Select label="Fruit">
