@@ -34,7 +34,8 @@
     "build:example": "npm run sync:example && npm run build:example:app",
     "sync:example": "node scripts/sync-example-registry.mjs && node scripts/generate-example-barrel.mjs",
     "build:example:app": "npm --prefix example run build",
-    "capture:screenshots": "node scripts/capture-screenshots.mjs"
+    "capture:screenshots": "node scripts/capture-screenshots.mjs",
+    "capture:screenshots:after": "CAPTURE_AFTER_ONLY=1 node scripts/capture-screenshots.mjs"
   },
   "repository": {
     "type": "git",

@@ -10,6 +10,7 @@ import { repoRoot } from './repo-root.mjs';
 const outDir = join(repoRoot, 'docs/screenshots');
 mkdirSync(outDir, { recursive: true });
 
+const AFTER_ONLY = process.env.CAPTURE_AFTER_ONLY === '1';
 const BEFORE_COMMIT = process.env.SCREENSHOT_BEFORE_COMMIT || 'f8d631a';
 
 async function waitForUrl(url, attempts = 40) {
@@ -49,22 +50,24 @@ async function captureSet({ cwd, port, prefix }) {
   server.kill('SIGTERM');
 }
 
-const beforeRoot = mkdtempSync(join(tmpdir(), 'tc-before-'));
-const checkout = spawnSync('git', ['worktree', 'add', '--detach', beforeRoot, BEFORE_COMMIT], {
-  cwd: repoRoot,
-  encoding: 'utf8',
-});
-if (checkout.status !== 0) {
-  console.error(checkout.stderr);
-  process.exit(1);
+if (!AFTER_ONLY) {
+  const beforeRoot = mkdtempSync(join(tmpdir(), 'tc-before-'));
+  const checkout = spawnSync('git', ['worktree', 'add', '--detach', beforeRoot, BEFORE_COMMIT], {
+    cwd: repoRoot,
+    encoding: 'utf8',
+  });
+  if (checkout.status !== 0) {
+    console.error(checkout.stderr);
+    process.exit(1);
+  }
+
+  spawnSync('npm', ['ci'], { cwd: beforeRoot, stdio: 'inherit' });
+  spawnSync('npm', ['ci'], { cwd: join(beforeRoot, 'example'), stdio: 'inherit' });
+
+  await captureSet({ cwd: join(beforeRoot, 'example'), port: 4174, prefix: 'before' });
+
+  spawnSync('git', ['worktree', 'remove', '--force', beforeRoot], { cwd: repoRoot });
 }
-
-spawnSync('npm', ['ci'], { cwd: beforeRoot, stdio: 'inherit' });
-spawnSync('npm', ['ci'], { cwd: join(beforeRoot, 'example'), stdio: 'inherit' });
-
-await captureSet({ cwd: join(beforeRoot, 'example'), port: 4174, prefix: 'before' });
-
-spawnSync('git', ['worktree', 'remove', '--force', beforeRoot], { cwd: repoRoot });
 
 spawnSync('npm', ['run', 'sync:example'], { cwd: repoRoot, stdio: 'inherit' });
 
