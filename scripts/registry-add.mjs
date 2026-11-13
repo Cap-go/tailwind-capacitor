@@ -8,6 +8,9 @@ import { dirname, join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 const root = process.cwd();
+const scriptRoot = new URL('..', import.meta.url).pathname;
+const defaultRegistryDir = join(scriptRoot, 'public/r');
+const registryRoot = process.env.REGISTRY_ROOT || defaultRegistryDir;
 const itemPath = resolve(process.argv[2] || '');
 
 if (!itemPath || !existsSync(itemPath)) {
@@ -23,7 +26,8 @@ function loadItem(path) {
 
 function resolveDep(dep, baseDir) {
   if (dep.startsWith('http://') || dep.startsWith('https://')) {
-    throw new Error(`remote registry deps are not supported in registry-add: ${dep}`);
+    const name = dep.split('/').pop() || dep;
+    return join(registryRoot, name);
   }
   if (dep.startsWith('./')) {
     return join(baseDir, dep);

@@ -23,7 +23,6 @@ jobs:
       - run: npm run smoke:tailwind
       - run: npm run build:registry
       - run: npm run test:registry-install
-      - run: npm run postprocess:registry
       - run: npm run sync:example
       - run: npm --prefix example ci
       - run: npm --prefix example run build
