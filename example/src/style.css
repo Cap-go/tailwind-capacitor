@@ -73,6 +73,18 @@ body {
 
 /* Demo chrome (navbar, tabbar, links) must stay content-sized, not viewport tall */
 .demo-page .c-navbar,
+.demo-page .c-app {
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+.demo-page.c-page {
+  position: relative !important;
+  inset: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
 .demo-page .c-toolbar,
 .demo-page .c-header,
 .demo-page .c-footer {
@@ -101,6 +113,17 @@ body {
   height: auto !important;
   max-height: 4rem !important;
   align-self: center !important;
+}
+
+.demo-page .c-toolbar > div:first-child {
+  height: 100% !important;
+  max-height: 100% !important;
+}
+
+.demo-page .c-tabbar .c-toolbar,
+.demo-page .c-tabbar {
+  height: auto !important;
+  max-height: 4rem !important;
 }
 
 .demo-back-row {
