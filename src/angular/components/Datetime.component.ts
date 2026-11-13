@@ -2,6 +2,7 @@ import {
   Component,
   Input,
   inject,
+  OnInit,
   OnChanges,
   HostBinding,
 } from '@angular/core';
@@ -15,7 +16,7 @@ import { resolveTheme, themeClasses } from '../shared/use-theme-classes.js';
   standalone: true,
   template: '<ng-content />',
 })
-export class DatetimeComponent implements OnChanges {
+export class DatetimeComponent implements OnInit, OnChanges {
   @Input() ios?: boolean;
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
@@ -26,11 +27,20 @@ export class DatetimeComponent implements OnChanges {
 
   private readonly ctx = inject(CAPACITOR_CONTEXT);
 
+  ngOnInit(): void {
+    this.syncHostClass();
+  }
+
   ngOnChanges(): void {
+    this.syncHostClass();
+  }
+
+  private syncHostClass(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = DatetimeColors(this.colors || {}, () => '');
+    const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
+    const colors = DatetimeColors(this.colors || {}, dark);
     const props = this as Record<string, unknown>;
-    const raw = DatetimeClasses(props, colors, { className: this.class });
+    const raw = DatetimeClasses(props, colors, { className: this.class }, dark);
     const c = themeClasses(raw, theme, this.class);
     const base = c.base;
     if (typeof base === 'string') {

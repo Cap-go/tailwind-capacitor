@@ -920,7 +920,7 @@
       "title": "Tailwind Capacitor icons (React)",
       "description": "Inline SVG icon components used by capacitor UI.",
       "registryDependencies": [
-        "../capacitor-provider.json"
+        "./capacitor-provider.json"
       ],
       "dependencies": [
         "react",
@@ -981,7 +981,7 @@
       "description": "Capacitor Accordion React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1003,7 +1003,7 @@
       "description": "Capacitor AccordionItem React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1025,7 +1025,7 @@
       "description": "Capacitor Actions React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1047,7 +1047,7 @@
       "description": "Capacitor ActionsButton React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1069,7 +1069,7 @@
       "description": "Capacitor ActionsGroup React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1096,7 +1096,7 @@
       "description": "Capacitor ActionsLabel React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1118,7 +1118,7 @@
       "description": "Capacitor Alert React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1140,7 +1140,7 @@
       "description": "Capacitor App React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1162,7 +1162,7 @@
       "description": "Capacitor Avatar React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1184,7 +1184,7 @@
       "description": "Capacitor Badge React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1206,7 +1206,7 @@
       "description": "Capacitor Block React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1228,7 +1228,7 @@
       "description": "Capacitor BlockFooter React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1250,7 +1250,7 @@
       "description": "Capacitor BlockHeader React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1272,7 +1272,7 @@
       "description": "Capacitor BlockTitle React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1294,7 +1294,7 @@
       "description": "Capacitor Breadcrumbs React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1316,7 +1316,7 @@
       "description": "Capacitor BreadcrumbsCollapsed React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1338,7 +1338,7 @@
       "description": "Capacitor BreadcrumbsItem React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1360,9 +1360,9 @@
       "description": "Capacitor BreadcrumbsSeparator React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-icons.json"
+        "./capacitor-icons.json"
       ],
       "dependencies": [
         "react",
@@ -1383,7 +1383,7 @@
       "description": "Capacitor Button React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1405,7 +1405,7 @@
       "description": "Capacitor Card React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1427,9 +1427,9 @@
       "description": "Capacitor Checkbox React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-icons.json"
+        "./capacitor-icons.json"
       ],
       "dependencies": [
         "react",
@@ -1450,9 +1450,9 @@
       "description": "Capacitor Chip React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-icons.json"
+        "./capacitor-icons.json"
       ],
       "dependencies": [
         "react",
@@ -1473,7 +1473,7 @@
       "description": "Capacitor Datetime React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1495,7 +1495,7 @@
       "description": "Capacitor Dialog React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1522,9 +1522,9 @@
       "description": "Capacitor DialogButton React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-button.json"
+        "./capacitor-button.json"
       ],
       "dependencies": [
         "react",
@@ -1545,7 +1545,7 @@
       "description": "Capacitor Fab React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1572,7 +1572,7 @@
       "description": "Capacitor Footer React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1594,7 +1594,7 @@
       "description": "Capacitor Header React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1616,9 +1616,9 @@
       "description": "Capacitor Icon React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-badge.json"
+        "./capacitor-badge.json"
       ],
       "dependencies": [
         "react",
@@ -1639,7 +1639,7 @@
       "description": "Capacitor InfiniteScroll React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1661,7 +1661,7 @@
       "description": "Capacitor InputOtp React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1683,7 +1683,7 @@
       "description": "Capacitor ItemSliding React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1705,7 +1705,7 @@
       "description": "Capacitor Link React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1737,7 +1737,7 @@
       "description": "Capacitor List React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1759,7 +1759,7 @@
       "description": "Capacitor ListButton React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1781,9 +1781,9 @@
       "description": "Capacitor ListGroup React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-list.json"
+        "./capacitor-list.json"
       ],
       "dependencies": [
         "react",
@@ -1804,10 +1804,10 @@
       "description": "Capacitor ListInput React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-icons.json",
-        "../capacitor-list-item.json"
+        "./capacitor-icons.json",
+        "./capacitor-list-item.json"
       ],
       "dependencies": [
         "react",
@@ -1828,9 +1828,9 @@
       "description": "Capacitor ListItem React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-icons.json"
+        "./capacitor-icons.json"
       ],
       "dependencies": [
         "react",
@@ -1851,9 +1851,9 @@
       "description": "Capacitor MenuList React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-list.json"
+        "./capacitor-list.json"
       ],
       "dependencies": [
         "react",
@@ -1874,9 +1874,9 @@
       "description": "Capacitor MenuListItem React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-list-item.json"
+        "./capacitor-list-item.json"
       ],
       "dependencies": [
         "react",
@@ -1897,7 +1897,7 @@
       "description": "Capacitor Message React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1919,9 +1919,9 @@
       "description": "Capacitor Messagebar React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-toolbar.json"
+        "./capacitor-toolbar.json"
       ],
       "dependencies": [
         "react",
@@ -1947,7 +1947,7 @@
       "description": "Capacitor Messages React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1969,7 +1969,7 @@
       "description": "Capacitor MessagesTitle React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -1991,7 +1991,7 @@
       "description": "Capacitor Modal React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2013,7 +2013,7 @@
       "description": "Capacitor Navbar React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2045,10 +2045,10 @@
       "description": "Capacitor NavbarBackLink React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-icons.json",
-        "../capacitor-link.json"
+        "./capacitor-icons.json",
+        "./capacitor-link.json"
       ],
       "dependencies": [
         "react",
@@ -2069,7 +2069,7 @@
       "description": "Capacitor Note React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2091,9 +2091,9 @@
       "description": "Capacitor Notification React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-icons.json"
+        "./capacitor-icons.json"
       ],
       "dependencies": [
         "react",
@@ -2119,7 +2119,7 @@
       "description": "Capacitor Page React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2141,7 +2141,7 @@
       "description": "Capacitor Panel React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2168,7 +2168,7 @@
       "description": "Capacitor Picker React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2190,7 +2190,7 @@
       "description": "Capacitor Popover React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2217,7 +2217,7 @@
       "description": "Capacitor Popup React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2239,9 +2239,9 @@
       "description": "Capacitor Preloader React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-icons.json"
+        "./capacitor-icons.json"
       ],
       "dependencies": [
         "react",
@@ -2262,7 +2262,7 @@
       "description": "Capacitor Progressbar React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2284,9 +2284,9 @@
       "description": "Capacitor Radio React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-icons.json"
+        "./capacitor-icons.json"
       ],
       "dependencies": [
         "react",
@@ -2307,7 +2307,7 @@
       "description": "Capacitor Range React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2329,7 +2329,7 @@
       "description": "Capacitor Refresher React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2351,7 +2351,7 @@
       "description": "Capacitor Reorder React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2373,9 +2373,9 @@
       "description": "Capacitor Searchbar React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-icons.json"
+        "./capacitor-icons.json"
       ],
       "dependencies": [
         "react",
@@ -2401,7 +2401,7 @@
       "description": "Capacitor Segmented React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2438,9 +2438,9 @@
       "description": "Capacitor SegmentedButton React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-button.json"
+        "./capacitor-button.json"
       ],
       "dependencies": [
         "react",
@@ -2466,7 +2466,7 @@
       "description": "Capacitor Select React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2488,7 +2488,7 @@
       "description": "Capacitor Sheet React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2510,7 +2510,7 @@
       "description": "Capacitor Skeleton React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2532,7 +2532,7 @@
       "description": "Capacitor SplitPane React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2554,7 +2554,7 @@
       "description": "Capacitor Stepper React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2576,9 +2576,9 @@
       "description": "Capacitor Tab React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-segmented-button.json"
+        "./capacitor-segmented-button.json"
       ],
       "dependencies": [
         "react",
@@ -2599,9 +2599,9 @@
       "description": "Capacitor Tabbar React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-toolbar.json"
+        "./capacitor-toolbar.json"
       ],
       "dependencies": [
         "react",
@@ -2622,9 +2622,9 @@
       "description": "Capacitor TabbarLink React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-link.json"
+        "./capacitor-link.json"
       ],
       "dependencies": [
         "react",
@@ -2645,7 +2645,7 @@
       "description": "Capacitor Table React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2667,7 +2667,7 @@
       "description": "Capacitor TableBody React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2689,7 +2689,7 @@
       "description": "Capacitor TableCell React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2711,7 +2711,7 @@
       "description": "Capacitor TableHead React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2733,7 +2733,7 @@
       "description": "Capacitor TableRow React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2755,9 +2755,9 @@
       "description": "Capacitor Tabs React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json",
-        "../capacitor-segmented.json"
+        "./capacitor-segmented.json"
       ],
       "dependencies": [
         "react",
@@ -2778,7 +2778,7 @@
       "description": "Capacitor Textarea React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2800,7 +2800,7 @@
       "description": "Capacitor Thumbnail React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2822,7 +2822,7 @@
       "description": "Capacitor Toast React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2849,7 +2849,7 @@
       "description": "Capacitor Toggle React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2871,7 +2871,7 @@
       "description": "Capacitor Toolbar React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [
@@ -2898,7 +2898,7 @@
       "description": "Capacitor TouchRipple React component.",
       "registryDependencies": [
         "../capacitor-tailwind.json",
-        "../capacitor-provider.json",
+        "./capacitor-provider.json",
         "../capacitor-shared.json"
       ],
       "dependencies": [

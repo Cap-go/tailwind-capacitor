@@ -120,8 +120,9 @@ function fileEntry(path, type, target) {
   return { path, type, target };
 }
 
-function dep(name, nested = false) {
-  if (nested) return `../${name}.json`;
+/** parent=true resolves ../capacitor-*.json (tailwind, shared only in framework subdirs). */
+function dep(name, parent = false) {
+  if (parent) return `../${name}.json`;
   return `./${name}.json`;
 }
 
@@ -157,46 +158,41 @@ function sharedItem(nested) {
   };
 }
 
-function collectVueDeps(source, names, nested) {
+function collectVueDeps(source, names) {
   const registryDeps = [
-    dep('capacitor-tailwind', nested),
-    dep('capacitor-provider', !nested),
-    dep('capacitor-shared', nested),
+    dep('capacitor-tailwind', false),
+    dep('capacitor-provider', false),
+    dep('capacitor-shared', false),
   ];
-  if (!nested) {
-    registryDeps[1] = dep('capacitor-provider', false);
-  } else {
-    registryDeps[1] = dep('capacitor-provider', true);
-  }
   if (/components\/icons\/|\.\/icons\//.test(source)) {
-    registryDeps.push(dep('capacitor-icons', nested));
+    registryDeps.push(dep('capacitor-icons', false));
   }
   for (const match of source.matchAll(/from\s+['"]\.\/([^'"]+\.vue)['"]/g)) {
     const imp = match[1];
     if (imp.startsWith('icons/')) continue;
     const imported = basename(imp, '.vue');
     if (!names.includes(imported)) continue;
-    const sibling = dep(`capacitor-${toKebab(imported)}`, nested);
+    const sibling = dep(`capacitor-${toKebab(imported)}`, false);
     if (!registryDeps.includes(sibling)) registryDeps.push(sibling);
   }
   return registryDeps;
 }
 
-function collectReactDeps(source, names, nested) {
+function collectReactDeps(source, names) {
   const registryDeps = [
-    dep('capacitor-tailwind', nested),
-    dep('capacitor-provider', nested),
-    dep('capacitor-shared', nested),
+    dep('capacitor-tailwind', true),
+    dep('capacitor-provider', false),
+    dep('capacitor-shared', true),
   ];
   if (/components\/icons\/|\.\/icons\//.test(source)) {
-    registryDeps.push(dep('capacitor-icons', nested));
+    registryDeps.push(dep('capacitor-icons', false));
   }
   for (const match of source.matchAll(/from\s+['"]\.\/([^'"]+\.tsx)['"]/g)) {
     const imp = match[1];
     if (imp.startsWith('icons/')) continue;
     const imported = basename(imp, '.tsx');
     if (!names.includes(imported)) continue;
-    const sibling = dep(`capacitor-${toKebab(imported)}`, nested);
+    const sibling = dep(`capacitor-${toKebab(imported)}`, false);
     if (!registryDeps.includes(sibling)) registryDeps.push(sibling);
   }
   return registryDeps;
@@ -252,7 +248,7 @@ for (const name of vueNames) {
     type: 'registry:item',
     title: `Capacitor ${name} (Vue)`,
     description: `Capacitor ${name} Vue component.`,
-    registryDependencies: collectVueDeps(source, vueNames, false),
+    registryDependencies: collectVueDeps(source, vueNames),
     dependencies: ['vue'],
     files: [
       fileEntry(
@@ -283,7 +279,7 @@ reactItems.push({
   type: 'registry:item',
   title: 'Tailwind Capacitor icons (React)',
   description: 'Inline SVG icon components used by capacitor UI.',
-  registryDependencies: [dep('capacitor-provider', true)],
+  registryDependencies: [dep('capacitor-provider', false)],
   dependencies: ['react', 'react-dom'],
   files: iconFilesReact.map((path) => {
     const rel = path.replace(/^src\//, 'capacitor/');
@@ -321,7 +317,7 @@ for (const name of reactNames) {
     type: 'registry:item',
     title: `Capacitor ${name} (React)`,
     description: `Capacitor ${name} React component.`,
-    registryDependencies: collectReactDeps(source, reactNames, true),
+    registryDependencies: collectReactDeps(source, reactNames),
     dependencies: ['react', 'react-dom'],
     files,
   });
@@ -355,7 +351,7 @@ if (iconFilesAngular.length) {
     type: 'registry:item',
     title: 'Tailwind Capacitor icons (Angular)',
     description: 'Inline SVG icon components used by capacitor UI.',
-    registryDependencies: [dep('capacitor-provider', true)],
+    registryDependencies: [dep('capacitor-provider', false)],
     dependencies: ['@angular/core'],
     files: iconFilesAngular.map((path) => {
       const rel = path.replace(/^src\//, 'capacitor/');
@@ -379,7 +375,7 @@ for (const name of angularNames) {
     description: `Capacitor ${name} Angular component.`,
     registryDependencies: [
       dep('capacitor-tailwind', true),
-      dep('capacitor-provider', true),
+      dep('capacitor-provider', false),
       dep('capacitor-shared', true),
     ],
     dependencies: ['@angular/core'],

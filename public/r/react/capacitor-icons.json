@@ -9,7 +9,7 @@
     "react-dom"
   ],
   "registryDependencies": [
-    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json"
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-provider.json"
   ],
   "files": [
     {

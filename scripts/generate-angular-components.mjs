@@ -136,14 +136,17 @@ for (const name of names) {
   const colorsImport = colorsFn
     ? `import { ${colorsFn} } from '../../shared/colors/${meta.file}Colors.js';`
     : '';
-  const colorsLine = colorsFn
-    ? `const colors = ${colorsFn}(this.colors || {}, () => '');`
-    : 'const colors = {};';
+  const colorsBlock = colorsFn
+    ? `const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
+    const colors = ${colorsFn}(this.colors || {}, dark);`
+    : `const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
+    const colors = {};`;
 
   const ts = `import {
   Component,
   Input,
   inject,
+  OnInit,
   OnChanges,
   HostBinding,
 } from '@angular/core';
@@ -157,7 +160,7 @@ import { resolveTheme, themeClasses } from '../shared/use-theme-classes.js';
   standalone: true,
   template: '<ng-content />',
 })
-export class ${name}Component implements OnChanges {
+export class ${name}Component implements OnInit, OnChanges {
   @Input() ios?: boolean;
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
@@ -168,11 +171,19 @@ export class ${name}Component implements OnChanges {
 
   private readonly ctx = inject(CAPACITOR_CONTEXT);
 
+  ngOnInit(): void {
+    this.syncHostClass();
+  }
+
   ngOnChanges(): void {
+    this.syncHostClass();
+  }
+
+  private syncHostClass(): void {
     const theme = resolveTheme(this.ctx, this);
-    ${colorsLine}
+    ${colorsBlock}
     const props = this as Record<string, unknown>;
-    const raw = ${meta.classesFn}(props, colors, { className: this.class });
+    const raw = ${meta.classesFn}(props, colors, { className: this.class }, dark);
     const c = themeClasses(raw, theme, this.class);
     const base = c.base;
     if (typeof base === 'string') {

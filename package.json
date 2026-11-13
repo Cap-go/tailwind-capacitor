@@ -34,7 +34,7 @@
     "verify:registry-refs": "node scripts/verify-registry-refs.mjs",
     "postprocess:registry": "node scripts/postprocess-registry.mjs",
     "pretest": "npm run generate:css",
-    "test": "node scripts/verify-safe-area-selectors.js",
+    "test": "node scripts/verify-safe-area-selectors.js && node scripts/test-angular-gen.mjs",
     "test:registry-install": "npm run test:registry-install:vue && npm run test:registry-install:react && npm run test:registry-install:angular",
     "smoke:tailwind": "node scripts/smoke-tailwind-v4.mjs",
     "build:example": "npm run sync:example && npm run build:example:app",

@@ -14,6 +14,13 @@ import { repoRoot } from './repo-root.mjs';
 const konstaReact = process.env.KONSTA_ROOT || '/tmp/konsta/src/react';
 const outRoot = join(repoRoot, 'src/react');
 
+if (process.env.PORT_KONSTA !== '1') {
+  console.log(
+    'port-konsta-react: skip (committed src/react is source of truth; set PORT_KONSTA=1 and KONSTA_ROOT to refresh)',
+  );
+  process.exit(0);
+}
+
 function transformSource(text) {
   const replacements = [
     ['KonstaContext', 'CapacitorContext'],
