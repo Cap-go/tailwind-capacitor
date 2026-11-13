@@ -1,0 +1,96 @@
+@layer base {
+  :root {
+    --c-safe-area-left: 0px;
+    --c-safe-area-right: 0px;
+    --c-safe-area-top: 0px;
+    --c-safe-area-bottom: 0px;
+    --c-safe-area-start: var(--c-safe-area-left);
+    --c-safe-area-end: var(--c-safe-area-right);
+  }
+  [dir='rtl'] {
+    --c-safe-area-start: var(--c-safe-area-right);
+    --c-safe-area-end: var(--c-safe-area-left);
+  }
+  @supports (left: env(safe-area-inset-left)) {
+    .safe-areas {
+      --c-safe-area-left: env(safe-area-inset-left);
+      --c-safe-area-right: env(safe-area-inset-right);
+      --c-safe-area-top: env(safe-area-inset-top);
+      --c-safe-area-bottom: env(safe-area-inset-bottom);
+    }
+  }
+}
+
+@utility no-safe-areas {
+  --c-safe-area-left: 0px;
+  --c-safe-area-right: 0px;
+  --c-safe-area-top: 0px;
+  --c-safe-area-bottom: 0px;
+}
+@utility no-safe-areas-top {
+  --c-safe-area-top: 0px;
+}
+@utility no-safe-areas-left {
+  --c-safe-area-left: 0px;
+}
+@utility no-safe-areas-right {
+  --c-safe-area-right: 0px;
+}
+@utility no-safe-areas-bottom {
+  --c-safe-area-bottom: 0px;
+}
+
+@utility pt-safe {
+  padding-top: var(--c-safe-area-top);
+}
+@utility pr-safe {
+  padding-right: var(--c-safe-area-right);
+}
+@utility pb-safe {
+  padding-bottom: var(--c-safe-area-bottom);
+}
+@utility pl-safe {
+  padding-left: var(--c-safe-area-left);
+}
+@utility mt-safe {
+  margin-top: var(--c-safe-area-top);
+}
+@utility mr-safe {
+  margin-right: var(--c-safe-area-right);
+}
+@utility mb-safe {
+  margin-bottom: var(--c-safe-area-bottom);
+}
+@utility ml-safe {
+  margin-left: var(--c-safe-area-left);
+}
+@utility top-safe {
+  top: var(--c-safe-area-top);
+}
+@utility right-safe {
+  right: var(--c-safe-area-right);
+}
+@utility bottom-safe {
+  bottom: var(--c-safe-area-bottom);
+}
+@utility left-safe {
+  left: var(--c-safe-area-left);
+}
+@utility ps-safe {
+  padding-inline-start: var(--c-safe-area-start);
+}
+@utility pe-safe {
+  padding-inline-end: var(--c-safe-area-end);
+}
+@utility ms-safe {
+  margin-inline-start: var(--c-safe-area-start);
+}
+@utility me-safe {
+  margin-inline-end: var(--c-safe-area-end);
+}
+@utility start-safe {
+  inset-inline-start: var(--c-safe-area-start);
+}
+@utility end-safe {
+  inset-inline-end: var(--c-safe-area-end);
+}

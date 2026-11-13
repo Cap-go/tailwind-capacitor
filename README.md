@@ -1,113 +1,71 @@
 # tailwind-capacitor
-<a href="https://capgo.app/"><img src='https://raw.githubusercontent.com/Cap-go/capgo/main/assets/capgo_banner.png' alt='Capgo - Instant updates for capacitor'/></a>
-  
+
+<a href="https://capgo.app/"><img src="https://raw.githubusercontent.com/Cap-go/capgo/main/assets/capgo_banner.png" alt="Capgo - Instant updates for capacitor"/></a>
+
 <div align="center">
   <h2><a href="https://capgo.app/?ref=plugin"> ➡️ Get Instant updates for your App with Capgo</a></h2>
 </div>
 
-Tailwind plugin for capacitor apps
+Tailwind CSS v4 + Capacitor UI components, shipped as a [shadcn](https://ui.shadcn.com/) registry so you own the source.
 
-## Version Compatibility
+## Prerequisites
 
-- **Use v4** for Tailwind CSS 4.x
-- **Use v1.0.8** for Tailwind CSS 3.x
+- Vue 3 app with Tailwind CSS v4 (`@tailwindcss/vite` or PostCSS)
+- A project-level `components.json` from the [shadcn CLI](https://ui.shadcn.com/docs/cli) (`npx shadcn@latest init`)
+- Path alias `@/*` pointing at your `src/` folder (see `jsconfig.json` in this repo)
 
-## How to use
+## Install (shadcn registry)
 
-1. Add the plugin to your project
+Registry JSON is built to `public/r/` with `npm run build:registry`. Committed artifacts always point `registryDependencies` at `refs/heads/main`. For a **local-only** branch preview, run `REGISTRY_BRANCH=<branch> npm run postprocess:registry` and do not commit `public/r/`.
+
+Install URLs after merge (or from this repo's committed `public/r/`):
+
 ```bash
-npm install --save-dev tailwind-capacitor
+npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json
+npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json
+npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json
+npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-icons.json
 ```
 
-2. Add the plugin to your CSS (Tailwind CSS 4.x)
+Then add any component:
+
+```bash
+npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-button.json
+```
+
+**From a clone of this repo** (after `npm run build:registry`):
+
+```bash
+npx shadcn@latest add ./public/r/capacitor-button.json
+```
+
+Replace your app global stylesheet with the capacitor bundle (it already includes Tailwind):
+
 ```css
-@import "tailwindcss";
-// minimum
-@plugin "@capgo/tailwind-capacitor/platform";
-@plugin "@capgo/tailwind-capacitor/safe-areas";
-// recommended
-@plugin "@capgo/tailwind-capacitor/colors";
-@plugin "@capgo/tailwind-capacitor/hairlines";
-@plugin "@capgo/tailwind-capacitor/ios-material";
-@plugin "@capgo/tailwind-capacitor/line-clamp";
-@plugin "@capgo/tailwind-capacitor/no-scrollbar";
-@plugin "@capgo/tailwind-capacitor/preloader";
-@plugin "@capgo/tailwind-capacitor/range";
-@plugin "@capgo/tailwind-capacitor/touch-ripple";
-@plugin "@capgo/tailwind-capacitor/touch";
-@plugin "@capgo/tailwind-capacitor/translucent";
+@import '@/capacitor/styles/tailwind-capacitor.css';
 ```
 
-Or for Tailwind CSS 3.x config style, add to your tailwind config:
-```js
-// tailwind.config.js
-module.exports = {
-  plugins: [
-    require('tailwind-capacitor').platform,
-    require('tailwind-capacitor').safeAreas,
-    require('tailwind-capacitor').colors,
-    require('tailwind-capacitor').hairlines,
-    require('tailwind-capacitor').touchRipple,
-    require('tailwind-capacitor').iosMaterial,
-    require('tailwind-capacitor').lineClamp,
-    require('tailwind-capacitor').translucent,
-    require('tailwind-capacitor').range,
-    require('tailwind-capacitor').touch,
-    require('tailwind-capacitor').noScrollbar,
-  ],
-}
+Do not add a separate `@import "tailwindcss"` when using `tailwind-capacitor.css`.
+
+All component slugs: `capacitor-actions`, `capacitor-actions-button`, `capacitor-actions-group`, `capacitor-actions-label`, `capacitor-app`, `capacitor-badge`, `capacitor-block`, `capacitor-block-footer`, `capacitor-block-header`, `capacitor-block-title`, `capacitor-breadcrumbs`, `capacitor-breadcrumbs-collapsed`, `capacitor-breadcrumbs-item`, `capacitor-breadcrumbs-separator`, `capacitor-button`, `capacitor-card`, `capacitor-checkbox`, `capacitor-chip`, `capacitor-dialog`, `capacitor-dialog-button`, `capacitor-fab`, `capacitor-icon`, `capacitor-link`, `capacitor-list`, `capacitor-list-button`, `capacitor-list-group`, `capacitor-list-input`, `capacitor-list-item`, `capacitor-menu-list`, `capacitor-menu-list-item`, `capacitor-message`, `capacitor-messagebar`, `capacitor-messages`, `capacitor-messages-title`, `capacitor-navbar`, `capacitor-navbar-back-link`, `capacitor-notification`, `capacitor-page`, `capacitor-panel`, `capacitor-popover`, `capacitor-popup`, `capacitor-preloader`, `capacitor-progressbar`, `capacitor-radio`, `capacitor-range`, `capacitor-searchbar`, `capacitor-segmented`, `capacitor-segmented-button`, `capacitor-sheet`, `capacitor-stepper`, `capacitor-tabbar`, `capacitor-tabbar-link`, `capacitor-table`, `capacitor-table-body`, `capacitor-table-cell`, `capacitor-table-head`, `capacitor-table-row`, `capacitor-toast`, `capacitor-toggle`, `capacitor-toolbar`.
+
+## Tailwind v4 (CSS first)
+
+No `tailwind.config.js`. Capacitor safe areas, platform variants (`ios`, `android`, `capacitor`, …), and utilities ship in `registry/capacitor/styles/` using `@import "tailwindcss"`, `@theme`, `@utility`, `@custom-variant`, and `@layer`.
+
+## Example app
+
+```bash
+npm run build:registry
+npm run sync:example
+npm --prefix example run dev
 ```
 
-## Basic Example
+## Legacy npm plugin (Tailwind v3)
 
-```vue
-<template>
-  <TailwindCapacitorProvider>
-    <App>
-      <Page>
-        <Navbar title="My App" />
-        
-        <Block>
-          <Button fill="ios:outline md:fill">
-            My Button
-          </Button>
-          
-          <List>
-            <ListItem title="Item 1" />
-            <ListItem title="Item 2" />
-          </List>
-        </Block>
-      </Page>
-    </App>
-  </TailwindCapacitorProvider>
-</template>
+v1.x on npm targets Tailwind 3. This branch is v4 + registry only (not published to npm). Package entry points (`main`, `./platform`, …) still load v3-style plugins and require `tailwindcss` as a peer dependency if you import them.
 
-<script setup>
-import { 
-  TailwindCapacitorProvider,
-  App, 
-  Page, 
-  Navbar, 
-  Block, 
-  Button, 
-  List, 
-  ListItem 
-} from 'tailwind-capacitor/vue'
-</script>
-```
-
-Documentation for each plugin can be found here:
-- [Platform](https://github.com/Cap-go/tailwind-capacitor/blob/main/docs/platform.md)
-- [Safe Areas](https://github.com/Cap-go/tailwind-capacitor/blob/main/docs/safe-areas.md)
-- [Colors](https://github.com/Cap-go/tailwind-capacitor/blob/main/docs/colors.md)
-- [Hairlines](https://github.com/Cap-go/tailwind-capacitor/blob/main/docs/hairlines.md)
-- [Touch Ripple](https://github.com/Cap-go/tailwind-capacitor/blob/main/docs/touch-ripple.md)
-- [iOS Material](https://github.com/Cap-go/tailwind-capacitor/blob/main/docs/ios-material.md)
-- [Line Clamp](https://github.com/Cap-go/tailwind-capacitor/blob/main/docs/line-clamp.md)
-- [Translucent](https://github.com/Cap-go/tailwind-capacitor/blob/main/docs/translucent.md)
-- [Range](https://github.com/Cap-go/tailwind-capacitor/blob/main/docs/range.md)
-- [Touch](https://github.com/Cap-go/tailwind-capacitor/blob/main/docs/touch.md)
-- [No Scrollbar](https://github.com/Cap-go/tailwind-capacitor/blob/main/docs/no-scrollbar.md)
+Documentation for each plugin topic lives under `docs/` (safe areas, platform, colors, …).
 
 # Credits
 

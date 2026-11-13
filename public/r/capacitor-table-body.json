@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-table-body",
+  "type": "registry:item",
+  "title": "Capacitor TableBody",
+  "description": "Capacitor TableBody Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/TableBody.vue",
+      "content": "<template>\n  <tbody ref=\"elRef\" :class=\"c.base\">\n    <slot />\n  </tbody>\n</template>\n<script>\n  import { ref } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { TableBodyClasses } from '../../shared/classes/TableBodyClasses.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  export default {\n    name: 'c-table-body',\n    props: {\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useThemeClasses = themeClasses(context);\n      const elRef = ref(null);\n\n      const c = useThemeClasses(props, () =>\n        TableBodyClasses(\n          {\n            ...props,\n          },\n          ctx.attrs.class\n        )\n      );\n\n      return {\n        c,\n        elRef,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/TableBody.vue"
+    }
+  ]
+}

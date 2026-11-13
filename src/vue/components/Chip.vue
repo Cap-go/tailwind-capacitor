@@ -2,15 +2,15 @@
   <component :is="component" :class="c.base[style]">
     <div v-if="slots.media" :class="c.media"><slot name="media" /></div>
     <slot />
-    <div
+    <button
       v-if="deleteButton"
+      type="button"
       :class="c.deleteButton"
-      role="button"
-      tabindex="0"
+      :aria-label="deleteLabel"
       @click="onDelete"
     >
       <delete-icon :theme="theme" class="h-4 w-4" />
-    </div>
+    </button>
   </component>
 </template>
 <script>
@@ -52,6 +52,10 @@
       deleteButton: {
         type: Boolean,
         default: false,
+      },
+      deleteLabel: {
+        type: String,
+        default: 'Remove',
       },
       outline: {
         type: Boolean,

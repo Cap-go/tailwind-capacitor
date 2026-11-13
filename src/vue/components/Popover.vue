@@ -91,7 +91,11 @@
       );
 
       const setPopover = () => {
-        if (!props.target || !elRef.value || !props.opened) return;
+        const hasTarget =
+          props.target ||
+          (typeof props.targetX !== 'undefined' &&
+            typeof props.targetY !== 'undefined');
+        if (!hasTarget || !elRef.value || !props.opened) return;
         positions.value = calcPopoverPosition({
           popoverEl: elRef.value,
           targetEl: props.target,

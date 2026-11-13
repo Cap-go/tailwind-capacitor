@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-menu-list",
+  "type": "registry:item",
+  "title": "Capacitor MenuList",
+  "description": "Capacitor MenuList Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-list.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/MenuList.vue",
+      "content": "<template>\n  <c-list v-bind=\"listProps\">\n    <slot />\n  </c-list>\n</template>\n<script>\n  import { computed } from 'vue';\n  import cList from './List.vue';\n\n  export default {\n    name: 'c-menu-list',\n    components: {\n      cList,\n    },\n    props: {\n      ...cList.props,\n    },\n    setup(props) {\n      const listProps = computed(() => ({\n        ...props,\n        menuList: true,\n      }));\n      return { listProps };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/MenuList.vue"
+    }
+  ]
+}

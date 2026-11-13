@@ -91,7 +91,7 @@
         if (hasHighlight.value && highlightElRef.value) {
           const linksEl = highlightElRef.value.previousElementSibling;
           const activeIndex = [...linksEl.children].indexOf(
-            linksEl.querySelector('.k-tabbar-link-active')
+            linksEl.querySelector('.c-tabbar-link-active')
           );
           const width = `${(1 / linksEl.children.length) * 100}%`;
           const transform = `translateX(${activeIndex * 100}%)`;

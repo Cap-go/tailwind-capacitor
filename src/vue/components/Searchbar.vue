@@ -48,13 +48,15 @@
       >
         {{ disableButtonText }}
       </button>
-      <BackIcon
+      <button
         v-else
+        type="button"
         :class="cls(c.cancelButton)"
-        :theme="theme"
         @click="handleDisableButton"
         @pointerdown.prevent
-      />
+      >
+        <BackIcon :theme="theme" />
+      </button>
     </template>
   </component>
 </template>

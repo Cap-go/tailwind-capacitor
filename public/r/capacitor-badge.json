@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-badge",
+  "type": "registry:item",
+  "title": "Capacitor Badge",
+  "description": "Capacitor Badge Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Badge.vue",
+      "content": "<template>\n  <component :is=\"component\" :class=\"c.base[size]\">\n    <slot />\n  </component>\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n  import { BadgeClasses } from '../../shared/classes/BadgeClasses.js';\n  import { BadgeColors } from '../../shared/colors/BadgeColors.js';\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  export default {\n    name: 'c-badge',\n    props: {\n      component: {\n        type: String,\n        default: 'span',\n      },\n      small: {\n        type: Boolean,\n        default: false,\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n    },\n    setup(props) {\n      const context = useContext();\n      const useThemeClasses = themeClasses(context);\n      const colors = computed(() => BadgeColors(props.colors || {}));\n\n      const size = computed(() => (props.small ? 'sm' : 'md'));\n\n      const c = useThemeClasses(props, () => BadgeClasses(props, colors.value));\n\n      return {\n        c,\n        size,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Badge.vue"
+    }
+  ]
+}

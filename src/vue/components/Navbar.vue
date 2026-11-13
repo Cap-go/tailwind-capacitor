@@ -142,7 +142,7 @@
       );
 
       const getScrollEl = () => {
-        if (typeof scrollEl === 'undefined') {
+        if (typeof props.scrollEl === 'undefined') {
           return elRef.value && elRef.value.parentNode;
         }
         return props.scrollEl.value || props.scrollEl;
@@ -162,6 +162,14 @@
             }
             if (bgElRef.value) {
               bgElRef.value.style.opacity = '';
+              bgElRef.value.style.transform = '';
+            }
+            if (titleContainerElRef.value) {
+              titleContainerElRef.value.style.transform = '';
+              titleContainerElRef.value.style.opacity = '';
+            }
+            if (subnavbarElRef.value) {
+              subnavbarElRef.value.style.transform = '';
             }
           }
           return;

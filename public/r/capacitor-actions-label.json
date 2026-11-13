@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-actions-label",
+  "type": "registry:item",
+  "title": "Capacitor ActionsLabel",
+  "description": "Capacitor ActionsLabel Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/ActionsLabel.vue",
+      "content": "<template>\n  <component :is=\"component\" :class=\"c.base\">\n    <slot />\n  </component>\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { ActionsLabelClasses } from '../../shared/classes/ActionsLabelClasses.js';\n  import { ActionsLabelColors } from '../../shared/colors/ActionsLabelColors.js';\n  import { darkClasses } from '../shared/use-dark-classes.js';\n  import { themeClasses } from '../shared/use-theme-classes.js';\n  import { useTheme } from '../shared/use-theme.js';\n\n  export default {\n    name: 'c-actions-label',\n    props: {\n      component: {\n        type: String,\n        default: 'button',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      dividers: { type: Boolean, default: undefined },\n      fontSizeIos: { type: String, default: 'text-sm' },\n      fontSizeMaterial: { type: String, default: 'text-sm' },\n    },\n    setup(props) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const colors = computed(() =>\n        ActionsLabelColors(props.colors || {}, useDarkClasses)\n      );\n\n      const theme = useTheme({}, context);\n\n      const isDividers = computed(() =>\n        typeof props.dividers === 'undefined'\n          ? theme.value === 'ios'\n          : props.dividers\n      );\n\n      const c = useThemeClasses({ ...props, dividers: isDividers.value }, () =>\n        ActionsLabelClasses(props, colors.value)\n      );\n\n      return {\n        c,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/ActionsLabel.vue"
+    }
+  ]
+}

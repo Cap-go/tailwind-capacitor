@@ -1,14 +1,14 @@
 <template>
   <component :is="component" :class="classes">
-    <span
+    <button
       ref="buttonLeftElRef"
+      type="button"
       :class="buttonLeftClasses"
-      role="button"
-      tabindex="0"
+      :aria-label="minusLabel"
       @click="onMinus"
     >
       <span :class="c.hBar" />
-    </span>
+    </button>
     <input
       v-if="input && !buttonsOnly"
       :class="valueClasses"
@@ -24,16 +24,16 @@
     />
     <span v-if="!input && !buttonsOnly" :class="valueClasses">{{ value }}</span>
 
-    <span
+    <button
       ref="buttonRightElRef"
+      type="button"
       :class="buttonRightClasses"
-      role="button"
-      tabindex="0"
+      :aria-label="plusLabel"
       @click="onPlus"
     >
       <span :class="c.hBar" />
       <span :class="c.vBar" />
-    </span>
+    </button>
   </component>
 </template>
 <script>
@@ -99,6 +99,8 @@
       outlineMaterial: { type: Boolean, default: undefined },
 
       touchRipple: { type: Boolean, default: true },
+      minusLabel: { type: String, default: 'Decrease' },
+      plusLabel: { type: String, default: 'Increase' },
     },
     emits: ['input', 'change', 'focus', 'blur', 'minus', 'plus'],
     setup(props, ctx) {
@@ -231,6 +233,8 @@
         buttonLeftClasses,
         buttonRightClasses,
         valueClasses,
+        minusLabel: computed(() => props.minusLabel),
+        plusLabel: computed(() => props.plusLabel),
         onMinus,
         onInput,
         onChange,

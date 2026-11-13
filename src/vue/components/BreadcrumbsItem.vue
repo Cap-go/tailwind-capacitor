@@ -1,5 +1,12 @@
 <template>
-  <component :is="component" :class="c.base" role="menuitem" tabindex="0">
+  <component
+    :is="Component"
+    :class="c.base"
+    :href="resolvedHref"
+    :aria-current="active ? 'page' : undefined"
+    :role="linkRole"
+    tabindex="0"
+  >
     <slot />
   </component>
 </template>
@@ -37,6 +44,10 @@
         type: Boolean,
         default: false,
       },
+      href: {
+        type: [String, Boolean],
+        default: undefined,
+      },
     },
     setup(props) {
       const context = useContext();
@@ -48,8 +59,25 @@
       const c = useThemeClasses(props, () =>
         BreadcrumbsItemClasses(props, colors.value)
       );
+      const Component = computed(() => {
+        if (props.href || props.href === '') return 'a';
+        return props.component;
+      });
+      const resolvedHref = computed(() => {
+        if (props.href || props.href === '') {
+          return typeof props.href === 'string' ? props.href : '';
+        }
+        return undefined;
+      });
+      const linkRole = computed(() =>
+        props.href || props.href === '' ? undefined : 'menuitem'
+      );
       return {
         c,
+        Component,
+        resolvedHref,
+        linkRole,
+        active: computed(() => props.active),
       };
     },
   };

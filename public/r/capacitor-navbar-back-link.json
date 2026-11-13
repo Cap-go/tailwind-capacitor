@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-navbar-back-link",
+  "type": "registry:item",
+  "title": "Capacitor NavbarBackLink",
+  "description": "Capacitor NavbarBackLink Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-icons.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-link.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/NavbarBackLink.vue",
+      "content": "<template>\n  <c-link :component=\"component\" :class=\"c.base\" navbar>\n    <span :class=\"c.icon\">\n      <c-back-icon :theme=\"theme\" />\n    </span>\n    <span v-if=\"shouldShowText\">{{ text }}</span>\n    <slot />\n  </c-link>\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { useTheme } from '../shared/use-theme.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n  import cBackIcon from './icons/BackIcon.vue';\n  import cLink from './Link.vue';\n\n  import { NavbarBackLinkClasses } from '../../shared/classes/NavbarBackLinkClasses.js';\n\n  export default {\n    name: 'c-navbar-back-link',\n    components: {\n      cLink,\n      cBackIcon,\n    },\n    props: {\n      component: {\n        type: String,\n        default: 'a',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      text: {\n        type: String,\n        default: 'Back',\n      },\n      showText: {\n        type: [Boolean, String],\n        default: 'auto',\n      },\n    },\n    setup(props) {\n      const context = useContext();\n      const useThemeClasses = themeClasses(context);\n      const theme = useTheme(props, context);\n      const shouldShowText = computed(\n        () =>\n          (props.showText === 'auto' && theme.value === 'ios') ||\n          props.showText === true\n      );\n      const c = useThemeClasses(props, () => NavbarBackLinkClasses());\n      return {\n        c,\n        shouldShowText,\n        theme,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/NavbarBackLink.vue"
+    }
+  ]
+}

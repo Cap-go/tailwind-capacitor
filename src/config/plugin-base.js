@@ -45,19 +45,32 @@ if (
     };
   }
 
+  const themePrimary = theme('colors.primary');
+  const primaryForMd =
+    typeof themePrimary === 'string' && themePrimary.startsWith('#')
+      ? themePrimary
+      : '#3b82f6';
+
   const primaryColors = {
-    ...iosColors(theme('colors.primary')),
-    ...mdColors(theme('colors.primary')),
+    ...iosColors(primaryForMd),
+    ...mdColors(primaryForMd),
   };
   Object.keys(theme('colors')).forEach((key) => {
-    primaryColors[key] = theme('colors')[key];
+    const value = theme('colors')[key];
+    if (typeof value === 'string' && value.startsWith('#')) {
+      primaryColors[key] = value;
+    }
   });
   const primaryColorVars = {};
 
   Object.keys(primaryColors).forEach((key) => {
-    primaryColorVars[`--c-color-${key}`] = hexToRgb(primaryColors[key]).join(
-      ' '
-    );
+    const value = primaryColors[key];
+    if (typeof value === 'string' && value.startsWith('#')) {
+      const rgb = hexToRgb(value);
+      if (rgb) {
+        primaryColorVars[`--c-color-${key}`] = rgb.join(' ');
+      }
+    }
   });
 
   addBase({

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-actions-group",
+  "type": "registry:item",
+  "title": "Capacitor ActionsGroup",
+  "description": "Capacitor ActionsGroup Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/ActionsGroup.vue",
+      "content": "<template>\n  <component :is=\"component\" :class=\"c.base\">\n    <slot />\n  </component>\n</template>\n<script>\n  import { useContext } from '../shared/use-context.js';\n  import { ActionsGroupClasses } from '../../shared/classes/ActionsGroupClasses.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  export default {\n    name: 'c-actions-group',\n    props: {\n      component: {\n        type: String,\n        default: 'div',\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      dividers: { type: Boolean, default: true },\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useThemeClasses = themeClasses(context);\n      const c = useThemeClasses(props, () =>\n        ActionsGroupClasses(props, ctx.attrs.class)\n      );\n\n      return {\n        c,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/ActionsGroup.vue"
+    }
+  ]
+}

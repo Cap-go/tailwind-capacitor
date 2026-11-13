@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-toolbar",
+  "type": "registry:item",
+  "title": "Capacitor Toolbar",
+  "description": "Capacitor Toolbar Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Toolbar.vue",
+      "content": "<template>\n  <component :is=\"component\" :class=\"c.base\">\n    <div :class=\"c.bg\" />\n    <div :class=\"c.inner\">\n      <slot />\n    </div>\n    <span\n      v-if=\"hasHighlight\"\n      ref=\"highlightElRef\"\n      :class=\"c.highlight\"\n      :style=\"highlightStyle\"\n    />\n  </component>\n</template>\n<script>\n  import { computed, onMounted, onUpdated, ref } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { useTheme } from '../shared/use-theme.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  import { ToolbarClasses } from '../../shared/classes/ToolbarClasses.js';\n\n  import { ToolbarColors } from '../../shared/colors/ToolbarColors.js';\n\n  export default {\n    name: 'c-toolbar',\n    props: {\n      component: {\n        type: String,\n        default: 'div',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      translucent: { type: Boolean, default: true },\n\n      bgClass: { type: String, default: '' },\n      innerClass: { type: String, default: '' },\n\n      outline: { type: Boolean, default: undefined },\n\n      tabbar: { type: Boolean, default: false },\n      tabbarLabels: { type: Boolean, default: false },\n      tabbarIcons: { type: Boolean, default: false },\n\n      top: { type: Boolean, default: false },\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const highlightElRef = ref(null);\n      const highlightStyle = ref({\n        transform: '',\n        width: '',\n      });\n      const theme = useTheme({}, context);\n      const hasHighlight = computed(\n        () => theme.value === 'material' && props.tabbar && !props.tabbarIcons\n      );\n      const colors = computed(() =>\n        ToolbarColors(props.colors || {}, useDarkClasses)\n      );\n\n      const isOutline = computed(() =>\n        typeof props.outline === 'undefined'\n          ? theme.value === 'ios'\n          : props.outline\n      );\n\n      const c = useThemeClasses(props, () =>\n        ToolbarClasses(\n          { ...props, outline: isOutline.value },\n          colors.value,\n          ctx.attrs.class\n        )\n      );\n      const setHighlight = () => {\n        if (hasHighlight.value && highlightElRef.value) {\n          const linksEl = highlightElRef.value.previousElementSibling;\n          const activeIndex = [...linksEl.children].indexOf(\n            linksEl.querySelector('.c-tabbar-link-active')\n          );\n          const width = `${(1 / linksEl.children.length) * 100}%`;\n          const transform = `translateX(${activeIndex * 100}%)`;\n\n          if (\n            width !== highlightStyle.value.width ||\n            transform !== highlightStyle.value.transform\n          ) {\n            highlightStyle.value = {\n              ...highlightStyle.value,\n              width,\n              transform,\n            };\n          }\n        }\n      };\n      onMounted(() => {\n        setHighlight();\n      });\n      onUpdated(() => {\n        setHighlight();\n      });\n      return {\n        c,\n        hasHighlight,\n        highlightElRef,\n        highlightStyle,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Toolbar.vue"
+    }
+  ]
+}

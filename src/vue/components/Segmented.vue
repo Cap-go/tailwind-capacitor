@@ -81,14 +81,14 @@
           const buttonsEl = highlightElRef.value.parentElement;
           const buttonsLength = buttonsEl.children.length - 1;
           const activeIndex = [...buttonsEl.children].indexOf(
-            buttonsEl.querySelector('.k-segmented-strong-button-active')
+            buttonsEl.querySelector('.c-segmented-strong-button-active')
           );
 
           const between = '4px';
           const padding = '2px';
 
           const width = `calc((100% - ${padding} * 2 - ${between} * (${buttonsLength} - 1)) / ${buttonsLength})`;
-          const transform = `translateX(calc((${activeIndex} * 100% + ${activeIndex} * ${between}) * var(--k-rtl-reverse)))`;
+          const transform = `translateX(calc((${activeIndex} * 100% + ${activeIndex} * ${between}) * var(--c-rtl-reverse)))`;
 
           if (
             width !== highlightStyle.value.width ||

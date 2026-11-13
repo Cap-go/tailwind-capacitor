@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-list-button",
+  "type": "registry:item",
+  "title": "Capacitor ListButton",
+  "description": "Capacitor ListButton Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/ListButton.vue",
+      "content": "<template>\n  <component :is=\"component\" :class=\"c.base\">\n    <component\n      :is=\"ButtonComponent\"\n      ref=\"rippleElRef\"\n      :class=\"c.button\"\n      v-bind=\"buttonAttrs\"\n    >\n      <slot />\n    </component>\n  </component>\n</template>\n<script>\n  import { computed, inject, ref } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { ListButtonClasses } from '../../shared/classes/ListButtonClasses.js';\n\n  import { ListButtonColors } from '../../shared/colors/ListButtonColors.js';\n\n  import { useTheme } from '../shared/use-theme.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  import { useTouchRipple } from '../shared/use-touch-ripple.js';\n\n  export default {\n    name: 'c-list-button',\n    props: {\n      component: {\n        type: String,\n        default: 'li',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n\n      // Link props\n      href: { type: [String, Boolean], default: undefined },\n      target: { type: String, default: undefined },\n\n      // Button props\n      type: { type: String, default: undefined },\n      value: { type: [String, Number], default: undefined },\n\n      linkComponent: { type: String, default: 'a' },\n      linkProps: { type: Object, default: () => ({}) },\n\n      touchRipple: { type: Boolean, default: true },\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const rippleElRef = ref(null);\n      useTouchRipple(rippleElRef, props, { context });\n\n      const ListDividersContext = inject('ListDividersContext', {\n        value: false,\n      });\n\n      const colors = computed(() =>\n        ListButtonColors(props.colors || {}, useDarkClasses)\n      );\n\n      const theme = useTheme(props, context);\n\n      const c = useThemeClasses(props, () =>\n        ListButtonClasses(\n          { ...props, dividers: ListDividersContext.value },\n          colors.value,\n          ctx.attrs.class,\n          theme.value\n        )\n      );\n\n      const isLink = computed(() => !!props.href || props.href === '');\n      const hrefComputed = computed(() =>\n        !isLink.value || props.href === true || props.href === false\n          ? undefined\n          : props.href || ''\n      );\n      const buttonAttrs = computed(() => ({\n        href: hrefComputed.value,\n        target: props.target,\n        type: props.type,\n        value: props.value,\n        ...(props.linkProps || {}),\n      }));\n\n      const ButtonComponent = computed(() =>\n        isLink.value ? props.linkComponent : 'button'\n      );\n      return {\n        rippleElRef,\n        c,\n        buttonAttrs,\n        ButtonComponent,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/ListButton.vue"
+    }
+  ]
+}

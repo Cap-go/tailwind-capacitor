@@ -1,56 +1,47 @@
 <template>
   <TailwindCapacitorProvider>
     <App theme="ios">
-      <Page>
+      <Page class="safe-areas">
         <Navbar title="Tailwind Capacitor Demo" />
-        
-        <div class="p-4 space-y-6">
-          <!-- Buttons Section -->
-          <Block>
-            <BlockTitle>Buttons</BlockTitle>
-            <div class="space-y-3">
-              <Button fill="solid" color="primary">Solid Button</Button>
-              <Button fill="outline" color="secondary">Outline Button</Button>
-              <Button fill="clear" color="success">Clear Button</Button>
+
+        <div class="p-4 pb-safe space-y-6">
+          <Block strong inset>
+            <BlockTitle :with-block="false">Safe areas</BlockTitle>
+            <p class="text-sm opacity-80 mb-3">
+              Navbar respects safe area insets. Content uses
+              <code class="text-xs">pb-safe</code> with
+              <code class="text-xs">safe-areas</code> on the page.
+            </p>
+            <div class="ios:rounded-xl android:rounded-md hairline hairline-color p-4 bg-light">
+              Platform variants:
+              <span class="ios:inline hidden">iOS</span>
+              <span class="android:inline hidden">Android / Web</span>
             </div>
           </Block>
 
-          <!-- List Section -->
+          <Block>
+            <BlockTitle>Buttons</BlockTitle>
+            <div class="space-y-3">
+              <Button>Solid Button</Button>
+              <Button outline>Outline Button</Button>
+              <Button clear>Clear Button</Button>
+            </div>
+          </Block>
+
           <Block>
             <BlockTitle>Lists</BlockTitle>
             <List>
-              <ListItem 
-                title="Profile" 
-                subtitle="Manage your account"
-                chevron
-              />
-              <ListItem 
-                title="Settings" 
-                subtitle="App preferences"
-                chevron
-              />
-              <ListItem 
-                title="Notifications" 
-                subtitle="Push notifications"
-                chevron
-              />
+              <ListItem title="Profile" subtitle="Manage your account" chevron />
+              <ListItem title="Settings" subtitle="App preferences" chevron />
+              <ListItem title="Notifications" subtitle="Push notifications" chevron />
             </List>
           </Block>
 
-          <!-- Form Elements -->
           <Block>
             <BlockTitle>Form Elements</BlockTitle>
             <List>
-              <ListInput
-                label="Name"
-                type="text"
-                placeholder="Enter your name"
-              />
-              <ListInput
-                label="Email"
-                type="email"
-                placeholder="Enter your email"
-              />
+              <ListInput label="Name" type="text" placeholder="Enter your name" />
+              <ListInput label="Email" type="email" placeholder="Enter your email" />
               <ListItem>
                 <template #title>
                   <span>Enable notifications</span>
@@ -70,7 +61,6 @@
             </List>
           </Block>
 
-          <!-- Cards -->
           <Block>
             <BlockTitle>Cards</BlockTitle>
             <Card>
@@ -79,29 +69,27 @@
                 <p class="text-gray-600 mb-4">
                   This is a card component with some content inside.
                 </p>
-                <Button size="small" fill="outline">Learn More</Button>
+                <Button small outline>Learn More</Button>
               </div>
             </Card>
           </Block>
 
-          <!-- Badges and Chips -->
           <Block>
             <BlockTitle>Badges & Chips</BlockTitle>
             <div class="flex flex-wrap gap-2 mb-4">
-              <Badge color="primary">Primary</Badge>
-              <Badge color="secondary">Secondary</Badge>
-              <Badge color="success">Success</Badge>
-              <Badge color="warning">Warning</Badge>
-              <Badge color="danger">Danger</Badge>
+              <Badge>Primary</Badge>
+              <Badge>Secondary</Badge>
+              <Badge>Success</Badge>
+              <Badge>Warning</Badge>
+              <Badge>Danger</Badge>
             </div>
             <div class="flex flex-wrap gap-2">
               <Chip>Default Chip</Chip>
-              <Chip color="primary">Primary Chip</Chip>
-              <Chip color="success">Success Chip</Chip>
+              <Chip>Primary Chip</Chip>
+              <Chip>Success Chip</Chip>
             </div>
           </Block>
 
-          <!-- Progress and Range -->
           <Block>
             <BlockTitle>Progress & Range</BlockTitle>
             <div class="space-y-4">
@@ -116,42 +104,27 @@
             </div>
           </Block>
 
-          <!-- Action Buttons -->
           <div class="flex justify-center space-x-4 pt-4">
-            <Button @click="showToast" color="primary">Show Toast</Button>
-            <Button @click="showDialog" color="secondary">Show Dialog</Button>
+            <Button @click="showToast">Show Toast</Button>
+            <Button outline @click="showDialog">Show Dialog</Button>
           </div>
         </div>
 
-        <!-- Toast -->
-        <Toast 
-          v-if="toastVisible"
-          @toast:close="toastVisible = false"
-        >
-          <div class="flex items-center">
-            <Icon name="check-circle" class="mr-2 text-green-500" />
-            Toast message displayed!
-          </div>
+        <Toast :opened="toastVisible" position="center">
+          Toast message displayed!
         </Toast>
 
-        <!-- Dialog -->
-        <Dialog 
-          v-if="dialogVisible"
-          @dialog:close="dialogVisible = false"
-        >
-          <div class="p-6">
-            <h3 class="text-lg font-semibold mb-4">Confirm Action</h3>
-            <p class="mb-6">Are you sure you want to proceed?</p>
-            <div class="flex space-x-3">
-              <DialogButton @click="dialogVisible = false">Cancel</DialogButton>
-              <DialogButton strong @click="dialogVisible = false">Confirm</DialogButton>
-            </div>
-          </div>
+        <Dialog :opened="dialogVisible" @backdropclick="dialogVisible = false">
+          <template #title>Confirm Action</template>
+          Are you sure you want to proceed?
+          <template #buttons>
+            <DialogButton @click="dialogVisible = false">Cancel</DialogButton>
+            <DialogButton strong @click="dialogVisible = false">Confirm</DialogButton>
+          </template>
         </Dialog>
 
-        <!-- FAB -->
-        <Fab position="right-bottom" color="primary">
-          <Icon name="plus" />
+        <Fab href>
+          <span class="text-2xl leading-none">+</span>
         </Fab>
       </Page>
     </App>
@@ -181,9 +154,8 @@ import {
   Toast,
   Dialog,
   DialogButton,
-  Icon,
   Fab
-} from '@capgo/tailwind-capacitor/vue'
+} from '@/capacitor/index.js'
 
 const toastVisible = ref(false)
 const dialogVisible = ref(false)
@@ -198,4 +170,4 @@ const showToast = () => {
 const showDialog = () => {
   dialogVisible.value = true
 }
-</script> 
+</script>

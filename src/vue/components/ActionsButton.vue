@@ -4,6 +4,7 @@
     ref="rippleElRef"
     role="button"
     tabindex="0"
+    :href="resolvedHref"
     :class="c.base"
   >
     <slot />
@@ -60,14 +61,14 @@
       const useThemeClasses = themeClasses(context);
       const rippleElRef = ref(null);
       const Component = computed(() => {
-        let c = props.component;
-        if (
-          typeof props.component === 'undefined' &&
-          (props.href || props.href === '')
-        ) {
-          c = 'a';
+        if (props.href || props.href === '') return 'a';
+        return props.component;
+      });
+      const resolvedHref = computed(() => {
+        if (props.href || props.href === '') {
+          return typeof props.href === 'string' ? props.href : '';
         }
-        return c;
+        return undefined;
       });
 
       useTouchRipple(rippleElRef, props, { context });
@@ -103,6 +104,7 @@
       return {
         c,
         Component,
+        resolvedHref,
         rippleElRef,
       };
     },

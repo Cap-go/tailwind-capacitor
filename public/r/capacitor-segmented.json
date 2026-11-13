@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-segmented",
+  "type": "registry:item",
+  "title": "Capacitor Segmented",
+  "description": "Capacitor Segmented Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Segmented.vue",
+      "content": "<template>\n  <component :is=\"component\" :class=\"classes\">\n    <span v-if=\"outline\" :class=\"c.outlineInner\"><slot /></span>\n    <slot v-else />\n    <span\n      v-if=\"strong\"\n      ref=\"highlightElRef\"\n      :class=\"c.strongHighlight\"\n      :style=\"highlightStyle\"\n    />\n  </component>\n</template>\n<script>\n  import { computed, ref, onMounted, onUpdated } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { cls } from '../../shared/cls.js';\n\n  import { SegmentedClasses } from '../../shared/classes/SegmentedClasses.js';\n\n  import { SegmentedColors } from '../../shared/colors/SegmentedColors.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  export default {\n    name: 'c-segmented',\n    props: {\n      component: {\n        type: String,\n        default: 'div',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      // Style props\n      raised: { type: Boolean, default: false },\n      outline: { type: Boolean, default: false },\n      strong: { type: Boolean, default: false },\n      rounded: { type: Boolean, default: false },\n    },\n    setup(props) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const highlightElRef = ref(null);\n      const highlightStyle = ref({\n        transform: '',\n        width: '',\n      });\n\n      const colors = computed(() =>\n        SegmentedColors(props.colors || {}, useDarkClasses)\n      );\n\n      const c = useThemeClasses(props, () =>\n        SegmentedClasses(props, colors.value, useDarkClasses)\n      );\n\n      const classes = computed(() =>\n        cls(\n          // base\n          props.rounded ? c.value.base.rounded : c.value.base.square,\n          props.raised && c.value.raised,\n          props.outline && c.value.outline,\n          props.strong && c.value.strong\n        )\n      );\n\n      const setHighlight = () => {\n        if (props.strong && highlightElRef.value) {\n          const buttonsEl = highlightElRef.value.parentElement;\n          const buttonsLength = buttonsEl.children.length - 1;\n          const activeIndex = [...buttonsEl.children].indexOf(\n            buttonsEl.querySelector('.c-segmented-strong-button-active')\n          );\n\n          const between = '4px';\n          const padding = '2px';\n\n          const width = `calc((100% - ${padding} * 2 - ${between} * (${buttonsLength} - 1)) / ${buttonsLength})`;\n          const transform = `translateX(calc((${activeIndex} * 100% + ${activeIndex} * ${between}) * var(--c-rtl-reverse)))`;\n\n          if (\n            width !== highlightStyle.value.width ||\n            transform !== highlightStyle.value.transform\n          ) {\n            highlightStyle.value = {\n              width,\n              transform,\n            };\n          }\n        }\n      };\n      onMounted(() => {\n        setHighlight();\n      });\n      onUpdated(() => {\n        setHighlight();\n      });\n\n      return {\n        c,\n        classes,\n        highlightElRef,\n        highlightStyle,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Segmented.vue"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-segmented-button",
+  "type": "registry:item",
+  "title": "Capacitor SegmentedButton",
+  "description": "Capacitor SegmentedButton Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-button.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/SegmentedButton.vue",
+      "content": "<template>\n  <c-button v-bind=\"buttonProps\">\n    <slot />\n  </c-button>\n</template>\n<script>\n  import { computed } from 'vue';\n  import cButton from './Button.vue';\n\n  export default {\n    name: 'c-segmented-button',\n    components: {\n      cButton,\n    },\n    props: {\n      ...cButton.props,\n      active: { type: Boolean, default: false },\n      outline: { type: Boolean, default: false },\n      strong: { type: Boolean, default: false },\n      clear: { type: Boolean, default: false },\n      rounded: { type: Boolean, default: false },\n    },\n    setup(props) {\n      const buttonProps = computed(() => {\n        return {\n          ...props,\n          segmented: true,\n          segmentedActive: props.active,\n          segmentedStrong: props.strong,\n          rounded: props.rounded && props.strong,\n        };\n      });\n      return {\n        buttonProps,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/SegmentedButton.vue"
+    }
+  ]
+}

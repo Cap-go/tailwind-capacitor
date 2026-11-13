@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-block-title",
+  "type": "registry:item",
+  "title": "Capacitor BlockTitle",
+  "description": "Capacitor BlockTitle Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/BlockTitle.vue",
+      "content": "<template>\n  <component :is=\"component\" :class=\"c.base\">\n    <slot />\n  </component>\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { BlockTitleClasses } from '../../shared/classes/BlockTitleClasses.js';\n\n  import { BlockTitleColors } from '../../shared/colors/BlockTitleColors.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  export default {\n    name: 'c-block-title',\n    props: {\n      component: {\n        type: String,\n        default: 'span',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      withBlock: {\n        type: Boolean,\n        default: true,\n      },\n      medium: {\n        type: Boolean,\n        default: false,\n      },\n      large: {\n        type: Boolean,\n        default: false,\n      },\n    },\n    setup(props) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const colors = computed(() =>\n        BlockTitleColors(props.colors || {}, useDarkClasses)\n      );\n      const c = useThemeClasses(props, () =>\n        BlockTitleClasses(props, colors.value)\n      );\n      return {\n        c,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/BlockTitle.vue"
+    }
+  ]
+}

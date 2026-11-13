@@ -1,5 +1,12 @@
 <template>
-  <component :is="component" :class="c.base" role="button" tabindex="0">
+  <component
+    :is="component"
+    :class="c.base"
+    type="button"
+    :aria-label="ariaLabel"
+    role="button"
+    tabindex="0"
+  >
     <span :class="c.dot" />
     <span :class="c.dot" />
     <span :class="c.dot" />
@@ -23,7 +30,11 @@
     props: {
       component: {
         type: String,
-        default: 'span',
+        default: 'button',
+      },
+      ariaLabel: {
+        type: String,
+        default: 'Show more breadcrumbs',
       },
       ios: {
         type: Boolean,

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-dialog",
+  "type": "registry:item",
+  "title": "Capacitor Dialog",
+  "description": "Capacitor Dialog Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Dialog.vue",
+      "content": "<template>\n  <div v-if=\"backdrop\" :class=\"c.backdrop[state]\" @click=\"onBackdropClick\" />\n  <component\n    :is=\"component\"\n    ref=\"dialogRef\"\n    :class=\"c.base[state]\"\n    role=\"dialog\"\n    :aria-modal=\"opened ? 'true' : undefined\"\n    tabindex=\"-1\"\n  >\n    <div :class=\"c.contentWrap\">\n      <div v-if=\"slots.title\" :class=\"c.title\"><slot name=\"title\" /></div>\n      <div v-if=\"slots.default\" :class=\"c.content\">\n        <slot />\n      </div>\n    </div>\n    <div v-if=\"slots.buttons\" :class=\"c.buttons\"><slot name=\"buttons\" /></div>\n  </component>\n</template>\n<script>\n  import { computed, ref, watch, nextTick } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { DialogClasses } from '../../shared/classes/DialogClasses.js';\n\n  import { DialogColors } from '../../shared/colors/DialogColors.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  export default {\n    name: 'c-dialog',\n    props: {\n      component: {\n        type: String,\n        default: 'div',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      translucent: {\n        type: Boolean,\n        default: true,\n      },\n      titleFontSizeIos: { type: String, default: 'text-[18px]' },\n      titleFontSizeMaterial: { type: String, default: 'text-[24px]' },\n      sizeIos: { type: String, default: 'w-[16.875rem]' },\n      sizeMaterial: { type: String, default: 'w-[19.5rem]' },\n      opened: Boolean,\n      backdrop: { type: Boolean, default: true },\n    },\n    emits: ['backdropclick'],\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const state = computed(() => (props.opened ? 'opened' : 'closed'));\n      const colors = computed(() =>\n        DialogColors(props.colors || {}, useDarkClasses)\n      );\n      const c = useThemeClasses(props, () =>\n        DialogClasses(props, colors.value, ctx.attrs.class, {\n          hasButtons: ctx.slots.buttons,\n        })\n      );\n\n      const dialogRef = ref(null);\n\n      const onBackdropClick = (e) => {\n        ctx.emit('backdropclick', e);\n      };\n\n      watch(\n        () => props.opened,\n        (opened) => {\n          if (!opened) return;\n          nextTick(() => {\n            const el = dialogRef.value;\n            if (el && typeof el.focus === 'function') el.focus();\n          });\n        },\n      );\n\n      return {\n        onBackdropClick,\n        c,\n        state,\n        slots: ctx.slots,\n        dialogRef,\n        opened: computed(() => props.opened),\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Dialog.vue"
+    }
+  ]
+}

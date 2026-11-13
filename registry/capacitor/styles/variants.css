@@ -1,0 +1,12 @@
+@custom-variant ios (&:is(.c-ios *, .ios *));
+@custom-variant android (&:is(.c-material *, .md *));
+@custom-variant capacitor (.capacitor &);
+@custom-variant electron (.electron &);
+@custom-variant cordova (.cordova &);
+@custom-variant mobile (@media (max-width: 767px));
+@custom-variant tablet (@media (min-width: 768px) and (max-width: 1023px));
+@custom-variant desktop (@media (min-width: 1024px));
+@custom-variant portrait (@media (orientation: portrait));
+@custom-variant landscape (@media (orientation: landscape));
+@custom-variant theme-ios (&:is(.c-ios *, .ios *));
+@custom-variant theme-material (&:is(.c-material *, .md *));

@@ -1,1 +1,5 @@
 node_modules
+example/src/capacitor
+example/src/capacitor/index.js
+example/dist
+registry/capacitor/config

@@ -74,9 +74,13 @@
         RangeClasses(props, colors.value, useDarkClasses)
       );
 
-      const valueWidth = computed(
-        () => (((props.value || 0) - props.min) / (props.max - props.min)) * 100
-      );
+      const valueWidth = computed(() => {
+        const range = props.max - props.min;
+        if (!range) return 0;
+        const value = props.value ?? props.min;
+        const percent = ((value - props.min) / range) * 100;
+        return Number.isFinite(percent) ? percent : 0;
+      });
       const onInput = (e) => {
         ctx.emit('input', e);
       };
