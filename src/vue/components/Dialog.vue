@@ -1,6 +1,13 @@
 <template>
   <div v-if="backdrop" :class="c.backdrop[state]" @click="onBackdropClick" />
-  <component :is="component" :class="c.base[state]">
+  <component
+    :is="component"
+    ref="dialogRef"
+    :class="c.base[state]"
+    role="dialog"
+    :aria-modal="opened ? 'true' : undefined"
+    tabindex="-1"
+  >
     <div :class="c.contentWrap">
       <div v-if="slots.title" :class="c.title"><slot name="title" /></div>
       <div v-if="slots.default" :class="c.content">
@@ -11,7 +18,7 @@
   </component>
 </template>
 <script>
-  import { computed } from 'vue';
+  import { computed, ref, watch, nextTick } from 'vue';
   import { useContext } from '../shared/use-context.js';
 
   import { DialogClasses } from '../../shared/classes/DialogClasses.js';
@@ -66,15 +73,30 @@
         })
       );
 
+      const dialogRef = ref(null);
+
       const onBackdropClick = (e) => {
         ctx.emit('backdropclick', e);
       };
+
+      watch(
+        () => props.opened,
+        (opened) => {
+          if (!opened) return;
+          nextTick(() => {
+            const el = dialogRef.value;
+            if (el && typeof el.focus === 'function') el.focus();
+          });
+        },
+      );
 
       return {
         onBackdropClick,
         c,
         state,
         slots: ctx.slots,
+        dialogRef,
+        opened: computed(() => props.opened),
       };
     },
   };

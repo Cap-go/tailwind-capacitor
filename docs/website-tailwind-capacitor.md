@@ -39,15 +39,22 @@ Components land under `src/capacitor/vue/components/` with shared classes in `sr
 
 ## Vue usage
 
+Install the shell components you need:
+
+```bash
+npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-app.json
+npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-page.json
+npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-navbar.json
+npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-button.json
+```
+
 ```vue
 <script setup>
-import {
-  TailwindCapacitorProvider,
-  App,
-  Page,
-  Navbar,
-  Button,
-} from '@/capacitor/index.js'
+import TailwindCapacitorProvider from '@/capacitor/vue/shared/TailwindCapacitorProvider.vue'
+import App from '@/capacitor/vue/components/App.vue'
+import Page from '@/capacitor/vue/components/Page.vue'
+import Navbar from '@/capacitor/vue/components/Navbar.vue'
+import Button from '@/capacitor/vue/components/Button.vue'
 </script>
 
 <template>
@@ -62,7 +69,7 @@ import {
 </template>
 ```
 
-Prefer the generated barrel from your app after you add multiple components.
+You may add a local barrel (`src/capacitor/index.js`) after installing several components.
 
 ## Safe areas
 

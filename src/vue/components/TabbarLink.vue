@@ -35,12 +35,12 @@
   import { darkClasses } from '../shared/use-dark-classes.js';
 
   import { themeClasses } from '../shared/use-theme-classes.js';
-  import kLink from './Link.vue';
+  import cLink from './Link.vue';
 
   export default {
     name: 'c-tabbar-link',
     components: {
-      kLink,
+      cLink,
     },
     props: {
       component: {

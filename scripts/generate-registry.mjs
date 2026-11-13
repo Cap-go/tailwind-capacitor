@@ -1,7 +1,15 @@
 import { readdirSync, readFileSync, writeFileSync, statSync } from 'node:fs';
 import { basename, join } from 'node:path';
+import { repoRoot } from './repo-root.mjs';
 
-const root = new URL('..', import.meta.url).pathname;
+const root = repoRoot;
+
+function toKebab(name) {
+  return name
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+    .replace(/([A-Z])([A-Z][a-z])/g, '$1-$2')
+    .toLowerCase();
+}
 const componentsDir = join(root, 'src/vue/components');
 const sharedDir = join(root, 'src/shared');
 
@@ -124,6 +132,7 @@ items.push({
   type: 'registry:lib',
   title: 'Tailwind Capacitor icons',
   description: 'Inline SVG icon components used by capacitor UI.',
+  registryDependencies: [dep('capacitor-provider')],
   files: iconFiles.map((path) => {
     const rel = path.replace(/^src\//, 'capacitor/');
     return fileEntry(path, 'registry:lib', `src/${rel}`);
@@ -131,10 +140,7 @@ items.push({
 });
 
 for (const name of componentNames) {
-  const kebab = name
-    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
-    .replace(/([A-Z])([A-Z][a-z])/g, '$1-$2')
-    .toLowerCase();
+  const kebab = toKebab(name);
   const vuePath = `src/vue/components/${name}.vue`;
   const source = readFileSync(join(root, vuePath), 'utf8');
   const registryDeps = [
@@ -142,8 +148,18 @@ for (const name of componentNames) {
     dep('capacitor-provider'),
     dep('capacitor-shared'),
   ];
-  if (/components\/icons\//.test(source)) {
+  if (/components\/icons\/|\.\/icons\//.test(source)) {
     registryDeps.push(dep('capacitor-icons'));
+  }
+  for (const match of source.matchAll(/from\s+['"]\.\/([^'"]+\.vue)['"]/g)) {
+    const imp = match[1];
+    if (imp.startsWith('icons/')) continue;
+    const imported = basename(imp, '.vue');
+    if (!componentNames.includes(imported)) continue;
+    const sibling = dep(`capacitor-${toKebab(imported)}`);
+    if (!registryDeps.includes(sibling)) {
+      registryDeps.push(sibling);
+    }
   }
   items.push({
     name: `capacitor-${kebab}`,

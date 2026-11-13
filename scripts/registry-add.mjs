@@ -6,10 +6,10 @@ import {
 } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { repoRoot } from './repo-root.mjs';
 
 const root = process.cwd();
-const scriptRoot = new URL('..', import.meta.url).pathname;
-const defaultRegistryDir = join(scriptRoot, 'public/r');
+const defaultRegistryDir = join(repoRoot, 'public/r');
 const registryRoot = process.env.REGISTRY_ROOT || defaultRegistryDir;
 const itemPath = resolve(process.argv[2] || '');
 
@@ -65,10 +65,16 @@ function installItem(path) {
     ...asArray(item.devDependencies),
   ];
   if (deps.length) {
-    spawnSync('npm', ['install', ...new Set(deps)], {
+    const install = spawnSync('npm', ['install', ...new Set(deps)], {
       cwd: root,
       stdio: 'pipe',
+      encoding: 'utf8',
     });
+    if (install.status !== 0) {
+      console.error(install.stdout);
+      console.error(install.stderr);
+      throw new Error(`npm install failed for ${item.name || itemPath}`);
+    }
   }
 }
 
@@ -77,6 +83,9 @@ console.log(`registry-add: ok (${installed.size} items)`);
 
 function asArray(value) {
   if (!value) return [];
-  if (Array.isArray(value)) return value;
-  return [value];
+  if (Array.isArray(value)) {
+    return value.filter((entry) => typeof entry === 'string');
+  }
+  if (typeof value === 'string') return [value];
+  return [];
 }

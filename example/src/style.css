@@ -1,5 +1,8 @@
 @import '@/capacitor/styles/tailwind-capacitor.css';
 
+@source "./**/*.vue";
+@source "./capacitor/**/*.vue";
+
 body {
   margin: 0;
   font-family:

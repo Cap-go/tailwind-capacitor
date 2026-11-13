@@ -4,7 +4,7 @@
       <div v-if="slots.left" :class="c.left"><slot name="left" /></div>
       <div :class="c.messagebarArea">
         <textarea
-          id="textareaId"
+          :id="textareaId"
           ref="areaElRef"
           type="textarea"
           :class="c.messagebarInput"

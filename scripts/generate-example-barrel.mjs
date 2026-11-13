@@ -1,7 +1,8 @@
 import { readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { repoRoot } from './repo-root.mjs';
 
-const root = new URL('..', import.meta.url).pathname;
+const root = repoRoot;
 const componentsDir = join(root, 'example/src/capacitor/vue/components');
 
 const names = readdirSync(componentsDir)

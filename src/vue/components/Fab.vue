@@ -1,11 +1,11 @@
 <template>
   <component
-    :is="component"
+    :is="Component"
     ref="rippleElRef"
     :class="text || slots.text ? c.base.withText : c.base.iconOnly"
     role="button"
     tabindex="0"
-    :href="href"
+    :href="resolvedHref"
   >
     <span
       v-if="(text || slots.text) && textPosition === 'before'"
@@ -40,7 +40,7 @@
     props: {
       component: {
         type: String,
-        default: 'a',
+        default: 'button',
       },
       colors: {
         type: Object,
@@ -65,6 +65,17 @@
       const rippleElRef = ref(null);
       useTouchRipple(rippleElRef, props, { context });
 
+      const Component = computed(() => {
+        if (props.href || props.href === '') return 'a';
+        return props.component;
+      });
+      const resolvedHref = computed(() => {
+        if (props.href || props.href === '') {
+          return typeof props.href === 'string' ? props.href : '';
+        }
+        return undefined;
+      });
+
       const colors = computed(() =>
         FabColors(props.colors || {}, useDarkClasses)
       );
@@ -74,6 +85,8 @@
         rippleElRef,
         slots: ctx.slots,
         c,
+        Component,
+        resolvedHref,
       };
     },
   };

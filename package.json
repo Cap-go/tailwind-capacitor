@@ -24,7 +24,7 @@
     "lint": "eslint .",
     "generate:css": "node scripts/copy-capacitor-config.mjs && node scripts/generate-line-clamp-css.mjs && node scripts/generate-safe-area-css.mjs",
     "generate:registry": "node scripts/generate-registry.mjs",
-    "build:registry": "npm run generate:css && npm run generate:registry && shadcn build -o public/r",
+    "build:registry": "npm run generate:css && npm run generate:registry && shadcn build -o public/r && node scripts/postprocess-registry.mjs",
     "postprocess:registry": "node scripts/postprocess-registry.mjs",
     "test": "node scripts/verify-safe-area-selectors.js",
     "test:registry-install": "node scripts/test-registry-install.mjs",

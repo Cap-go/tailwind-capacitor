@@ -8,9 +8,10 @@
     "vue"
   ],
   "registryDependencies": [
-    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-tailwind.json",
-    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-provider.json",
-    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-shared.json"
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-icons.json"
   ],
   "files": [
     {

@@ -713,6 +713,9 @@
       "type": "registry:lib",
       "title": "Tailwind Capacitor icons",
       "description": "Inline SVG icon components used by capacitor UI.",
+      "registryDependencies": [
+        "./capacitor-provider.json"
+      ],
       "files": [
         {
           "path": "src/vue/components/icons/BackIcon.vue",
@@ -1037,7 +1040,8 @@
       "registryDependencies": [
         "./capacitor-tailwind.json",
         "./capacitor-provider.json",
-        "./capacitor-shared.json"
+        "./capacitor-shared.json",
+        "./capacitor-icons.json"
       ],
       "dependencies": [
         "vue"
@@ -1100,7 +1104,8 @@
       "registryDependencies": [
         "./capacitor-tailwind.json",
         "./capacitor-provider.json",
-        "./capacitor-shared.json"
+        "./capacitor-shared.json",
+        "./capacitor-icons.json"
       ],
       "dependencies": [
         "vue"
@@ -1121,7 +1126,8 @@
       "registryDependencies": [
         "./capacitor-tailwind.json",
         "./capacitor-provider.json",
-        "./capacitor-shared.json"
+        "./capacitor-shared.json",
+        "./capacitor-icons.json"
       ],
       "dependencies": [
         "vue"
@@ -1163,7 +1169,8 @@
       "registryDependencies": [
         "./capacitor-tailwind.json",
         "./capacitor-provider.json",
-        "./capacitor-shared.json"
+        "./capacitor-shared.json",
+        "./capacitor-button.json"
       ],
       "dependencies": [
         "vue"
@@ -1205,7 +1212,8 @@
       "registryDependencies": [
         "./capacitor-tailwind.json",
         "./capacitor-provider.json",
-        "./capacitor-shared.json"
+        "./capacitor-shared.json",
+        "./capacitor-badge.json"
       ],
       "dependencies": [
         "vue"
@@ -1289,7 +1297,8 @@
       "registryDependencies": [
         "./capacitor-tailwind.json",
         "./capacitor-provider.json",
-        "./capacitor-shared.json"
+        "./capacitor-shared.json",
+        "./capacitor-list.json"
       ],
       "dependencies": [
         "vue"
@@ -1310,7 +1319,9 @@
       "registryDependencies": [
         "./capacitor-tailwind.json",
         "./capacitor-provider.json",
-        "./capacitor-shared.json"
+        "./capacitor-shared.json",
+        "./capacitor-icons.json",
+        "./capacitor-list-item.json"
       ],
       "dependencies": [
         "vue"
@@ -1331,7 +1342,8 @@
       "registryDependencies": [
         "./capacitor-tailwind.json",
         "./capacitor-provider.json",
-        "./capacitor-shared.json"
+        "./capacitor-shared.json",
+        "./capacitor-icons.json"
       ],
       "dependencies": [
         "vue"
@@ -1352,7 +1364,8 @@
       "registryDependencies": [
         "./capacitor-tailwind.json",
         "./capacitor-provider.json",
-        "./capacitor-shared.json"
+        "./capacitor-shared.json",
+        "./capacitor-list.json"
       ],
       "dependencies": [
         "vue"
@@ -1373,7 +1386,8 @@
       "registryDependencies": [
         "./capacitor-tailwind.json",
         "./capacitor-provider.json",
-        "./capacitor-shared.json"
+        "./capacitor-shared.json",
+        "./capacitor-list-item.json"
       ],
       "dependencies": [
         "vue"
@@ -1415,7 +1429,8 @@
       "registryDependencies": [
         "./capacitor-tailwind.json",
         "./capacitor-provider.json",
-        "./capacitor-shared.json"
+        "./capacitor-shared.json",
+        "./capacitor-toolbar.json"
       ],
       "dependencies": [
         "vue"
@@ -1499,7 +1514,9 @@
       "registryDependencies": [
         "./capacitor-tailwind.json",
         "./capacitor-provider.json",
-        "./capacitor-shared.json"
+        "./capacitor-shared.json",
+        "./capacitor-icons.json",
+        "./capacitor-link.json"
       ],
       "dependencies": [
         "vue"
@@ -1520,7 +1537,8 @@
       "registryDependencies": [
         "./capacitor-tailwind.json",
         "./capacitor-provider.json",
-        "./capacitor-shared.json"
+        "./capacitor-shared.json",
+        "./capacitor-icons.json"
       ],
       "dependencies": [
         "vue"
@@ -1625,7 +1643,8 @@
       "registryDependencies": [
         "./capacitor-tailwind.json",
         "./capacitor-provider.json",
-        "./capacitor-shared.json"
+        "./capacitor-shared.json",
+        "./capacitor-icons.json"
       ],
       "dependencies": [
         "vue"
@@ -1667,7 +1686,8 @@
       "registryDependencies": [
         "./capacitor-tailwind.json",
         "./capacitor-provider.json",
-        "./capacitor-shared.json"
+        "./capacitor-shared.json",
+        "./capacitor-icons.json"
       ],
       "dependencies": [
         "vue"
@@ -1709,7 +1729,8 @@
       "registryDependencies": [
         "./capacitor-tailwind.json",
         "./capacitor-provider.json",
-        "./capacitor-shared.json"
+        "./capacitor-shared.json",
+        "./capacitor-icons.json"
       ],
       "dependencies": [
         "vue"
@@ -1751,7 +1772,8 @@
       "registryDependencies": [
         "./capacitor-tailwind.json",
         "./capacitor-provider.json",
-        "./capacitor-shared.json"
+        "./capacitor-shared.json",
+        "./capacitor-button.json"
       ],
       "dependencies": [
         "vue"
@@ -1814,7 +1836,8 @@
       "registryDependencies": [
         "./capacitor-tailwind.json",
         "./capacitor-provider.json",
-        "./capacitor-shared.json"
+        "./capacitor-shared.json",
+        "./capacitor-toolbar.json"
       ],
       "dependencies": [
         "vue"
@@ -1835,7 +1858,8 @@
       "registryDependencies": [
         "./capacitor-tailwind.json",
         "./capacitor-provider.json",
-        "./capacitor-shared.json"
+        "./capacitor-shared.json",
+        "./capacitor-link.json"
       ],
       "dependencies": [
         "vue"

@@ -1,17 +1,11 @@
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { spawnSync } from 'node:child_process';
+import { repoRoot } from './repo-root.mjs';
 
-const root = new URL('..', import.meta.url).pathname;
+const root = repoRoot;
 const dir = join(root, 'public/r');
 
-const branch =
-  process.env.REGISTRY_BRANCH ||
-  spawnSync('git', ['rev-parse', '--abbrev-ref', 'HEAD'], {
-    cwd: root,
-    encoding: 'utf8',
-  }).stdout.trim() ||
-  'main';
+const branch = process.env.REGISTRY_BRANCH || 'main';
 
 const base = `https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/${branch}/public/r`;
 

@@ -1,4 +1,5 @@
 import { writeFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
 function joinSafeClassSelector(...parts) {
   const className = parts.join('-');
@@ -47,10 +48,10 @@ const spacingKeys = [
 ];
 
 const sides = [
-  { side: 'top', first: 't', upper: 'Top', areaSide: 'top' },
-  { side: 'right', first: 'r', upper: 'Right', areaSide: 'right' },
-  { side: 'bottom', first: 'b', upper: 'Bottom', areaSide: 'bottom' },
-  { side: 'left', first: 'l', upper: 'Left', areaSide: 'left' },
+  { side: 'top', pad: 'padding-top', margin: 'margin-top', areaSide: 'top' },
+  { side: 'right', pad: 'padding-right', margin: 'margin-right', areaSide: 'right' },
+  { side: 'bottom', pad: 'padding-bottom', margin: 'margin-bottom', areaSide: 'bottom' },
+  { side: 'left', pad: 'padding-left', margin: 'margin-left', areaSide: 'left' },
 ];
 
 function cssLength(key) {
@@ -59,35 +60,43 @@ function cssLength(key) {
   return `${Number(key) * 0.25}rem`;
 }
 
-const lines = ['@layer utilities {'];
+function utilityNameFromSelector(selector) {
+  return selector.slice(1).replace(/\\/g, '');
+}
 
-for (const { side, first, upper, areaSide } of sides) {
+const lines = [];
+
+for (const { side, pad, margin, areaSide } of sides) {
   for (const key of spacingKeys) {
     const len = cssLength(key);
-    const selPt = joinSafeClassSelector(`p${first}`, key, 'safe');
-    const selMt = joinSafeClassSelector(`m${first}`, key, 'safe');
+    const selPt = joinSafeClassSelector(`p${side[0]}`, key, 'safe');
+    const selMt = joinSafeClassSelector(`m${side[0]}`, key, 'safe');
     const selPos = joinSafeClassSelector(side, key, 'safe');
-    lines.push(`  ${selPt} {`);
-    lines.push(
-      `    padding${upper}: calc(var(--c-safe-area-${areaSide}) + ${len});`,
-    );
-    lines.push('  }');
-    lines.push(`  ${selMt} {`);
-    lines.push(
-      `    margin${upper}: calc(var(--c-safe-area-${areaSide}) + ${len});`,
-    );
-    lines.push('  }');
-    lines.push(`  ${selPos} {`);
-    lines.push(`    ${side}: calc(var(--c-safe-area-${areaSide}) + ${len});`);
-    lines.push('  }');
+
+    const blocks = [
+      [selPt, `${pad}: calc(var(--c-safe-area-${areaSide}) + ${len});`],
+      [selMt, `${margin}: calc(var(--c-safe-area-${areaSide}) + ${len});`],
+      [selPos, `${side}: calc(var(--c-safe-area-${areaSide}) + ${len});`],
+    ];
+
+    for (const [sel, decl] of blocks) {
+      if (!key.includes('.')) {
+        lines.push(`@utility ${utilityNameFromSelector(sel)} {`);
+        lines.push(`  ${decl}`);
+        lines.push('}');
+      } else {
+        lines.push(`@layer utilities {`);
+        lines.push(`  ${sel} {`);
+        lines.push(`    ${decl}`);
+        lines.push('  }');
+        lines.push('}');
+      }
+    }
   }
 }
 
-lines.push('}');
-
-const outPath = new URL(
-  '../registry/capacitor/styles/safe-areas-generated.css',
-  import.meta.url,
+const outPath = fileURLToPath(
+  new URL('../registry/capacitor/styles/safe-areas-generated.css', import.meta.url),
 );
 writeFileSync(outPath, `${lines.join('\n')}\n`);
-console.log(`wrote ${outPath.pathname}`);
+console.log(`wrote ${outPath}`);

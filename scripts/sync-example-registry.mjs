@@ -1,8 +1,9 @@
 import { readdirSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
+import { repoRoot } from './repo-root.mjs';
 
-const root = new URL('..', import.meta.url).pathname;
+const root = repoRoot;
 const registryDir = join(root, 'public/r');
 const exampleDir = join(root, 'example');
 
@@ -14,7 +15,11 @@ for (const item of items) {
   const result = spawnSync(
     'node',
     [join(root, 'scripts/registry-add.mjs'), join(registryDir, item)],
-    { cwd: exampleDir, stdio: 'inherit' },
+    {
+      cwd: exampleDir,
+      stdio: 'inherit',
+      env: { ...process.env, REGISTRY_ROOT: registryDir },
+    },
   );
   if (result.status !== 0) {
     process.exit(result.status ?? 1);

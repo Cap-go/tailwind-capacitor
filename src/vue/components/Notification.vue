@@ -13,16 +13,16 @@
       >
         {{ titleRightText }}<slot name="titleRightText" />
       </div>
-      <div
+      <button
         v-if="button || slots.button"
+        type="button"
         :class="c.button"
-        role="button"
-        tabindex="0"
+        :aria-label="closeLabel"
         @click="onClose"
       >
         <delete-icon :theme="theme" :class="c.deleteIcon" />
         <slot name="button" />
-      </div>
+      </button>
     </div>
     <div :class="c.content">
       <div v-if="subtitle || slots.subtitle" :class="c.subtitle">
@@ -61,16 +61,16 @@
           <slot />
         </div>
       </div>
-      <div
+      <button
         v-if="button || slots.button"
+        type="button"
         :class="c.button"
-        role="button"
-        tabindex="0"
+        :aria-label="closeLabel"
         @click="onClose"
       >
         <delete-icon :theme="theme" :class="c.deleteIcon" />
         <slot name="button" />
-      </div>
+      </button>
     </div>
   </component>
 </template>
@@ -124,6 +124,7 @@
       titleRightText: { type: [String, Number] },
       subtitle: { type: [String, Number] },
       text: { type: [String, Number] },
+      closeLabel: { type: String, default: 'Close notification' },
     },
     emits: ['close'],
     setup(props, ctx) {
@@ -147,6 +148,7 @@
         theme,
         onClose,
         slots: ctx.slots,
+        closeLabel: computed(() => props.closeLabel),
       };
     },
   };

@@ -4,6 +4,9 @@
   "type": "registry:lib",
   "title": "Tailwind Capacitor icons",
   "description": "Inline SVG icon components used by capacitor UI.",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json"
+  ],
   "files": [
     {
       "path": "src/vue/components/icons/BackIcon.vue",

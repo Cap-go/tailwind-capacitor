@@ -1,7 +1,8 @@
 import { cpSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
+import { repoRoot } from './repo-root.mjs';
 
-const root = new URL('..', import.meta.url).pathname;
+const root = repoRoot;
 const outDir = join(root, 'registry/capacitor/config');
 mkdirSync(outDir, { recursive: true });
 

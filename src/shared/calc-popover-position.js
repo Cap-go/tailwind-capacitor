@@ -48,18 +48,21 @@ export const calcPopoverPosition = ({
 
   let targetOffsetLeft;
   let targetOffsetTop;
-  // eslint-disable-next-line
-  const targetElStyles = window.getComputedStyle(targetEl);
-  let safeAreaTop =
-    parseInt(targetElStyles.getPropertyValue('--c-safe-area-top'), 10) || 0;
-  let safeAreaLeft =
-    parseInt(targetElStyles.getPropertyValue('--c-safe-area-left'), 10) || 0;
-  let safeAreaRight =
-    parseInt(targetElStyles.getPropertyValue('--c-safe-area-right'), 10) || 0;
-  if (Number.isNaN(safeAreaTop)) safeAreaTop = 0;
-  if (Number.isNaN(safeAreaLeft)) safeAreaLeft = 0;
-  if (Number.isNaN(safeAreaRight)) safeAreaRight = 0;
+  let safeAreaTop = 0;
+  let safeAreaLeft = 0;
+  let safeAreaRight = 0;
   if (targetEl) {
+    // eslint-disable-next-line
+    const targetElStyles = window.getComputedStyle(targetEl);
+    safeAreaTop =
+      parseInt(targetElStyles.getPropertyValue('--c-safe-area-top'), 10) || 0;
+    safeAreaLeft =
+      parseInt(targetElStyles.getPropertyValue('--c-safe-area-left'), 10) || 0;
+    safeAreaRight =
+      parseInt(targetElStyles.getPropertyValue('--c-safe-area-right'), 10) || 0;
+    if (Number.isNaN(safeAreaTop)) safeAreaTop = 0;
+    if (Number.isNaN(safeAreaLeft)) safeAreaLeft = 0;
+    if (Number.isNaN(safeAreaRight)) safeAreaRight = 0;
     targetWidth = targetEl.offsetWidth;
     targetHeight = targetEl.offsetHeight;
 
