@@ -1,54 +1,160 @@
 <template>
   <TailwindCapacitorProvider :dark="darkMode" :theme="platformTheme">
     <App :theme="platformTheme" :dark="darkMode">
-      <Page class="safe-areas">
+      <Page class="safe-areas demo-page">
         <Navbar title="Tailwind Capacitor Demo" />
 
-        <div class="p-4 pb-safe space-y-6">
+        <div class="p-4 pb-16 space-y-4 demo-shell">
           <Block strong inset>
             <BlockTitle :with-block="false">Theme controls</BlockTitle>
-            <div class="flex flex-wrap gap-2 items-center">
-              <Button small :tonal="platformTheme === 'ios'" @click="platformTheme = 'ios'">
+            <div class="flex flex-wrap gap-2">
+              <button
+                type="button"
+                class="theme-chip"
+                :class="{ 'theme-chip-active': platformTheme === 'ios' }"
+                @click="platformTheme = 'ios'"
+              >
                 iOS
-              </Button>
-              <Button small :tonal="platformTheme === 'material'" @click="platformTheme = 'material'">
+              </button>
+              <button
+                type="button"
+                class="theme-chip"
+                :class="{ 'theme-chip-active': platformTheme === 'material' }"
+                @click="platformTheme = 'material'"
+              >
                 Material
-              </Button>
-              <Button small outline @click="darkMode = false">Light</Button>
-              <Button small outline @click="darkMode = true">Dark</Button>
+              </button>
+              <button
+                type="button"
+                class="theme-chip"
+                :class="{ 'theme-chip-active': !darkMode }"
+                @click="darkMode = false"
+              >
+                Light
+              </button>
+              <button
+                type="button"
+                class="theme-chip"
+                :class="{ 'theme-chip-active': darkMode }"
+                @click="darkMode = true"
+              >
+                Dark
+              </button>
             </div>
           </Block>
 
           <Block strong inset>
             <BlockTitle :with-block="false">New Ionic style components</BlockTitle>
-            <Note>Demo section ({{ platformTheme }} / {{ darkMode ? 'dark' : 'light' }})</Note>
+            <Note>
+              Demo ({{ platformTheme }} / {{ darkMode ? 'dark' : 'light' }})
+            </Note>
+          </Block>
+
+          <Block strong inset>
+            <BlockTitle>Alerts and content</BlockTitle>
+            <Refresher>Pull to refresh</Refresher>
             <Alert>Default alert banner text</Alert>
+            <Note>Supporting note text</Note>
             <div class="flex gap-3 items-center py-2">
               <Avatar>MD</Avatar>
-              <Thumbnail>A</Thumbnail>
+              <Thumbnail>IMG</Thumbnail>
             </div>
-            <Skeleton class="h-4 w-full mb-3" />
-            <Accordion class="mb-3">
-              <AccordionItem>Section one</AccordionItem>
-              <AccordionItem>Section two</AccordionItem>
+            <Skeleton class="h-4 w-full" />
+          </Block>
+
+          <Block strong inset>
+            <BlockTitle>Accordion</BlockTitle>
+            <Accordion>
+              <AccordionItem>Accordion section one</AccordionItem>
+              <AccordionItem>Accordion section two</AccordionItem>
             </Accordion>
-            <Segmented strong rounded class="w-full mb-3">
-              <SegmentedButton strong :active="tab === 'a'" @click="tab = 'a'">Tab A</SegmentedButton>
-              <SegmentedButton strong :active="tab === 'b'" @click="tab = 'b'">Tab B</SegmentedButton>
+          </Block>
+
+          <Block strong inset>
+            <BlockTitle>Tabs and navigation</BlockTitle>
+            <Segmented strong rounded class="w-full">
+              <SegmentedButton strong :active="tab === 'a'" @click="tab = 'a'">
+                Tab A
+              </SegmentedButton>
+              <SegmentedButton strong :active="tab === 'b'" @click="tab = 'b'">
+                Tab B
+              </SegmentedButton>
             </Segmented>
+            <Tabs strong rounded class="w-full mt-2">
+              <Tab :active="tab2 === 'one'" @click="tab2 = 'one'">Tabs one</Tab>
+              <Tab :active="tab2 === 'two'" @click="tab2 = 'two'">Tabs two</Tab>
+            </Tabs>
+            <Tabbar labels class="mt-2">
+              <TabbarLink :active="tab === 'a'">Home</TabbarLink>
+              <TabbarLink>Settings</TabbarLink>
+            </Tabbar>
+            <div class="flex items-center gap-2 mt-2">
+              <NavbarBackLink @click.prevent />
+              <span class="text-sm">Back button</span>
+            </div>
+          </Block>
+
+          <Block strong inset>
+            <BlockTitle>Lists and menus</BlockTitle>
+            <List strong inset>
+              <ListItem title="List row" after="Detail" />
+            </List>
+            <MenuList strong inset>
+              <MenuListItem title="Menu item A" />
+              <MenuListItem title="Menu item B" />
+            </MenuList>
+            <ItemSliding class="p-3">
+              <ListItem title="Sliding list item" />
+            </ItemSliding>
+            <Reorder class="p-1">
+              <List strong inset>
+                <ListItem title="Reorder row 1" />
+                <ListItem title="Reorder row 2" />
+              </List>
+            </Reorder>
+          </Block>
+
+          <Block strong inset>
+            <BlockTitle>Forms and pickers</BlockTitle>
+            <Datetime>Nov 13, 2026 4:00 PM</Datetime>
+            <Picker>Picker: Medium</Picker>
             <Textarea placeholder="Write notes here" />
             <Select label="Fruit">
               <option>Option A</option>
               <option>Option B</option>
             </Select>
+            <InputOtp>1 2 3 4</InputOtp>
           </Block>
 
-          <Block>
-            <BlockTitle>Buttons</BlockTitle>
-            <div class="space-y-3">
-              <Button>Solid Button</Button>
-              <Button outline>Outline Button</Button>
+          <Block strong inset>
+            <BlockTitle>Loading and overlays</BlockTitle>
+            <div class="flex items-center gap-2 py-2">
+              <Preloader class="w-6 h-6" />
+              <span class="text-sm opacity-80">Loading spinner</span>
             </div>
+            <Modal>Modal surface (inline demo)</Modal>
+          </Block>
+
+          <Block strong inset>
+            <BlockTitle>Layout primitives</BlockTitle>
+            <SplitPane>
+              <div class="flex-1 p-3 rounded-lg bg-primary/10 text-center text-xs">
+                Split left
+              </div>
+              <div
+                class="flex-1 p-3 rounded-lg bg-black/5 dark:bg-white/10 text-center text-xs"
+              >
+                Split right
+              </div>
+            </SplitPane>
+            <Header class="mt-2 px-2 py-1 text-xs font-semibold uppercase">
+              Section header
+            </Header>
+            <Footer class="px-2 py-1 text-xs opacity-70">Section footer</Footer>
+            <InfiniteScroll>Infinite scroll footer</InfiniteScroll>
+            <TouchRipple class="inline-flex mt-2">
+              <Button small outline inline>Ripple target</Button>
+            </TouchRipple>
           </Block>
         </div>
       </Page>
@@ -66,10 +172,6 @@ import {
   Block,
   BlockTitle,
   Button,
-  Toast,
-  Dialog,
-  DialogButton,
-  Fab,
   Alert,
   Avatar,
   Thumbnail,
@@ -79,12 +181,34 @@ import {
   AccordionItem,
   Segmented,
   SegmentedButton,
+  Tabs,
+  Tab,
+  Tabbar,
+  TabbarLink,
+  List,
+  ListItem,
+  MenuList,
+  MenuListItem,
+  ItemSliding,
+  Reorder,
+  Datetime,
+  Picker,
   Textarea,
   Select,
+  InputOtp,
+  Preloader,
+  Modal,
+  SplitPane,
+  InfiniteScroll,
+  Refresher,
+  Header,
+  Footer,
+  NavbarBackLink,
+  TouchRipple,
 } from '@/capacitor/index.js'
 
-const dialogVisible = ref(false)
 const platformTheme = ref('ios')
 const darkMode = ref(false)
 const tab = ref('a')
+const tab2 = ref('one')
 </script>

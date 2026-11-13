@@ -3,6 +3,42 @@
 @source "./**/*.vue";
 @source "./capacitor/**/*.vue";
 
+.demo-shell {
+  min-height: 2200px;
+}
+
+.c-app,
+.safe-areas.c-page {
+  position: relative !important;
+  height: auto !important;
+  min-height: 100vh;
+  overflow: visible !important;
+}
+
+.theme-chip {
+  appearance: none;
+  cursor: pointer;
+  border-radius: 9999px;
+  border: 2px solid var(--color-primary, #007aff);
+  background: transparent;
+  color: var(--color-primary, #007aff);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0.35rem 0.85rem;
+}
+
+.theme-chip.theme-chip-active {
+  background-color: var(--color-primary, #007aff);
+  border-color: var(--color-primary, #007aff);
+  color: #ffffff !important;
+}
+
+.dark .theme-chip:not(.theme-chip-active) {
+  border-color: var(--color-primary, #0a84ff);
+  color: var(--color-primary, #0a84ff);
+}
+
 body {
   margin: 0;
   font-family:

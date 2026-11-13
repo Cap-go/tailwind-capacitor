@@ -1,7 +1,6 @@
-export const SplitPaneColors = (colorsProp = {}) => ({
-  bg: 'bg-light',
-  text: 'text-black dark:text-white',
-  iosSurface: 'ios:rounded-xl',
-  materialSurface: 'android:rounded-2xl',
+import { ionicSurfaceColors } from './ionicSurfaceColors.js';
+
+export const SplitPaneColors = (colorsProp = {}, dark) => ({
+  ...ionicSurfaceColors(dark),
   ...colorsProp,
 });

@@ -2,8 +2,8 @@ import { cls } from '../cls.js';
 
 export const ModalClasses = (props, colors, { className } = {}) => ({
   base: {
-    common: cls(colors.bg, colors.text, className),
-    ios: colors.iosSurface,
-    material: colors.materialSurface,
+    common: cls('px-4 py-3 text-sm mb-2', className),
+    ios: cls('rounded-xl', colors.bgIos, colors.textIos),
+    material: cls('rounded-lg', colors.bgMaterial, colors.textMaterial),
   },
 });

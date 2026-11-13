@@ -34,7 +34,7 @@ export const SegmentedClasses = (props, colors, darkClasses) => {
         'absolute start-0.5 top-0.5 bottom-0.5 !ms-0 pointer-events-none duration-200',
         rounded && 'rounded-full',
         `bg-white shadow`,
-        darkClasses('dark:bg-opacity-15 dark:touch-ripple-white')
+        darkClasses('dark:bg-neutral-600 dark:shadow-md')
       ),
       ios: cls(!rounded && 'rounded'),
       material: cls(!rounded && 'rounded-md'),

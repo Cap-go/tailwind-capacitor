@@ -891,6 +891,11 @@
           "target": "src/capacitor/shared/colors/TouchRippleColors.js"
         },
         {
+          "path": "src/shared/colors/ionicSurfaceColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ionicSurfaceColors.js"
+        },
+        {
           "path": "src/shared/filter-colors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/filter-colors.js"

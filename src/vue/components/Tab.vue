@@ -1,5 +1,5 @@
 <template>
-  <c-segmented-button :active="active" strong rounded>
+  <c-segmented-button v-bind="$attrs" :active="active" strong rounded>
     <slot />
   </c-segmented-button>
 </template>
