@@ -10,13 +10,18 @@ module.exports = plugin(function({ addUtilities, theme, addBase }) {
   // Create CSS custom properties for all theme colors
   Object.keys(themeColors).forEach((colorName) => {
     const colorValue = themeColors[colorName];
-    if (typeof colorValue === 'string') {
+    if (typeof colorValue === 'string' && colorValue.startsWith('#')) {
       const rgb = hexToRgb(colorValue);
-      colorVariables[`--c-color-${colorName}`] = rgb.join(' ');
-    } else if (typeof colorValue === 'object') {
+      if (rgb) colorVariables[`--c-color-${colorName}`] = rgb.join(' ');
+    } else if (typeof colorValue === 'object' && colorValue) {
       Object.keys(colorValue).forEach((shade) => {
-        const rgb = hexToRgb(colorValue[shade]);
-        colorVariables[`--c-color-${colorName}-${shade}`] = rgb.join(' ');
+        const shadeValue = colorValue[shade];
+        if (typeof shadeValue === 'string' && shadeValue.startsWith('#')) {
+          const rgb = hexToRgb(shadeValue);
+          if (rgb) {
+            colorVariables[`--c-color-${colorName}-${shade}`] = rgb.join(' ');
+          }
+        }
       });
     }
   });
@@ -31,7 +36,7 @@ module.exports = plugin(function({ addUtilities, theme, addBase }) {
   
   Object.keys(themeColors).forEach((colorName) => {
     const colorValue = themeColors[colorName];
-    if (typeof colorValue === 'string') {
+    if (typeof colorValue === 'string' && colorVariables[`--c-color-${colorName}`]) {
       colorUtilities[`.text-${colorName}`] = {
         color: `rgba(var(--c-color-${colorName}), 1)`
       };

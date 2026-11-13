@@ -1,0 +1,82 @@
+@theme {
+  --color-primary: #3b82f6;
+  --color-secondary: #6b7280;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-info: #3b82f6;
+}
+
+@layer base {
+  :root {
+    --c-device-pixel-ratio: 1;
+    --c-hairline-color: rgba(0, 0, 0, 0.2);
+    --c-rtl-reverse: 1;
+    --c-primary-rgb: 59 130 246;
+    --c-success-rgb: 16 185 129;
+    --c-warning-rgb: 245 158 11;
+    --c-danger-rgb: 239 68 68;
+    --c-info-rgb: 59 130 246;
+    --c-dark-rgb: 17 24 39;
+    --c-medium-rgb: 107 114 128;
+    --c-light-rgb: 249 250 251;
+    --c-primary: rgba(var(--c-primary-rgb) / 1);
+    --c-success: rgba(var(--c-success-rgb) / 1);
+    --c-warning: rgba(var(--c-warning-rgb) / 1);
+    --c-danger: rgba(var(--c-danger-rgb) / 1);
+    --c-info: rgba(var(--c-info-rgb) / 1);
+    --c-dark: rgba(var(--c-dark-rgb) / 1);
+    --c-medium: rgba(var(--c-medium-rgb) / 1);
+    --c-light: rgba(var(--c-light-rgb) / 1);
+  }
+  .dark {
+    background-color: #000;
+    --c-hairline-color: rgba(255, 255, 255, 0.15);
+    color: #fff;
+  }
+  [dir='rtl'] {
+    --c-rtl-reverse: -1;
+  }
+  * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .c-ios,
+  .ios {
+    --c-theme: ios;
+    font-family:
+      -apple-system,
+      SF Pro Text,
+      SF UI Text,
+      system-ui,
+      Helvetica Neue,
+      Helvetica,
+      Arial,
+      sans-serif;
+  }
+  .c-material,
+  .md {
+    --c-theme: material;
+    font-family: Roboto, system-ui, Noto, Helvetica, Arial, sans-serif;
+  }
+  .theme-ios {
+    --c-theme: ios;
+  }
+  .theme-material,
+  .theme-md {
+    --c-theme: material;
+  }
+}
+
+@keyframes preloader-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

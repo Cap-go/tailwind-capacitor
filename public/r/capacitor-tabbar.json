@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-tabbar",
+  "type": "registry:item",
+  "title": "Capacitor Tabbar",
+  "description": "Capacitor Tabbar Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Tabbar.vue",
+      "content": "<template>\n  <c-toolbar v-bind=\"toolbarProps\">\n    <slot />\n  </c-toolbar>\n</template>\n<script>\n  import { computed } from 'vue';\n  import cToolbar from './Toolbar.vue';\n\n  export default {\n    name: 'c-tabbar',\n    components: {\n      cToolbar,\n    },\n    props: {\n      ...cToolbar.props,\n      labels: {\n        type: Boolean,\n      },\n      icons: {\n        type: Boolean,\n      },\n    },\n    setup(props) {\n      const toolbarProps = computed(() => {\n        return {\n          ...props,\n          tabbar: true,\n          tabbarLabels: props.labels,\n          tabbarIcons: props.icons,\n        };\n      });\n      return {\n        toolbarProps,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Tabbar.vue"
+    }
+  ]
+}

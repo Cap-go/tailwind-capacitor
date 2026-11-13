@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-panel",
+  "type": "registry:item",
+  "title": "Capacitor Panel",
+  "description": "Capacitor Panel Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Panel.vue",
+      "content": "<template>\n  <div v-if=\"backdrop\" :class=\"c.backdrop[state]\" @click=\"onBackdropClick\" />\n  <component :is=\"component\" :class=\"classes\">\n    <slot />\n  </component>\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { cls } from '../../shared/cls.js';\n\n  import { PanelClasses } from '../../shared/classes/PanelClasses.js';\n\n  import { PanelColors } from '../../shared/colors/PanelColors.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  export default {\n    name: 'c-panel',\n    props: {\n      component: {\n        type: String,\n        default: 'div',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      size: { type: String, default: 'w-72 h-screen' },\n      side: { type: String, default: 'left' },\n      opened: Boolean,\n      floating: { type: Boolean, default: false },\n      backdrop: { type: Boolean, default: true },\n    },\n    emits: ['backdropclick'],\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const state = computed(() => (props.opened ? 'opened' : 'closed'));\n      const colors = computed(() =>\n        PanelColors(props.colors || {}, useDarkClasses)\n      );\n\n      const c = useThemeClasses(props, () =>\n        PanelClasses(props, colors.value, ctx.attrs.class)\n      );\n\n      const classes = computed(() =>\n        cls(c.value.base, c.value[props.side][state.value], ctx.attrs.class)\n      );\n\n      const onBackdropClick = (e) => {\n        ctx.emit('backdropclick', e);\n      };\n\n      return {\n        onBackdropClick,\n        c,\n        state,\n        classes,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Panel.vue"
+    }
+  ]
+}

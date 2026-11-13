@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-page",
+  "type": "registry:item",
+  "title": "Capacitor Page",
+  "description": "Capacitor Page Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Page.vue",
+      "content": "<template>\n  <component :is=\"component\" :class=\"c.base\">\n    <slot />\n  </component>\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { PageClasses } from '../../shared/classes/PageClasses.js';\n\n  import { PageColors } from '../../shared/colors/PageColors.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  export default {\n    name: 'c-page',\n    props: {\n      component: {\n        type: String,\n        default: 'div',\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      colors: {\n        type: Object,\n      },\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const colors = computed(() =>\n        PageColors(props.colors || {}, useDarkClasses)\n      );\n      const c = useThemeClasses(props, () =>\n        PageClasses(props, colors.value, ctx.attrs.class)\n      );\n\n      return {\n        c,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Page.vue"
+    }
+  ]
+}

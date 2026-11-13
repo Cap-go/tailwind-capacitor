@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-block",
+  "type": "registry:item",
+  "title": "Capacitor Block",
+  "description": "Capacitor Block Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Block.vue",
+      "content": "<template>\n  <component :is=\"component\" :class=\"classes\">\n    <slot />\n  </component>\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { useTheme } from '../shared/use-theme.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  import { cls } from '../../shared/cls.js';\n\n  import { BlockClasses } from '../../shared/classes/BlockClasses.js';\n\n  import { BlockColors } from '../../shared/colors/BlockColors.js';\n\n  export default {\n    name: 'c-block',\n    props: {\n      component: {\n        type: String,\n        default: 'div',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      margin: { type: String, default: 'my-8' },\n      padding: { type: String, default: 'py-4' },\n      inset: { type: Boolean, default: undefined },\n      insetIos: { type: Boolean, default: false },\n      insetMaterial: { type: Boolean, default: false },\n      strong: { type: Boolean, default: undefined },\n      strongIos: { type: Boolean, default: false },\n      strongMaterial: { type: Boolean, default: false },\n      outline: { type: Boolean, default: undefined },\n      outlineIos: { type: Boolean, default: false },\n      outlineMaterial: { type: Boolean, default: false },\n      nested: { type: Boolean, default: false },\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const colors = computed(() =>\n        BlockColors(props.colors || {}, useDarkClasses)\n      );\n\n      const theme = useTheme({}, context);\n\n      const isStrong = computed(() =>\n        typeof props.strong === 'undefined'\n          ? theme.value === 'ios'\n            ? props.strongIos\n            : props.strongMaterial\n          : props.strong\n      );\n\n      const isOutline = computed(() =>\n        typeof props.outline === 'undefined'\n          ? theme.value === 'ios'\n            ? props.outlineIos\n            : props.outlineMaterial\n          : props.outline\n      );\n      const isInset = computed(() =>\n        typeof props.inset === 'undefined'\n          ? theme.value === 'ios'\n            ? props.insetIos\n            : props.insetMaterial\n          : props.inset\n      );\n\n      const c = useThemeClasses(props, () =>\n        BlockClasses(\n          {\n            ...props,\n            inset: isInset.value,\n            strong: isStrong.value,\n            outline: isOutline.value,\n          },\n          colors.value,\n          ctx.attrs.class\n        )\n      );\n\n      const classes = computed(() =>\n        cls(\n          // base\n          c.value.base,\n\n          // inset\n          isInset.value && c.value.inset\n        )\n      );\n      return {\n        classes,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Block.vue"
+    }
+  ]
+}

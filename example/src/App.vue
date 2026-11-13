@@ -1,10 +1,20 @@
 <template>
   <TailwindCapacitorProvider>
     <App theme="ios">
-      <Page>
-        <Navbar title="Tailwind Capacitor Demo" />
+      <Page class="safe-areas">
+        <Navbar title="Tailwind Capacitor Demo" large class="pt-safe" />
         
-        <div class="p-4 space-y-6">
+        <div class="p-4 pb-safe space-y-6">
+          <Block strong inset>
+            <BlockTitle>Safe areas</BlockTitle>
+            <p class="text-sm opacity-80 mb-3">
+              Navbar uses <code class="text-xs">pt-safe</code>. Content uses
+              <code class="text-xs">pb-safe</code> with <code class="text-xs">safe-areas</code> on the page.
+            </p>
+            <div class="ios:rounded-xl android:rounded-md hairline hairline-color p-4 bg-light">
+              Platform variants: <span class="ios:inline hidden">iOS</span><span class="android:inline hidden">Android / Web</span>
+            </div>
+          </Block>
           <!-- Buttons Section -->
           <Block>
             <BlockTitle>Buttons</BlockTitle>
@@ -183,7 +193,7 @@ import {
   DialogButton,
   Icon,
   Fab
-} from '@capgo/tailwind-capacitor/vue'
+} from '@/capacitor/index.js'
 
 const toastVisible = ref(false)
 const dialogVisible = ref(false)

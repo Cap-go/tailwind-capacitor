@@ -1,6 +1,6 @@
 {
   "name": "@capgo/tailwind-capacitor",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "description": "Tailwind plugin for Capacitor apps",
   "main": "index.js",
   "exports": {
@@ -21,7 +21,17 @@
     "./platform": "./src/config/plugin-platform.js"
   },
   "scripts": {
-    "test": "node scripts/verify-safe-area-selectors.js"
+    "lint": "eslint .",
+    "generate:css": "node scripts/copy-capacitor-config.mjs && node scripts/generate-line-clamp-css.mjs && node scripts/generate-safe-area-css.mjs",
+    "generate:registry": "node scripts/generate-registry.mjs",
+    "build:registry": "npm run generate:css && npm run generate:registry && shadcn build -o public/r",
+    "postprocess:registry": "node scripts/postprocess-registry.mjs",
+    "test": "node scripts/verify-safe-area-selectors.js",
+    "test:registry-install": "node scripts/test-registry-install.mjs",
+    "smoke:tailwind": "node scripts/smoke-tailwind-v4.mjs",
+    "build:example": "npm run sync:example && npm run build:example:app",
+    "sync:example": "node scripts/sync-example-registry.mjs && node scripts/generate-example-barrel.mjs",
+    "build:example:app": "npm --prefix example run build"
   },
   "repository": {
     "type": "git",
@@ -38,11 +48,23 @@
     "url": "https://github.com/Cap-go/tailwind-capacitor/issues"
   },
   "homepage": "https://github.com/Cap-go/tailwind-capacitor#readme",
-  "dependencies": {
-    "tailwindcss": "^3.4.17"
-  },
+  "files": [
+    "index.js",
+    "src",
+    "registry",
+    "registry.json",
+    "public/r",
+    "components.json"
+  ],
   "devDependencies": {
-    "postcss": "8.5.32",
-    "tailwindcss": "3.4.19"
+    "@eslint/js": "^9.28.0",
+    "@tailwindcss/postcss": "^4.1.11",
+    "@tailwindcss/vite": "^4.1.11",
+    "eslint": "^9.28.0",
+    "globals": "^16.2.0",
+    "playwright": "^1.51.0",
+    "postcss": "^8.5.6",
+    "shadcn": "^3.2.1",
+    "tailwindcss": "^4.1.11"
   }
 }

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-preloader",
+  "type": "registry:item",
+  "title": "Capacitor Preloader",
+  "description": "Capacitor Preloader Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Preloader.vue",
+      "content": "<template>\n  <component :is=\"component\" :class=\"c.base\">\n    <span :class=\"c.inner\">\n      <component :is=\"svgComponent\" class=\"w-full h-full\" />\n    </span>\n    <slot />\n  </component>\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { useTheme } from '../shared/use-theme.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  import PreloaderIOS from './icons/PreloaderIOS.vue';\n  import PreloaderMaterial from './icons/PreloaderMaterial.vue';\n\n  import { PreloaderClasses } from '../../shared/classes/PreloaderClasses.js';\n\n  import { PreloaderColors } from '../../shared/colors/PreloaderColors.js';\n\n  export default {\n    name: 'c-preloader',\n    props: {\n      component: {\n        type: String,\n        default: 'span',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      size: {\n        type: String,\n        default: 'w-8 h-8',\n      },\n    },\n    setup(props) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const theme = useTheme(props, context);\n\n      const colors = computed(() =>\n        PreloaderColors(props.colors || {}, useDarkClasses)\n      );\n\n      const svgComponent = computed(() =>\n        theme.value === 'ios' ? PreloaderIOS : PreloaderMaterial\n      );\n\n      const c = useThemeClasses(props, () =>\n        PreloaderClasses(props, colors.value, theme.value)\n      );\n\n      return {\n        svgComponent,\n        c,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Preloader.vue"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-actions-button",
+  "type": "registry:item",
+  "title": "Capacitor ActionsButton",
+  "description": "Capacitor ActionsButton Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/ActionsButton.vue",
+      "content": "<template>\n  <component\n    :is=\"Component\"\n    ref=\"rippleElRef\"\n    role=\"button\"\n    tabindex=\"0\"\n    :class=\"c.base\"\n  >\n    <slot />\n  </component>\n</template>\n<script>\n  import { ref, computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { useTouchRipple } from '../shared/use-touch-ripple.js';\n  import { themeClasses } from '../shared/use-theme-classes.js';\n  import { useTheme } from '../shared/use-theme.js';\n  import { darkClasses } from '../shared/use-dark-classes.js';\n  import { ActionsButtonClasses } from '../../shared/classes/ActionsButtonClasses.js';\n  import { ActionsButtonColors } from '../../shared/colors/ActionsButtonColors.js';\n\n  export default {\n    name: 'c-actions-button',\n    props: {\n      component: {\n        type: String,\n        default: 'button',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      // Anchor props\n      href: {\n        type: [Boolean, String],\n        default: undefined,\n      },\n      touchRipple: {\n        type: Boolean,\n        default: true,\n      },\n      dividers: { type: Boolean, default: undefined },\n      bold: { type: Boolean, default: undefined },\n      boldIos: { type: Boolean, default: false },\n      boldMaterial: { type: Boolean, default: false },\n      fontSizeIos: { type: String, default: 'text-xl' },\n      fontSizeMaterial: { type: String, default: 'text-base' },\n    },\n    setup(props) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const rippleElRef = ref(null);\n      const Component = computed(() => {\n        let c = props.component;\n        if (\n          typeof props.component === 'undefined' &&\n          (props.href || props.href === '')\n        ) {\n          c = 'a';\n        }\n        return c;\n      });\n\n      useTouchRipple(rippleElRef, props, { context });\n\n      const colors = computed(() =>\n        ActionsButtonColors(props.colors || {}, useDarkClasses)\n      );\n\n      const theme = useTheme({}, context);\n\n      const isDividers = computed(() =>\n        typeof props.dividers === 'undefined'\n          ? theme.value === 'ios'\n          : props.dividers\n      );\n\n      const isBold = computed(() =>\n        typeof props.bold === 'undefined'\n          ? theme.value === 'ios'\n            ? props.boldIos\n            : props.boldMaterial\n          : props.bold\n      );\n\n      const c = useThemeClasses(props, () =>\n        ActionsButtonClasses(\n          { ...props, bold: isBold.value, dividers: isDividers.value },\n          colors.value,\n          useDarkClasses\n        )\n      );\n\n      return {\n        c,\n        Component,\n        rippleElRef,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/ActionsButton.vue"
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+@utility hairline-t {
+  border-top-width: calc(1px / var(--c-device-pixel-ratio));
+}
+@utility hairline-r {
+  border-right-width: calc(1px / var(--c-device-pixel-ratio));
+}
+@utility hairline-b {
+  border-bottom-width: calc(1px / var(--c-device-pixel-ratio));
+}
+@utility hairline-l {
+  border-left-width: calc(1px / var(--c-device-pixel-ratio));
+}
+@utility hairline-x {
+  border-left-width: calc(1px / var(--c-device-pixel-ratio));
+  border-right-width: calc(1px / var(--c-device-pixel-ratio));
+}
+@utility hairline-y {
+  border-top-width: calc(1px / var(--c-device-pixel-ratio));
+  border-bottom-width: calc(1px / var(--c-device-pixel-ratio));
+}
+@utility hairline {
+  border-width: calc(1px / var(--c-device-pixel-ratio));
+}
+@utility hairline-color {
+  border-color: var(--c-hairline-color);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility touch-action-auto {
+  touch-action: auto;
+}
+@utility touch-action-none {
+  touch-action: none;
+}
+@utility touch-action-pan-x {
+  touch-action: pan-x;
+}
+@utility touch-action-pan-y {
+  touch-action: pan-y;
+}
+@utility touch-action-manipulation {
+  touch-action: manipulation;
+}
+@utility user-select-none {
+  -webkit-user-select: none;
+  user-select: none;
+}
+@utility user-select-text {
+  -webkit-user-select: text;
+  user-select: text;
+}
+@utility user-select-all {
+  -webkit-user-select: all;
+  user-select: all;
+}
+
+@utility line-clamp-none {
+  overflow: visible;
+  display: block;
+  -webkit-box-orient: unset;
+  -webkit-line-clamp: unset;
+}
+
+@utility preloader {
+  display: inline-block;
+  animation: preloader-spin 1s linear infinite;
+}
+@utility preloader-ios {
+  width: 20px;
+  height: 20px;
+  background: conic-gradient(from 0deg, transparent, currentColor);
+  border-radius: 50%;
+  mask-image: radial-gradient(circle, transparent 40%, black 40%);
+  -webkit-mask-image: radial-gradient(circle, transparent 40%, black 40%);
+}
+@utility preloader-material {
+  width: 20px;
+  height: 20px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+}
+
+@utility translucent {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.9);
+}
+@utility translucent-dark {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.9);
+}
+@utility translucent-glass {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@utility touch-ripple {
+  position: relative;
+  overflow: hidden;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition:
+      width 0.3s,
+      height 0.3s;
+    pointer-events: none;
+  }
+  &:active::before {
+    width: 200px;
+    height: 200px;
+  }
+}
+@utility touch-ripple-dark {
+  &::before {
+    background: rgba(0, 0, 0, 0.1);
+  }
+}
+
+@utility range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.1);
+  outline: none;
+  border-radius: 1px;
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: currentColor;
+    cursor: pointer;
+  }
+  &::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: currentColor;
+    cursor: pointer;
+    border: none;
+  }
+}

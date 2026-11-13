@@ -1,0 +1,29 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+      - 'cursor/**'
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run generate:css
+      - run: npm test
+      - run: npm run smoke:tailwind
+      - run: npm run build:registry
+      - run: npm run test:registry-install
+      - run: npm run postprocess:registry
+      - run: npm run sync:example
+      - run: npm --prefix example ci
+      - run: npm --prefix example run build

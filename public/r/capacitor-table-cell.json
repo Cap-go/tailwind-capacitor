@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-table-cell",
+  "type": "registry:item",
+  "title": "Capacitor TableCell",
+  "description": "Capacitor TableCell Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/TableCell.vue",
+      "content": "<template>\n  <component :is=\"component\" ref=\"elRef\" :class=\"c.base\">\n    <slot />\n  </component>\n</template>\n<script>\n  import { ref, computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { TableCellClasses } from '../../shared/classes/TableCellClasses.js';\n\n  import { TableCellColors } from '../../shared/colors/TableCellColors.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  export default {\n    name: 'c-table-cell',\n    props: {\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      header: {\n        type: Boolean,\n        default: false,\n      },\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const elRef = ref(null);\n      const component = computed(() => (props.header ? 'th' : 'td'));\n\n      const colors = computed(() =>\n        TableCellColors(props.colors || {}, useDarkClasses)\n      );\n      const c = useThemeClasses(props, () =>\n        TableCellClasses(props, colors.value, ctx.attrs.class)\n      );\n\n      return {\n        c,\n        elRef,\n        component,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/TableCell.vue"
+    }
+  ]
+}

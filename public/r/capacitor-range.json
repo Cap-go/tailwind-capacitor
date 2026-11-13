@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-range",
+  "type": "registry:item",
+  "title": "Capacitor Range",
+  "description": "Capacitor Range Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/cursor/tailwind-v4-shadcn-registry-0cd5/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Range.vue",
+      "content": "<template>\n  <component :is=\"component\" :class=\"c.base\">\n    <span :class=\"c.trackBg\" />\n    <span :class=\"c.trackValue\" :style=\"{ width: `${valueWidth}%` }\" />\n    <input\n      :id=\"inputId\"\n      :class=\"cls(c.input, c.inputThumb, c.inputTrack)\"\n      type=\"range\"\n      :name=\"name\"\n      :min=\"min\"\n      :max=\"max\"\n      :step=\"step\"\n      :value=\"value\"\n      :readonly=\"readonly\"\n      :disabled=\"disabled\"\n      @input=\"onInput\"\n      @change=\"onChange\"\n      @focus=\"onFocus\"\n      @blur=\"onBlur\"\n    />\n  </component>\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { cls } from '../../shared/cls.js';\n\n  import { RangeClasses } from '../../shared/classes/RangeClasses.js';\n\n  import { RangeColors } from '../../shared/colors/RangeColors.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  export default {\n    name: 'c-range',\n    props: {\n      component: {\n        type: String,\n        default: 'div',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      inputId: { type: String, default: undefined },\n      name: { type: String, default: undefined },\n      value: { type: Number, default: undefined },\n      readonly: { type: Boolean, default: false },\n      disabled: { type: Boolean, default: false },\n      step: { type: Number, default: 1 },\n      min: { type: Number, default: 0 },\n      max: { type: Number, default: 100 },\n    },\n    emits: ['input', 'change', 'focus', 'blur'],\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const colors = computed(() =>\n        RangeColors(props.colors || {}, useDarkClasses)\n      );\n\n      const c = useThemeClasses(props, () =>\n        RangeClasses(props, colors.value, useDarkClasses)\n      );\n\n      const valueWidth = computed(\n        () => (((props.value || 0) - props.min) / (props.max - props.min)) * 100\n      );\n      const onInput = (e) => {\n        ctx.emit('input', e);\n      };\n      const onChange = (e) => {\n        ctx.emit('change', e);\n      };\n      const onFocus = (e) => {\n        ctx.emit('focus', e);\n      };\n      const onBlur = (e) => {\n        ctx.emit('blur', e);\n      };\n      return {\n        c,\n        valueWidth,\n        cls,\n        onInput,\n        onChange,\n        onFocus,\n        onBlur,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Range.vue"
+    }
+  ]
+}
