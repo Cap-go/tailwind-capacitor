@@ -26,12 +26,14 @@
     "generate:registry": "node scripts/generate-registry.mjs",
     "build:registry": "npm run generate:css && npm run generate:registry && shadcn build -o public/r && node scripts/postprocess-registry.mjs",
     "postprocess:registry": "node scripts/postprocess-registry.mjs",
+    "pretest": "npm run generate:css",
     "test": "node scripts/verify-safe-area-selectors.js",
     "test:registry-install": "node scripts/test-registry-install.mjs",
     "smoke:tailwind": "node scripts/smoke-tailwind-v4.mjs",
     "build:example": "npm run sync:example && npm run build:example:app",
     "sync:example": "node scripts/sync-example-registry.mjs && node scripts/generate-example-barrel.mjs",
-    "build:example:app": "npm --prefix example run build"
+    "build:example:app": "npm --prefix example run build",
+    "capture:screenshots": "node scripts/capture-screenshots.mjs"
   },
   "repository": {
     "type": "git",
@@ -48,6 +50,9 @@
     "url": "https://github.com/Cap-go/tailwind-capacitor/issues"
   },
   "homepage": "https://github.com/Cap-go/tailwind-capacitor#readme",
+  "peerDependencies": {
+    "tailwindcss": "^4.0.0"
+  },
   "files": [
     "index.js",
     "src",

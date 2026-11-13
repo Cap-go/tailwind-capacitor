@@ -1,11 +1,25 @@
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { spawnSync } from 'node:child_process';
 import { repoRoot } from './repo-root.mjs';
 
 const root = repoRoot;
 const dir = join(root, 'public/r');
 
-const branch = process.env.REGISTRY_BRANCH || 'main';
+function registryBranch() {
+  if (process.env.REGISTRY_BRANCH) {
+    return process.env.REGISTRY_BRANCH;
+  }
+  const head = spawnSync('git', ['rev-parse', '--abbrev-ref', 'HEAD'], {
+    cwd: root,
+    encoding: 'utf8',
+  });
+  const branch = head.stdout.trim();
+  if (branch && branch !== 'HEAD') return branch;
+  return 'main';
+}
+
+const branch = registryBranch();
 
 const base = `https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/${branch}/public/r`;
 
@@ -36,4 +50,4 @@ for (const file of readdirSync(dir)) {
   writeFileSync(path, `${JSON.stringify(data, null, 2)}\n`);
 }
 
-console.log(`postprocess-registry: base ${base}/`);
+console.log(`postprocess-registry: base ${base}/ (branch ${branch})`);

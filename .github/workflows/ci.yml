@@ -1,10 +1,12 @@
 name: ci
 
+permissions:
+  contents: read
+
 on:
   push:
     branches:
       - main
-      - 'cursor/**'
   pull_request:
 
 jobs:

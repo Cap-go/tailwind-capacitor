@@ -118,24 +118,26 @@ items.push({
 
 items.push({
   name: 'capacitor-shared',
-  type: 'registry:lib',
+  type: 'registry:item',
   title: 'Tailwind Capacitor shared tokens',
   description: 'Shared class and color maps for capacitor components.',
+  registryDependencies: [dep('capacitor-tailwind')],
   files: sharedClassColorFiles().map((path) => {
     const rel = path.replace(/^src\//, 'capacitor/');
-    return fileEntry(path, 'registry:lib', `src/${rel}`);
+    return fileEntry(path, 'registry:file', `src/${rel}`);
   }),
 });
 
 items.push({
   name: 'capacitor-icons',
-  type: 'registry:lib',
+  type: 'registry:item',
   title: 'Tailwind Capacitor icons',
   description: 'Inline SVG icon components used by capacitor UI.',
   registryDependencies: [dep('capacitor-provider')],
+  dependencies: ['vue'],
   files: iconFiles.map((path) => {
     const rel = path.replace(/^src\//, 'capacitor/');
-    return fileEntry(path, 'registry:lib', `src/${rel}`);
+    return fileEntry(path, 'registry:file', `src/${rel}`);
   }),
 });
 

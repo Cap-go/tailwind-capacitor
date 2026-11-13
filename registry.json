@@ -127,634 +127,640 @@
     },
     {
       "name": "capacitor-shared",
-      "type": "registry:lib",
+      "type": "registry:item",
       "title": "Tailwind Capacitor shared tokens",
       "description": "Shared class and color maps for capacitor components.",
+      "registryDependencies": [
+        "./capacitor-tailwind.json"
+      ],
       "files": [
         {
           "path": "src/shared/calc-popover-position.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/calc-popover-position.js"
         },
         {
           "path": "src/shared/classes/ActionsButtonClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/ActionsButtonClasses.js"
         },
         {
           "path": "src/shared/classes/ActionsClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/ActionsClasses.js"
         },
         {
           "path": "src/shared/classes/ActionsGroupClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/ActionsGroupClasses.js"
         },
         {
           "path": "src/shared/classes/ActionsLabelClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/ActionsLabelClasses.js"
         },
         {
           "path": "src/shared/classes/AppClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/AppClasses.js"
         },
         {
           "path": "src/shared/classes/BadgeClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/BadgeClasses.js"
         },
         {
           "path": "src/shared/classes/BlockClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/BlockClasses.js"
         },
         {
           "path": "src/shared/classes/BlockFooterClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/BlockFooterClasses.js"
         },
         {
           "path": "src/shared/classes/BlockHeaderClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/BlockHeaderClasses.js"
         },
         {
           "path": "src/shared/classes/BlockTitleClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/BlockTitleClasses.js"
         },
         {
           "path": "src/shared/classes/BreadcrumbsClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/BreadcrumbsClasses.js"
         },
         {
           "path": "src/shared/classes/BreadcrumbsCollapsedClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/BreadcrumbsCollapsedClasses.js"
         },
         {
           "path": "src/shared/classes/BreadcrumbsItemClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/BreadcrumbsItemClasses.js"
         },
         {
           "path": "src/shared/classes/BreadcrumbsSeparatorClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/BreadcrumbsSeparatorClasses.js"
         },
         {
           "path": "src/shared/classes/ButtonClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/ButtonClasses.js"
         },
         {
           "path": "src/shared/classes/CardClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/CardClasses.js"
         },
         {
           "path": "src/shared/classes/CheckboxClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/CheckboxClasses.js"
         },
         {
           "path": "src/shared/classes/ChipClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/ChipClasses.js"
         },
         {
           "path": "src/shared/classes/DialogButtonClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/DialogButtonClasses.js"
         },
         {
           "path": "src/shared/classes/DialogClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/DialogClasses.js"
         },
         {
           "path": "src/shared/classes/FabClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/FabClasses.js"
         },
         {
           "path": "src/shared/classes/IconClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/IconClasses.js"
         },
         {
           "path": "src/shared/classes/LinkClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/LinkClasses.js"
         },
         {
           "path": "src/shared/classes/ListButtonClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/ListButtonClasses.js"
         },
         {
           "path": "src/shared/classes/ListClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/ListClasses.js"
         },
         {
           "path": "src/shared/classes/ListInputClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/ListInputClasses.js"
         },
         {
           "path": "src/shared/classes/ListItemClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/ListItemClasses.js"
         },
         {
           "path": "src/shared/classes/MessageClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/MessageClasses.js"
         },
         {
           "path": "src/shared/classes/MessagebarClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/MessagebarClasses.js"
         },
         {
           "path": "src/shared/classes/MessagesClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/MessagesClasses.js"
         },
         {
           "path": "src/shared/classes/MessagesTitleClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/MessagesTitleClasses.js"
         },
         {
           "path": "src/shared/classes/NavbarBackLinkClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/NavbarBackLinkClasses.js"
         },
         {
           "path": "src/shared/classes/NavbarClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/NavbarClasses.js"
         },
         {
           "path": "src/shared/classes/NotificationsClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/NotificationsClasses.js"
         },
         {
           "path": "src/shared/classes/PageClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/PageClasses.js"
         },
         {
           "path": "src/shared/classes/PanelClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/PanelClasses.js"
         },
         {
           "path": "src/shared/classes/PopoverClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/PopoverClasses.js"
         },
         {
           "path": "src/shared/classes/PopupClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/PopupClasses.js"
         },
         {
           "path": "src/shared/classes/PreloaderClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/PreloaderClasses.js"
         },
         {
           "path": "src/shared/classes/ProgressbarClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/ProgressbarClasses.js"
         },
         {
           "path": "src/shared/classes/RadioClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/RadioClasses.js"
         },
         {
           "path": "src/shared/classes/RangeClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/RangeClasses.js"
         },
         {
           "path": "src/shared/classes/SearchbarClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/SearchbarClasses.js"
         },
         {
           "path": "src/shared/classes/SegmentedClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/SegmentedClasses.js"
         },
         {
           "path": "src/shared/classes/SheetClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/SheetClasses.js"
         },
         {
           "path": "src/shared/classes/StepperClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/StepperClasses.js"
         },
         {
           "path": "src/shared/classes/TabbarLinkClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/TabbarLinkClasses.js"
         },
         {
           "path": "src/shared/classes/TableBodyClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/TableBodyClasses.js"
         },
         {
           "path": "src/shared/classes/TableCellClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/TableCellClasses.js"
         },
         {
           "path": "src/shared/classes/TableClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/TableClasses.js"
         },
         {
           "path": "src/shared/classes/TableHeadClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/TableHeadClasses.js"
         },
         {
           "path": "src/shared/classes/TableRowClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/TableRowClasses.js"
         },
         {
           "path": "src/shared/classes/ToastClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/ToastClasses.js"
         },
         {
           "path": "src/shared/classes/ToggleClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/ToggleClasses.js"
         },
         {
           "path": "src/shared/classes/ToolbarClasses.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/classes/ToolbarClasses.js"
         },
         {
           "path": "src/shared/cls.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/cls.js"
         },
         {
           "path": "src/shared/colors/ActionsButtonColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/ActionsButtonColors.js"
         },
         {
           "path": "src/shared/colors/ActionsColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/ActionsColors.js"
         },
         {
           "path": "src/shared/colors/ActionsGroupColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/ActionsGroupColors.js"
         },
         {
           "path": "src/shared/colors/ActionsLabelColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/ActionsLabelColors.js"
         },
         {
           "path": "src/shared/colors/AppColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/AppColors.js"
         },
         {
           "path": "src/shared/colors/BadgeColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/BadgeColors.js"
         },
         {
           "path": "src/shared/colors/BlockColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/BlockColors.js"
         },
         {
           "path": "src/shared/colors/BlockFooterColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/BlockFooterColors.js"
         },
         {
           "path": "src/shared/colors/BlockHeaderColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/BlockHeaderColors.js"
         },
         {
           "path": "src/shared/colors/BlockTitleColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/BlockTitleColors.js"
         },
         {
           "path": "src/shared/colors/BreadcrumbsCollapsedColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/BreadcrumbsCollapsedColors.js"
         },
         {
           "path": "src/shared/colors/BreadcrumbsColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/BreadcrumbsColors.js"
         },
         {
           "path": "src/shared/colors/BreadcrumbsItemColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/BreadcrumbsItemColors.js"
         },
         {
           "path": "src/shared/colors/BreadcrumbsSeparatorColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/BreadcrumbsSeparatorColors.js"
         },
         {
           "path": "src/shared/colors/ButtonColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/ButtonColors.js"
         },
         {
           "path": "src/shared/colors/CardColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/CardColors.js"
         },
         {
           "path": "src/shared/colors/CheckboxColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/CheckboxColors.js"
         },
         {
           "path": "src/shared/colors/ChipColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/ChipColors.js"
         },
         {
           "path": "src/shared/colors/DialogButtonColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/DialogButtonColors.js"
         },
         {
           "path": "src/shared/colors/DialogColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/DialogColors.js"
         },
         {
           "path": "src/shared/colors/FabColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/FabColors.js"
         },
         {
           "path": "src/shared/colors/IconColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/IconColors.js"
         },
         {
           "path": "src/shared/colors/LinkColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/LinkColors.js"
         },
         {
           "path": "src/shared/colors/ListButtonColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/ListButtonColors.js"
         },
         {
           "path": "src/shared/colors/ListColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/ListColors.js"
         },
         {
           "path": "src/shared/colors/ListGroupColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/ListGroupColors.js"
         },
         {
           "path": "src/shared/colors/ListInputColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/ListInputColors.js"
         },
         {
           "path": "src/shared/colors/ListItemColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/ListItemColors.js"
         },
         {
           "path": "src/shared/colors/MenuListColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/MenuListColors.js"
         },
         {
           "path": "src/shared/colors/MenuListItemColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/MenuListItemColors.js"
         },
         {
           "path": "src/shared/colors/MessageColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/MessageColors.js"
         },
         {
           "path": "src/shared/colors/MessagebarColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/MessagebarColors.js"
         },
         {
           "path": "src/shared/colors/MessagesTitleColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/MessagesTitleColors.js"
         },
         {
           "path": "src/shared/colors/NavbarBackLinkColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/NavbarBackLinkColors.js"
         },
         {
           "path": "src/shared/colors/NavbarColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/NavbarColors.js"
         },
         {
           "path": "src/shared/colors/NotificationsColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/NotificationsColors.js"
         },
         {
           "path": "src/shared/colors/PageColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/PageColors.js"
         },
         {
           "path": "src/shared/colors/PanelColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/PanelColors.js"
         },
         {
           "path": "src/shared/colors/PopoverColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/PopoverColors.js"
         },
         {
           "path": "src/shared/colors/PopupColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/PopupColors.js"
         },
         {
           "path": "src/shared/colors/PreloaderColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/PreloaderColors.js"
         },
         {
           "path": "src/shared/colors/ProgressbarColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/ProgressbarColors.js"
         },
         {
           "path": "src/shared/colors/RadioColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/RadioColors.js"
         },
         {
           "path": "src/shared/colors/RangeColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/RangeColors.js"
         },
         {
           "path": "src/shared/colors/SearchbarColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/SearchbarColors.js"
         },
         {
           "path": "src/shared/colors/SegmentedButtonColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/SegmentedButtonColors.js"
         },
         {
           "path": "src/shared/colors/SegmentedColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/SegmentedColors.js"
         },
         {
           "path": "src/shared/colors/SheetColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/SheetColors.js"
         },
         {
           "path": "src/shared/colors/StepperColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/StepperColors.js"
         },
         {
           "path": "src/shared/colors/TabbarColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/TabbarColors.js"
         },
         {
           "path": "src/shared/colors/TabbarLinkColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/TabbarLinkColors.js"
         },
         {
           "path": "src/shared/colors/TableCellColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/TableCellColors.js"
         },
         {
           "path": "src/shared/colors/TableRowColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/TableRowColors.js"
         },
         {
           "path": "src/shared/colors/ToastColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/ToastColors.js"
         },
         {
           "path": "src/shared/colors/ToggleColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/ToggleColors.js"
         },
         {
           "path": "src/shared/colors/ToolbarColors.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/colors/ToolbarColors.js"
         },
         {
           "path": "src/shared/position-class.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/position-class.js"
         },
         {
           "path": "src/shared/touch-ripple-class.js",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/shared/touch-ripple-class.js"
         }
       ]
     },
     {
       "name": "capacitor-icons",
-      "type": "registry:lib",
+      "type": "registry:item",
       "title": "Tailwind Capacitor icons",
       "description": "Inline SVG icon components used by capacitor UI.",
       "registryDependencies": [
         "./capacitor-provider.json"
       ],
+      "dependencies": [
+        "vue"
+      ],
       "files": [
         {
           "path": "src/vue/components/icons/BackIcon.vue",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/vue/components/icons/BackIcon.vue"
         },
         {
           "path": "src/vue/components/icons/CheckboxIcon.vue",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/vue/components/icons/CheckboxIcon.vue"
         },
         {
           "path": "src/vue/components/icons/ChevronIcon.vue",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/vue/components/icons/ChevronIcon.vue"
         },
         {
           "path": "src/vue/components/icons/DeleteIcon.vue",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/vue/components/icons/DeleteIcon.vue"
         },
         {
           "path": "src/vue/components/icons/DropdownIcon.vue",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/vue/components/icons/DropdownIcon.vue"
         },
         {
           "path": "src/vue/components/icons/PreloaderIOS.vue",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/vue/components/icons/PreloaderIOS.vue"
         },
         {
           "path": "src/vue/components/icons/PreloaderMaterial.vue",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/vue/components/icons/PreloaderMaterial.vue"
         },
         {
           "path": "src/vue/components/icons/SearchIcon.vue",
-          "type": "registry:lib",
+          "type": "registry:file",
           "target": "src/capacitor/vue/components/icons/SearchIcon.vue"
         }
       ]

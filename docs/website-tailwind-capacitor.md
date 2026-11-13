@@ -61,8 +61,8 @@ import Button from '@/capacitor/vue/components/Button.vue'
   <TailwindCapacitorProvider>
     <App theme="ios" class="safe-areas">
       <Page>
-        <Navbar title="Home" class="pt-safe" />
-        <Button fill="solid">Continue</Button>
+        <Navbar title="Home" />
+        <Button>Continue</Button>
       </Page>
     </App>
   </TailwindCapacitorProvider>

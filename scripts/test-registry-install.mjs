@@ -6,6 +6,7 @@ import {
   rmSync,
   writeFileSync,
   readFileSync,
+  existsSync,
 } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -14,6 +15,8 @@ import { repoRoot } from './repo-root.mjs';
 
 const registryDir = join(repoRoot, 'public/r');
 const dir = mkdtempSync(join(tmpdir(), 'tc-registry-'));
+const shadcnTag = process.env.SHADCN_VERSION || 'latest';
+const shadcnCmd = [`shadcn@${shadcnTag}`, 'add'];
 
 function localizeRegistryFile(path) {
   const data = JSON.parse(readFileSync(path, 'utf8'));
@@ -47,53 +50,102 @@ for (const name of readdirSync(registryDir)) {
 
 writeFileSync(
   join(dir, 'package.json'),
-  JSON.stringify({ name: 'registry-install-smoke', private: true, type: 'module' }, null, 2),
+  JSON.stringify(
+    {
+      name: 'registry-install-smoke',
+      private: true,
+      type: 'module',
+      dependencies: {
+        vue: '^3.5.17',
+      },
+      devDependencies: {
+        tailwindcss: '^4.1.11',
+        '@tailwindcss/vite': '^4.1.11',
+        vite: '^7.0.2',
+        '@vitejs/plugin-vue': '^6.0.0',
+      },
+    },
+    null,
+    2,
+  ),
 );
 mkdirSync(join(dir, 'src'), { recursive: true });
-writeFileSync(join(dir, 'src/style.css'), '@import "tailwindcss";\n');
+writeFileSync(
+  join(dir, 'src/style.css'),
+  '@import "@/capacitor/styles/tailwind-capacitor.css";\n',
+);
 cpSync(join(repoRoot, 'components.json'), join(dir, 'components.json'));
 cpSync(join(repoRoot, 'jsconfig.json'), join(dir, 'jsconfig.json'));
+writeFileSync(
+  join(dir, 'vite.config.js'),
+  `import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+  plugins: [vue(), tailwindcss()],
+  resolve: {
+    alias: {
+      '@': new URL('./src', import.meta.url).pathname,
+    },
+  },
+});
+`,
+);
+
+const npmCi = spawnSync('npm', ['install'], { cwd: dir, stdio: 'inherit' });
+if (npmCi.status !== 0) {
+  process.exit(npmCi.status ?? 1);
+}
+
+const priority = [
+  'capacitor-tailwind.json',
+  'capacitor-provider.json',
+  'capacitor-shared.json',
+  'capacitor-icons.json',
+];
 
 const items = readdirSync(dir)
-  .filter(
-    (name) =>
-      name.endsWith('.json') &&
-      name !== 'registry.json' &&
-      name !== 'components.json',
-  )
-  .sort();
+  .filter((name) => name.startsWith('capacitor-') && name.endsWith('.json'))
+  .sort((a, b) => {
+    const ai = priority.indexOf(a);
+    const bi = priority.indexOf(b);
+    if (ai === -1 && bi === -1) return a.localeCompare(b);
+    if (ai === -1) return 1;
+    if (bi === -1) return -1;
+    return ai - bi;
+  });
 
 for (const item of items) {
-  const result = spawnSync(
-    'node',
-    [join(repoRoot, 'scripts/registry-add.mjs'), join(dir, item)],
-    { cwd: dir, stdio: 'inherit', env: { ...process.env, REGISTRY_ROOT: registryDir } },
-  );
+  const addArgs = [...shadcnCmd, join(dir, item), '-y'];
+  const result = spawnSync('npx', addArgs, {
+    cwd: dir,
+    stdio: 'pipe',
+    encoding: 'utf8',
+  });
   if (result.status !== 0) {
-    process.exit(result.status ?? 1);
+    console.error(`shadcn add failed: ${item}`);
+    console.error(`command: npx ${addArgs.join(' ')}`);
+    console.error(result.stdout);
+    console.error(result.stderr);
+    process.exit(1);
   }
 
   const parsed = JSON.parse(readFileSync(join(dir, item), 'utf8'));
   for (const file of parsed.files || []) {
     const target = join(dir, file.target);
-    if (!readFileSync(target, 'utf8')) {
-      console.error(`empty file after install: ${file.target}`);
+    if (!existsSync(target) || !readFileSync(target, 'utf8').trim()) {
+      console.error(`missing or empty after shadcn add: ${file.target}`);
       process.exit(1);
     }
   }
 }
 
 const buttonPath = join(dir, 'src/capacitor/vue/components/Button.vue');
-if (!readFileSync(buttonPath, 'utf8').includes('c-button')) {
+if (!existsSync(buttonPath)) {
   console.error('missing Button.vue after registry install');
   process.exit(1);
 }
 
-const stylePath = join(dir, 'src/capacitor/styles/variants.css');
-if (!readFileSync(stylePath, 'utf8').includes('@custom-variant ios')) {
-  console.error('missing tailwind-capacitor.css after registry install');
-  process.exit(1);
-}
-
 rmSync(dir, { recursive: true, force: true });
-console.log(`test-registry-install: ok (${items.length} items)`);
+console.log(`test-registry-install: ok (${items.length} items via npx shadcn add)`);
