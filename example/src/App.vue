@@ -1,7 +1,7 @@
 <template>
   <TailwindCapacitorProvider :dark="darkMode" :theme="platformTheme">
     <App :theme="platformTheme" :dark="darkMode">
-      <Page class="safe-areas demo-page">
+      <Page class="demo-page no-safe-areas-top">
         <Navbar title="Tailwind Capacitor Demo" />
 
         <div class="p-4 pb-16 space-y-4 demo-shell">
@@ -88,7 +88,7 @@
               <TabbarLink :active="tab === 'a'">Home</TabbarLink>
               <TabbarLink>Settings</TabbarLink>
             </Tabbar>
-            <div class="flex items-center gap-2 mt-2">
+            <div class="demo-back-row flex items-center gap-2 mt-2">
               <NavbarBackLink @click.prevent />
               <span class="text-sm">Back button</span>
             </div>
