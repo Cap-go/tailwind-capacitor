@@ -24,6 +24,7 @@ jobs:
       - run: npm test
       - run: npm run smoke:tailwind
       - run: npm run build:registry
+      - run: npm run verify:registry-refs
       - run: npm run test:registry-install
       - run: npm run sync:example
       - run: npm --prefix example ci

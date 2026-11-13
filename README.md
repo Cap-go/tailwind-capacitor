@@ -16,9 +16,9 @@ Tailwind CSS v4 + Capacitor UI components, shipped as a [shadcn](https://ui.shad
 
 ## Install (shadcn registry)
 
-Registry JSON is built to `public/r/` with `npm run build:registry`. Published URLs use your current git branch unless you set `REGISTRY_BRANCH` (for example `REGISTRY_BRANCH=main npm run postprocess:registry`).
+Registry JSON is built to `public/r/` with `npm run build:registry`. Committed artifacts always point `registryDependencies` at `refs/heads/main`. For a **local-only** branch preview, run `REGISTRY_BRANCH=<branch> npm run postprocess:registry` and do not commit `public/r/`.
 
-After merge, use `main` in the URL:
+Install URLs after merge (or from this repo's committed `public/r/`):
 
 ```bash
 npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json
