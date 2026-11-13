@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-avatar",
+  "type": "registry:item",
   "title": "Capacitor Avatar (React)",
   "description": "Capacitor Avatar React component.",
   "dependencies": [
@@ -15,10 +16,9 @@
   "files": [
     {
       "path": "src/react/components/Avatar.tsx",
-      "content": "/* @ts-nocheck */\nimport React from 'react';\nimport { AvatarClasses } from '../../shared/classes/AvatarClasses.js';\nimport { AvatarColors } from '../../shared/colors/AvatarColors.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\n\nconst Avatar = (props) => {\n  const {\n    component: Component = 'div',\n    className,\n    colors: colorsProp,\n    ios,\n    material,\n    children,\n    ...rest\n  } = props;\n  const themeClassesFn = useThemeClasses({ ios, material });\n  const colors = AvatarColors(colorsProp);\n  const c = themeClassesFn(AvatarClasses(props, colors, { className }), className);\n  return (\n    <Component className={c.base} {...rest}>\n      {children}\n    </Component>\n  );\n};\n\nAvatar.displayName = 'Avatar';\nexport default Avatar;\n",
+      "content": "/* @ts-nocheck */\nimport React from 'react';\nimport { AvatarClasses } from '../../shared/classes/AvatarClasses.js';\nimport { AvatarColors } from '../../shared/colors/AvatarColors.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\n\nconst Avatar = (props) => {\n  const {\n    component: Component = 'span',\n    className,\n    colors: colorsProp,\n    ios,\n    material,\n    children,\n    ...rest\n  } = props;\n  const themeClassesFn = useThemeClasses({ ios, material });\n  const dark = useDarkClasses();\n  const colors = AvatarColors(colorsProp, dark);\n  const c = themeClassesFn(\n    AvatarClasses(props, colors, { className }),\n    className,\n  );\n  return (\n    <Component className={c.base} {...rest}>\n      {children}\n    </Component>\n  );\n};\n\nAvatar.displayName = 'Avatar';\nexport default Avatar;\n",
       "type": "registry:file",
       "target": "src/capacitor/react/components/Avatar.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

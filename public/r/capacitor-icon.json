@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-icon",
+  "type": "registry:item",
   "title": "Capacitor Icon (Vue)",
   "description": "Capacitor Icon Vue component.",
   "dependencies": [
@@ -19,6 +20,5 @@
       "type": "registry:file",
       "target": "src/capacitor/vue/components/Icon.vue"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

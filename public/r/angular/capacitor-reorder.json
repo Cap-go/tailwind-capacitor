@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-reorder",
+  "type": "registry:item",
   "title": "Capacitor Reorder (Angular)",
   "description": "Capacitor Reorder Angular component.",
   "dependencies": [
@@ -14,10 +15,9 @@
   "files": [
     {
       "path": "src/angular/components/Reorder.component.ts",
-      "content": "import {\n  Component,\n  Input,\n  inject,\n  OnChanges,\n  HostBinding,\n} from '@angular/core';\nimport { ReorderClasses } from '../../shared/classes/ReorderClasses.js';\nimport { ReorderColors } from '../../shared/colors/ReorderColors.js';\nimport { CAPACITOR_CONTEXT } from '../shared/capacitor-context.js';\nimport { resolveTheme, themeClasses } from '../shared/use-theme-classes.js';\n\n@Component({\n  selector: 'c-reorder',\n  standalone: true,\n  template: '<ng-content />',\n})\nexport class ReorderComponent implements OnChanges {\n  @Input() ios?: boolean;\n  @Input() material?: boolean;\n  @Input() colors?: Record<string, unknown>;\n  @Input() class = '';\n\n  @HostBinding('class')\n  hostClass = '';\n\n  private readonly ctx = inject(CAPACITOR_CONTEXT);\n\n  ngOnChanges(): void {\n    const theme = resolveTheme(this.ctx, this);\n    const colors = ReorderColors(this.colors || {});\n    const props = this as Record<string, unknown>;\n    const raw = ReorderClasses(props, colors, { className: this.class });\n    const c = themeClasses(raw, theme, this.class);\n    const base = c.base;\n    if (typeof base === 'string') {\n      this.hostClass = base;\n    } else if (base && typeof base === 'object') {\n      this.hostClass = (base as { default?: string }).default || '';\n    } else {\n      this.hostClass = '';\n    }\n  }\n}\n",
+      "content": "import {\n  Component,\n  Input,\n  inject,\n  OnChanges,\n  HostBinding,\n} from '@angular/core';\nimport { ReorderClasses } from '../../shared/classes/ReorderClasses.js';\nimport { ReorderColors } from '../../shared/colors/ReorderColors.js';\nimport { CAPACITOR_CONTEXT } from '../shared/capacitor-context.js';\nimport { resolveTheme, themeClasses } from '../shared/use-theme-classes.js';\n\n@Component({\n  selector: 'c-reorder',\n  standalone: true,\n  template: '<ng-content />',\n})\nexport class ReorderComponent implements OnChanges {\n  @Input() ios?: boolean;\n  @Input() material?: boolean;\n  @Input() colors?: Record<string, unknown>;\n  @Input() class = '';\n\n  @HostBinding('class')\n  hostClass = '';\n\n  private readonly ctx = inject(CAPACITOR_CONTEXT);\n\n  ngOnChanges(): void {\n    const theme = resolveTheme(this.ctx, this);\n    const colors = ReorderColors(this.colors || {}, () => '');\n    const props = this as Record<string, unknown>;\n    const raw = ReorderClasses(props, colors, { className: this.class });\n    const c = themeClasses(raw, theme, this.class);\n    const base = c.base;\n    if (typeof base === 'string') {\n      this.hostClass = base;\n    } else if (base && typeof base === 'object') {\n      this.hostClass = (base as { default?: string }).default || '';\n    } else {\n      this.hostClass = '';\n    }\n  }\n}\n",
       "type": "registry:file",
       "target": "src/capacitor/angular/components/Reorder.component.ts"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

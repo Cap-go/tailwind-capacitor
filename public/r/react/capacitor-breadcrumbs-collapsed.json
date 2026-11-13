@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-breadcrumbs-collapsed",
+  "type": "registry:item",
   "title": "Capacitor BreadcrumbsCollapsed (React)",
   "description": "Capacitor BreadcrumbsCollapsed React component.",
   "dependencies": [
@@ -19,6 +20,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/BreadcrumbsCollapsed.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

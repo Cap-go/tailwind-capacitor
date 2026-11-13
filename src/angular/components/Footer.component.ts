@@ -28,7 +28,7 @@ export class FooterComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = FooterColors(this.colors || {});
+    const colors = FooterColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = FooterClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

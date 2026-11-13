@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-modal",
+  "type": "registry:item",
   "title": "Capacitor Modal (React)",
   "description": "Capacitor Modal React component.",
   "dependencies": [
@@ -19,6 +20,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/Modal.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

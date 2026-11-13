@@ -28,7 +28,7 @@ export class ModalComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = ModalColors(this.colors || {});
+    const colors = ModalColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = ModalClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

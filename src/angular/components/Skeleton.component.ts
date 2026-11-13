@@ -28,7 +28,7 @@ export class SkeletonComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = SkeletonColors(this.colors || {});
+    const colors = SkeletonColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = SkeletonClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

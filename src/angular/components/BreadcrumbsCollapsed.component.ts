@@ -28,7 +28,7 @@ export class BreadcrumbsCollapsedComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = BreadcrumbsCollapsedColors(this.colors || {});
+    const colors = BreadcrumbsCollapsedColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = BreadcrumbsCollapsedClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

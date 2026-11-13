@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-table-row",
+  "type": "registry:item",
   "title": "Capacitor TableRow (React)",
   "description": "Capacitor TableRow React component.",
   "dependencies": [
@@ -19,6 +20,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/TableRow.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

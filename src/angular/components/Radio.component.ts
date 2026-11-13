@@ -28,7 +28,7 @@ export class RadioComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = RadioColors(this.colors || {});
+    const colors = RadioColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = RadioClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

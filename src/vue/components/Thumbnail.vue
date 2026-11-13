@@ -1,5 +1,5 @@
 <template>
-  <component :is="component" :class="classes">
+  <component :is="component" :class="c.base">
     <slot />
   </component>
 </template>
@@ -14,10 +14,7 @@
   export default {
     name: 'c-thumbnail',
     props: {
-      component: {
-        type: String,
-        default: 'div',
-      },
+      component: { type: String, default: 'div' },
       colors: { type: Object },
       ios: { type: Boolean, default: undefined },
       material: { type: Boolean, default: undefined },
@@ -26,12 +23,13 @@
       const context = useContext();
       const useDarkClasses = darkClasses(context);
       const useThemeClasses = themeClasses(context);
-      const colors = computed(() => ThumbnailColors(props.colors || {}, useDarkClasses));
+      const colors = computed(() =>
+        ThumbnailColors(props.colors || {}, useDarkClasses),
+      );
       const c = useThemeClasses(props, () =>
         ThumbnailClasses(props, colors.value, { className: ctx.attrs.class }),
       );
-      const classes = computed(() => c.value.base);
-      return { classes };
+      return { c };
     },
   };
 </script>

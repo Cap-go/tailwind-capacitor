@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-shared",
+  "type": "registry:item",
   "title": "Tailwind Capacitor shared tokens",
   "description": "Shared class and color maps for capacitor components.",
   "registryDependencies": [
@@ -15,13 +16,13 @@
     },
     {
       "path": "src/shared/classes/AccordionClasses.js",
-      "content": "import { cls } from '../cls.js';\n\nexport const AccordionClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(colors.bg, colors.text, className),\n    ios: colors.iosSurface,\n    material: colors.materialSurface,\n  },\n});\n",
+      "content": "import { cls } from '../cls.js';\n\nexport const AccordionClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls('overflow-hidden', className),\n    ios: cls('rounded-xl hairline', colors.bgIos),\n    material: cls('rounded-2xl elevation-1', colors.bgMaterial),\n  },\n});\n",
       "type": "registry:file",
       "target": "src/capacitor/shared/classes/AccordionClasses.js"
     },
     {
       "path": "src/shared/classes/AccordionItemClasses.js",
-      "content": "import { cls } from '../cls.js';\n\nexport const AccordionItemClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(colors.bg, colors.text, className),\n    ios: colors.iosSurface,\n    material: colors.materialSurface,\n  },\n});\n",
+      "content": "import { cls } from '../cls.js';\n\nexport const AccordionItemClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(\n      'flex items-center justify-between w-full px-4 py-3 text-left text-sm font-medium cursor-pointer',\n      className,\n    ),\n    ios: cls('hairline-b last:hairline-b-0', colors.textIos, colors.activeIos),\n    material: cls(colors.textMaterial, colors.activeMaterial),\n  },\n  chevron: {\n    common: 'opacity-40 ms-2 shrink-0',\n    ios: 'w-2 h-2',\n    material: 'w-2 h-2',\n  },\n});\n",
       "type": "registry:file",
       "target": "src/capacitor/shared/classes/AccordionItemClasses.js"
     },
@@ -51,7 +52,7 @@
     },
     {
       "path": "src/shared/classes/AlertClasses.js",
-      "content": "import { cls } from '../cls.js';\n\nexport const AlertClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(colors.bg, colors.text, className),\n    ios: colors.iosSurface,\n    material: colors.materialSurface,\n  },\n});\n",
+      "content": "import { cls } from '../cls.js';\n\nexport const AlertClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls('px-4 py-3 text-sm font-medium mb-2', className),\n    ios: cls('rounded-xl', colors.bgIos, colors.textIos),\n    material: cls('rounded-lg elevation-1', colors.bgMaterial, colors.textMaterial),\n  },\n});\n",
       "type": "registry:file",
       "target": "src/capacitor/shared/classes/AlertClasses.js"
     },
@@ -63,7 +64,7 @@
     },
     {
       "path": "src/shared/classes/AvatarClasses.js",
-      "content": "import { cls } from '../cls.js';\n\nexport const AvatarClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(colors.bg, colors.text, className),\n    ios: colors.iosSurface,\n    material: colors.materialSurface,\n  },\n});\n",
+      "content": "import { cls } from '../cls.js';\n\nexport const AvatarClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(\n      'inline-flex items-center justify-center font-semibold shrink-0 select-none',\n      className,\n    ),\n    ios: cls('w-12 h-12 text-base rounded-full', colors.bgIos, colors.textIos),\n    material: cls(\n      'w-10 h-10 text-sm rounded-full',\n      colors.bgMaterial,\n      colors.textMaterial,\n    ),\n  },\n});\n",
       "type": "registry:file",
       "target": "src/capacitor/shared/classes/AvatarClasses.js"
     },
@@ -285,7 +286,7 @@
     },
     {
       "path": "src/shared/classes/NoteClasses.js",
-      "content": "import { cls } from '../cls.js';\n\nexport const NoteClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(colors.bg, colors.text, className),\n    ios: colors.iosSurface,\n    material: colors.materialSurface,\n  },\n});\n",
+      "content": "import { cls } from '../cls.js';\n\nexport const NoteClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls('text-xs uppercase font-medium tracking-wide px-4', className),\n    ios: cls(colors.textIos),\n    material: cls(colors.textMaterial),\n  },\n});\n",
       "type": "registry:file",
       "target": "src/capacitor/shared/classes/NoteClasses.js"
     },
@@ -387,7 +388,7 @@
     },
     {
       "path": "src/shared/classes/SkeletonClasses.js",
-      "content": "import { cls } from '../cls.js';\n\nexport const SkeletonClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(colors.bg, colors.text, className),\n    ios: colors.iosSurface,\n    material: colors.materialSurface,\n  },\n});\n",
+      "content": "import { cls } from '../cls.js';\n\nexport const SkeletonClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(\n      'animate-pulse rounded',\n      colors.block,\n      className,\n    ),\n    ios: 'rounded-lg',\n    material: 'rounded-md',\n  },\n});\n",
       "type": "registry:file",
       "target": "src/capacitor/shared/classes/SkeletonClasses.js"
     },
@@ -459,7 +460,7 @@
     },
     {
       "path": "src/shared/classes/ThumbnailClasses.js",
-      "content": "import { cls } from '../cls.js';\n\nexport const ThumbnailClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(colors.bg, colors.text, className),\n    ios: colors.iosSurface,\n    material: colors.materialSurface,\n  },\n});\n",
+      "content": "import { cls } from '../cls.js';\n\nexport const ThumbnailClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(\n      'overflow-hidden flex items-center justify-center text-xs font-medium shrink-0',\n      className,\n    ),\n    ios: cls('w-14 h-14 rounded-lg', colors.bgIos, colors.textIos),\n    material: cls('w-12 h-12 rounded-md', colors.bgMaterial, colors.textMaterial),\n  },\n});\n",
       "type": "registry:file",
       "target": "src/capacitor/shared/classes/ThumbnailClasses.js"
     },
@@ -495,13 +496,13 @@
     },
     {
       "path": "src/shared/colors/AccordionColors.js",
-      "content": "export const AccordionColors = (colorsProp = {}) => ({\n  bg: 'bg-light',\n  text: 'text-black dark:text-white',\n  iosSurface: 'ios:rounded-xl',\n  materialSurface: 'android:rounded-2xl',\n  ...colorsProp,\n});\n",
+      "content": "import { cls } from '../cls.js';\n\nexport const AccordionColors = (colorsProp = {}, dark) => ({\n  bgIos: cls('bg-ios-light-surface-1', dark('dark:bg-ios-dark-surface-1')),\n  bgMaterial: cls('bg-md-light-surface-1', dark('dark:bg-md-dark-surface-1')),\n  ...colorsProp,\n});\n",
       "type": "registry:file",
       "target": "src/capacitor/shared/colors/AccordionColors.js"
     },
     {
       "path": "src/shared/colors/AccordionItemColors.js",
-      "content": "export const AccordionItemColors = (colorsProp = {}) => ({\n  bg: 'bg-light',\n  text: 'text-black dark:text-white',\n  iosSurface: 'ios:rounded-xl',\n  materialSurface: 'android:rounded-2xl',\n  ...colorsProp,\n});\n",
+      "content": "import { cls } from '../cls.js';\n\nexport const AccordionItemColors = (colorsProp = {}, dark) => ({\n  textIos: cls('text-ios-light-primary', dark('dark:text-ios-dark-primary')),\n  activeIos: cls('active:bg-ios-light-surface-1-shade', dark('dark:active:bg-ios-dark-surface-1-shade')),\n  textMaterial: cls(\n    'text-md-light-primary',\n    dark('dark:text-md-dark-primary'),\n  ),\n  activeMaterial: cls(\n    'active:bg-md-light-surface-1-shade',\n    dark('dark:active:bg-md-dark-surface-1-shade'),\n  ),\n  ...colorsProp,\n});\n",
       "type": "registry:file",
       "target": "src/capacitor/shared/colors/AccordionItemColors.js"
     },
@@ -531,7 +532,7 @@
     },
     {
       "path": "src/shared/colors/AlertColors.js",
-      "content": "export const AlertColors = (colorsProp = {}) => ({\n  bg: 'bg-light',\n  text: 'text-black dark:text-white',\n  iosSurface: 'ios:rounded-xl',\n  materialSurface: 'android:rounded-2xl',\n  ...colorsProp,\n});\n",
+      "content": "import { cls } from '../cls.js';\n\nexport const AlertColors = (colorsProp = {}, dark) => ({\n  bgIos: cls(\n    'bg-ios-light-primary/10 border border-ios-light-primary/25',\n    dark('dark:bg-ios-dark-primary/15 dark:border-ios-dark-primary/30'),\n  ),\n  textIos: cls('text-ios-light-primary', dark('dark:text-ios-dark-primary')),\n  bgMaterial: cls(\n    'bg-md-light-primary/10 border border-md-light-primary/25',\n    dark('dark:bg-md-dark-primary/15 dark:border-md-dark-primary/30'),\n  ),\n  textMaterial: cls(\n    'text-md-light-primary',\n    dark('dark:text-md-dark-primary'),\n  ),\n  ...colorsProp,\n});\n",
       "type": "registry:file",
       "target": "src/capacitor/shared/colors/AlertColors.js"
     },
@@ -543,7 +544,7 @@
     },
     {
       "path": "src/shared/colors/AvatarColors.js",
-      "content": "export const AvatarColors = (colorsProp = {}) => ({\n  bg: 'bg-light',\n  text: 'text-black dark:text-white',\n  iosSurface: 'ios:rounded-xl',\n  materialSurface: 'android:rounded-2xl',\n  ...colorsProp,\n});\n",
+      "content": "import { cls } from '../cls.js';\n\nexport const AvatarColors = (colorsProp = {}, dark) => ({\n  bgIos: cls('bg-ios-light-primary', dark('dark:bg-ios-dark-primary')),\n  textIos: 'text-white',\n  bgMaterial: cls('bg-md-light-primary', dark('dark:bg-md-dark-primary')),\n  textMaterial: 'text-white',\n  ...colorsProp,\n});\n",
       "type": "registry:file",
       "target": "src/capacitor/shared/colors/AvatarColors.js"
     },
@@ -777,7 +778,7 @@
     },
     {
       "path": "src/shared/colors/NoteColors.js",
-      "content": "export const NoteColors = (colorsProp = {}) => ({\n  bg: 'bg-light',\n  text: 'text-black dark:text-white',\n  iosSurface: 'ios:rounded-xl',\n  materialSurface: 'android:rounded-2xl',\n  ...colorsProp,\n});\n",
+      "content": "import { cls } from '../cls.js';\n\nexport const NoteColors = (colorsProp = {}, dark) => ({\n  textIos: cls('text-ios-light-secondary', dark('dark:text-ios-dark-secondary')),\n  textMaterial: cls(\n    'text-md-light-secondary',\n    dark('dark:text-md-dark-secondary'),\n  ),\n  ...colorsProp,\n});\n",
       "type": "registry:file",
       "target": "src/capacitor/shared/colors/NoteColors.js"
     },
@@ -885,7 +886,7 @@
     },
     {
       "path": "src/shared/colors/SkeletonColors.js",
-      "content": "export const SkeletonColors = (colorsProp = {}) => ({\n  bg: 'bg-light',\n  text: 'text-black dark:text-white',\n  iosSurface: 'ios:rounded-xl',\n  materialSurface: 'android:rounded-2xl',\n  ...colorsProp,\n});\n",
+      "content": "import { cls } from '../cls.js';\n\nexport const SkeletonColors = (colorsProp = {}, dark) => ({\n  block: cls(\n    'bg-ios-light-surface-1-shade',\n    dark('dark:bg-ios-dark-surface-1-shade'),\n    'android:bg-md-light-surface-1-shade',\n    dark('dark:android:bg-md-dark-surface-1-shade'),\n  ),\n  ...colorsProp,\n});\n",
       "type": "registry:file",
       "target": "src/capacitor/shared/colors/SkeletonColors.js"
     },
@@ -945,7 +946,7 @@
     },
     {
       "path": "src/shared/colors/ThumbnailColors.js",
-      "content": "export const ThumbnailColors = (colorsProp = {}) => ({\n  bg: 'bg-light',\n  text: 'text-black dark:text-white',\n  iosSurface: 'ios:rounded-xl',\n  materialSurface: 'android:rounded-2xl',\n  ...colorsProp,\n});\n",
+      "content": "import { cls } from '../cls.js';\n\nexport const ThumbnailColors = (colorsProp = {}, dark) => ({\n  bgIos: cls('bg-ios-light-surface-1-shade', dark('dark:bg-ios-dark-surface-1-shade')),\n  textIos: cls('text-ios-light-secondary', dark('dark:text-ios-dark-secondary')),\n  bgMaterial: cls('bg-md-light-surface-1-shade', dark('dark:bg-md-dark-surface-1-shade')),\n  textMaterial: cls(\n    'text-md-light-secondary',\n    dark('dark:text-md-dark-secondary'),\n  ),\n  ...colorsProp,\n});\n",
       "type": "registry:file",
       "target": "src/capacitor/shared/colors/ThumbnailColors.js"
     },
@@ -997,6 +998,5 @@
       "type": "registry:file",
       "target": "src/capacitor/shared/use-ios-highlight.js"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

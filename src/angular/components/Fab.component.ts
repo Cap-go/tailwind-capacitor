@@ -28,7 +28,7 @@ export class FabComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = FabColors(this.colors || {});
+    const colors = FabColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = FabClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

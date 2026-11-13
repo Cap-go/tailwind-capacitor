@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-notification",
+  "type": "registry:item",
   "title": "Capacitor Notification (React)",
   "description": "Capacitor Notification React component.",
   "dependencies": [
@@ -26,6 +27,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/Glass.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

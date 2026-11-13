@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-list-item",
+  "type": "registry:item",
   "title": "Capacitor ListItem (Vue)",
   "description": "Capacitor ListItem Vue component.",
   "dependencies": [
@@ -19,6 +20,5 @@
       "type": "registry:file",
       "target": "src/capacitor/vue/components/ListItem.vue"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

@@ -23,7 +23,7 @@
   "scripts": {
     "lint": "eslint .",
     "generate:css": "node scripts/copy-capacitor-config.mjs && node scripts/generate-line-clamp-css.mjs && node scripts/generate-safe-area-css.mjs",
-    "generate:registry": "node scripts/scaffold-ionic-additions.mjs && node scripts/port-konsta-react.mjs && node scripts/generate-angular-components.mjs && node scripts/generate-registry.mjs",
+    "generate:registry": "node scripts/scaffold-ionic-additions.mjs && node scripts/port-konsta-react.mjs && node scripts/generate-angular-components.mjs && node scripts/generate-angular-icons.mjs && node scripts/generate-registry.mjs",
     "build:registry:vue": "npx shadcn build -o public/r registry.json",
     "build:registry:react": "npx shadcn build -o public/r/react registry-react.json",
     "build:registry:angular": "npx shadcn build -o public/r/angular registry-angular.json",

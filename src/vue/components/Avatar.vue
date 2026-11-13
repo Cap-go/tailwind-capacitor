@@ -1,5 +1,5 @@
 <template>
-  <component :is="component" :class="classes">
+  <component :is="component" :class="c.base">
     <slot />
   </component>
 </template>
@@ -16,7 +16,7 @@
     props: {
       component: {
         type: String,
-        default: 'div',
+        default: 'span',
       },
       colors: { type: Object },
       ios: { type: Boolean, default: undefined },
@@ -26,12 +26,13 @@
       const context = useContext();
       const useDarkClasses = darkClasses(context);
       const useThemeClasses = themeClasses(context);
-      const colors = computed(() => AvatarColors(props.colors || {}, useDarkClasses));
+      const colors = computed(() =>
+        AvatarColors(props.colors || {}, useDarkClasses),
+      );
       const c = useThemeClasses(props, () =>
         AvatarClasses(props, colors.value, { className: ctx.attrs.class }),
       );
-      const classes = computed(() => c.value.base);
-      return { classes };
+      return { c };
     },
   };
 </script>

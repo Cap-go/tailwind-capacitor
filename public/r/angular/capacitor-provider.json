@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-provider",
+  "type": "registry:item",
   "title": "Tailwind Capacitor provider (Angular)",
   "description": "Root provider and Angular context for theme.",
   "dependencies": [
@@ -28,6 +29,5 @@
       "type": "registry:file",
       "target": "src/capacitor/angular/shared/use-theme-classes.ts"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

@@ -2572,7 +2572,8 @@
       "registryDependencies": [
         "../capacitor-tailwind.json",
         "../capacitor-provider.json",
-        "../capacitor-shared.json"
+        "../capacitor-shared.json",
+        "../capacitor-segmented-button.json"
       ],
       "dependencies": [
         "react",
@@ -2750,7 +2751,8 @@
       "registryDependencies": [
         "../capacitor-tailwind.json",
         "../capacitor-provider.json",
-        "../capacitor-shared.json"
+        "../capacitor-shared.json",
+        "../capacitor-segmented.json"
       ],
       "dependencies": [
         "react",

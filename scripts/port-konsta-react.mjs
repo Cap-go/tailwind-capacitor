@@ -58,8 +58,10 @@ function walkCopy(srcDir, destDir, extFrom, extTo) {
 }
 
 if (!existsSync(konstaReact)) {
-  console.error(`missing konsta react at ${konstaReact}`);
-  process.exit(1);
+  console.log(
+    `port-konsta-react: skip (no konsta at ${konstaReact}, using committed src/react)`,
+  );
+  process.exit(0);
 }
 
 mkdirSync(outRoot, { recursive: true });

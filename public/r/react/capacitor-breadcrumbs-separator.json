@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-breadcrumbs-separator",
+  "type": "registry:item",
   "title": "Capacitor BreadcrumbsSeparator (React)",
   "description": "Capacitor BreadcrumbsSeparator React component.",
   "dependencies": [
@@ -20,6 +21,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/BreadcrumbsSeparator.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

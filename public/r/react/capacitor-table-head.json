@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-table-head",
+  "type": "registry:item",
   "title": "Capacitor TableHead (React)",
   "description": "Capacitor TableHead React component.",
   "dependencies": [
@@ -19,6 +20,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/TableHead.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

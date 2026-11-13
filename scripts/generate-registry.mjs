@@ -1,4 +1,10 @@
-import { readdirSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import {
+  existsSync,
+  readdirSync,
+  readFileSync,
+  writeFileSync,
+  mkdirSync,
+} from 'node:fs';
 import { basename, join } from 'node:path';
 import { repoRoot } from './repo-root.mjs';
 
@@ -33,11 +39,6 @@ const iconFilesVue = readdirSync(join(vueDir, 'icons'))
 const iconFilesReact = readdirSync(join(reactDir, 'icons'))
   .filter((name) => name.endsWith('.tsx'))
   .map((name) => `src/react/components/icons/${name}`);
-
-const angularNames = readdirSync(join(root, 'src/angular/components'))
-  .filter((name) => name.endsWith('.component.ts'))
-  .map((name) => basename(name, '.component.ts'))
-  .sort();
 
 function sharedClassColorFiles() {
   const dirs = ['classes', 'colors'];
@@ -340,6 +341,33 @@ angularItems.push({
     return fileEntry(path, 'registry:file', `src/${rel}`);
   }),
 });
+
+const angularIconsDir = join(root, 'src/angular/components/icons');
+const iconFilesAngular = existsSync(angularIconsDir)
+  ? readdirSync(angularIconsDir)
+      .filter((name) => name.endsWith('.component.ts'))
+      .map((name) => `src/angular/components/icons/${name}`)
+  : [];
+
+if (iconFilesAngular.length) {
+  angularItems.push({
+    name: 'capacitor-icons',
+    type: 'registry:item',
+    title: 'Tailwind Capacitor icons (Angular)',
+    description: 'Inline SVG icon components used by capacitor UI.',
+    registryDependencies: [dep('capacitor-provider', true)],
+    dependencies: ['@angular/core'],
+    files: iconFilesAngular.map((path) => {
+      const rel = path.replace(/^src\//, 'capacitor/');
+      return fileEntry(path, 'registry:file', `src/${rel}`);
+    }),
+  });
+}
+
+const angularNames = readdirSync(join(root, 'src/angular/components'))
+  .filter((name) => name.endsWith('.component.ts'))
+  .map((name) => basename(name, '.component.ts'))
+  .sort();
 
 for (const name of angularNames) {
   const kebab = toKebab(name);

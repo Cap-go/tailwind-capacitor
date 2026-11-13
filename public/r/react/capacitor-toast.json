@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-toast",
+  "type": "registry:item",
   "title": "Capacitor Toast (React)",
   "description": "Capacitor Toast React component.",
   "dependencies": [
@@ -25,6 +26,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/Glass.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

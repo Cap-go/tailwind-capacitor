@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-list-group",
+  "type": "registry:item",
   "title": "Capacitor ListGroup (React)",
   "description": "Capacitor ListGroup React component.",
   "dependencies": [
@@ -20,6 +21,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/ListGroup.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

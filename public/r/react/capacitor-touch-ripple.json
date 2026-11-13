@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-touch-ripple",
+  "type": "registry:item",
   "title": "Capacitor TouchRipple (React)",
   "description": "Capacitor TouchRipple React component.",
   "dependencies": [
@@ -19,6 +20,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/TouchRipple.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

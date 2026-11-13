@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-datetime",
+  "type": "registry:item",
   "title": "Capacitor Datetime (React)",
   "description": "Capacitor Datetime React component.",
   "dependencies": [
@@ -19,6 +20,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/Datetime.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

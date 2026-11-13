@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-segmented",
+  "type": "registry:item",
   "title": "Capacitor Segmented (React)",
   "description": "Capacitor Segmented React component.",
   "dependencies": [
@@ -37,6 +38,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/Glass.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

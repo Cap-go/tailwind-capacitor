@@ -28,7 +28,7 @@ export class ProgressbarComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = ProgressbarColors(this.colors || {});
+    const colors = ProgressbarColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = ProgressbarClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

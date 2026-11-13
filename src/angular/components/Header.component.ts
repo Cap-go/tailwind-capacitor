@@ -28,7 +28,7 @@ export class HeaderComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = HeaderColors(this.colors || {});
+    const colors = HeaderColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = HeaderClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

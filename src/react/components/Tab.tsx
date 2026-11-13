@@ -1,26 +1,13 @@
 /* @ts-nocheck */
 import React from 'react';
-import { TabClasses } from '../../shared/classes/TabClasses.js';
-import { TabColors } from '../../shared/colors/TabColors.js';
-import { useThemeClasses } from '../shared/use-theme-classes.js';
+import SegmentedButton from './SegmentedButton.tsx';
 
 const Tab = (props) => {
-  const {
-    component: Component = 'div',
-    className,
-    colors: colorsProp,
-    ios,
-    material,
-    children,
-    ...rest
-  } = props;
-  const themeClassesFn = useThemeClasses({ ios, material });
-  const colors = TabColors(colorsProp);
-  const c = themeClassesFn(TabClasses(props, colors, { className }), className);
+  const { active = false, children, ...rest } = props;
   return (
-    <Component className={c.base} {...rest}>
+    <SegmentedButton active={active} strong rounded {...rest}>
       {children}
-    </Component>
+    </SegmentedButton>
   );
 };
 

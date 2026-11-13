@@ -28,7 +28,7 @@ export class ActionsLabelComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = ActionsLabelColors(this.colors || {});
+    const colors = ActionsLabelColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = ActionsLabelClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

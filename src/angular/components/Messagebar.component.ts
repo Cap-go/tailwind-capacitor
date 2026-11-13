@@ -28,7 +28,7 @@ export class MessagebarComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = MessagebarColors(this.colors || {});
+    const colors = MessagebarColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = MessagebarClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-tab",
+  "type": "registry:item",
   "title": "Capacitor Tab (React)",
   "description": "Capacitor Tab React component.",
   "dependencies": [
@@ -10,15 +11,15 @@
   "registryDependencies": [
     "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
     "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
-    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-segmented-button.json"
   ],
   "files": [
     {
       "path": "src/react/components/Tab.tsx",
-      "content": "/* @ts-nocheck */\nimport React from 'react';\nimport { TabClasses } from '../../shared/classes/TabClasses.js';\nimport { TabColors } from '../../shared/colors/TabColors.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\n\nconst Tab = (props) => {\n  const {\n    component: Component = 'div',\n    className,\n    colors: colorsProp,\n    ios,\n    material,\n    children,\n    ...rest\n  } = props;\n  const themeClassesFn = useThemeClasses({ ios, material });\n  const colors = TabColors(colorsProp);\n  const c = themeClassesFn(TabClasses(props, colors, { className }), className);\n  return (\n    <Component className={c.base} {...rest}>\n      {children}\n    </Component>\n  );\n};\n\nTab.displayName = 'Tab';\nexport default Tab;\n",
+      "content": "/* @ts-nocheck */\nimport React from 'react';\nimport SegmentedButton from './SegmentedButton.tsx';\n\nconst Tab = (props) => {\n  const { active = false, children, ...rest } = props;\n  return (\n    <SegmentedButton active={active} strong rounded {...rest}>\n      {children}\n    </SegmentedButton>\n  );\n};\n\nTab.displayName = 'Tab';\nexport default Tab;\n",
       "type": "registry:file",
       "target": "src/capacitor/react/components/Tab.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

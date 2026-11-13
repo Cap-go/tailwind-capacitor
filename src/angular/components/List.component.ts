@@ -28,7 +28,7 @@ export class ListComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = ListColors(this.colors || {});
+    const colors = ListColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = ListClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

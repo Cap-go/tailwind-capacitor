@@ -1,37 +1,19 @@
 <template>
-  <component :is="component" :class="classes">
-    <slot />
-  </component>
+  <c-list strong inset class="!my-0">
+    <c-list-input type="select" :label="label">
+      <slot />
+    </c-list-input>
+  </c-list>
 </template>
 <script>
-  import { computed } from 'vue';
-  import { useContext } from '../shared/use-context.js';
-  import { SelectClasses } from '../../shared/classes/SelectClasses.js';
-  import { SelectColors } from '../../shared/colors/SelectColors.js';
-  import { themeClasses } from '../shared/use-theme-classes.js';
-  import { darkClasses } from '../shared/use-dark-classes.js';
+  import cList from './List.vue';
+  import cListInput from './ListInput.vue';
 
   export default {
     name: 'c-select',
+    components: { cList, cListInput },
     props: {
-      component: {
-        type: String,
-        default: 'div',
-      },
-      colors: { type: Object },
-      ios: { type: Boolean, default: undefined },
-      material: { type: Boolean, default: undefined },
-    },
-    setup(props, ctx) {
-      const context = useContext();
-      const useDarkClasses = darkClasses(context);
-      const useThemeClasses = themeClasses(context);
-      const colors = computed(() => SelectColors(props.colors || {}, useDarkClasses));
-      const c = useThemeClasses(props, () =>
-        SelectClasses(props, colors.value, { className: ctx.attrs.class }),
-      );
-      const classes = computed(() => c.value.base);
-      return { classes };
+      label: { type: String, default: 'Select' },
     },
   };
 </script>

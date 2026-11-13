@@ -28,7 +28,7 @@ export class RefresherComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = RefresherColors(this.colors || {});
+    const colors = RefresherColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = RefresherClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

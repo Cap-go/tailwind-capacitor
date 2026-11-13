@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-radio",
+  "type": "registry:item",
   "title": "Capacitor Radio (Vue)",
   "description": "Capacitor Radio Vue component.",
   "dependencies": [
@@ -19,6 +20,5 @@
       "type": "registry:file",
       "target": "src/capacitor/vue/components/Radio.vue"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

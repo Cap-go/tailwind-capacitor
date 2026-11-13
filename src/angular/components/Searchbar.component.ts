@@ -28,7 +28,7 @@ export class SearchbarComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = SearchbarColors(this.colors || {});
+    const colors = SearchbarColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = SearchbarClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

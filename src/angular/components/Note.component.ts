@@ -28,7 +28,7 @@ export class NoteComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = NoteColors(this.colors || {});
+    const colors = NoteColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = NoteClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

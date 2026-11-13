@@ -28,7 +28,7 @@ export class AlertComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = AlertColors(this.colors || {});
+    const colors = AlertColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = AlertClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

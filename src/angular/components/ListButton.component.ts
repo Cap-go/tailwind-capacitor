@@ -28,7 +28,7 @@ export class ListButtonComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = ListButtonColors(this.colors || {});
+    const colors = ListButtonColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = ListButtonClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

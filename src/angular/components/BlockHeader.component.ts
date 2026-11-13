@@ -28,7 +28,7 @@ export class BlockHeaderComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = BlockHeaderColors(this.colors || {});
+    const colors = BlockHeaderColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = BlockHeaderClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

@@ -28,7 +28,7 @@ export class DialogComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = DialogColors(this.colors || {});
+    const colors = DialogColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = DialogClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

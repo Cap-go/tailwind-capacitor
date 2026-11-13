@@ -28,7 +28,7 @@ export class NavbarComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = NavbarColors(this.colors || {});
+    const colors = NavbarColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = NavbarClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

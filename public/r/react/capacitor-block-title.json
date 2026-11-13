@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-block-title",
+  "type": "registry:item",
   "title": "Capacitor BlockTitle (React)",
   "description": "Capacitor BlockTitle React component.",
   "dependencies": [
@@ -19,6 +20,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/BlockTitle.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

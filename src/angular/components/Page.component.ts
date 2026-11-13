@@ -28,7 +28,7 @@ export class PageComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = PageColors(this.colors || {});
+    const colors = PageColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = PageClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

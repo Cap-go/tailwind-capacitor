@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-tabs",
+  "type": "registry:item",
   "title": "Capacitor Tabs (React)",
   "description": "Capacitor Tabs React component.",
   "dependencies": [
@@ -10,15 +11,15 @@
   "registryDependencies": [
     "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
     "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
-    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-segmented.json"
   ],
   "files": [
     {
       "path": "src/react/components/Tabs.tsx",
-      "content": "/* @ts-nocheck */\nimport React from 'react';\nimport { TabsClasses } from '../../shared/classes/TabsClasses.js';\nimport { TabsColors } from '../../shared/colors/TabsColors.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\n\nconst Tabs = (props) => {\n  const {\n    component: Component = 'div',\n    className,\n    colors: colorsProp,\n    ios,\n    material,\n    children,\n    ...rest\n  } = props;\n  const themeClassesFn = useThemeClasses({ ios, material });\n  const colors = TabsColors(colorsProp);\n  const c = themeClassesFn(TabsClasses(props, colors, { className }), className);\n  return (\n    <Component className={c.base} {...rest}>\n      {children}\n    </Component>\n  );\n};\n\nTabs.displayName = 'Tabs';\nexport default Tabs;\n",
+      "content": "/* @ts-nocheck */\nimport React from 'react';\nimport Segmented from './Segmented.tsx';\n\nconst Tabs = (props) => {\n  const { children, ...rest } = props;\n  return (\n    <Segmented strong rounded {...rest}>\n      {children}\n    </Segmented>\n  );\n};\n\nTabs.displayName = 'Tabs';\nexport default Tabs;\n",
       "type": "registry:file",
       "target": "src/capacitor/react/components/Tabs.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

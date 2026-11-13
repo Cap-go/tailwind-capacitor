@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-provider",
+  "type": "registry:item",
   "title": "Tailwind Capacitor provider (React)",
   "description": "Root provider and React hooks for theme and context.",
   "dependencies": [
@@ -77,6 +78,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/shared/use-list.ts"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

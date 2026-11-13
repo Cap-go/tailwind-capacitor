@@ -28,7 +28,7 @@ export class ToggleComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = ToggleColors(this.colors || {});
+    const colors = ToggleColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = ToggleClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-toolbar",
+  "type": "registry:item",
   "title": "Capacitor Toolbar (React)",
   "description": "Capacitor Toolbar React component.",
   "dependencies": [
@@ -25,6 +26,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/ToolbarContext.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

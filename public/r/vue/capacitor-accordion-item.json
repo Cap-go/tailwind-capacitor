@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-accordion-item",
+  "type": "registry:item",
   "title": "Capacitor AccordionItem (Vue)",
   "description": "Capacitor AccordionItem Vue component.",
   "dependencies": [
@@ -9,15 +10,15 @@
   "registryDependencies": [
     "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
     "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
-    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json"
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-icons.json"
   ],
   "files": [
     {
       "path": "src/vue/components/AccordionItem.vue",
-      "content": "<template>\n  <component :is=\"component\" :class=\"classes\">\n    <slot />\n  </component>\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n  import { AccordionItemClasses } from '../../shared/classes/AccordionItemClasses.js';\n  import { AccordionItemColors } from '../../shared/colors/AccordionItemColors.js';\n  import { themeClasses } from '../shared/use-theme-classes.js';\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  export default {\n    name: 'c-accordion-item',\n    props: {\n      component: {\n        type: String,\n        default: 'div',\n      },\n      colors: { type: Object },\n      ios: { type: Boolean, default: undefined },\n      material: { type: Boolean, default: undefined },\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const colors = computed(() => AccordionItemColors(props.colors || {}, useDarkClasses));\n      const c = useThemeClasses(props, () =>\n        AccordionItemClasses(props, colors.value, { className: ctx.attrs.class }),\n      );\n      const classes = computed(() => c.value.base);\n      return { classes };\n    },\n  };\n</script>\n",
+      "content": "<template>\n  <component :is=\"component\" :class=\"c.base\">\n    <span class=\"flex-1\"><slot /></span>\n    <chevron-icon :class=\"c.chevron\" />\n  </component>\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n  import { AccordionItemClasses } from '../../shared/classes/AccordionItemClasses.js';\n  import { AccordionItemColors } from '../../shared/colors/AccordionItemColors.js';\n  import { themeClasses } from '../shared/use-theme-classes.js';\n  import { darkClasses } from '../shared/use-dark-classes.js';\n  import ChevronIcon from './icons/ChevronIcon.vue';\n\n  export default {\n    name: 'c-accordion-item',\n    components: { ChevronIcon },\n    props: {\n      component: { type: String, default: 'button' },\n      colors: { type: Object },\n      ios: { type: Boolean, default: undefined },\n      material: { type: Boolean, default: undefined },\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const colors = computed(() =>\n        AccordionItemColors(props.colors || {}, useDarkClasses),\n      );\n      const c = useThemeClasses(props, () =>\n        AccordionItemClasses(props, colors.value, { className: ctx.attrs.class }),\n      );\n      return { c };\n    },\n  };\n</script>\n",
       "type": "registry:file",
       "target": "src/capacitor/vue/components/AccordionItem.vue"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

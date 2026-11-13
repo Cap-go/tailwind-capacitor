@@ -869,6 +869,60 @@
       ]
     },
     {
+      "name": "capacitor-icons",
+      "type": "registry:item",
+      "title": "Tailwind Capacitor icons (Angular)",
+      "description": "Inline SVG icon components used by capacitor UI.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/icons/BackIcon.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/icons/BackIcon.component.ts"
+        },
+        {
+          "path": "src/angular/components/icons/CheckboxIcon.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/icons/CheckboxIcon.component.ts"
+        },
+        {
+          "path": "src/angular/components/icons/ChevronIcon.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/icons/ChevronIcon.component.ts"
+        },
+        {
+          "path": "src/angular/components/icons/DeleteIcon.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/icons/DeleteIcon.component.ts"
+        },
+        {
+          "path": "src/angular/components/icons/DropdownIcon.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/icons/DropdownIcon.component.ts"
+        },
+        {
+          "path": "src/angular/components/icons/PreloaderIOS.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/icons/PreloaderIOS.component.ts"
+        },
+        {
+          "path": "src/angular/components/icons/PreloaderMaterial.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/icons/PreloaderMaterial.component.ts"
+        },
+        {
+          "path": "src/angular/components/icons/SearchIcon.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/icons/SearchIcon.component.ts"
+        }
+      ]
+    },
+    {
       "name": "capacitor-accordion",
       "type": "registry:item",
       "title": "Capacitor Accordion (Angular)",
@@ -1604,6 +1658,27 @@
       ]
     },
     {
+      "name": "capacitor-list-group",
+      "type": "registry:item",
+      "title": "Capacitor ListGroup (Angular)",
+      "description": "Capacitor ListGroup Angular component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/ListGroup.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/ListGroup.component.ts"
+        }
+      ]
+    },
+    {
       "name": "capacitor-list-input",
       "type": "registry:item",
       "title": "Capacitor ListInput (Angular)",
@@ -1642,6 +1717,48 @@
           "path": "src/angular/components/ListItem.component.ts",
           "type": "registry:file",
           "target": "src/capacitor/angular/components/ListItem.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-menu-list",
+      "type": "registry:item",
+      "title": "Capacitor MenuList (Angular)",
+      "description": "Capacitor MenuList Angular component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/MenuList.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/MenuList.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-menu-list-item",
+      "type": "registry:item",
+      "title": "Capacitor MenuListItem (Angular)",
+      "description": "Capacitor MenuListItem Angular component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/MenuListItem.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/MenuListItem.component.ts"
         }
       ]
     },
@@ -2108,6 +2225,27 @@
       ]
     },
     {
+      "name": "capacitor-segmented-button",
+      "type": "registry:item",
+      "title": "Capacitor SegmentedButton (Angular)",
+      "description": "Capacitor SegmentedButton Angular component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/SegmentedButton.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/SegmentedButton.component.ts"
+        }
+      ]
+    },
+    {
       "name": "capacitor-select",
       "type": "registry:item",
       "title": "Capacitor Select (Angular)",
@@ -2230,6 +2368,27 @@
           "path": "src/angular/components/Tab.component.ts",
           "type": "registry:file",
           "target": "src/capacitor/angular/components/Tab.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-tabbar",
+      "type": "registry:item",
+      "title": "Capacitor Tabbar (Angular)",
+      "description": "Capacitor Tabbar Angular component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Tabbar.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Tabbar.component.ts"
         }
       ]
     },

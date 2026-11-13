@@ -28,7 +28,7 @@ export class PopupComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = PopupColors(this.colors || {});
+    const colors = PopupColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = PopupClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

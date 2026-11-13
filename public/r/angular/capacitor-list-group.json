@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-list-group",
+  "type": "registry:item",
+  "title": "Capacitor ListGroup (Angular)",
+  "description": "Capacitor ListGroup Angular component.",
+  "dependencies": [
+    "@angular/core"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/angular/components/ListGroup.component.ts",
+      "content": "import { Component, Input } from '@angular/core';\nimport { ListComponent } from './List.component.js';\n\n@Component({\n  selector: 'c-list-group',\n  standalone: true,\n  imports: [ListComponent],\n  template: `<c-list [nested]=\"true\"><ng-content /></c-list>`,\n})\nexport class ListGroupComponent {\n  \n}\n",
+      "type": "registry:file",
+      "target": "src/capacitor/angular/components/ListGroup.component.ts"
+    }
+  ]
+}

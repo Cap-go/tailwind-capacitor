@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-footer",
+  "type": "registry:item",
   "title": "Capacitor Footer (React)",
   "description": "Capacitor Footer React component.",
   "dependencies": [
@@ -19,6 +20,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/Footer.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-list-button",
+  "type": "registry:item",
   "title": "Capacitor ListButton (React)",
   "description": "Capacitor ListButton React component.",
   "dependencies": [
@@ -19,6 +20,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/ListButton.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

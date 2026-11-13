@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-radio",
+  "type": "registry:item",
   "title": "Capacitor Radio (React)",
   "description": "Capacitor Radio React component.",
   "dependencies": [
@@ -20,6 +21,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/Radio.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

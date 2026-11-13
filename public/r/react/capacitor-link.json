@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-link",
+  "type": "registry:item",
   "title": "Capacitor Link (React)",
   "description": "Capacitor Link React component.",
   "dependencies": [
@@ -31,6 +32,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/NavbarContext.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

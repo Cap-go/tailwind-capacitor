@@ -1,5 +1,5 @@
 import { spawn, spawnSync } from 'node:child_process';
-import { mkdirSync, rmSync } from 'node:fs';
+import { existsSync, mkdirSync, rmSync } from 'node:fs';
 import { mkdtempSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -11,7 +11,7 @@ const outDir = join(repoRoot, 'docs/screenshots');
 mkdirSync(outDir, { recursive: true });
 
 const AFTER_ONLY = process.env.CAPTURE_AFTER_ONLY === '1';
-const BEFORE_COMMIT = process.env.SCREENSHOT_BEFORE_COMMIT || 'f8d631a';
+const BEFORE_COMMIT = process.env.SCREENSHOT_BEFORE_COMMIT || 'e6437809852749b566a8489cd59db362006741f0';
 
 async function waitForUrl(url, attempts = 40) {
   for (let i = 0; i < attempts; i += 1) {
@@ -26,7 +26,17 @@ async function waitForUrl(url, attempts = 40) {
   throw new Error(`server did not respond at ${url}`);
 }
 
-async function captureSet({ cwd, port, prefix }) {
+async function applyTheme(page, { ios, material, light, dark }) {
+  if (ios) await page.getByRole('button', { name: 'iOS', exact: true }).click();
+  if (material) {
+    await page.getByRole('button', { name: 'Material', exact: true }).click();
+  }
+  if (light) await page.getByRole('button', { name: 'Light', exact: true }).click();
+  if (dark) await page.getByRole('button', { name: 'Dark', exact: true }).click();
+  await sleep(300);
+}
+
+async function captureSet({ cwd, port, shots }) {
   const server = spawn('npm', ['run', 'dev', '--', '--host', '127.0.0.1', '--port', String(port)], {
     cwd,
     stdio: 'pipe',
@@ -37,14 +47,12 @@ async function captureSet({ cwd, port, prefix }) {
   const browser = await chromium.launch();
   const page = await browser.newPage();
 
-  async function shot(name, width, height) {
-    await page.setViewportSize({ width, height });
+  for (const shot of shots) {
+    await page.setViewportSize({ width: shot.width, height: shot.height });
     await page.goto(url, { waitUntil: 'networkidle' });
-    await page.screenshot({ path: join(outDir, name) });
+    if (shot.theme) await applyTheme(page, shot.theme);
+    await page.screenshot({ path: join(outDir, shot.name) });
   }
-
-  await shot(`${prefix}-desktop.png`, 1280, 800);
-  await shot(`${prefix}-mobile.png`, 390, 844);
 
   await browser.close();
   server.kill('SIGTERM');
@@ -64,24 +72,60 @@ if (!AFTER_ONLY) {
   spawnSync('npm', ['ci'], { cwd: beforeRoot, stdio: 'inherit' });
   spawnSync('npm', ['ci'], { cwd: join(beforeRoot, 'example'), stdio: 'inherit' });
 
-  await captureSet({ cwd: join(beforeRoot, 'example'), port: 4174, prefix: 'before' });
+  await captureSet({
+    cwd: join(beforeRoot, 'example'),
+    port: 4174,
+    shots: [
+      { name: 'before-desktop.png', width: 1280, height: 800 },
+      { name: 'before-mobile.png', width: 390, height: 844 },
+    ],
+  });
 
   spawnSync('git', ['worktree', 'remove', '--force', beforeRoot], { cwd: repoRoot });
 }
 
-spawnSync('npm', ['run', 'sync:example'], { cwd: repoRoot, stdio: 'inherit' });
+if (!process.env.SKIP_REGISTRY_SYNC) {
+  spawnSync('npm', ['run', 'sync:example'], { cwd: repoRoot, stdio: 'inherit' });
+}
 
-await captureSet({ cwd: join(repoRoot, 'example'), port: 4173, prefix: 'after' });
-
-const digests = spawnSync(
-  'sha256sum',
-  [
-    join(outDir, 'before-desktop.png'),
-    join(outDir, 'after-desktop.png'),
-    join(outDir, 'before-mobile.png'),
-    join(outDir, 'after-mobile.png'),
+await captureSet({
+  cwd: join(repoRoot, 'example'),
+  port: 4173,
+  shots: [
+    { name: 'after-desktop.png', width: 1280, height: 800, theme: { ios: true, light: true } },
+    { name: 'after-mobile.png', width: 390, height: 844, theme: { ios: true, light: true } },
+    {
+      name: 'after-desktop-dark.png',
+      width: 1280,
+      height: 800,
+      theme: { ios: true, dark: true },
+    },
+    {
+      name: 'after-desktop-material.png',
+      width: 1280,
+      height: 800,
+      theme: { material: true, light: true },
+    },
   ],
-  { encoding: 'utf8' },
-);
+});
+
+const files = [
+  'before-desktop.png',
+  'before-mobile.png',
+  'after-desktop.png',
+  'after-mobile.png',
+  'after-desktop-dark.png',
+  'after-desktop-material.png',
+].filter((name) => {
+  try {
+    return existsSync(join(outDir, name));
+  } catch {
+    return false;
+  }
+});
+
+const digests = spawnSync('sha256sum', files.map((f) => join(outDir, f)), {
+  encoding: 'utf8',
+});
 console.log(digests.stdout);
 console.log(`wrote screenshots to ${outDir}`);

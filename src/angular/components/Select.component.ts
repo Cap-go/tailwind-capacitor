@@ -1,44 +1,13 @@
-import {
-  Component,
-  Input,
-  inject,
-  OnChanges,
-  HostBinding,
-} from '@angular/core';
-import { SelectClasses } from '../../shared/classes/SelectClasses.js';
-import { SelectColors } from '../../shared/colors/SelectColors.js';
-import { CAPACITOR_CONTEXT } from '../shared/capacitor-context.js';
-import { resolveTheme, themeClasses } from '../shared/use-theme-classes.js';
+import { Component, Input } from '@angular/core';
+import { ListComponent } from './List.component.js';
+import { ListInputComponent } from './ListInput.component.js';
 
 @Component({
   selector: 'c-select',
   standalone: true,
-  template: '<ng-content />',
+  imports: [ListComponent, ListInputComponent],
+  template: `<c-list [strong]="true" [inset]="true"><c-list-input type="select" [label]="label"><ng-content /></c-list-input></c-list>`,
 })
-export class SelectComponent implements OnChanges {
-  @Input() ios?: boolean;
-  @Input() material?: boolean;
-  @Input() colors?: Record<string, unknown>;
-  @Input() class = '';
-
-  @HostBinding('class')
-  hostClass = '';
-
-  private readonly ctx = inject(CAPACITOR_CONTEXT);
-
-  ngOnChanges(): void {
-    const theme = resolveTheme(this.ctx, this);
-    const colors = SelectColors(this.colors || {});
-    const props = this as Record<string, unknown>;
-    const raw = SelectClasses(props, colors, { className: this.class });
-    const c = themeClasses(raw, theme, this.class);
-    const base = c.base;
-    if (typeof base === 'string') {
-      this.hostClass = base;
-    } else if (base && typeof base === 'object') {
-      this.hostClass = (base as { default?: string }).default || '';
-    } else {
-      this.hostClass = '';
-    }
-  }
+export class SelectComponent {
+  @Input() label = "Select";
 }

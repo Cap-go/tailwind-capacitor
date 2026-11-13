@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-segmented-button",
+  "type": "registry:item",
+  "title": "Capacitor SegmentedButton (Angular)",
+  "description": "Capacitor SegmentedButton Angular component.",
+  "dependencies": [
+    "@angular/core"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/angular/components/SegmentedButton.component.ts",
+      "content": "import { Component, Input } from '@angular/core';\nimport { ButtonComponent } from './Button.component.js';\n\n@Component({\n  selector: 'c-segmented-button',\n  standalone: true,\n  imports: [ButtonComponent],\n  template: `<c-button [segmented]=\"true\"><ng-content /></c-button>`,\n})\nexport class SegmentedButtonComponent {\n  \n}\n",
+      "type": "registry:file",
+      "target": "src/capacitor/angular/components/SegmentedButton.component.ts"
+    }
+  ]
+}

@@ -28,7 +28,7 @@ export class BlockFooterComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = BlockFooterColors(this.colors || {});
+    const colors = BlockFooterColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = BlockFooterClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

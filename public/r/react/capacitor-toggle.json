@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-toggle",
+  "type": "registry:item",
   "title": "Capacitor Toggle (React)",
   "description": "Capacitor Toggle React component.",
   "dependencies": [
@@ -19,6 +20,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/Toggle.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

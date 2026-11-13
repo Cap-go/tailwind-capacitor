@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-icon",
+  "type": "registry:item",
   "title": "Capacitor Icon (React)",
   "description": "Capacitor Icon React component.",
   "dependencies": [
@@ -20,6 +21,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/Icon.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

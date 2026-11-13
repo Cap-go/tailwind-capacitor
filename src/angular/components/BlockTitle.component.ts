@@ -28,7 +28,7 @@ export class BlockTitleComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = BlockTitleColors(this.colors || {});
+    const colors = BlockTitleColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = BlockTitleClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

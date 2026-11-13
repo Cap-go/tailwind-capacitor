@@ -28,7 +28,7 @@ export class BreadcrumbsItemComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = BreadcrumbsItemColors(this.colors || {});
+    const colors = BreadcrumbsItemColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = BreadcrumbsItemClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

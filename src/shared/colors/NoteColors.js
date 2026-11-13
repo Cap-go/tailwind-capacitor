@@ -1,7 +1,10 @@
-export const NoteColors = (colorsProp = {}) => ({
-  bg: 'bg-light',
-  text: 'text-black dark:text-white',
-  iosSurface: 'ios:rounded-xl',
-  materialSurface: 'android:rounded-2xl',
+import { cls } from '../cls.js';
+
+export const NoteColors = (colorsProp = {}, dark) => ({
+  textIos: cls('text-ios-light-secondary', dark('dark:text-ios-dark-secondary')),
+  textMaterial: cls(
+    'text-md-light-secondary',
+    dark('dark:text-md-dark-secondary'),
+  ),
   ...colorsProp,
 });

@@ -28,7 +28,7 @@ export class TouchRippleComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = TouchRippleColors(this.colors || {});
+    const colors = TouchRippleColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = TouchRippleClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

@@ -28,7 +28,7 @@ export class AccordionItemComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = AccordionItemColors(this.colors || {});
+    const colors = AccordionItemColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = AccordionItemClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

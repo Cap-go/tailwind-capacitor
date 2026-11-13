@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-split-pane",
+  "type": "registry:item",
   "title": "Capacitor SplitPane (React)",
   "description": "Capacitor SplitPane React component.",
   "dependencies": [
@@ -19,6 +20,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/SplitPane.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

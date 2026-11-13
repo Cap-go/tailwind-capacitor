@@ -28,7 +28,7 @@ export class RangeComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = RangeColors(this.colors || {});
+    const colors = RangeColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = RangeClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

@@ -28,7 +28,7 @@ export class ToastComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = ToastColors(this.colors || {});
+    const colors = ToastColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = ToastClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);

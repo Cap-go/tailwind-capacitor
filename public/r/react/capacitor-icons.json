@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-icons",
+  "type": "registry:item",
   "title": "Tailwind Capacitor icons (React)",
   "description": "Inline SVG icon components used by capacitor UI.",
   "dependencies": [
@@ -65,6 +66,5 @@
       "type": "registry:file",
       "target": "src/capacitor/react/components/icons/SearchIcon.tsx"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

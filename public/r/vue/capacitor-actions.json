@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-actions",
+  "type": "registry:item",
   "title": "Capacitor Actions (Vue)",
   "description": "Capacitor Actions Vue component.",
   "dependencies": [
@@ -18,6 +19,5 @@
       "type": "registry:file",
       "target": "src/capacitor/vue/components/Actions.vue"
     }
-  ],
-  "type": "registry:item"
+  ]
 }

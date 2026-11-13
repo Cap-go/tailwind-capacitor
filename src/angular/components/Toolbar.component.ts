@@ -28,7 +28,7 @@ export class ToolbarComponent implements OnChanges {
 
   ngOnChanges(): void {
     const theme = resolveTheme(this.ctx, this);
-    const colors = ToolbarColors(this.colors || {});
+    const colors = ToolbarColors(this.colors || {}, () => '');
     const props = this as Record<string, unknown>;
     const raw = ToolbarClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);
