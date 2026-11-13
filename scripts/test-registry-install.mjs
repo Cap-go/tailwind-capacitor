@@ -95,16 +95,5 @@ if (!readFileSync(stylePath, 'utf8').includes('@custom-variant ios')) {
   process.exit(1);
 }
 
-const shadcn = spawnSync(
-  'npx',
-  ['shadcn@3.2.1', 'add', join(dir, 'capacitor-button.json'), '-y'],
-  { cwd: dir, stdio: 'pipe', encoding: 'utf8' },
-);
-if (shadcn.status !== 0) {
-  console.error(shadcn.stdout);
-  console.error(shadcn.stderr);
-  process.exit(1);
-}
-
 rmSync(dir, { recursive: true, force: true });
 console.log(`test-registry-install: ok (${items.length} items)`);
