@@ -61,26 +61,24 @@ async function captureSet({ cwd, port, shots }) {
   for (const shot of shots) {
     await page.setViewportSize({ width: shot.width, height: shot.height });
     await page.goto(url, { waitUntil: 'networkidle' });
-    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.evaluate('window.scrollTo(0, 0)');
     if (shot.theme) await applyTheme(page, shot.theme);
-    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.evaluate('window.scrollTo(0, 0)');
     await sleep(150);
     if (shot.fullPage) {
-      await page.evaluate(() => {
+      await page.evaluate(`(() => {
         const shell = document.querySelector('.demo-shell');
         if (shell) shell.style.minHeight = '2800px';
-      });
-      const scrollHeight = await page.evaluate(() =>
-        Math.max(
-          document.body.scrollHeight,
-          document.documentElement.scrollHeight,
-        ),
-      );
+      })()`);
+      const scrollHeight = await page.evaluate(`Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+      )`);
       const minHeight = shot.width >= 900 ? 3200 : 4200;
       const capHeight = Math.min(Math.max(shot.height, scrollHeight + 32, minHeight), 12000);
       await page.setViewportSize({ width: shot.width, height: capHeight });
     }
-    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.evaluate('window.scrollTo(0, 0)');
     await sleep(150);
     await page.screenshot({
       path: join(outDir, shot.name),
