@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-tabbar-link",
+  "title": "Capacitor TabbarLink (React)",
+  "description": "Capacitor TabbarLink React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-link.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/TabbarLink.tsx",
+      "content": "/* @ts-nocheck */\nimport React, { useRef } from 'react';\nimport { TabbarLinkClasses } from '../../shared/classes/TabbarLinkClasses.js';\nimport { TabbarLinkColors } from '../../shared/colors/TabbarLinkColors.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\n\nimport Link from './Link.tsx';\nimport { cls } from '../../shared/cls.js';\n\nconst TabbarLink = (props) => {\n  const {\n    className,\n    active,\n    ios,\n    material,\n    colors: colorsProp,\n    linkProps = {},\n\n    icon,\n    label,\n\n    children,\n\n    ref,\n\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const attrs = {\n    ...linkProps,\n    ...rest,\n  };\n  const dark = useDarkClasses();\n  const colors = TabbarLinkColors(colorsProp, dark);\n  const themeClasses = useThemeClasses({ ios, material });\n\n  const hasIcon = !!icon;\n  const hasLabel = label || (children && children.length);\n  const c = themeClasses(\n    TabbarLinkClasses({ active, hasIcon, hasLabel }, colors)\n  );\n\n  return (\n    <Link\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      tabbarActive={active}\n      className={cls(c.base, className)}\n      {...attrs}\n    >\n      <span className={c.content}>\n        {icon && (\n          <span className={c.iconContainer}>\n            <span className={c.iconBg} />\n            {icon}\n          </span>\n        )}\n        {(label || (children && children.length)) && (\n          <span className={c.label}>\n            {label}\n            {children}\n          </span>\n        )}\n      </span>\n    </Link>\n  );\n};\n\nTabbarLink.displayName = 'TabbarLink';\n\nexport default TabbarLink;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/TabbarLink.tsx"
+    }
+  ],
+  "type": "registry:item"
+}

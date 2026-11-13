@@ -77,55 +77,6 @@
       ]
     },
     {
-      "name": "capacitor-provider",
-      "type": "registry:item",
-      "title": "Tailwind Capacitor provider",
-      "description": "Root provider and Vue composables for theme and context.",
-      "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json"
-      ],
-      "dependencies": [
-        "vue"
-      ],
-      "files": [
-        {
-          "path": "src/vue/shared/TailwindCapacitorProvider.vue",
-          "type": "registry:file",
-          "target": "src/capacitor/vue/shared/TailwindCapacitorProvider.vue"
-        },
-        {
-          "path": "src/vue/shared/use-auto-theme.js",
-          "type": "registry:file",
-          "target": "src/capacitor/vue/shared/use-auto-theme.js"
-        },
-        {
-          "path": "src/vue/shared/use-context.js",
-          "type": "registry:file",
-          "target": "src/capacitor/vue/shared/use-context.js"
-        },
-        {
-          "path": "src/vue/shared/use-dark-classes.js",
-          "type": "registry:file",
-          "target": "src/capacitor/vue/shared/use-dark-classes.js"
-        },
-        {
-          "path": "src/vue/shared/use-theme-classes.js",
-          "type": "registry:file",
-          "target": "src/capacitor/vue/shared/use-theme-classes.js"
-        },
-        {
-          "path": "src/vue/shared/use-theme.js",
-          "type": "registry:file",
-          "target": "src/capacitor/vue/shared/use-theme.js"
-        },
-        {
-          "path": "src/vue/shared/use-touch-ripple.js",
-          "type": "registry:file",
-          "target": "src/capacitor/vue/shared/use-touch-ripple.js"
-        }
-      ]
-    },
-    {
       "name": "capacitor-shared",
       "type": "registry:item",
       "title": "Tailwind Capacitor shared tokens",
@@ -138,6 +89,16 @@
           "path": "src/shared/calc-popover-position.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/calc-popover-position.js"
+        },
+        {
+          "path": "src/shared/classes/AccordionClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/AccordionClasses.js"
+        },
+        {
+          "path": "src/shared/classes/AccordionItemClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/AccordionItemClasses.js"
         },
         {
           "path": "src/shared/classes/ActionsButtonClasses.js",
@@ -160,9 +121,19 @@
           "target": "src/capacitor/shared/classes/ActionsLabelClasses.js"
         },
         {
+          "path": "src/shared/classes/AlertClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/AlertClasses.js"
+        },
+        {
           "path": "src/shared/classes/AppClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/AppClasses.js"
+        },
+        {
+          "path": "src/shared/classes/AvatarClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/AvatarClasses.js"
         },
         {
           "path": "src/shared/classes/BadgeClasses.js",
@@ -230,6 +201,11 @@
           "target": "src/capacitor/shared/classes/ChipClasses.js"
         },
         {
+          "path": "src/shared/classes/DatetimeClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/DatetimeClasses.js"
+        },
+        {
           "path": "src/shared/classes/DialogButtonClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/DialogButtonClasses.js"
@@ -245,9 +221,39 @@
           "target": "src/capacitor/shared/classes/FabClasses.js"
         },
         {
+          "path": "src/shared/classes/FooterClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/FooterClasses.js"
+        },
+        {
+          "path": "src/shared/classes/GlassClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/GlassClasses.js"
+        },
+        {
+          "path": "src/shared/classes/HeaderClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/HeaderClasses.js"
+        },
+        {
           "path": "src/shared/classes/IconClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/IconClasses.js"
+        },
+        {
+          "path": "src/shared/classes/InfiniteScrollClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/InfiniteScrollClasses.js"
+        },
+        {
+          "path": "src/shared/classes/InputOtpClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/InputOtpClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ItemSlidingClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ItemSlidingClasses.js"
         },
         {
           "path": "src/shared/classes/LinkClasses.js",
@@ -295,6 +301,11 @@
           "target": "src/capacitor/shared/classes/MessagesTitleClasses.js"
         },
         {
+          "path": "src/shared/classes/ModalClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ModalClasses.js"
+        },
+        {
           "path": "src/shared/classes/NavbarBackLinkClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/NavbarBackLinkClasses.js"
@@ -303,6 +314,11 @@
           "path": "src/shared/classes/NavbarClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/NavbarClasses.js"
+        },
+        {
+          "path": "src/shared/classes/NoteClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/NoteClasses.js"
         },
         {
           "path": "src/shared/classes/NotificationsClasses.js",
@@ -318,6 +334,11 @@
           "path": "src/shared/classes/PanelClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/PanelClasses.js"
+        },
+        {
+          "path": "src/shared/classes/PickerClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/PickerClasses.js"
         },
         {
           "path": "src/shared/classes/PopoverClasses.js",
@@ -350,6 +371,16 @@
           "target": "src/capacitor/shared/classes/RangeClasses.js"
         },
         {
+          "path": "src/shared/classes/RefresherClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/RefresherClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ReorderClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ReorderClasses.js"
+        },
+        {
           "path": "src/shared/classes/SearchbarClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/SearchbarClasses.js"
@@ -360,14 +391,34 @@
           "target": "src/capacitor/shared/classes/SegmentedClasses.js"
         },
         {
+          "path": "src/shared/classes/SelectClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/SelectClasses.js"
+        },
+        {
           "path": "src/shared/classes/SheetClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/SheetClasses.js"
         },
         {
+          "path": "src/shared/classes/SkeletonClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/SkeletonClasses.js"
+        },
+        {
+          "path": "src/shared/classes/SplitPaneClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/SplitPaneClasses.js"
+        },
+        {
           "path": "src/shared/classes/StepperClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/StepperClasses.js"
+        },
+        {
+          "path": "src/shared/classes/TabClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TabClasses.js"
         },
         {
           "path": "src/shared/classes/TabbarLinkClasses.js",
@@ -400,6 +451,21 @@
           "target": "src/capacitor/shared/classes/TableRowClasses.js"
         },
         {
+          "path": "src/shared/classes/TabsClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TabsClasses.js"
+        },
+        {
+          "path": "src/shared/classes/TextareaClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TextareaClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ThumbnailClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ThumbnailClasses.js"
+        },
+        {
           "path": "src/shared/classes/ToastClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/ToastClasses.js"
@@ -415,9 +481,24 @@
           "target": "src/capacitor/shared/classes/ToolbarClasses.js"
         },
         {
+          "path": "src/shared/classes/TouchRippleClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TouchRippleClasses.js"
+        },
+        {
           "path": "src/shared/cls.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/cls.js"
+        },
+        {
+          "path": "src/shared/colors/AccordionColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/AccordionColors.js"
+        },
+        {
+          "path": "src/shared/colors/AccordionItemColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/AccordionItemColors.js"
         },
         {
           "path": "src/shared/colors/ActionsButtonColors.js",
@@ -440,9 +521,19 @@
           "target": "src/capacitor/shared/colors/ActionsLabelColors.js"
         },
         {
+          "path": "src/shared/colors/AlertColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/AlertColors.js"
+        },
+        {
           "path": "src/shared/colors/AppColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/AppColors.js"
+        },
+        {
+          "path": "src/shared/colors/AvatarColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/AvatarColors.js"
         },
         {
           "path": "src/shared/colors/BadgeColors.js",
@@ -510,6 +601,11 @@
           "target": "src/capacitor/shared/colors/ChipColors.js"
         },
         {
+          "path": "src/shared/colors/DatetimeColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/DatetimeColors.js"
+        },
+        {
           "path": "src/shared/colors/DialogButtonColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/DialogButtonColors.js"
@@ -525,9 +621,39 @@
           "target": "src/capacitor/shared/colors/FabColors.js"
         },
         {
+          "path": "src/shared/colors/FooterColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/FooterColors.js"
+        },
+        {
+          "path": "src/shared/colors/GlassColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/GlassColors.js"
+        },
+        {
+          "path": "src/shared/colors/HeaderColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/HeaderColors.js"
+        },
+        {
           "path": "src/shared/colors/IconColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/IconColors.js"
+        },
+        {
+          "path": "src/shared/colors/InfiniteScrollColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/InfiniteScrollColors.js"
+        },
+        {
+          "path": "src/shared/colors/InputOtpColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/InputOtpColors.js"
+        },
+        {
+          "path": "src/shared/colors/ItemSlidingColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ItemSlidingColors.js"
         },
         {
           "path": "src/shared/colors/LinkColors.js",
@@ -585,6 +711,11 @@
           "target": "src/capacitor/shared/colors/MessagesTitleColors.js"
         },
         {
+          "path": "src/shared/colors/ModalColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ModalColors.js"
+        },
+        {
           "path": "src/shared/colors/NavbarBackLinkColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/NavbarBackLinkColors.js"
@@ -593,6 +724,11 @@
           "path": "src/shared/colors/NavbarColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/NavbarColors.js"
+        },
+        {
+          "path": "src/shared/colors/NoteColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/NoteColors.js"
         },
         {
           "path": "src/shared/colors/NotificationsColors.js",
@@ -608,6 +744,11 @@
           "path": "src/shared/colors/PanelColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/PanelColors.js"
+        },
+        {
+          "path": "src/shared/colors/PickerColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/PickerColors.js"
         },
         {
           "path": "src/shared/colors/PopoverColors.js",
@@ -640,6 +781,16 @@
           "target": "src/capacitor/shared/colors/RangeColors.js"
         },
         {
+          "path": "src/shared/colors/RefresherColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/RefresherColors.js"
+        },
+        {
+          "path": "src/shared/colors/ReorderColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ReorderColors.js"
+        },
+        {
           "path": "src/shared/colors/SearchbarColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/SearchbarColors.js"
@@ -655,14 +806,34 @@
           "target": "src/capacitor/shared/colors/SegmentedColors.js"
         },
         {
+          "path": "src/shared/colors/SelectColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/SelectColors.js"
+        },
+        {
           "path": "src/shared/colors/SheetColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/SheetColors.js"
         },
         {
+          "path": "src/shared/colors/SkeletonColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/SkeletonColors.js"
+        },
+        {
+          "path": "src/shared/colors/SplitPaneColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/SplitPaneColors.js"
+        },
+        {
           "path": "src/shared/colors/StepperColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/StepperColors.js"
+        },
+        {
+          "path": "src/shared/colors/TabColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TabColors.js"
         },
         {
           "path": "src/shared/colors/TabbarColors.js",
@@ -685,6 +856,21 @@
           "target": "src/capacitor/shared/colors/TableRowColors.js"
         },
         {
+          "path": "src/shared/colors/TabsColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TabsColors.js"
+        },
+        {
+          "path": "src/shared/colors/TextareaColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TextareaColors.js"
+        },
+        {
+          "path": "src/shared/colors/ThumbnailColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ThumbnailColors.js"
+        },
+        {
           "path": "src/shared/colors/ToastColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/ToastColors.js"
@@ -700,6 +886,16 @@
           "target": "src/capacitor/shared/colors/ToolbarColors.js"
         },
         {
+          "path": "src/shared/colors/TouchRippleColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TouchRippleColors.js"
+        },
+        {
+          "path": "src/shared/filter-colors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/filter-colors.js"
+        },
+        {
           "path": "src/shared/position-class.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/position-class.js"
@@ -708,13 +904,67 @@
           "path": "src/shared/touch-ripple-class.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/touch-ripple-class.js"
+        },
+        {
+          "path": "src/shared/use-ios-highlight.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/use-ios-highlight.js"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-provider",
+      "type": "registry:item",
+      "title": "Tailwind Capacitor provider (Vue)",
+      "description": "Root provider and Vue composables for theme and context.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/shared/TailwindCapacitorProvider.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/shared/TailwindCapacitorProvider.vue"
+        },
+        {
+          "path": "src/vue/shared/use-auto-theme.js",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/shared/use-auto-theme.js"
+        },
+        {
+          "path": "src/vue/shared/use-context.js",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/shared/use-context.js"
+        },
+        {
+          "path": "src/vue/shared/use-dark-classes.js",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/shared/use-dark-classes.js"
+        },
+        {
+          "path": "src/vue/shared/use-theme-classes.js",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/shared/use-theme-classes.js"
+        },
+        {
+          "path": "src/vue/shared/use-theme.js",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/shared/use-theme.js"
+        },
+        {
+          "path": "src/vue/shared/use-touch-ripple.js",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/shared/use-touch-ripple.js"
         }
       ]
     },
     {
       "name": "capacitor-icons",
       "type": "registry:item",
-      "title": "Tailwind Capacitor icons",
+      "title": "Tailwind Capacitor icons (Vue)",
       "description": "Inline SVG icon components used by capacitor UI.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json"
@@ -766,9 +1016,51 @@
       ]
     },
     {
+      "name": "capacitor-accordion",
+      "type": "registry:item",
+      "title": "Capacitor Accordion (Vue)",
+      "description": "Capacitor Accordion Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/Accordion.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/Accordion.vue"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-accordion-item",
+      "type": "registry:item",
+      "title": "Capacitor AccordionItem (Vue)",
+      "description": "Capacitor AccordionItem Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/AccordionItem.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/AccordionItem.vue"
+        }
+      ]
+    },
+    {
       "name": "capacitor-actions",
       "type": "registry:item",
-      "title": "Capacitor Actions",
+      "title": "Capacitor Actions (Vue)",
       "description": "Capacitor Actions Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -789,7 +1081,7 @@
     {
       "name": "capacitor-actions-button",
       "type": "registry:item",
-      "title": "Capacitor ActionsButton",
+      "title": "Capacitor ActionsButton (Vue)",
       "description": "Capacitor ActionsButton Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -810,7 +1102,7 @@
     {
       "name": "capacitor-actions-group",
       "type": "registry:item",
-      "title": "Capacitor ActionsGroup",
+      "title": "Capacitor ActionsGroup (Vue)",
       "description": "Capacitor ActionsGroup Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -831,7 +1123,7 @@
     {
       "name": "capacitor-actions-label",
       "type": "registry:item",
-      "title": "Capacitor ActionsLabel",
+      "title": "Capacitor ActionsLabel (Vue)",
       "description": "Capacitor ActionsLabel Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -850,9 +1142,30 @@
       ]
     },
     {
+      "name": "capacitor-alert",
+      "type": "registry:item",
+      "title": "Capacitor Alert (Vue)",
+      "description": "Capacitor Alert Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/Alert.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/Alert.vue"
+        }
+      ]
+    },
+    {
       "name": "capacitor-app",
       "type": "registry:item",
-      "title": "Capacitor App",
+      "title": "Capacitor App (Vue)",
       "description": "Capacitor App Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -871,9 +1184,30 @@
       ]
     },
     {
+      "name": "capacitor-avatar",
+      "type": "registry:item",
+      "title": "Capacitor Avatar (Vue)",
+      "description": "Capacitor Avatar Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/Avatar.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/Avatar.vue"
+        }
+      ]
+    },
+    {
       "name": "capacitor-badge",
       "type": "registry:item",
-      "title": "Capacitor Badge",
+      "title": "Capacitor Badge (Vue)",
       "description": "Capacitor Badge Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -894,7 +1228,7 @@
     {
       "name": "capacitor-block",
       "type": "registry:item",
-      "title": "Capacitor Block",
+      "title": "Capacitor Block (Vue)",
       "description": "Capacitor Block Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -915,7 +1249,7 @@
     {
       "name": "capacitor-block-footer",
       "type": "registry:item",
-      "title": "Capacitor BlockFooter",
+      "title": "Capacitor BlockFooter (Vue)",
       "description": "Capacitor BlockFooter Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -936,7 +1270,7 @@
     {
       "name": "capacitor-block-header",
       "type": "registry:item",
-      "title": "Capacitor BlockHeader",
+      "title": "Capacitor BlockHeader (Vue)",
       "description": "Capacitor BlockHeader Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -957,7 +1291,7 @@
     {
       "name": "capacitor-block-title",
       "type": "registry:item",
-      "title": "Capacitor BlockTitle",
+      "title": "Capacitor BlockTitle (Vue)",
       "description": "Capacitor BlockTitle Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -978,7 +1312,7 @@
     {
       "name": "capacitor-breadcrumbs",
       "type": "registry:item",
-      "title": "Capacitor Breadcrumbs",
+      "title": "Capacitor Breadcrumbs (Vue)",
       "description": "Capacitor Breadcrumbs Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -999,7 +1333,7 @@
     {
       "name": "capacitor-breadcrumbs-collapsed",
       "type": "registry:item",
-      "title": "Capacitor BreadcrumbsCollapsed",
+      "title": "Capacitor BreadcrumbsCollapsed (Vue)",
       "description": "Capacitor BreadcrumbsCollapsed Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1020,7 +1354,7 @@
     {
       "name": "capacitor-breadcrumbs-item",
       "type": "registry:item",
-      "title": "Capacitor BreadcrumbsItem",
+      "title": "Capacitor BreadcrumbsItem (Vue)",
       "description": "Capacitor BreadcrumbsItem Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1041,7 +1375,7 @@
     {
       "name": "capacitor-breadcrumbs-separator",
       "type": "registry:item",
-      "title": "Capacitor BreadcrumbsSeparator",
+      "title": "Capacitor BreadcrumbsSeparator (Vue)",
       "description": "Capacitor BreadcrumbsSeparator Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1063,7 +1397,7 @@
     {
       "name": "capacitor-button",
       "type": "registry:item",
-      "title": "Capacitor Button",
+      "title": "Capacitor Button (Vue)",
       "description": "Capacitor Button Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1084,7 +1418,7 @@
     {
       "name": "capacitor-card",
       "type": "registry:item",
-      "title": "Capacitor Card",
+      "title": "Capacitor Card (Vue)",
       "description": "Capacitor Card Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1105,7 +1439,7 @@
     {
       "name": "capacitor-checkbox",
       "type": "registry:item",
-      "title": "Capacitor Checkbox",
+      "title": "Capacitor Checkbox (Vue)",
       "description": "Capacitor Checkbox Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1127,7 +1461,7 @@
     {
       "name": "capacitor-chip",
       "type": "registry:item",
-      "title": "Capacitor Chip",
+      "title": "Capacitor Chip (Vue)",
       "description": "Capacitor Chip Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1147,9 +1481,30 @@
       ]
     },
     {
+      "name": "capacitor-datetime",
+      "type": "registry:item",
+      "title": "Capacitor Datetime (Vue)",
+      "description": "Capacitor Datetime Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/Datetime.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/Datetime.vue"
+        }
+      ]
+    },
+    {
       "name": "capacitor-dialog",
       "type": "registry:item",
-      "title": "Capacitor Dialog",
+      "title": "Capacitor Dialog (Vue)",
       "description": "Capacitor Dialog Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1170,7 +1525,7 @@
     {
       "name": "capacitor-dialog-button",
       "type": "registry:item",
-      "title": "Capacitor DialogButton",
+      "title": "Capacitor DialogButton (Vue)",
       "description": "Capacitor DialogButton Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1192,7 +1547,7 @@
     {
       "name": "capacitor-fab",
       "type": "registry:item",
-      "title": "Capacitor Fab",
+      "title": "Capacitor Fab (Vue)",
       "description": "Capacitor Fab Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1211,9 +1566,51 @@
       ]
     },
     {
+      "name": "capacitor-footer",
+      "type": "registry:item",
+      "title": "Capacitor Footer (Vue)",
+      "description": "Capacitor Footer Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/Footer.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/Footer.vue"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-header",
+      "type": "registry:item",
+      "title": "Capacitor Header (Vue)",
+      "description": "Capacitor Header Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/Header.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/Header.vue"
+        }
+      ]
+    },
+    {
       "name": "capacitor-icon",
       "type": "registry:item",
-      "title": "Capacitor Icon",
+      "title": "Capacitor Icon (Vue)",
       "description": "Capacitor Icon Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1233,9 +1630,72 @@
       ]
     },
     {
+      "name": "capacitor-infinite-scroll",
+      "type": "registry:item",
+      "title": "Capacitor InfiniteScroll (Vue)",
+      "description": "Capacitor InfiniteScroll Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/InfiniteScroll.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/InfiniteScroll.vue"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-input-otp",
+      "type": "registry:item",
+      "title": "Capacitor InputOtp (Vue)",
+      "description": "Capacitor InputOtp Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/InputOtp.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/InputOtp.vue"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-item-sliding",
+      "type": "registry:item",
+      "title": "Capacitor ItemSliding (Vue)",
+      "description": "Capacitor ItemSliding Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/ItemSliding.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/ItemSliding.vue"
+        }
+      ]
+    },
+    {
       "name": "capacitor-link",
       "type": "registry:item",
-      "title": "Capacitor Link",
+      "title": "Capacitor Link (Vue)",
       "description": "Capacitor Link Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1256,7 +1716,7 @@
     {
       "name": "capacitor-list",
       "type": "registry:item",
-      "title": "Capacitor List",
+      "title": "Capacitor List (Vue)",
       "description": "Capacitor List Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1277,7 +1737,7 @@
     {
       "name": "capacitor-list-button",
       "type": "registry:item",
-      "title": "Capacitor ListButton",
+      "title": "Capacitor ListButton (Vue)",
       "description": "Capacitor ListButton Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1298,7 +1758,7 @@
     {
       "name": "capacitor-list-group",
       "type": "registry:item",
-      "title": "Capacitor ListGroup",
+      "title": "Capacitor ListGroup (Vue)",
       "description": "Capacitor ListGroup Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1320,7 +1780,7 @@
     {
       "name": "capacitor-list-input",
       "type": "registry:item",
-      "title": "Capacitor ListInput",
+      "title": "Capacitor ListInput (Vue)",
       "description": "Capacitor ListInput Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1343,7 +1803,7 @@
     {
       "name": "capacitor-list-item",
       "type": "registry:item",
-      "title": "Capacitor ListItem",
+      "title": "Capacitor ListItem (Vue)",
       "description": "Capacitor ListItem Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1365,7 +1825,7 @@
     {
       "name": "capacitor-menu-list",
       "type": "registry:item",
-      "title": "Capacitor MenuList",
+      "title": "Capacitor MenuList (Vue)",
       "description": "Capacitor MenuList Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1387,7 +1847,7 @@
     {
       "name": "capacitor-menu-list-item",
       "type": "registry:item",
-      "title": "Capacitor MenuListItem",
+      "title": "Capacitor MenuListItem (Vue)",
       "description": "Capacitor MenuListItem Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1409,7 +1869,7 @@
     {
       "name": "capacitor-message",
       "type": "registry:item",
-      "title": "Capacitor Message",
+      "title": "Capacitor Message (Vue)",
       "description": "Capacitor Message Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1430,7 +1890,7 @@
     {
       "name": "capacitor-messagebar",
       "type": "registry:item",
-      "title": "Capacitor Messagebar",
+      "title": "Capacitor Messagebar (Vue)",
       "description": "Capacitor Messagebar Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1452,7 +1912,7 @@
     {
       "name": "capacitor-messages",
       "type": "registry:item",
-      "title": "Capacitor Messages",
+      "title": "Capacitor Messages (Vue)",
       "description": "Capacitor Messages Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1473,7 +1933,7 @@
     {
       "name": "capacitor-messages-title",
       "type": "registry:item",
-      "title": "Capacitor MessagesTitle",
+      "title": "Capacitor MessagesTitle (Vue)",
       "description": "Capacitor MessagesTitle Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1492,9 +1952,30 @@
       ]
     },
     {
+      "name": "capacitor-modal",
+      "type": "registry:item",
+      "title": "Capacitor Modal (Vue)",
+      "description": "Capacitor Modal Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/Modal.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/Modal.vue"
+        }
+      ]
+    },
+    {
       "name": "capacitor-navbar",
       "type": "registry:item",
-      "title": "Capacitor Navbar",
+      "title": "Capacitor Navbar (Vue)",
       "description": "Capacitor Navbar Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1515,7 +1996,7 @@
     {
       "name": "capacitor-navbar-back-link",
       "type": "registry:item",
-      "title": "Capacitor NavbarBackLink",
+      "title": "Capacitor NavbarBackLink (Vue)",
       "description": "Capacitor NavbarBackLink Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1536,9 +2017,30 @@
       ]
     },
     {
+      "name": "capacitor-note",
+      "type": "registry:item",
+      "title": "Capacitor Note (Vue)",
+      "description": "Capacitor Note Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/Note.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/Note.vue"
+        }
+      ]
+    },
+    {
       "name": "capacitor-notification",
       "type": "registry:item",
-      "title": "Capacitor Notification",
+      "title": "Capacitor Notification (Vue)",
       "description": "Capacitor Notification Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1560,7 +2062,7 @@
     {
       "name": "capacitor-page",
       "type": "registry:item",
-      "title": "Capacitor Page",
+      "title": "Capacitor Page (Vue)",
       "description": "Capacitor Page Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1581,7 +2083,7 @@
     {
       "name": "capacitor-panel",
       "type": "registry:item",
-      "title": "Capacitor Panel",
+      "title": "Capacitor Panel (Vue)",
       "description": "Capacitor Panel Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1600,9 +2102,30 @@
       ]
     },
     {
+      "name": "capacitor-picker",
+      "type": "registry:item",
+      "title": "Capacitor Picker (Vue)",
+      "description": "Capacitor Picker Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/Picker.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/Picker.vue"
+        }
+      ]
+    },
+    {
       "name": "capacitor-popover",
       "type": "registry:item",
-      "title": "Capacitor Popover",
+      "title": "Capacitor Popover (Vue)",
       "description": "Capacitor Popover Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1623,7 +2146,7 @@
     {
       "name": "capacitor-popup",
       "type": "registry:item",
-      "title": "Capacitor Popup",
+      "title": "Capacitor Popup (Vue)",
       "description": "Capacitor Popup Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1644,7 +2167,7 @@
     {
       "name": "capacitor-preloader",
       "type": "registry:item",
-      "title": "Capacitor Preloader",
+      "title": "Capacitor Preloader (Vue)",
       "description": "Capacitor Preloader Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1666,7 +2189,7 @@
     {
       "name": "capacitor-progressbar",
       "type": "registry:item",
-      "title": "Capacitor Progressbar",
+      "title": "Capacitor Progressbar (Vue)",
       "description": "Capacitor Progressbar Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1687,7 +2210,7 @@
     {
       "name": "capacitor-radio",
       "type": "registry:item",
-      "title": "Capacitor Radio",
+      "title": "Capacitor Radio (Vue)",
       "description": "Capacitor Radio Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1709,7 +2232,7 @@
     {
       "name": "capacitor-range",
       "type": "registry:item",
-      "title": "Capacitor Range",
+      "title": "Capacitor Range (Vue)",
       "description": "Capacitor Range Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1728,9 +2251,51 @@
       ]
     },
     {
+      "name": "capacitor-refresher",
+      "type": "registry:item",
+      "title": "Capacitor Refresher (Vue)",
+      "description": "Capacitor Refresher Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/Refresher.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/Refresher.vue"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-reorder",
+      "type": "registry:item",
+      "title": "Capacitor Reorder (Vue)",
+      "description": "Capacitor Reorder Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/Reorder.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/Reorder.vue"
+        }
+      ]
+    },
+    {
       "name": "capacitor-searchbar",
       "type": "registry:item",
-      "title": "Capacitor Searchbar",
+      "title": "Capacitor Searchbar (Vue)",
       "description": "Capacitor Searchbar Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1752,7 +2317,7 @@
     {
       "name": "capacitor-segmented",
       "type": "registry:item",
-      "title": "Capacitor Segmented",
+      "title": "Capacitor Segmented (Vue)",
       "description": "Capacitor Segmented Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1773,7 +2338,7 @@
     {
       "name": "capacitor-segmented-button",
       "type": "registry:item",
-      "title": "Capacitor SegmentedButton",
+      "title": "Capacitor SegmentedButton (Vue)",
       "description": "Capacitor SegmentedButton Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1793,9 +2358,30 @@
       ]
     },
     {
+      "name": "capacitor-select",
+      "type": "registry:item",
+      "title": "Capacitor Select (Vue)",
+      "description": "Capacitor Select Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/Select.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/Select.vue"
+        }
+      ]
+    },
+    {
       "name": "capacitor-sheet",
       "type": "registry:item",
-      "title": "Capacitor Sheet",
+      "title": "Capacitor Sheet (Vue)",
       "description": "Capacitor Sheet Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1814,9 +2400,51 @@
       ]
     },
     {
+      "name": "capacitor-skeleton",
+      "type": "registry:item",
+      "title": "Capacitor Skeleton (Vue)",
+      "description": "Capacitor Skeleton Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/Skeleton.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/Skeleton.vue"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-split-pane",
+      "type": "registry:item",
+      "title": "Capacitor SplitPane (Vue)",
+      "description": "Capacitor SplitPane Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/SplitPane.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/SplitPane.vue"
+        }
+      ]
+    },
+    {
       "name": "capacitor-stepper",
       "type": "registry:item",
-      "title": "Capacitor Stepper",
+      "title": "Capacitor Stepper (Vue)",
       "description": "Capacitor Stepper Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1835,9 +2463,30 @@
       ]
     },
     {
+      "name": "capacitor-tab",
+      "type": "registry:item",
+      "title": "Capacitor Tab (Vue)",
+      "description": "Capacitor Tab Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/Tab.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/Tab.vue"
+        }
+      ]
+    },
+    {
       "name": "capacitor-tabbar",
       "type": "registry:item",
-      "title": "Capacitor Tabbar",
+      "title": "Capacitor Tabbar (Vue)",
       "description": "Capacitor Tabbar Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1859,7 +2508,7 @@
     {
       "name": "capacitor-tabbar-link",
       "type": "registry:item",
-      "title": "Capacitor TabbarLink",
+      "title": "Capacitor TabbarLink (Vue)",
       "description": "Capacitor TabbarLink Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1881,7 +2530,7 @@
     {
       "name": "capacitor-table",
       "type": "registry:item",
-      "title": "Capacitor Table",
+      "title": "Capacitor Table (Vue)",
       "description": "Capacitor Table Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1902,7 +2551,7 @@
     {
       "name": "capacitor-table-body",
       "type": "registry:item",
-      "title": "Capacitor TableBody",
+      "title": "Capacitor TableBody (Vue)",
       "description": "Capacitor TableBody Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1923,7 +2572,7 @@
     {
       "name": "capacitor-table-cell",
       "type": "registry:item",
-      "title": "Capacitor TableCell",
+      "title": "Capacitor TableCell (Vue)",
       "description": "Capacitor TableCell Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1944,7 +2593,7 @@
     {
       "name": "capacitor-table-head",
       "type": "registry:item",
-      "title": "Capacitor TableHead",
+      "title": "Capacitor TableHead (Vue)",
       "description": "Capacitor TableHead Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1965,7 +2614,7 @@
     {
       "name": "capacitor-table-row",
       "type": "registry:item",
-      "title": "Capacitor TableRow",
+      "title": "Capacitor TableRow (Vue)",
       "description": "Capacitor TableRow Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -1984,9 +2633,72 @@
       ]
     },
     {
+      "name": "capacitor-tabs",
+      "type": "registry:item",
+      "title": "Capacitor Tabs (Vue)",
+      "description": "Capacitor Tabs Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/Tabs.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/Tabs.vue"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-textarea",
+      "type": "registry:item",
+      "title": "Capacitor Textarea (Vue)",
+      "description": "Capacitor Textarea Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/Textarea.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/Textarea.vue"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-thumbnail",
+      "type": "registry:item",
+      "title": "Capacitor Thumbnail (Vue)",
+      "description": "Capacitor Thumbnail Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/Thumbnail.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/Thumbnail.vue"
+        }
+      ]
+    },
+    {
       "name": "capacitor-toast",
       "type": "registry:item",
-      "title": "Capacitor Toast",
+      "title": "Capacitor Toast (Vue)",
       "description": "Capacitor Toast Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -2007,7 +2719,7 @@
     {
       "name": "capacitor-toggle",
       "type": "registry:item",
-      "title": "Capacitor Toggle",
+      "title": "Capacitor Toggle (Vue)",
       "description": "Capacitor Toggle Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -2028,7 +2740,7 @@
     {
       "name": "capacitor-toolbar",
       "type": "registry:item",
-      "title": "Capacitor Toolbar",
+      "title": "Capacitor Toolbar (Vue)",
       "description": "Capacitor Toolbar Vue component.",
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
@@ -2043,6 +2755,27 @@
           "path": "src/vue/components/Toolbar.vue",
           "type": "registry:file",
           "target": "src/capacitor/vue/components/Toolbar.vue"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-touch-ripple",
+      "type": "registry:item",
+      "title": "Capacitor TouchRipple (Vue)",
+      "description": "Capacitor TouchRipple Vue component.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+      ],
+      "dependencies": [
+        "vue"
+      ],
+      "files": [
+        {
+          "path": "src/vue/components/TouchRipple.vue",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/components/TouchRipple.vue"
         }
       ]
     }

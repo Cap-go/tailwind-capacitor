@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-link",
+  "title": "Capacitor Link (React)",
+  "description": "Capacitor Link React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/Link.tsx",
+      "content": "/* @ts-nocheck */\nimport React, { useRef } from 'react';\nimport { cls } from '../../shared/cls.js';\nimport { useTheme } from '../shared/use-theme.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { useTouchRipple } from '../shared/use-touch-ripple.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\nimport { LinkClasses } from '../../shared/classes/LinkClasses.js';\nimport { LinkColors } from '../../shared/colors/LinkColors.js';\nimport { useToolbarContext } from './ToolbarContext.tsx';\nimport { useNavbarContext } from './NavbarContext.tsx';\n\nconst Link = (props) => {\n  const {\n    component = 'a',\n    className,\n    colors: colorsProp,\n\n    iconOnly,\n    linkProps = {},\n\n    tabbarActive,\n\n    ios,\n    material,\n\n    onClick,\n\n    // Children\n    children,\n\n    ref,\n\n    // Rest\n    ...rest\n  } = props;\n  const { navbar } = useNavbarContext();\n  const { toolbar, tabbar, tabbarLabels, tabbarIcons } = useToolbarContext();\n\n  const rippleElRef = useRef(null);\n\n  const Component = component;\n\n  const attrs = {\n    ...linkProps,\n    ...rest,\n  };\n\n  const theme = useTheme({ ios, material });\n  const themeClasses = useThemeClasses({ ios, material });\n  const dark = useDarkClasses();\n\n  const needsTouchRipple =\n    theme === 'material' && (toolbar || tabbar || navbar);\n\n  useTouchRipple(rippleElRef, needsTouchRipple);\n\n  const colors = LinkColors(colorsProp, dark);\n\n  // prettier-ignore\n  const themeTextColor = navbar ?\n    (\n      theme === 'material' ? colors.navbarTextMaterial : colors.navbarTextIos\n    ) :\n    toolbar ? (theme === 'material' ? colors.toolbarTextMaterial : colors.toolbarTextIos) :\n    (\n      theme === 'material' ? colors.textMaterial : colors.textIos\n    );\n  const textColor =\n    tabbar && !tabbarActive ? colors.tabbarInactive : themeTextColor;\n  const tabbarState = tabbarActive ? 'active' : 'inactive';\n\n  const c = themeClasses(\n    LinkClasses(\n      { ...props, tabbarLabels, tabbarIcons, tabbar, toolbar },\n      { textColor, needsTouchRipple }\n    )\n  );\n\n  const classes = cls(\n    // base\n    c.base,\n\n    toolbar && c.toolbar,\n\n    navbar && c.navbar,\n\n    tabbar && c.tabbar[tabbarState],\n\n    className\n  );\n\n  return (\n    <Component\n      ref={(el) => {\n        rippleElRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      className={classes}\n      {...attrs}\n      role=\"link\"\n      tabIndex=\"0\"\n      onClick={onClick}\n    >\n      {children}\n    </Component>\n  );\n};\n\nLink.displayName = 'Link';\n\nexport default Link;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/Link.tsx"
+    },
+    {
+      "path": "src/react/components/ToolbarContext.tsx",
+      "content": "/* @ts-nocheck */\nimport { createContext, useContext } from 'react';\n\nexport const ToolbarContext = createContext({\n  tabbarLabels: true,\n  tabbarIcons: true,\n  tabbar: false,\n  toolbar: false,\n});\n\nexport const useToolbarContext = () => useContext(ToolbarContext);\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/ToolbarContext.tsx"
+    },
+    {
+      "path": "src/react/components/NavbarContext.tsx",
+      "content": "/* @ts-nocheck */\nimport { createContext, useContext } from 'react';\n\nexport const NavbarContext = createContext({\n  navbar: false,\n});\n\nexport const useNavbarContext = () => useContext(NavbarContext);\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/NavbarContext.tsx"
+    }
+  ],
+  "type": "registry:item"
+}

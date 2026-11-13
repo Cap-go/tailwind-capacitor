@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-toolbar",
+  "title": "Capacitor Toolbar (React)",
+  "description": "Capacitor Toolbar React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/Toolbar.tsx",
+      "content": "/* @ts-nocheck */\nimport React, { useState, useRef, useEffect } from 'react';\nimport { useTheme } from '../shared/use-theme.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\nimport { ToolbarClasses } from '../../shared/classes/ToolbarClasses.js';\nimport { ToolbarColors } from '../../shared/colors/ToolbarColors.js';\nimport { ToolbarContext } from './ToolbarContext.tsx';\n\nconst Toolbar = (props) => {\n  const {\n    component = 'div',\n    className,\n    colors: colorsProp,\n\n    bgClassName = '',\n    innerClassName = '',\n\n    outline,\n\n    tabbar,\n    tabbarIcons,\n    tabbarLabels,\n\n    top,\n    ios,\n    material,\n\n    children,\n\n    ref,\n\n    ...rest\n  } = props;\n\n  const highlightElRef = useRef(null);\n  const elRef = useRef(null);\n\n  const Component = component;\n\n  const [highlightStyle, setHighlightStyle] = useState({\n    transform: '',\n    width: '',\n  });\n  const theme = useTheme({ ios, material });\n  const themeClasses = useThemeClasses({ ios, material });\n  const dark = useDarkClasses();\n\n  const attrs = {\n    ...rest,\n  };\n\n  const colors = ToolbarColors(colorsProp, dark);\n\n  const isOutline = typeof outline === 'undefined' ? theme === 'ios' : outline;\n\n  const c = themeClasses(\n    ToolbarClasses(\n      {\n        ...props,\n        outline: isOutline,\n        bgClassName,\n        innerClassName,\n      },\n      colors\n    ),\n    className\n  );\n\n  const hasHighlight = theme === 'material' && tabbar && !tabbarIcons;\n\n  useEffect(() => {\n    if (hasHighlight && highlightElRef.current) {\n      const linksEl = highlightElRef.current.previousElementSibling;\n      const width = (1 / linksEl.children.length) * 100;\n      const activeIndex = [...linksEl.children].indexOf(\n        linksEl.querySelector('.k-tabbar-link-active')\n      );\n\n      setHighlightStyle({\n        ...highlightStyle,\n        width: `${width}%`,\n        transform: `translateX(${activeIndex * 100}%)`,\n      });\n    }\n  }, [children]);\n  return (\n    <Component\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      className={c.base}\n      {...attrs}\n    >\n      <ToolbarContext.Provider\n        value={{ toolbar: true, tabbarLabels, tabbarIcons, tabbar }}\n      >\n        {theme === 'ios' && !top && <div className={c.bgBlur} />}\n        {(theme === 'material' || !top) && <div className={c.bg} />}\n        <div className={c.inner}>{children}</div>\n        {hasHighlight && (\n          <span\n            className={c.highlight}\n            style={highlightStyle}\n            ref={highlightElRef}\n          />\n        )}\n      </ToolbarContext.Provider>\n    </Component>\n  );\n};\n\nToolbar.displayName = 'Toolbar';\n\nexport default Toolbar;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/Toolbar.tsx"
+    },
+    {
+      "path": "src/react/components/ToolbarContext.tsx",
+      "content": "/* @ts-nocheck */\nimport { createContext, useContext } from 'react';\n\nexport const ToolbarContext = createContext({\n  tabbarLabels: true,\n  tabbarIcons: true,\n  tabbar: false,\n  toolbar: false,\n});\n\nexport const useToolbarContext = () => useContext(ToolbarContext);\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/ToolbarContext.tsx"
+    }
+  ],
+  "type": "registry:item"
+}

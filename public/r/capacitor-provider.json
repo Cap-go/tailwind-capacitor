@@ -1,8 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-provider",
-  "type": "registry:item",
-  "title": "Tailwind Capacitor provider",
+  "title": "Tailwind Capacitor provider (Vue)",
   "description": "Root provider and Vue composables for theme and context.",
   "dependencies": [
     "vue"
@@ -53,5 +52,6 @@
       "type": "registry:file",
       "target": "src/capacitor/vue/shared/use-touch-ripple.js"
     }
-  ]
+  ],
+  "type": "registry:item"
 }

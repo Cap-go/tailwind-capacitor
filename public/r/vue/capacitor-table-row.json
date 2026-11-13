@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-table-row",
+  "title": "Capacitor TableRow (Vue)",
+  "description": "Capacitor TableRow Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/TableRow.vue",
+      "content": "<template>\n  <tr ref=\"elRef\" :class=\"c.base\">\n    <slot />\n  </tr>\n</template>\n<script>\n  import { computed, ref } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { TableRowClasses } from '../../shared/classes/TableRowClasses.js';\n\n  import { TableRowColors } from '../../shared/colors/TableRowColors.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  export default {\n    name: 'c-table-row',\n    props: {\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      header: {\n        type: Boolean,\n        default: false,\n      },\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const elRef = ref(null);\n\n      const colors = computed(() =>\n        TableRowColors(props.colors || {}, useDarkClasses)\n      );\n      const c = useThemeClasses(props, () =>\n        TableRowClasses(props, colors.value, ctx.attrs.class)\n      );\n\n      return {\n        c,\n        elRef,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/TableRow.vue"
+    }
+  ],
+  "type": "registry:item"
+}

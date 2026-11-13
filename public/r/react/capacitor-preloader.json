@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-preloader",
+  "title": "Capacitor Preloader (React)",
+  "description": "Capacitor Preloader React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-icons.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/Preloader.tsx",
+      "content": "/* @ts-nocheck */\nimport React, { useRef } from 'react';\nimport { useTheme } from '../shared/use-theme.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\n\nimport PreloaderIOS from './icons/PreloaderIOS.tsx';\nimport PreloaderMaterial from './icons/PreloaderMaterial.tsx';\nimport { PreloaderClasses } from '../../shared/classes/PreloaderClasses.js';\nimport { PreloaderColors } from '../../shared/colors/PreloaderColors.js';\n\nconst Preloader = (props) => {\n  const {\n    component = 'span',\n    className,\n    colors: colorsProp,\n\n    ios,\n    material,\n\n    // Children\n    children,\n\n    ref,\n\n    // Rest\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const Component = component;\n\n  const attrs = {\n    ...rest,\n  };\n\n  const theme = useTheme({ ios, material });\n  const themeClasses = useThemeClasses({ ios, material });\n  const dark = useDarkClasses();\n  const colors = PreloaderColors(colorsProp, dark);\n\n  const SVGComponent = theme === 'ios' ? PreloaderIOS : PreloaderMaterial;\n\n  const c = themeClasses(PreloaderClasses(props, colors, theme, className));\n\n  return (\n    <Component\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      className={c.base}\n      {...attrs}\n    >\n      <span className={c.inner}>\n        <SVGComponent className=\"w-full h-full\" />\n      </span>\n      {children}\n    </Component>\n  );\n};\n\nPreloader.displayName = 'Preloader';\n\nexport default Preloader;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/Preloader.tsx"
+    }
+  ],
+  "type": "registry:item"
+}

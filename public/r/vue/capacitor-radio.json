@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-radio",
+  "title": "Capacitor Radio (Vue)",
+  "description": "Capacitor Radio Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-icons.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Radio.vue",
+      "content": "<template>\n  <component :is=\"component\" ref=\"elRef\" :class=\"c.base\">\n    <input\n      type=\"radio\"\n      :name=\"name\"\n      :value=\"value\"\n      :disabled=\"disabled\"\n      :readonly=\"readonly\"\n      :checked=\"checked\"\n      :class=\"c.input\"\n      @change=\"onChange\"\n    />\n\n    <i :class=\"c.iconWrap[state]\">\n      <CheckboxIcon v-if=\"theme === 'ios'\" :class=\"c.icon[state]\" />\n      <span v-else :class=\"c.icon[state]\" />\n    </i>\n    <slot />\n  </component>\n</template>\n<script>\n  import { computed, ref } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { useTheme } from '../shared/use-theme.js';\n\n  import { useTouchRipple } from '../shared/use-touch-ripple.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n  import CheckboxIcon from './icons/CheckboxIcon.vue';\n\n  import { RadioClasses } from '../../shared/classes/RadioClasses.js';\n\n  import { RadioColors } from '../../shared/colors/RadioColors.js';\n\n  export default {\n    name: 'c-radio',\n    components: {\n      CheckboxIcon,\n    },\n    props: {\n      component: {\n        type: String,\n        default: 'label',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      checked: { type: Boolean, default: false },\n      name: { type: String, default: undefined },\n      value: { type: [Number, String], default: undefined },\n      disabled: { type: Boolean, default: false },\n      readonly: { type: Boolean, default: false },\n      touchRipple: { type: Boolean, default: true },\n    },\n    emits: ['change'],\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const elRef = ref(null);\n      const theme = useTheme(props, context);\n\n      useTouchRipple(elRef, props, { context });\n\n      const colors = computed(() =>\n        RadioColors(props.colors || {}, useDarkClasses)\n      );\n\n      const state = computed(() => (props.checked ? 'checked' : 'notChecked'));\n\n      const c = useThemeClasses(props, () =>\n        RadioClasses(props, colors.value, ctx.attrs.class, useDarkClasses)\n      );\n\n      const onChange = (e) => {\n        ctx.emit('change', e);\n      };\n\n      return {\n        elRef,\n        onChange,\n        c,\n        state,\n        theme,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Radio.vue"
+    }
+  ],
+  "type": "registry:item"
+}

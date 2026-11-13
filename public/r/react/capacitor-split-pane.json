@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-split-pane",
+  "title": "Capacitor SplitPane (React)",
+  "description": "Capacitor SplitPane React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/SplitPane.tsx",
+      "content": "/* @ts-nocheck */\nimport React from 'react';\nimport { SplitPaneClasses } from '../../shared/classes/SplitPaneClasses.js';\nimport { SplitPaneColors } from '../../shared/colors/SplitPaneColors.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\n\nconst SplitPane = (props) => {\n  const {\n    component: Component = 'div',\n    className,\n    colors: colorsProp,\n    ios,\n    material,\n    children,\n    ...rest\n  } = props;\n  const themeClassesFn = useThemeClasses({ ios, material });\n  const colors = SplitPaneColors(colorsProp);\n  const c = themeClassesFn(SplitPaneClasses(props, colors, { className }), className);\n  return (\n    <Component className={c.base} {...rest}>\n      {children}\n    </Component>\n  );\n};\n\nSplitPane.displayName = 'SplitPane';\nexport default SplitPane;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/SplitPane.tsx"
+    }
+  ],
+  "type": "registry:item"
+}

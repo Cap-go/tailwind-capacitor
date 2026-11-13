@@ -1,8 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-tabbar-link",
-  "type": "registry:item",
-  "title": "Capacitor TabbarLink",
+  "title": "Capacitor TabbarLink (Vue)",
   "description": "Capacitor TabbarLink Vue component.",
   "dependencies": [
     "vue"
@@ -20,5 +19,6 @@
       "type": "registry:file",
       "target": "src/capacitor/vue/components/TabbarLink.vue"
     }
-  ]
+  ],
+  "type": "registry:item"
 }

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-actions-button",
+  "title": "Capacitor ActionsButton (React)",
+  "description": "Capacitor ActionsButton React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/ActionsButton.tsx",
+      "content": "/* @ts-nocheck */\nimport React, { useRef } from 'react';\nimport { useTheme } from '../shared/use-theme.js';\nimport { useTouchRipple } from '../shared/use-touch-ripple.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\nimport { ActionsButtonClasses } from '../../shared/classes/ActionsButtonClasses.js';\nimport { ActionsButtonColors } from '../../shared/colors/ActionsButtonColors.js';\n\nconst ActionsButton = (props) => {\n  const {\n    component = 'button',\n    className,\n    colors: colorsProp,\n\n    ios,\n    material,\n\n    bold,\n    boldIos = false,\n    boldMaterial = false,\n\n    fontSizeIos = 'text-xl',\n    fontSizeMaterial = 'text-base',\n\n    // Anchor props\n    href,\n\n    dividers = undefined,\n\n    // Children\n    children,\n\n    ref,\n\n    // Rest\n    ...rest\n  } = props;\n\n  const rippleElRef = useRef(null);\n\n  let Component = component;\n  if (typeof props.component === 'undefined' && (href || href === '')) {\n    Component = 'a';\n  }\n  const attrs = {\n    href,\n    ...rest,\n  };\n\n  const theme = useTheme({ ios, material });\n  const themeClasses = useThemeClasses({ ios, material });\n  const dark = useDarkClasses();\n\n  useTouchRipple(rippleElRef, theme === 'material');\n\n  const colors = ActionsButtonColors(colorsProp, dark);\n\n  const isDividers =\n    typeof dividers === 'undefined' ? theme === 'ios' : dividers;\n\n  const isBold =\n    typeof bold === 'undefined'\n      ? theme === 'ios'\n        ? boldIos\n        : boldMaterial\n      : bold;\n\n  const c = themeClasses(\n    ActionsButtonClasses(\n      {\n        fontSizeIos,\n        fontSizeMaterial,\n        bold: isBold,\n        dividers: isDividers,\n        ...props,\n      },\n      colors,\n      dark\n    ),\n    className\n  );\n\n  return (\n    <Component\n      ref={(el) => {\n        rippleElRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      role=\"button\"\n      tabIndex=\"0\"\n      className={c.base}\n      {...attrs}\n    >\n      {children}\n    </Component>\n  );\n};\n\nActionsButton.displayName = 'ActionsButton';\n\nexport default ActionsButton;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/ActionsButton.tsx"
+    }
+  ],
+  "type": "registry:item"
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-list-button",
+  "title": "Capacitor ListButton (React)",
+  "description": "Capacitor ListButton React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/ListButton.tsx",
+      "content": "/* @ts-nocheck */\nimport React, { useRef } from 'react';\nimport { useTheme } from '../shared/use-theme.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\nimport { useTouchRipple } from '../shared/use-touch-ripple.js';\nimport { ListButtonClasses } from '../../shared/classes/ListButtonClasses.js';\nimport { ListButtonColors } from '../../shared/colors/ListButtonColors.js';\nimport { useList } from '../shared/use-list.js';\n\nconst ListButton = (props) => {\n  const {\n    component = 'li',\n    className,\n    colors: colorsProp,\n\n    // Link props\n    href,\n    target,\n\n    // Button props\n    type,\n    value,\n\n    linkComponent = 'a',\n    linkProps = {},\n\n    ios,\n    material,\n\n    // Children\n    children,\n\n    ref,\n\n    // Rest\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n  const rippleElRef = useRef(null);\n  const listContext = useList();\n  const dividers = listContext?.dividers;\n\n  const Component = component;\n\n  const attrs = {\n    ...rest,\n  };\n\n  const theme = useTheme({ ios, material });\n  const themeClasses = useThemeClasses({ ios, material });\n\n  useTouchRipple(rippleElRef, theme === 'material');\n\n  const dark = useDarkClasses();\n\n  const colors = ListButtonColors(colorsProp, dark);\n\n  const c = themeClasses(\n    ListButtonClasses({ ...props, dividers }, colors),\n    className\n  );\n\n  const isLink = !!href || href === '';\n  const hrefComputed =\n    !isLink || href === true || href === false ? undefined : href || '';\n  const buttonAttrs = { href: hrefComputed, target, type, value, ...linkProps };\n\n  const ButtonComponent = isLink ? linkComponent : 'button';\n\n  return (\n    <Component\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      className={c.base}\n      {...attrs}\n    >\n      <ButtonComponent ref={rippleElRef} className={c.button} {...buttonAttrs}>\n        {children}\n      </ButtonComponent>\n    </Component>\n  );\n};\n\nListButton.displayName = 'ListButton';\n\nexport default ListButton;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/ListButton.tsx"
+    }
+  ],
+  "type": "registry:item"
+}

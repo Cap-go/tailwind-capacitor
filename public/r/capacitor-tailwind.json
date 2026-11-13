@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-tailwind",
-  "type": "registry:item",
   "title": "Tailwind Capacitor styles",
   "description": "Tailwind CSS v4 capacitor utilities, safe areas, and platform variants.",
   "files": [
@@ -83,5 +82,6 @@
       "type": "registry:file",
       "target": "src/capacitor/config/join-safe-class-selector.js"
     }
-  ]
+  ],
+  "type": "registry:item"
 }

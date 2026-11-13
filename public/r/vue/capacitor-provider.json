@@ -1,0 +1,57 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-provider",
+  "title": "Tailwind Capacitor provider (Vue)",
+  "description": "Root provider and Vue composables for theme and context.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/shared/TailwindCapacitorProvider.vue",
+      "content": "<template>\n  <slot />\n</template>\n<script>\n  import { computed, provide } from 'vue';\n\n  import { useAutoTheme } from './use-auto-theme.js';\n\n  export default {\n    name: 'tailwind-capacitor-provider',\n    props: {\n      theme: {\n        type: String,\n        default: 'material',\n      },\n      dark: {\n        type: Boolean,\n        default: true,\n      },\n      touchRipple: {\n        type: Boolean,\n        default: true,\n      },\n      autoThemeDetection: {\n        type: Boolean,\n        default: true,\n      },\n    },\n    setup(props) {\n      const currentTheme = useAutoTheme(props, props.autoThemeDetection);\n\n      const TailwindCapacitorContext = computed(() => ({\n        theme: currentTheme.value,\n        dark: props.dark,\n        touchRipple: props.touchRipple,\n      }));\n      provide('TailwindCapacitorContext', TailwindCapacitorContext);\n\n      return {\n        currentTheme,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/shared/TailwindCapacitorProvider.vue"
+    },
+    {
+      "path": "src/vue/shared/use-auto-theme.js",
+      "content": "import { ref, watch, onMounted } from 'vue';\n\nexport const useAutoTheme = (props, autoThemeDetection = true) => {\n  const themeState = ref(props.theme);\n\n  /* eslint-disable no-restricted-globals */\n  const setTheme = (newTheme) => {\n    if (newTheme === 'ios' || newTheme === 'material') {\n      if (themeState.value !== newTheme) {\n        themeState.value = newTheme;\n      }\n    } else if (\n      autoThemeDetection &&\n      themeState.value === 'parent' &&\n      typeof window !== 'undefined' &&\n      typeof document !== 'undefined'\n    ) {\n      const htmlEl = document.documentElement;\n      if (htmlEl) {\n        if (htmlEl.classList.contains('ios')) {\n          themeState.value = 'ios';\n        } else if (\n          htmlEl.classList.contains('md') ||\n          htmlEl.classList.contains('material')\n        ) {\n          themeState.value = 'material';\n        }\n      }\n    }\n  };\n  /* eslint-enable no-restricted-globals */\n\n  watch(\n    () => props.theme,\n    (newTheme) => {\n      setTheme(newTheme);\n    }\n  );\n  onMounted(() => {\n    setTheme(props.theme);\n  });\n\n  return themeState;\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/shared/use-auto-theme.js"
+    },
+    {
+      "path": "src/vue/shared/use-context.js",
+      "content": "import { inject } from 'vue';\n\nexport const useContext = () => {\n  return inject('TailwindCapacitorContext');\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/shared/use-context.js"
+    },
+    {
+      "path": "src/vue/shared/use-dark-classes.js",
+      "content": "const useDarkClasses = (classNames, context) => {\n  if (!context || !context.value.dark) return '';\n  return classNames;\n};\nconst createUseDarkClasses = (context) => (classNames) =>\n  useDarkClasses(classNames, context);\n\nexport { createUseDarkClasses as darkClasses, useDarkClasses };\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/shared/use-dark-classes.js"
+    },
+    {
+      "path": "src/vue/shared/use-theme-classes.js",
+      "content": "import { computed } from 'vue';\nimport { cls } from '../../shared/cls.js';\n\nconst propClasses = (classesObj, theme, state) => {\n  if (typeof classesObj === 'string') return classesObj;\n  const arr = [classesObj.common, classesObj[theme]];\n  if (state && classesObj[state]) {\n    if (typeof classesObj[state] === 'string') arr.push(classesObj[state]);\n    else {\n      arr.push(classesObj[state].common, classesObj[state][theme]);\n    }\n  }\n  return arr;\n};\nconst themeClasses = (classesObj, theme, addBaseClassName) => {\n  const c = {};\n  const themeSubKeys = ['common', 'ios', 'material'];\n  Object.keys(classesObj).forEach((key) => {\n    const addBaseClass = key === 'base' ? addBaseClassName : '';\n    const hasStates =\n      typeof classesObj[key] !== 'string' &&\n      Object.keys(classesObj[key]).filter(\n        (state) => !themeSubKeys.includes(state)\n      ).length > 0;\n    if (!hasStates) {\n      c[key] = cls(propClasses(classesObj[key], theme), addBaseClass);\n      return;\n    }\n    c[key] = {};\n    const defaultStateClasses = propClasses(classesObj[key], theme);\n    c[key].default = cls(defaultStateClasses, addBaseClass);\n    Object.keys(classesObj[key])\n      .filter((state) => !themeSubKeys.includes(state))\n      .forEach((state) => {\n        c[key][state] = cls(\n          defaultStateClasses,\n          propClasses(classesObj[key], theme, state),\n          addBaseClass\n        );\n      });\n  });\n  return c;\n};\n\nconst useThemeClasses = (props, classesObj, ctx) =>\n  computed(() => {\n    let theme;\n    if (ctx) {\n      theme = ctx.value.theme || 'ios';\n    }\n    if (props.ios) theme = 'ios';\n    if (props.material) theme = 'material';\n    return themeClasses(\n      typeof classesObj === 'function' ? classesObj() : classesObj,\n      theme\n    );\n  });\n\nconst createUseThemeClasses = (context) => (props, classesObj) =>\n  useThemeClasses(props, classesObj, context);\nexport { useThemeClasses, createUseThemeClasses as themeClasses };\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/shared/use-theme-classes.js"
+    },
+    {
+      "path": "src/vue/shared/use-theme.js",
+      "content": "import { computed } from 'vue';\n\nconst useTheme = (props = {}, context) =>\n  computed(() => {\n    let theme;\n    if (context) {\n      theme = context.value.theme || 'ios';\n    }\n    if (props.ios) theme = 'ios';\n    if (props.material) theme = 'material';\n    return theme;\n  });\n\nexport { useTheme };\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/shared/use-theme.js"
+    },
+    {
+      "path": "src/vue/shared/use-touch-ripple.js",
+      "content": "import { ref, onMounted, onBeforeUnmount, watch } from 'vue';\nimport { TouchRipple } from '../../shared/touch-ripple-class.js';\n\nexport const useTouchRipple = (\n  elRef,\n  props,\n  { addCondition, eventsElRef, context } = {}\n) => {\n  if (!eventsElRef) eventsElRef = elRef;\n  const ripple = ref(null);\n  let eventsAttached = false;\n\n  const getEl = (reference) => {\n    if (!reference || !reference.value) return null;\n    let el = reference.value;\n    if (el.$el) el = el.$el;\n    return el;\n  };\n\n  const theme = () => {\n    let value = context.value.theme || 'ios';\n    if (props.ios) value = 'ios';\n    if (props.material) value = 'material';\n    return value;\n  };\n  const needsTouchRipple = () => {\n    return (\n      theme() === 'material' &&\n      props.touchRipple &&\n      (addCondition ? addCondition() : true)\n    );\n  };\n  const removeRipple = () => {\n    if (ripple.value) ripple.value.remove();\n    ripple.value = null;\n  };\n\n  const onPointerDown = (e) => {\n    ripple.value = new TouchRipple(getEl(elRef), e.pageX, e.pageY);\n  };\n  const onPointerMove = () => {\n    removeRipple();\n  };\n  const onPointerUp = () => {\n    removeRipple();\n  };\n\n  const attachEvents = () => {\n    if (!context.value.touchRipple || eventsAttached) return;\n    eventsAttached = true;\n    const el = getEl(eventsElRef);\n    el.addEventListener('pointerdown', onPointerDown);\n    el.addEventListener('pointermove', onPointerMove);\n    el.addEventListener('pointerup', onPointerUp);\n    el.addEventListener('pointercancel', onPointerUp);\n    el.addEventListener('contextmenu', onPointerUp);\n  };\n  const detachEvents = () => {\n    eventsAttached = false;\n    const el = getEl(eventsElRef);\n    el.removeEventListener('pointerdown', onPointerDown);\n    el.removeEventListener('pointermove', onPointerMove);\n    el.removeEventListener('pointerup', onPointerUp);\n    el.removeEventListener('pointercancel', onPointerUp);\n    el.removeEventListener('contextmenu', onPointerUp);\n  };\n\n  watch(\n    () => needsTouchRipple(),\n    (newV) => {\n      if (newV) attachEvents();\n      else detachEvents();\n    }\n  );\n\n  onMounted(() => {\n    if (!getEl(eventsElRef) || !needsTouchRipple()) return;\n    attachEvents();\n  });\n\n  onBeforeUnmount(() => {\n    if (!getEl(eventsElRef) || !needsTouchRipple()) return;\n    detachEvents();\n  });\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/shared/use-touch-ripple.js"
+    }
+  ],
+  "type": "registry:item"
+}

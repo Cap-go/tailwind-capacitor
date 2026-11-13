@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-table-body",
+  "title": "Capacitor TableBody (React)",
+  "description": "Capacitor TableBody React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/TableBody.tsx",
+      "content": "/* @ts-nocheck */\nimport React, { useRef } from 'react';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { TableBodyClasses } from '../../shared/classes/TableBodyClasses.js';\n\nconst TableBody = (props) => {\n  const {\n    className,\n    ios,\n    material,\n\n    children,\n\n    ref,\n\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const themeClasses = useThemeClasses({ ios, material });\n\n  const c = themeClasses(TableBodyClasses({ ...props }));\n\n  const attrs = {\n    ...rest,\n  };\n\n  return (\n    <tbody\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      className={c.base}\n      {...attrs}\n    >\n      {children}\n    </tbody>\n  );\n};\n\nTableBody.displayName = 'TableBody';\nexport default TableBody;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/TableBody.tsx"
+    }
+  ],
+  "type": "registry:item"
+}

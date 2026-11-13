@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-infinite-scroll",
+  "title": "Capacitor InfiniteScroll (React)",
+  "description": "Capacitor InfiniteScroll React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/InfiniteScroll.tsx",
+      "content": "/* @ts-nocheck */\nimport React from 'react';\nimport { InfiniteScrollClasses } from '../../shared/classes/InfiniteScrollClasses.js';\nimport { InfiniteScrollColors } from '../../shared/colors/InfiniteScrollColors.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\n\nconst InfiniteScroll = (props) => {\n  const {\n    component: Component = 'div',\n    className,\n    colors: colorsProp,\n    ios,\n    material,\n    children,\n    ...rest\n  } = props;\n  const themeClassesFn = useThemeClasses({ ios, material });\n  const colors = InfiniteScrollColors(colorsProp);\n  const c = themeClassesFn(InfiniteScrollClasses(props, colors, { className }), className);\n  return (\n    <Component className={c.base} {...rest}>\n      {children}\n    </Component>\n  );\n};\n\nInfiniteScroll.displayName = 'InfiniteScroll';\nexport default InfiniteScroll;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/InfiniteScroll.tsx"
+    }
+  ],
+  "type": "registry:item"
+}

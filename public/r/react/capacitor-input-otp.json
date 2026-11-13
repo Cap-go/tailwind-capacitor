@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-input-otp",
+  "title": "Capacitor InputOtp (React)",
+  "description": "Capacitor InputOtp React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/InputOtp.tsx",
+      "content": "/* @ts-nocheck */\nimport React from 'react';\nimport { InputOtpClasses } from '../../shared/classes/InputOtpClasses.js';\nimport { InputOtpColors } from '../../shared/colors/InputOtpColors.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\n\nconst InputOtp = (props) => {\n  const {\n    component: Component = 'div',\n    className,\n    colors: colorsProp,\n    ios,\n    material,\n    children,\n    ...rest\n  } = props;\n  const themeClassesFn = useThemeClasses({ ios, material });\n  const colors = InputOtpColors(colorsProp);\n  const c = themeClassesFn(InputOtpClasses(props, colors, { className }), className);\n  return (\n    <Component className={c.base} {...rest}>\n      {children}\n    </Component>\n  );\n};\n\nInputOtp.displayName = 'InputOtp';\nexport default InputOtp;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/InputOtp.tsx"
+    }
+  ],
+  "type": "registry:item"
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-header",
+  "title": "Capacitor Header (React)",
+  "description": "Capacitor Header React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/Header.tsx",
+      "content": "/* @ts-nocheck */\nimport React from 'react';\nimport { HeaderClasses } from '../../shared/classes/HeaderClasses.js';\nimport { HeaderColors } from '../../shared/colors/HeaderColors.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\n\nconst Header = (props) => {\n  const {\n    component: Component = 'div',\n    className,\n    colors: colorsProp,\n    ios,\n    material,\n    children,\n    ...rest\n  } = props;\n  const themeClassesFn = useThemeClasses({ ios, material });\n  const colors = HeaderColors(colorsProp);\n  const c = themeClassesFn(HeaderClasses(props, colors, { className }), className);\n  return (\n    <Component className={c.base} {...rest}>\n      {children}\n    </Component>\n  );\n};\n\nHeader.displayName = 'Header';\nexport default Header;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/Header.tsx"
+    }
+  ],
+  "type": "registry:item"
+}

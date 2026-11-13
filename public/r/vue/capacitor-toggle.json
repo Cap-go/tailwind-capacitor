@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-toggle",
+  "title": "Capacitor Toggle (Vue)",
+  "description": "Capacitor Toggle Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Toggle.vue",
+      "content": "<template>\n  <component :is=\"component\" ref=\"elRef\" :class=\"c.base[state]\">\n    <input\n      type=\"checkbox\"\n      :name=\"name\"\n      :value=\"value\"\n      :disabled=\"disabled\"\n      :readonly=\"readonly\"\n      :checked=\"checked\"\n      :class=\"c.input\"\n    />\n    <span :class=\"c.inner[state]\" />\n    <span ref=\"rippleTargetElRef\" :class=\"c.thumbWrap[state]\">\n      <span :class=\"c.thumb[state]\" />\n    </span>\n    <slot />\n  </component>\n</template>\n<script>\n  import { computed, ref } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { ToggleClasses } from '../../shared/classes/ToggleClasses.js';\n\n  import { ToggleColors } from '../../shared/colors/ToggleColors.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  import { useTouchRipple } from '../shared/use-touch-ripple.js';\n\n  export default {\n    name: 'c-toggle',\n    props: {\n      component: {\n        type: String,\n        default: 'label',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      checked: { type: Boolean, default: false },\n      name: { type: String, default: undefined },\n      value: { type: [Number, String], default: undefined },\n      disabled: { type: Boolean, default: false },\n      readonly: { type: Boolean, default: false },\n      touchRipple: { type: Boolean, default: true },\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const elRef = ref(null);\n      const rippleTargetElRef = ref(null);\n\n      useTouchRipple(rippleTargetElRef, props, { eventsElRef: elRef, context });\n\n      const colors = computed(() =>\n        ToggleColors(props.colors || {}, useDarkClasses)\n      );\n\n      const state = computed(() => (props.checked ? 'checked' : 'notChecked'));\n\n      const c = useThemeClasses(props, () =>\n        ToggleClasses(props, colors.value, ctx.attrs.class, useDarkClasses)\n      );\n\n      return {\n        elRef,\n        rippleTargetElRef,\n        c,\n        state,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Toggle.vue"
+    }
+  ],
+  "type": "registry:item"
+}

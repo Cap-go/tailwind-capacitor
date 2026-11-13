@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-icon",
+  "title": "Capacitor Icon (Vue)",
+  "description": "Capacitor Icon Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-badge.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Icon.vue",
+      "content": "<template>\n  <component :is=\"component\" :class=\"c.base\">\n    <slot v-if=\"theme === 'ios'\" name=\"ios\" />\n    <slot v-else name=\"material\" />\n    <slot />\n    <c-badge\n      v-if=\"(typeof badge !== 'undefined' && badge !== null) || slots.badge\"\n      small\n      :class=\"c.badge\"\n      :colors=\"badgeColors || {}\"\n      >{{ badge }}<slot name=\"badge\" />\n    </c-badge>\n  </component>\n</template>\n<script>\n  import { useContext } from '../shared/use-context.js';\n  import { useTheme } from '../shared/use-theme.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n  import cBadge from './Badge.vue';\n\n  import { IconClasses } from '../../shared/classes/IconClasses.js';\n\n  export default {\n    name: 'c-icon',\n    components: {\n      cBadge,\n    },\n    props: {\n      component: {\n        type: String,\n        default: 'i',\n      },\n      badge: [String, Number],\n      badgeColors: Object,\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useThemeClasses = themeClasses(context);\n      const theme = useTheme({}, context);\n\n      const c = useThemeClasses(props, () =>\n        IconClasses(props, ctx.attrs.class)\n      );\n      return {\n        theme,\n        c,\n        slots: ctx.slots,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Icon.vue"
+    }
+  ],
+  "type": "registry:item"
+}

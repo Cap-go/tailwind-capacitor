@@ -1,0 +1,2510 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "capgo-tailwind-capacitor-angular",
+  "homepage": "https://github.com/Cap-go/tailwind-capacitor/",
+  "items": [
+    {
+      "name": "capacitor-shared",
+      "type": "registry:item",
+      "title": "Tailwind Capacitor shared tokens",
+      "description": "Shared class and color maps for capacitor components.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json"
+      ],
+      "files": [
+        {
+          "path": "src/shared/calc-popover-position.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/calc-popover-position.js"
+        },
+        {
+          "path": "src/shared/classes/AccordionClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/AccordionClasses.js"
+        },
+        {
+          "path": "src/shared/classes/AccordionItemClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/AccordionItemClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ActionsButtonClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ActionsButtonClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ActionsClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ActionsClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ActionsGroupClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ActionsGroupClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ActionsLabelClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ActionsLabelClasses.js"
+        },
+        {
+          "path": "src/shared/classes/AlertClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/AlertClasses.js"
+        },
+        {
+          "path": "src/shared/classes/AppClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/AppClasses.js"
+        },
+        {
+          "path": "src/shared/classes/AvatarClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/AvatarClasses.js"
+        },
+        {
+          "path": "src/shared/classes/BadgeClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/BadgeClasses.js"
+        },
+        {
+          "path": "src/shared/classes/BlockClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/BlockClasses.js"
+        },
+        {
+          "path": "src/shared/classes/BlockFooterClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/BlockFooterClasses.js"
+        },
+        {
+          "path": "src/shared/classes/BlockHeaderClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/BlockHeaderClasses.js"
+        },
+        {
+          "path": "src/shared/classes/BlockTitleClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/BlockTitleClasses.js"
+        },
+        {
+          "path": "src/shared/classes/BreadcrumbsClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/BreadcrumbsClasses.js"
+        },
+        {
+          "path": "src/shared/classes/BreadcrumbsCollapsedClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/BreadcrumbsCollapsedClasses.js"
+        },
+        {
+          "path": "src/shared/classes/BreadcrumbsItemClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/BreadcrumbsItemClasses.js"
+        },
+        {
+          "path": "src/shared/classes/BreadcrumbsSeparatorClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/BreadcrumbsSeparatorClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ButtonClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ButtonClasses.js"
+        },
+        {
+          "path": "src/shared/classes/CardClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/CardClasses.js"
+        },
+        {
+          "path": "src/shared/classes/CheckboxClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/CheckboxClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ChipClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ChipClasses.js"
+        },
+        {
+          "path": "src/shared/classes/DatetimeClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/DatetimeClasses.js"
+        },
+        {
+          "path": "src/shared/classes/DialogButtonClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/DialogButtonClasses.js"
+        },
+        {
+          "path": "src/shared/classes/DialogClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/DialogClasses.js"
+        },
+        {
+          "path": "src/shared/classes/FabClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/FabClasses.js"
+        },
+        {
+          "path": "src/shared/classes/FooterClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/FooterClasses.js"
+        },
+        {
+          "path": "src/shared/classes/GlassClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/GlassClasses.js"
+        },
+        {
+          "path": "src/shared/classes/HeaderClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/HeaderClasses.js"
+        },
+        {
+          "path": "src/shared/classes/IconClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/IconClasses.js"
+        },
+        {
+          "path": "src/shared/classes/InfiniteScrollClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/InfiniteScrollClasses.js"
+        },
+        {
+          "path": "src/shared/classes/InputOtpClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/InputOtpClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ItemSlidingClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ItemSlidingClasses.js"
+        },
+        {
+          "path": "src/shared/classes/LinkClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/LinkClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ListButtonClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ListButtonClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ListClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ListClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ListInputClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ListInputClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ListItemClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ListItemClasses.js"
+        },
+        {
+          "path": "src/shared/classes/MessageClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/MessageClasses.js"
+        },
+        {
+          "path": "src/shared/classes/MessagebarClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/MessagebarClasses.js"
+        },
+        {
+          "path": "src/shared/classes/MessagesClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/MessagesClasses.js"
+        },
+        {
+          "path": "src/shared/classes/MessagesTitleClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/MessagesTitleClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ModalClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ModalClasses.js"
+        },
+        {
+          "path": "src/shared/classes/NavbarBackLinkClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/NavbarBackLinkClasses.js"
+        },
+        {
+          "path": "src/shared/classes/NavbarClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/NavbarClasses.js"
+        },
+        {
+          "path": "src/shared/classes/NoteClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/NoteClasses.js"
+        },
+        {
+          "path": "src/shared/classes/NotificationsClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/NotificationsClasses.js"
+        },
+        {
+          "path": "src/shared/classes/PageClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/PageClasses.js"
+        },
+        {
+          "path": "src/shared/classes/PanelClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/PanelClasses.js"
+        },
+        {
+          "path": "src/shared/classes/PickerClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/PickerClasses.js"
+        },
+        {
+          "path": "src/shared/classes/PopoverClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/PopoverClasses.js"
+        },
+        {
+          "path": "src/shared/classes/PopupClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/PopupClasses.js"
+        },
+        {
+          "path": "src/shared/classes/PreloaderClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/PreloaderClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ProgressbarClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ProgressbarClasses.js"
+        },
+        {
+          "path": "src/shared/classes/RadioClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/RadioClasses.js"
+        },
+        {
+          "path": "src/shared/classes/RangeClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/RangeClasses.js"
+        },
+        {
+          "path": "src/shared/classes/RefresherClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/RefresherClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ReorderClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ReorderClasses.js"
+        },
+        {
+          "path": "src/shared/classes/SearchbarClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/SearchbarClasses.js"
+        },
+        {
+          "path": "src/shared/classes/SegmentedClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/SegmentedClasses.js"
+        },
+        {
+          "path": "src/shared/classes/SelectClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/SelectClasses.js"
+        },
+        {
+          "path": "src/shared/classes/SheetClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/SheetClasses.js"
+        },
+        {
+          "path": "src/shared/classes/SkeletonClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/SkeletonClasses.js"
+        },
+        {
+          "path": "src/shared/classes/SplitPaneClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/SplitPaneClasses.js"
+        },
+        {
+          "path": "src/shared/classes/StepperClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/StepperClasses.js"
+        },
+        {
+          "path": "src/shared/classes/TabClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TabClasses.js"
+        },
+        {
+          "path": "src/shared/classes/TabbarLinkClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TabbarLinkClasses.js"
+        },
+        {
+          "path": "src/shared/classes/TableBodyClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TableBodyClasses.js"
+        },
+        {
+          "path": "src/shared/classes/TableCellClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TableCellClasses.js"
+        },
+        {
+          "path": "src/shared/classes/TableClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TableClasses.js"
+        },
+        {
+          "path": "src/shared/classes/TableHeadClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TableHeadClasses.js"
+        },
+        {
+          "path": "src/shared/classes/TableRowClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TableRowClasses.js"
+        },
+        {
+          "path": "src/shared/classes/TabsClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TabsClasses.js"
+        },
+        {
+          "path": "src/shared/classes/TextareaClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TextareaClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ThumbnailClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ThumbnailClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ToastClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ToastClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ToggleClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ToggleClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ToolbarClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ToolbarClasses.js"
+        },
+        {
+          "path": "src/shared/classes/TouchRippleClasses.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TouchRippleClasses.js"
+        },
+        {
+          "path": "src/shared/cls.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/cls.js"
+        },
+        {
+          "path": "src/shared/colors/AccordionColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/AccordionColors.js"
+        },
+        {
+          "path": "src/shared/colors/AccordionItemColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/AccordionItemColors.js"
+        },
+        {
+          "path": "src/shared/colors/ActionsButtonColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ActionsButtonColors.js"
+        },
+        {
+          "path": "src/shared/colors/ActionsColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ActionsColors.js"
+        },
+        {
+          "path": "src/shared/colors/ActionsGroupColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ActionsGroupColors.js"
+        },
+        {
+          "path": "src/shared/colors/ActionsLabelColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ActionsLabelColors.js"
+        },
+        {
+          "path": "src/shared/colors/AlertColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/AlertColors.js"
+        },
+        {
+          "path": "src/shared/colors/AppColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/AppColors.js"
+        },
+        {
+          "path": "src/shared/colors/AvatarColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/AvatarColors.js"
+        },
+        {
+          "path": "src/shared/colors/BadgeColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/BadgeColors.js"
+        },
+        {
+          "path": "src/shared/colors/BlockColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/BlockColors.js"
+        },
+        {
+          "path": "src/shared/colors/BlockFooterColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/BlockFooterColors.js"
+        },
+        {
+          "path": "src/shared/colors/BlockHeaderColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/BlockHeaderColors.js"
+        },
+        {
+          "path": "src/shared/colors/BlockTitleColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/BlockTitleColors.js"
+        },
+        {
+          "path": "src/shared/colors/BreadcrumbsCollapsedColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/BreadcrumbsCollapsedColors.js"
+        },
+        {
+          "path": "src/shared/colors/BreadcrumbsColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/BreadcrumbsColors.js"
+        },
+        {
+          "path": "src/shared/colors/BreadcrumbsItemColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/BreadcrumbsItemColors.js"
+        },
+        {
+          "path": "src/shared/colors/BreadcrumbsSeparatorColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/BreadcrumbsSeparatorColors.js"
+        },
+        {
+          "path": "src/shared/colors/ButtonColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ButtonColors.js"
+        },
+        {
+          "path": "src/shared/colors/CardColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/CardColors.js"
+        },
+        {
+          "path": "src/shared/colors/CheckboxColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/CheckboxColors.js"
+        },
+        {
+          "path": "src/shared/colors/ChipColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ChipColors.js"
+        },
+        {
+          "path": "src/shared/colors/DatetimeColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/DatetimeColors.js"
+        },
+        {
+          "path": "src/shared/colors/DialogButtonColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/DialogButtonColors.js"
+        },
+        {
+          "path": "src/shared/colors/DialogColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/DialogColors.js"
+        },
+        {
+          "path": "src/shared/colors/FabColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/FabColors.js"
+        },
+        {
+          "path": "src/shared/colors/FooterColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/FooterColors.js"
+        },
+        {
+          "path": "src/shared/colors/GlassColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/GlassColors.js"
+        },
+        {
+          "path": "src/shared/colors/HeaderColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/HeaderColors.js"
+        },
+        {
+          "path": "src/shared/colors/IconColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/IconColors.js"
+        },
+        {
+          "path": "src/shared/colors/InfiniteScrollColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/InfiniteScrollColors.js"
+        },
+        {
+          "path": "src/shared/colors/InputOtpColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/InputOtpColors.js"
+        },
+        {
+          "path": "src/shared/colors/ItemSlidingColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ItemSlidingColors.js"
+        },
+        {
+          "path": "src/shared/colors/LinkColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/LinkColors.js"
+        },
+        {
+          "path": "src/shared/colors/ListButtonColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ListButtonColors.js"
+        },
+        {
+          "path": "src/shared/colors/ListColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ListColors.js"
+        },
+        {
+          "path": "src/shared/colors/ListGroupColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ListGroupColors.js"
+        },
+        {
+          "path": "src/shared/colors/ListInputColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ListInputColors.js"
+        },
+        {
+          "path": "src/shared/colors/ListItemColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ListItemColors.js"
+        },
+        {
+          "path": "src/shared/colors/MenuListColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/MenuListColors.js"
+        },
+        {
+          "path": "src/shared/colors/MenuListItemColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/MenuListItemColors.js"
+        },
+        {
+          "path": "src/shared/colors/MessageColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/MessageColors.js"
+        },
+        {
+          "path": "src/shared/colors/MessagebarColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/MessagebarColors.js"
+        },
+        {
+          "path": "src/shared/colors/MessagesTitleColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/MessagesTitleColors.js"
+        },
+        {
+          "path": "src/shared/colors/ModalColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ModalColors.js"
+        },
+        {
+          "path": "src/shared/colors/NavbarBackLinkColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/NavbarBackLinkColors.js"
+        },
+        {
+          "path": "src/shared/colors/NavbarColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/NavbarColors.js"
+        },
+        {
+          "path": "src/shared/colors/NoteColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/NoteColors.js"
+        },
+        {
+          "path": "src/shared/colors/NotificationsColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/NotificationsColors.js"
+        },
+        {
+          "path": "src/shared/colors/PageColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/PageColors.js"
+        },
+        {
+          "path": "src/shared/colors/PanelColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/PanelColors.js"
+        },
+        {
+          "path": "src/shared/colors/PickerColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/PickerColors.js"
+        },
+        {
+          "path": "src/shared/colors/PopoverColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/PopoverColors.js"
+        },
+        {
+          "path": "src/shared/colors/PopupColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/PopupColors.js"
+        },
+        {
+          "path": "src/shared/colors/PreloaderColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/PreloaderColors.js"
+        },
+        {
+          "path": "src/shared/colors/ProgressbarColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ProgressbarColors.js"
+        },
+        {
+          "path": "src/shared/colors/RadioColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/RadioColors.js"
+        },
+        {
+          "path": "src/shared/colors/RangeColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/RangeColors.js"
+        },
+        {
+          "path": "src/shared/colors/RefresherColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/RefresherColors.js"
+        },
+        {
+          "path": "src/shared/colors/ReorderColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ReorderColors.js"
+        },
+        {
+          "path": "src/shared/colors/SearchbarColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/SearchbarColors.js"
+        },
+        {
+          "path": "src/shared/colors/SegmentedButtonColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/SegmentedButtonColors.js"
+        },
+        {
+          "path": "src/shared/colors/SegmentedColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/SegmentedColors.js"
+        },
+        {
+          "path": "src/shared/colors/SelectColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/SelectColors.js"
+        },
+        {
+          "path": "src/shared/colors/SheetColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/SheetColors.js"
+        },
+        {
+          "path": "src/shared/colors/SkeletonColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/SkeletonColors.js"
+        },
+        {
+          "path": "src/shared/colors/SplitPaneColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/SplitPaneColors.js"
+        },
+        {
+          "path": "src/shared/colors/StepperColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/StepperColors.js"
+        },
+        {
+          "path": "src/shared/colors/TabColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TabColors.js"
+        },
+        {
+          "path": "src/shared/colors/TabbarColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TabbarColors.js"
+        },
+        {
+          "path": "src/shared/colors/TabbarLinkColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TabbarLinkColors.js"
+        },
+        {
+          "path": "src/shared/colors/TableCellColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TableCellColors.js"
+        },
+        {
+          "path": "src/shared/colors/TableRowColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TableRowColors.js"
+        },
+        {
+          "path": "src/shared/colors/TabsColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TabsColors.js"
+        },
+        {
+          "path": "src/shared/colors/TextareaColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TextareaColors.js"
+        },
+        {
+          "path": "src/shared/colors/ThumbnailColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ThumbnailColors.js"
+        },
+        {
+          "path": "src/shared/colors/ToastColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ToastColors.js"
+        },
+        {
+          "path": "src/shared/colors/ToggleColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ToggleColors.js"
+        },
+        {
+          "path": "src/shared/colors/ToolbarColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ToolbarColors.js"
+        },
+        {
+          "path": "src/shared/colors/TouchRippleColors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TouchRippleColors.js"
+        },
+        {
+          "path": "src/shared/filter-colors.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/filter-colors.js"
+        },
+        {
+          "path": "src/shared/position-class.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/position-class.js"
+        },
+        {
+          "path": "src/shared/touch-ripple-class.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/touch-ripple-class.js"
+        },
+        {
+          "path": "src/shared/use-ios-highlight.js",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/use-ios-highlight.js"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-provider",
+      "type": "registry:item",
+      "title": "Tailwind Capacitor provider (Angular)",
+      "description": "Root provider and Angular context for theme.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/shared/tailwind-capacitor-provider.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/shared/tailwind-capacitor-provider.component.ts"
+        },
+        {
+          "path": "src/angular/shared/capacitor-context.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/shared/capacitor-context.ts"
+        },
+        {
+          "path": "src/angular/shared/use-theme-classes.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/shared/use-theme-classes.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-accordion",
+      "type": "registry:item",
+      "title": "Capacitor Accordion (Angular)",
+      "description": "Capacitor Accordion Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Accordion.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Accordion.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-accordion-item",
+      "type": "registry:item",
+      "title": "Capacitor AccordionItem (Angular)",
+      "description": "Capacitor AccordionItem Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/AccordionItem.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/AccordionItem.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-actions",
+      "type": "registry:item",
+      "title": "Capacitor Actions (Angular)",
+      "description": "Capacitor Actions Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Actions.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Actions.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-actions-button",
+      "type": "registry:item",
+      "title": "Capacitor ActionsButton (Angular)",
+      "description": "Capacitor ActionsButton Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/ActionsButton.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/ActionsButton.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-actions-group",
+      "type": "registry:item",
+      "title": "Capacitor ActionsGroup (Angular)",
+      "description": "Capacitor ActionsGroup Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/ActionsGroup.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/ActionsGroup.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-actions-label",
+      "type": "registry:item",
+      "title": "Capacitor ActionsLabel (Angular)",
+      "description": "Capacitor ActionsLabel Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/ActionsLabel.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/ActionsLabel.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-alert",
+      "type": "registry:item",
+      "title": "Capacitor Alert (Angular)",
+      "description": "Capacitor Alert Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Alert.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Alert.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-app",
+      "type": "registry:item",
+      "title": "Capacitor App (Angular)",
+      "description": "Capacitor App Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/App.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/App.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-avatar",
+      "type": "registry:item",
+      "title": "Capacitor Avatar (Angular)",
+      "description": "Capacitor Avatar Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Avatar.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Avatar.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-badge",
+      "type": "registry:item",
+      "title": "Capacitor Badge (Angular)",
+      "description": "Capacitor Badge Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Badge.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Badge.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-block",
+      "type": "registry:item",
+      "title": "Capacitor Block (Angular)",
+      "description": "Capacitor Block Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Block.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Block.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-block-footer",
+      "type": "registry:item",
+      "title": "Capacitor BlockFooter (Angular)",
+      "description": "Capacitor BlockFooter Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/BlockFooter.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/BlockFooter.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-block-header",
+      "type": "registry:item",
+      "title": "Capacitor BlockHeader (Angular)",
+      "description": "Capacitor BlockHeader Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/BlockHeader.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/BlockHeader.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-block-title",
+      "type": "registry:item",
+      "title": "Capacitor BlockTitle (Angular)",
+      "description": "Capacitor BlockTitle Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/BlockTitle.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/BlockTitle.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-breadcrumbs",
+      "type": "registry:item",
+      "title": "Capacitor Breadcrumbs (Angular)",
+      "description": "Capacitor Breadcrumbs Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Breadcrumbs.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Breadcrumbs.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-breadcrumbs-collapsed",
+      "type": "registry:item",
+      "title": "Capacitor BreadcrumbsCollapsed (Angular)",
+      "description": "Capacitor BreadcrumbsCollapsed Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/BreadcrumbsCollapsed.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/BreadcrumbsCollapsed.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-breadcrumbs-item",
+      "type": "registry:item",
+      "title": "Capacitor BreadcrumbsItem (Angular)",
+      "description": "Capacitor BreadcrumbsItem Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/BreadcrumbsItem.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/BreadcrumbsItem.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-breadcrumbs-separator",
+      "type": "registry:item",
+      "title": "Capacitor BreadcrumbsSeparator (Angular)",
+      "description": "Capacitor BreadcrumbsSeparator Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/BreadcrumbsSeparator.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/BreadcrumbsSeparator.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-button",
+      "type": "registry:item",
+      "title": "Capacitor Button (Angular)",
+      "description": "Capacitor Button Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Button.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Button.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-card",
+      "type": "registry:item",
+      "title": "Capacitor Card (Angular)",
+      "description": "Capacitor Card Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Card.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Card.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-checkbox",
+      "type": "registry:item",
+      "title": "Capacitor Checkbox (Angular)",
+      "description": "Capacitor Checkbox Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Checkbox.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Checkbox.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-chip",
+      "type": "registry:item",
+      "title": "Capacitor Chip (Angular)",
+      "description": "Capacitor Chip Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Chip.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Chip.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-datetime",
+      "type": "registry:item",
+      "title": "Capacitor Datetime (Angular)",
+      "description": "Capacitor Datetime Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Datetime.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Datetime.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-dialog",
+      "type": "registry:item",
+      "title": "Capacitor Dialog (Angular)",
+      "description": "Capacitor Dialog Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Dialog.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Dialog.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-dialog-button",
+      "type": "registry:item",
+      "title": "Capacitor DialogButton (Angular)",
+      "description": "Capacitor DialogButton Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/DialogButton.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/DialogButton.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-fab",
+      "type": "registry:item",
+      "title": "Capacitor Fab (Angular)",
+      "description": "Capacitor Fab Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Fab.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Fab.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-footer",
+      "type": "registry:item",
+      "title": "Capacitor Footer (Angular)",
+      "description": "Capacitor Footer Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Footer.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Footer.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-header",
+      "type": "registry:item",
+      "title": "Capacitor Header (Angular)",
+      "description": "Capacitor Header Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Header.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Header.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-icon",
+      "type": "registry:item",
+      "title": "Capacitor Icon (Angular)",
+      "description": "Capacitor Icon Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Icon.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Icon.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-infinite-scroll",
+      "type": "registry:item",
+      "title": "Capacitor InfiniteScroll (Angular)",
+      "description": "Capacitor InfiniteScroll Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/InfiniteScroll.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/InfiniteScroll.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-input-otp",
+      "type": "registry:item",
+      "title": "Capacitor InputOtp (Angular)",
+      "description": "Capacitor InputOtp Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/InputOtp.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/InputOtp.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-item-sliding",
+      "type": "registry:item",
+      "title": "Capacitor ItemSliding (Angular)",
+      "description": "Capacitor ItemSliding Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/ItemSliding.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/ItemSliding.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-link",
+      "type": "registry:item",
+      "title": "Capacitor Link (Angular)",
+      "description": "Capacitor Link Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Link.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Link.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-list",
+      "type": "registry:item",
+      "title": "Capacitor List (Angular)",
+      "description": "Capacitor List Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/List.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/List.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-list-button",
+      "type": "registry:item",
+      "title": "Capacitor ListButton (Angular)",
+      "description": "Capacitor ListButton Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/ListButton.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/ListButton.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-list-input",
+      "type": "registry:item",
+      "title": "Capacitor ListInput (Angular)",
+      "description": "Capacitor ListInput Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/ListInput.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/ListInput.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-list-item",
+      "type": "registry:item",
+      "title": "Capacitor ListItem (Angular)",
+      "description": "Capacitor ListItem Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/ListItem.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/ListItem.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-message",
+      "type": "registry:item",
+      "title": "Capacitor Message (Angular)",
+      "description": "Capacitor Message Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Message.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Message.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-messagebar",
+      "type": "registry:item",
+      "title": "Capacitor Messagebar (Angular)",
+      "description": "Capacitor Messagebar Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Messagebar.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Messagebar.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-messages",
+      "type": "registry:item",
+      "title": "Capacitor Messages (Angular)",
+      "description": "Capacitor Messages Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Messages.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Messages.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-messages-title",
+      "type": "registry:item",
+      "title": "Capacitor MessagesTitle (Angular)",
+      "description": "Capacitor MessagesTitle Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/MessagesTitle.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/MessagesTitle.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-modal",
+      "type": "registry:item",
+      "title": "Capacitor Modal (Angular)",
+      "description": "Capacitor Modal Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Modal.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Modal.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-navbar",
+      "type": "registry:item",
+      "title": "Capacitor Navbar (Angular)",
+      "description": "Capacitor Navbar Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Navbar.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Navbar.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-navbar-back-link",
+      "type": "registry:item",
+      "title": "Capacitor NavbarBackLink (Angular)",
+      "description": "Capacitor NavbarBackLink Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/NavbarBackLink.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/NavbarBackLink.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-note",
+      "type": "registry:item",
+      "title": "Capacitor Note (Angular)",
+      "description": "Capacitor Note Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Note.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Note.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-notification",
+      "type": "registry:item",
+      "title": "Capacitor Notification (Angular)",
+      "description": "Capacitor Notification Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Notification.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Notification.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-page",
+      "type": "registry:item",
+      "title": "Capacitor Page (Angular)",
+      "description": "Capacitor Page Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Page.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Page.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-panel",
+      "type": "registry:item",
+      "title": "Capacitor Panel (Angular)",
+      "description": "Capacitor Panel Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Panel.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Panel.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-picker",
+      "type": "registry:item",
+      "title": "Capacitor Picker (Angular)",
+      "description": "Capacitor Picker Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Picker.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Picker.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-popover",
+      "type": "registry:item",
+      "title": "Capacitor Popover (Angular)",
+      "description": "Capacitor Popover Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Popover.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Popover.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-popup",
+      "type": "registry:item",
+      "title": "Capacitor Popup (Angular)",
+      "description": "Capacitor Popup Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Popup.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Popup.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-preloader",
+      "type": "registry:item",
+      "title": "Capacitor Preloader (Angular)",
+      "description": "Capacitor Preloader Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Preloader.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Preloader.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-progressbar",
+      "type": "registry:item",
+      "title": "Capacitor Progressbar (Angular)",
+      "description": "Capacitor Progressbar Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Progressbar.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Progressbar.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-radio",
+      "type": "registry:item",
+      "title": "Capacitor Radio (Angular)",
+      "description": "Capacitor Radio Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Radio.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Radio.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-range",
+      "type": "registry:item",
+      "title": "Capacitor Range (Angular)",
+      "description": "Capacitor Range Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Range.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Range.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-refresher",
+      "type": "registry:item",
+      "title": "Capacitor Refresher (Angular)",
+      "description": "Capacitor Refresher Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Refresher.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Refresher.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-reorder",
+      "type": "registry:item",
+      "title": "Capacitor Reorder (Angular)",
+      "description": "Capacitor Reorder Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Reorder.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Reorder.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-searchbar",
+      "type": "registry:item",
+      "title": "Capacitor Searchbar (Angular)",
+      "description": "Capacitor Searchbar Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Searchbar.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Searchbar.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-segmented",
+      "type": "registry:item",
+      "title": "Capacitor Segmented (Angular)",
+      "description": "Capacitor Segmented Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Segmented.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Segmented.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-select",
+      "type": "registry:item",
+      "title": "Capacitor Select (Angular)",
+      "description": "Capacitor Select Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Select.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Select.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-sheet",
+      "type": "registry:item",
+      "title": "Capacitor Sheet (Angular)",
+      "description": "Capacitor Sheet Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Sheet.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Sheet.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-skeleton",
+      "type": "registry:item",
+      "title": "Capacitor Skeleton (Angular)",
+      "description": "Capacitor Skeleton Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Skeleton.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Skeleton.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-split-pane",
+      "type": "registry:item",
+      "title": "Capacitor SplitPane (Angular)",
+      "description": "Capacitor SplitPane Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/SplitPane.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/SplitPane.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-stepper",
+      "type": "registry:item",
+      "title": "Capacitor Stepper (Angular)",
+      "description": "Capacitor Stepper Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Stepper.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Stepper.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-tab",
+      "type": "registry:item",
+      "title": "Capacitor Tab (Angular)",
+      "description": "Capacitor Tab Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Tab.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Tab.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-tabbar-link",
+      "type": "registry:item",
+      "title": "Capacitor TabbarLink (Angular)",
+      "description": "Capacitor TabbarLink Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/TabbarLink.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/TabbarLink.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-table",
+      "type": "registry:item",
+      "title": "Capacitor Table (Angular)",
+      "description": "Capacitor Table Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Table.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Table.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-table-body",
+      "type": "registry:item",
+      "title": "Capacitor TableBody (Angular)",
+      "description": "Capacitor TableBody Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/TableBody.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/TableBody.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-table-cell",
+      "type": "registry:item",
+      "title": "Capacitor TableCell (Angular)",
+      "description": "Capacitor TableCell Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/TableCell.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/TableCell.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-table-head",
+      "type": "registry:item",
+      "title": "Capacitor TableHead (Angular)",
+      "description": "Capacitor TableHead Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/TableHead.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/TableHead.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-table-row",
+      "type": "registry:item",
+      "title": "Capacitor TableRow (Angular)",
+      "description": "Capacitor TableRow Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/TableRow.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/TableRow.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-tabs",
+      "type": "registry:item",
+      "title": "Capacitor Tabs (Angular)",
+      "description": "Capacitor Tabs Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Tabs.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Tabs.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-textarea",
+      "type": "registry:item",
+      "title": "Capacitor Textarea (Angular)",
+      "description": "Capacitor Textarea Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Textarea.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Textarea.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-thumbnail",
+      "type": "registry:item",
+      "title": "Capacitor Thumbnail (Angular)",
+      "description": "Capacitor Thumbnail Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Thumbnail.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Thumbnail.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-toast",
+      "type": "registry:item",
+      "title": "Capacitor Toast (Angular)",
+      "description": "Capacitor Toast Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Toast.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Toast.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-toggle",
+      "type": "registry:item",
+      "title": "Capacitor Toggle (Angular)",
+      "description": "Capacitor Toggle Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Toggle.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Toggle.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-toolbar",
+      "type": "registry:item",
+      "title": "Capacitor Toolbar (Angular)",
+      "description": "Capacitor Toolbar Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/Toolbar.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/Toolbar.component.ts"
+        }
+      ]
+    },
+    {
+      "name": "capacitor-touch-ripple",
+      "type": "registry:item",
+      "title": "Capacitor TouchRipple (Angular)",
+      "description": "Capacitor TouchRipple Angular component.",
+      "registryDependencies": [
+        "../capacitor-tailwind.json",
+        "../capacitor-provider.json",
+        "../capacitor-shared.json"
+      ],
+      "dependencies": [
+        "@angular/core"
+      ],
+      "files": [
+        {
+          "path": "src/angular/components/TouchRipple.component.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/angular/components/TouchRipple.component.ts"
+        }
+      ]
+    }
+  ]
+}

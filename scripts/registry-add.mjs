@@ -4,7 +4,7 @@ import {
   writeFileSync,
   existsSync,
 } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, isAbsolute, join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { repoRoot } from './repo-root.mjs';
 
@@ -25,11 +25,17 @@ function loadItem(path) {
 }
 
 function resolveDep(dep, baseDir) {
+  if (isAbsolute(dep)) {
+    return dep;
+  }
   if (dep.startsWith('http://') || dep.startsWith('https://')) {
     const name = dep.split('/').pop() || dep;
     return join(registryRoot, name);
   }
-  if (dep.startsWith('./')) {
+  if (dep.startsWith('./') || dep.startsWith('../')) {
+    return resolve(baseDir, dep);
+  }
+  if (dep.endsWith('.json')) {
     return join(baseDir, dep);
   }
   return join(baseDir, `${dep}.json`);

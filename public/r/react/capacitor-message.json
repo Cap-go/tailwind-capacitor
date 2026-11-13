@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-message",
+  "title": "Capacitor Message (React)",
+  "description": "Capacitor Message React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/Message.tsx",
+      "content": "/* @ts-nocheck */\n/* eslint-disable jsx-a11y/alt-text */\nimport React, { useRef } from 'react';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { cls } from '../../shared/cls.js';\n// import { useTheme } from '../shared/use-theme.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\nimport { MessageClasses } from '../../shared/classes/MessageClasses.js';\nimport { MessageColors } from '../../shared/colors/MessageColors.js';\n\nconst Message = (props) => {\n  const {\n    component = 'div',\n    className,\n    colors: colorsProp,\n    ref,\n    id,\n    text,\n    name,\n    type = 'sent',\n    header,\n    footer,\n    textHeader,\n    textFooter,\n    avatar,\n\n    ios,\n    material,\n\n    children,\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const themeClasses = useThemeClasses({ ios, material });\n  const dark = useDarkClasses();\n  const colors = MessageColors(colorsProp, dark);\n\n  const c = themeClasses(MessageClasses({ ...props }, colors, className));\n  const Component = component;\n\n  const attrs = {\n    ...rest,\n  };\n\n  const classes = cls(c.message, {\n    [c.messageSent]: type === 'sent',\n    [c.messageReceived]: type === 'received',\n  });\n\n  return (\n    <Component\n      id={id}\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      className={classes}\n      {...attrs}\n    >\n      {avatar && <div className={c.messageAvatar}>{avatar}</div>}\n      <div className={c.messageContent}>\n        {name && <div className={c.messageName}>{name}</div>}\n        {header && <div className={c.messageHeader}>{header}</div>}\n        <div className={c.messageBubble}>\n          {textHeader && (\n            <div className={c.messageTextHeader}>{textHeader}</div>\n          )}\n          {text && <div className={c.messageText}>{text}</div>}\n          {textFooter && (\n            <div className={c.messageTextFooter}>{textFooter}</div>\n          )}\n        </div>\n        {footer && <div className={c.messageFooter}>{footer}</div>}\n      </div>\n    </Component>\n  );\n};\n\nMessage.displayName = 'Message';\nexport default Message;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/Message.tsx"
+    }
+  ],
+  "type": "registry:item"
+}

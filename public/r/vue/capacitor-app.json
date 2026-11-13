@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-app",
+  "title": "Capacitor App (Vue)",
+  "description": "Capacitor App Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/App.vue",
+      "content": "<template>\n  <component :is=\"component\" :class=\"classes\">\n    <tailwind-capacitor-provider\n      :theme=\"currentTheme\"\n      :dark=\"dark\"\n      :touch-ripple=\"touchRipple\"\n      :auto-theme-detection=\"false\"\n    >\n      <slot />\n    </tailwind-capacitor-provider>\n  </component>\n</template>\n<script>\n  import { computed } from 'vue';\n\n  import TailwindCapacitorProvider from '../shared/TailwindCapacitorProvider.vue';\n  import { useAutoTheme } from '../shared/use-auto-theme.js';\n\n  import { AppClasses } from '../../shared/classes/AppClasses.js';\n\n  export default {\n    name: 'c-app',\n    components: {\n      TailwindCapacitorProvider,\n    },\n    props: {\n      component: {\n        type: String,\n        default: 'div',\n      },\n      theme: {\n        type: String,\n        default: 'material',\n      },\n      dark: {\n        type: Boolean,\n        default: true,\n      },\n      touchRipple: {\n        type: Boolean,\n        default: true,\n      },\n      safeAreas: {\n        type: Boolean,\n        default: true,\n      },\n    },\n    setup(props, ctx) {\n      const currentTheme = useAutoTheme(props);\n      const classes = computed(() =>\n        AppClasses(props, currentTheme.value, ctx.attrs.class)\n      );\n\n      return {\n        currentTheme,\n        classes,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/App.vue"
+    }
+  ],
+  "type": "registry:item"
+}

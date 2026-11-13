@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-fab",
+  "title": "Capacitor Fab (Vue)",
+  "description": "Capacitor Fab Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Fab.vue",
+      "content": "<template>\n  <component\n    :is=\"Component\"\n    ref=\"rippleElRef\"\n    :class=\"text || slots.text ? c.base.withText : c.base.iconOnly\"\n    role=\"button\"\n    tabindex=\"0\"\n    :href=\"resolvedHref\"\n  >\n    <span\n      v-if=\"(text || slots.text) && textPosition === 'before'\"\n      :class=\"c.text\"\n      >{{ text }}<slot name=\"text\"\n    /></span>\n    <span v-if=\"slots.icon\" :class=\"c.icon\"><slot name=\"icon\" /></span>\n    <span\n      v-if=\"(text || slots.text) && textPosition === 'after'\"\n      :class=\"c.text\"\n      >{{ text }}<slot name=\"text\"\n    /></span>\n    <slot />\n  </component>\n</template>\n<script>\n  import { computed, ref } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { FabClasses } from '../../shared/classes/FabClasses.js';\n\n  import { FabColors } from '../../shared/colors/FabColors.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  import { useTouchRipple } from '../shared/use-touch-ripple.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  export default {\n    name: 'c-fab',\n    props: {\n      component: {\n        type: String,\n        default: 'button',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      href: { type: [String, Boolean], default: undefined },\n      text: { type: String, default: undefined },\n      textPosition: { type: String, default: 'after' },\n      touchRipple: { type: Boolean, default: true },\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const rippleElRef = ref(null);\n      useTouchRipple(rippleElRef, props, { context });\n\n      const Component = computed(() => {\n        if (props.href || props.href === '') return 'a';\n        return props.component;\n      });\n      const resolvedHref = computed(() => {\n        if (props.href || props.href === '') {\n          return typeof props.href === 'string' ? props.href : '';\n        }\n        return undefined;\n      });\n\n      const colors = computed(() =>\n        FabColors(props.colors || {}, useDarkClasses)\n      );\n\n      const c = useThemeClasses(props, () => FabClasses(props, colors.value));\n      return {\n        rippleElRef,\n        slots: ctx.slots,\n        c,\n        Component,\n        resolvedHref,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Fab.vue"
+    }
+  ],
+  "type": "registry:item"
+}

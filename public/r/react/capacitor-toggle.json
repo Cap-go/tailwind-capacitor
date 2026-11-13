@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-toggle",
+  "title": "Capacitor Toggle (React)",
+  "description": "Capacitor Toggle React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/Toggle.tsx",
+      "content": "/* @ts-nocheck */\nimport React, { useRef } from 'react';\nimport { ToggleClasses } from '../../shared/classes/ToggleClasses.js';\nimport { ToggleColors } from '../../shared/colors/ToggleColors.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { useTheme } from '../shared/use-theme.js';\nimport { useTouchRipple } from '../shared/use-touch-ripple.js';\n\nconst Toggle = (props) => {\n  const {\n    component = 'label',\n    className,\n    colors: colorsProp,\n    defaultChecked,\n    checked,\n    name,\n    value,\n    disabled,\n    readOnly,\n    onChange,\n\n    ios,\n    material,\n\n    // Children\n    children,\n\n    ref,\n\n    // Rest\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n  const rippleTargetElRef = useRef(null);\n\n  const Component = component;\n\n  const attrs = {\n    ...rest,\n  };\n\n  const theme = useTheme({ ios, material });\n  const themeClasses = useThemeClasses({ ios, material });\n  const dark = useDarkClasses();\n\n  useTouchRipple(rippleTargetElRef, theme === 'material', elRef);\n\n  const colors = ToggleColors(colorsProp, dark);\n\n  const state =\n    checked || (defaultChecked && !onChange) ? 'checked' : 'notChecked';\n\n  const c = themeClasses(ToggleClasses(props, colors, dark), className);\n\n  return (\n    <Component\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      className={c.base[state]}\n      {...attrs}\n    >\n      <input\n        type=\"checkbox\"\n        name={name}\n        value={value}\n        disabled={disabled}\n        readOnly={readOnly}\n        checked={checked}\n        defaultChecked={defaultChecked}\n        onChange={onChange}\n        className={c.input}\n      />\n      {theme === 'ios' ? (\n        <>\n          <span className={c.thumbSide[state]} />\n          <span className={c.thumbBg[state]} />\n          <span className={c.thumbShadow[state]} />\n          <span ref={rippleTargetElRef} className={c.thumbWrap[state]}>\n            <span className={c.thumb[state]} />\n          </span>\n        </>\n      ) : (\n        <span ref={rippleTargetElRef} className={c.thumbWrap[state]}>\n          <span className={c.thumb[state]} />\n        </span>\n      )}\n\n      {children}\n    </Component>\n  );\n};\n\nToggle.displayName = 'Toggle';\n\nexport default Toggle;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/Toggle.tsx"
+    }
+  ],
+  "type": "registry:item"
+}

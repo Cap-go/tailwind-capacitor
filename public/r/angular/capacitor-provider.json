@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-provider",
+  "title": "Tailwind Capacitor provider (Angular)",
+  "description": "Root provider and Angular context for theme.",
+  "dependencies": [
+    "@angular/core"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json"
+  ],
+  "files": [
+    {
+      "path": "src/angular/shared/tailwind-capacitor-provider.component.ts",
+      "content": "import { Component, Input } from '@angular/core';\nimport { CAPACITOR_CONTEXT } from './capacitor-context.js';\n\n@Component({\n  selector: 'tailwind-capacitor-provider',\n  standalone: true,\n  template: '<ng-content />',\n  providers: [\n    {\n      provide: CAPACITOR_CONTEXT,\n      useFactory: (parent: TailwindCapacitorProviderComponent) => ({\n        theme: parent.theme,\n        dark: parent.dark,\n        touchRipple: parent.touchRipple,\n      }),\n      deps: [TailwindCapacitorProviderComponent],\n    },\n  ],\n})\nexport class TailwindCapacitorProviderComponent {\n  @Input() theme: 'ios' | 'material' = 'material';\n  @Input() dark = true;\n  @Input() touchRipple = true;\n}\n",
+      "type": "registry:file",
+      "target": "src/capacitor/angular/shared/tailwind-capacitor-provider.component.ts"
+    },
+    {
+      "path": "src/angular/shared/capacitor-context.ts",
+      "content": "import { InjectionToken, signal } from '@angular/core';\n\nexport type CapacitorContextValue = {\n  theme: 'ios' | 'material';\n  dark: boolean;\n  touchRipple: boolean;\n};\n\nexport const CAPACITOR_CONTEXT = new InjectionToken<CapacitorContextValue>(\n  'CapacitorContext',\n  {\n    factory: () => ({\n      theme: 'material',\n      dark: true,\n      touchRipple: true,\n    }),\n  },\n);\n\nexport function readCapacitorContext() {\n  const injected = signal<CapacitorContextValue | null>(null);\n  return injected;\n}\n",
+      "type": "registry:file",
+      "target": "src/capacitor/angular/shared/capacitor-context.ts"
+    },
+    {
+      "path": "src/angular/shared/use-theme-classes.ts",
+      "content": "import { cls } from '../../shared/cls.js';\n\nconst propClasses = (\n  classesObj: Record<string, unknown>,\n  theme: string,\n  state?: string,\n) => {\n  if (typeof classesObj === 'string') return classesObj;\n  const arr = [\n    (classesObj as { common?: string }).common,\n    (classesObj as Record<string, string>)[theme],\n  ];\n  if (state && (classesObj as Record<string, unknown>)[state]) {\n    const stateObj = (classesObj as Record<string, unknown>)[state];\n    if (typeof stateObj === 'string') arr.push(stateObj);\n    else if (stateObj && typeof stateObj === 'object') {\n      const so = stateObj as Record<string, string>;\n      arr.push(so.common, so[theme]);\n    }\n  }\n  return arr;\n};\n\nexport const themeClasses = (\n  classesObj: Record<string, unknown>,\n  theme: string,\n  addBaseClassName = '',\n) => {\n  const c: Record<string, unknown> = {};\n  const themeSubKeys = ['common', 'ios', 'material'];\n  Object.keys(classesObj).forEach((key) => {\n    const addBaseClass = key === 'base' ? addBaseClassName : '';\n    const segment = classesObj[key];\n    if (typeof segment === 'string') {\n      c[key] = segment;\n      return;\n    }\n    const hasStates =\n      typeof segment !== 'string' &&\n      Object.keys(segment as Record<string, unknown>).filter(\n        (state) => !themeSubKeys.includes(state),\n      ).length > 0;\n    if (!hasStates) {\n      c[key] = cls(propClasses(segment as Record<string, unknown>, theme), addBaseClass);\n      return;\n    }\n    c[key] = {};\n    const defaultStateClasses = propClasses(segment as Record<string, unknown>, theme);\n    (c[key] as Record<string, string>).default = cls(defaultStateClasses, addBaseClass);\n    Object.keys(segment as Record<string, unknown>)\n      .filter((state) => !themeSubKeys.includes(state))\n      .forEach((state) => {\n        (c[key] as Record<string, string>)[state] = cls(\n          defaultStateClasses,\n          propClasses(segment as Record<string, unknown>, theme, state),\n          addBaseClass,\n        );\n      });\n  });\n  return c;\n};\n\nexport function resolveTheme(\n  ctx: { theme?: string },\n  props: { ios?: boolean; material?: boolean },\n) {\n  let theme = ctx.theme || 'ios';\n  if (props.ios) theme = 'ios';\n  if (props.material) theme = 'material';\n  return theme;\n}\n",
+      "type": "registry:file",
+      "target": "src/capacitor/angular/shared/use-theme-classes.ts"
+    }
+  ],
+  "type": "registry:item"
+}

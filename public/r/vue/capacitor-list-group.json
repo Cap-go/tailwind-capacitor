@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-list-group",
+  "title": "Capacitor ListGroup (Vue)",
+  "description": "Capacitor ListGroup Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-list.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/ListGroup.vue",
+      "content": "<template>\n  <li>\n    <c-list nested v-bind=\"props\">\n      <slot />\n    </c-list>\n  </li>\n</template>\n<script>\n  import cList from './List.vue';\n\n  export default {\n    name: 'c-list-group',\n    components: {\n      cList,\n    },\n    props: {\n      margin: { type: String, default: 'my-8' },\n      dividers: { type: Boolean, default: undefined },\n      dividersIos: { type: Boolean, default: true },\n      dividersMaterial: { type: Boolean, default: false },\n      inset: { type: Boolean, default: undefined },\n      insetIos: { type: Boolean, default: false },\n      insetMaterial: { type: Boolean, default: false },\n      strong: { type: Boolean, default: undefined },\n      strongIos: { type: Boolean, default: false },\n      strongMaterial: { type: Boolean, default: false },\n      outline: { type: Boolean, default: undefined },\n      outlineIos: { type: Boolean, default: false },\n      outlineMaterial: { type: Boolean, default: false },\n      menuList: { type: Boolean, default: false },\n    },\n    setup(props) {\n      return {\n        props,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/ListGroup.vue"
+    }
+  ],
+  "type": "registry:item"
+}

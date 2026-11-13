@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-list",
+  "title": "Capacitor List (React)",
+  "description": "Capacitor List React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/List.tsx",
+      "content": "/* @ts-nocheck */\nimport React, { useRef } from 'react';\nimport { cls } from '../../shared/cls.js';\nimport { ListClasses } from '../../shared/classes/ListClasses.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { useTheme } from '../shared/use-theme.js';\nimport { ListColors } from '../../shared/colors/ListColors.js';\nimport { ListContext } from '../shared/ListContext.js';\nimport { getThemeSpecificProps } from '../shared/get-theme-specific-props.js';\n\nconst List = (props) => {\n  const {\n    component = 'div',\n    className,\n    colors: colorsProp,\n    nested,\n    menuList,\n\n    dividers,\n    dividersIos = true,\n    dividersMaterial = false,\n\n    inset,\n    insetIos,\n    insetMaterial,\n    strong,\n    strongIos,\n    strongMaterial,\n    outline,\n    outlineIos,\n    outlineMaterial,\n\n    ios,\n    material,\n\n    // Children\n    children,\n\n    ref,\n\n    // Rest\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const Component = component;\n\n  const attrs = {\n    ...rest,\n  };\n  const theme = useTheme();\n  const themeClasses = useThemeClasses({ ios, material });\n  const dark = useDarkClasses();\n\n  const {\n    strong: isStrong,\n    outline: isOutline,\n    inset: isInset,\n    dividers: hasDividers,\n  } = getThemeSpecificProps(\n    theme,\n    {\n      strong,\n      outline,\n      inset,\n      dividers,\n    },\n    {\n      strongIos,\n      strongMaterial,\n      outlineIos,\n      outlineMaterial,\n      insetIos,\n      insetMaterial,\n      dividersIos,\n      dividersMaterial,\n      ...props,\n    }\n  );\n\n  const colors = ListColors(colorsProp, dark);\n\n  const c = themeClasses(\n    ListClasses(\n      {\n        ...props,\n        inset: isInset,\n        strong: isStrong,\n        outline: isOutline,\n        dividers: hasDividers,\n      },\n      colors\n    )\n  );\n\n  const classes = cls(\n    c.base,\n\n    isInset && c.inset,\n\n    menuList && c.menuList,\n\n    className\n  );\n\n  return (\n    <ListContext.Provider value={{ nested, dividers: hasDividers }}>\n      <Component\n        ref={(el) => {\n          elRef.current = el;\n          if (ref && typeof ref === 'function') ref(el);\n          else if (ref) ref.current = el;\n        }}\n        className={classes}\n        {...attrs}\n      >\n        <ul className={c.ul}>{children}</ul>\n      </Component>\n    </ListContext.Provider>\n  );\n};\n\nList.displayName = 'List';\n\nexport default List;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/List.tsx"
+    }
+  ],
+  "type": "registry:item"
+}

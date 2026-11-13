@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-messages-title",
+  "title": "Capacitor MessagesTitle (Vue)",
+  "description": "Capacitor MessagesTitle Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/MessagesTitle.vue",
+      "content": "<template>\n  <component :is=\"component\" :id=\"id\" ref=\"elRef\" :class=\"c.base\">\n    <slot />\n  </component>\n</template>\n<script>\n  import { ref, computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { MessagesTitleClasses } from '../../shared/classes/MessagesTitleClasses.js';\n\n  import { MessagesTitleColors } from '../../shared/colors/MessagesTitleColors.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  export default {\n    name: 'c-messages-title',\n    props: {\n      component: {\n        type: String,\n        default: 'div',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      id: String,\n    },\n    setup(props) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const elRef = ref(null);\n\n      const colors = computed(() =>\n        MessagesTitleColors(props.colors || {}, useDarkClasses)\n      );\n\n      const c = useThemeClasses(props, () =>\n        MessagesTitleClasses(\n          {\n            ...props,\n          },\n          colors.value\n        )\n      );\n\n      return {\n        c,\n        elRef,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/MessagesTitle.vue"
+    }
+  ],
+  "type": "registry:item"
+}

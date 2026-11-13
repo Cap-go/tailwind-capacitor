@@ -6,40 +6,50 @@
   <h2><a href="https://capgo.app/?ref=plugin"> ➡️ Get Instant updates for your App with Capgo</a></h2>
 </div>
 
-Tailwind CSS v4 + Capacitor UI components, shipped as a [shadcn](https://ui.shadcn.com/) registry so you own the source.
+Tailwind CSS v4 + Capacitor UI components for **Vue**, **React**, and **Angular**, shipped as shadcn style registries so you own the source.
+
+Shared `capacitor-tailwind` and `capacitor-shared` live at `public/r/` and are reused by every framework.
 
 ## Prerequisites
 
-- Vue 3 app with Tailwind CSS v4 (`@tailwindcss/vite` or PostCSS)
-- A project-level `components.json` from the [shadcn CLI](https://ui.shadcn.com/docs/cli) (`npx shadcn@latest init`)
+- Tailwind CSS v4 (`@tailwindcss/vite` or PostCSS)
 - Path alias `@/*` pointing at your `src/` folder (see `jsconfig.json` in this repo)
+- Framework specific `components.json` from the matching CLI init
 
-## Install (shadcn registry)
+## Vue (shadcn-vue)
 
-Registry JSON is built to `public/r/` with `npm run build:registry`. Committed artifacts always point `registryDependencies` at `refs/heads/main`. For a **local-only** branch preview, run `REGISTRY_BRANCH=<branch> npm run postprocess:registry` and do not commit `public/r/`.
+Init with [shadcn-vue](https://www.shadcn-vue.com/) (`npx shadcn-vue@latest init`). Registry artifacts use the same schema as shadcn-vue.
 
-Install URLs after merge (or from this repo's committed `public/r/`):
+Legacy URLs stay at `public/r/<slug>.json`. Mirrors also live under `public/r/vue/`.
+
+```bash
+npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json
+npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json
+npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-button.json
+```
+
+## React (shadcn)
+
+Init with [shadcn](https://ui.shadcn.com/) (`npx shadcn@latest init`). Use `components-react.json` in this repo as a template (`tsx: true`).
 
 ```bash
 npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json
-npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json
 npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json
-npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-icons.json
+npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-provider.json
+npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-button.json
 ```
 
-Then add any component:
+## Angular
+
+[@spartan-ng/cli](https://www.spartan.ng/) does not install arbitrary remote registry JSON. Use the same registry layout and `node scripts/registry-add.mjs <url-or-path>` (works like shadcn copy install). Committed items live under `public/r/angular/`.
 
 ```bash
-npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-button.json
+node scripts/registry-add.mjs https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json
+node scripts/registry-add.mjs https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json
+node scripts/registry-add.mjs https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-button.json
 ```
 
-**From a clone of this repo** (after `npm run build:registry`):
-
-```bash
-npx shadcn@latest add ./public/r/capacitor-button.json
-```
-
-Replace your app global stylesheet with the capacitor bundle (it already includes Tailwind):
+## Styles
 
 ```css
 @import '@/capacitor/styles/tailwind-capacitor.css';
@@ -47,13 +57,30 @@ Replace your app global stylesheet with the capacitor bundle (it already include
 
 Do not add a separate `@import "tailwindcss"` when using `tailwind-capacitor.css`.
 
-All component slugs: `capacitor-actions`, `capacitor-actions-button`, `capacitor-actions-group`, `capacitor-actions-label`, `capacitor-app`, `capacitor-badge`, `capacitor-block`, `capacitor-block-footer`, `capacitor-block-header`, `capacitor-block-title`, `capacitor-breadcrumbs`, `capacitor-breadcrumbs-collapsed`, `capacitor-breadcrumbs-item`, `capacitor-breadcrumbs-separator`, `capacitor-button`, `capacitor-card`, `capacitor-checkbox`, `capacitor-chip`, `capacitor-dialog`, `capacitor-dialog-button`, `capacitor-fab`, `capacitor-icon`, `capacitor-link`, `capacitor-list`, `capacitor-list-button`, `capacitor-list-group`, `capacitor-list-input`, `capacitor-list-item`, `capacitor-menu-list`, `capacitor-menu-list-item`, `capacitor-message`, `capacitor-messagebar`, `capacitor-messages`, `capacitor-messages-title`, `capacitor-navbar`, `capacitor-navbar-back-link`, `capacitor-notification`, `capacitor-page`, `capacitor-panel`, `capacitor-popover`, `capacitor-popup`, `capacitor-preloader`, `capacitor-progressbar`, `capacitor-radio`, `capacitor-range`, `capacitor-searchbar`, `capacitor-segmented`, `capacitor-segmented-button`, `capacitor-sheet`, `capacitor-stepper`, `capacitor-tabbar`, `capacitor-tabbar-link`, `capacitor-table`, `capacitor-table-body`, `capacitor-table-cell`, `capacitor-table-head`, `capacitor-table-row`, `capacitor-toast`, `capacitor-toggle`, `capacitor-toolbar`.
+## Registry build
 
-## Tailwind v4 (CSS first)
+```bash
+npm run build:registry
+```
 
-No `tailwind.config.js`. Capacitor safe areas, platform variants (`ios`, `android`, `capacitor`, …), and utilities ship in `registry/capacitor/styles/` using `@import "tailwindcss"`, `@theme`, `@utility`, `@custom-variant`, and `@layer`.
+Outputs:
 
-## Example app
+- `public/r/` Vue items (backward compatible URLs) + shared `capacitor-tailwind.json`
+- `public/r/vue/` mirror of Vue item JSON
+- `public/r/react/` React `.tsx` items
+- `public/r/angular/` Angular standalone components
+
+## Component slugs (87 items)
+
+Install any item with `npx shadcn-vue@latest add .../public/r/<slug>.json` (Vue), `npx shadcn@latest add .../public/r/react/<slug>.json` (React), or `registry-add.mjs .../public/r/angular/<slug>.json` (Angular).
+
+`capacitor-tailwind`, `capacitor-shared`, `capacitor-provider`, `capacitor-icons`, `capacitor-accordion`, `capacitor-accordion-item`, `capacitor-actions`, `capacitor-actions-button`, `capacitor-actions-group`, `capacitor-actions-label`, `capacitor-alert`, `capacitor-app`, `capacitor-avatar`, `capacitor-badge`, `capacitor-block`, `capacitor-block-footer`, `capacitor-block-header`, `capacitor-block-title`, `capacitor-breadcrumbs`, `capacitor-breadcrumbs-collapsed`, `capacitor-breadcrumbs-item`, `capacitor-breadcrumbs-separator`, `capacitor-button`, `capacitor-card`, `capacitor-checkbox`, `capacitor-chip`, `capacitor-datetime`, `capacitor-dialog`, `capacitor-dialog-button`, `capacitor-fab`, `capacitor-footer`, `capacitor-header`, `capacitor-icon`, `capacitor-infinite-scroll`, `capacitor-input-otp`, `capacitor-item-sliding`, `capacitor-link`, `capacitor-list`, `capacitor-list-button`, `capacitor-list-group`, `capacitor-list-input`, `capacitor-list-item`, `capacitor-menu-list`, `capacitor-menu-list-item`, `capacitor-message`, `capacitor-messagebar`, `capacitor-messages`, `capacitor-messages-title`, `capacitor-modal`, `capacitor-navbar`, `capacitor-navbar-back-link`, `capacitor-note`, `capacitor-notification`, `capacitor-page`, `capacitor-panel`, `capacitor-picker`, `capacitor-popover`, `capacitor-popup`, `capacitor-preloader`, `capacitor-progressbar`, `capacitor-radio`, `capacitor-range`, `capacitor-refresher`, `capacitor-reorder`, `capacitor-searchbar`, `capacitor-segmented`, `capacitor-segmented-button`, `capacitor-select`, `capacitor-sheet`, `capacitor-skeleton`, `capacitor-split-pane`, `capacitor-stepper`, `capacitor-tab`, `capacitor-tabbar`, `capacitor-tabbar-link`, `capacitor-table`, `capacitor-table-body`, `capacitor-table-cell`, `capacitor-table-head`, `capacitor-table-row`, `capacitor-tabs`, `capacitor-textarea`, `capacitor-thumbnail`, `capacitor-toast`, `capacitor-toggle`, `capacitor-toolbar`, `capacitor-touch-ripple`.
+
+Framework availability: every slug above has a Vue item at `public/r/<slug>.json`. React and Angular items use the same slug under `public/r/react/` and `public/r/angular/` except shared `capacitor-tailwind` and `capacitor-shared` (root only).
+
+## Example apps
+
+Vue demo (all registry items synced into `example/`):
 
 ```bash
 npm run build:registry
@@ -61,12 +88,17 @@ npm run sync:example
 npm --prefix example run dev
 ```
 
-## Legacy npm plugin (Tailwind v3)
+React smoke app (registry install + Vite build):
 
-v1.x on npm targets Tailwind 3. This branch is v4 + registry only (not published to npm). Package entry points (`main`, `./platform`, …) still load v3-style plugins and require `tailwindcss` as a peer dependency if you import them.
+```bash
+npm run build:registry
+npm run build:example-react
+```
 
-Documentation for each plugin topic lives under `docs/` (safe areas, platform, colors, …).
+## Tailwind v4 (CSS first)
 
-# Credits
+No `tailwind.config.js`. Capacitor safe areas, platform variants (`ios`, `android`, `capacitor`, …), and utilities ship in `registry/capacitor/styles/`.
+
+## Credits
 
 Tailwind Capacitor is a fork of [Konsta UI](https://github.com/konstaui/konstaui) and [Tailwind CSS](https://tailwindcss.com/).

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-chip",
+  "title": "Capacitor Chip (React)",
+  "description": "Capacitor Chip React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-icons.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/Chip.tsx",
+      "content": "/* @ts-nocheck */\nimport React, { useRef } from 'react';\nimport { ChipClasses } from '../../shared/classes/ChipClasses.js';\nimport { ChipColors } from '../../shared/colors/ChipColors.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { useTheme } from '../shared/use-theme.js';\n\nimport DeleteIcon from './icons/DeleteIcon.tsx';\n\nconst Chip = (props) => {\n  const {\n    component = 'div',\n    className,\n    colors: colorsProp,\n    media,\n    deleteButton,\n    onDelete,\n\n    ios,\n    material,\n\n    // Style\n    outline,\n\n    // Children\n    children,\n\n    ref,\n\n    // Rest\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const Component = component;\n\n  const attrs = {\n    ...rest,\n  };\n\n  const themeClasses = useThemeClasses({ ios, material });\n  const theme = useTheme({ ios, material });\n  const dark = useDarkClasses();\n\n  const style = outline ? 'outline' : 'fill';\n\n  const colors = ChipColors(colorsProp, dark);\n\n  const c = themeClasses(ChipClasses(props, colors), className);\n\n  return (\n    <Component\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      className={c.base[style]}\n      {...attrs}\n    >\n      {media && <div className={c.media}>{media}</div>}\n      {children}\n      {deleteButton && (\n        <div\n          className={c.deleteButton}\n          role=\"button\"\n          tabIndex=\"0\"\n          onClick={onDelete}\n        >\n          <DeleteIcon theme={theme} className=\"h-4 w-4\" />\n        </div>\n      )}\n    </Component>\n  );\n};\n\nChip.displayName = 'Chip';\n\nexport default Chip;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/Chip.tsx"
+    }
+  ],
+  "type": "registry:item"
+}

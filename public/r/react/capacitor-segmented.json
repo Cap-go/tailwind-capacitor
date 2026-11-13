@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-segmented",
+  "title": "Capacitor Segmented (React)",
+  "description": "Capacitor Segmented React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/Segmented.tsx",
+      "content": "/* @ts-nocheck */\nimport React, { useRef, useEffect, useState } from 'react';\nimport { cls } from '../../shared/cls.js';\nimport { SegmentedClasses } from '../../shared/classes/SegmentedClasses.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { SegmentedColors } from '../../shared/colors/SegmentedColors.js';\nimport { getThemeSpecificProps } from '../shared/get-theme-specific-props.js';\nimport { useTheme } from '../shared/use-theme.js';\nimport { SegmentedContext } from './SegmentedContext.tsx';\nimport { useNavbarContext } from './NavbarContext.tsx';\nimport Glass from './Glass.tsx';\n\nconst Segmented = (props) => {\n  const {\n    component = 'div',\n    className,\n    colors: colorsProp,\n    ios,\n    material,\n\n    // Style props\n    raised,\n    raisedIos,\n    raisedMaterial,\n    outline,\n    outlineIos,\n    outlineMaterial,\n    strong,\n    strongIos,\n    strongMaterial,\n    rounded,\n    roundedIos,\n    roundedMaterial,\n\n    // Children\n    children,\n\n    ref,\n\n    // Rest\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n  const highlightElRef = useRef(null);\n  const outlineInnerElRef = useRef(null);\n\n  const [highlightStyle, setHighlightStyle] = useState({\n    transform: '',\n    width: '',\n  });\n\n  const attrs = {\n    ...rest,\n  };\n  const theme = useTheme({ ios, material });\n  const themeClasses = useThemeClasses({ ios, material });\n  const dark = useDarkClasses();\n\n  const colors = SegmentedColors(colorsProp, dark);\n\n  const themeProps = getThemeSpecificProps(\n    theme,\n    {\n      outline,\n      rounded,\n      strong,\n      raised,\n    },\n    props\n  );\n  const { navbar } = useNavbarContext();\n\n  const c = themeClasses(\n    SegmentedClasses({ ...props, ...themeProps, navbar }, colors, dark)\n  );\n\n  const Component = theme === 'ios' && navbar ? Glass : component;\n\n  const classes = cls(\n    // base\n    themeProps.rounded ? c.base.rounded : c.base.square,\n    themeProps.raised && c.raised,\n    themeProps.outline && c.outline,\n    themeProps.strong && c.strong,\n\n    className\n  );\n\n  useEffect(() => {\n    if (themeProps.strong && highlightElRef.current) {\n      const buttonsEl = themeProps.outline\n        ? outlineInnerElRef.current\n        : highlightElRef.current.parentElement;\n      if (!buttonsEl) return;\n      const buttons = [...buttonsEl.children].filter(\n        (child) => child.tagName === 'BUTTON' || child.tagName === 'A'\n      );\n      const buttonsLength = buttons.length;\n      const activeIndex = buttons.indexOf(\n        buttonsEl.querySelector('.k-segmented-strong-button-active')\n      );\n\n      const between = '4px';\n      const padding = theme === 'ios' && navbar ? '4px' : '2px';\n\n      setHighlightStyle({\n        ...highlightStyle,\n        width: `calc((100% - ${padding} * 2 - ${between} * (${buttonsLength} - 1)) / ${buttonsLength})`,\n        transform: `translateX(calc((${activeIndex} * 100% + ${activeIndex} * ${between}) * var(--k-rtl-reverse)))`,\n      });\n    }\n  }, [children]);\n\n  return (\n    <Component\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      className={classes}\n      {...attrs}\n    >\n      <SegmentedContext.Provider\n        value={{\n          strong: themeProps.strong,\n          outline: themeProps.outline,\n          rounded: themeProps.rounded,\n          raised: themeProps.raised,\n        }}\n      >\n        {themeProps.outline ? (\n          <span ref={outlineInnerElRef} className={c.outlineInner}>\n            {children}\n          </span>\n        ) : (\n          children\n        )}\n        {themeProps.strong && (\n          <span\n            ref={highlightElRef}\n            className={c.strongHighlight}\n            style={highlightStyle}\n          />\n        )}\n      </SegmentedContext.Provider>\n    </Component>\n  );\n};\n\nSegmented.displayName = 'Segmented';\n\nexport default Segmented;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/Segmented.tsx"
+    },
+    {
+      "path": "src/react/components/SegmentedContext.tsx",
+      "content": "/* @ts-nocheck */\nimport { createContext, useContext } from 'react';\n\nexport const SegmentedContext = createContext({\n  strong: false,\n  outline: false,\n  rounded: false,\n  raised: false,\n});\n\nexport const useSegmentedContext = () => {\n  return useContext(SegmentedContext);\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/SegmentedContext.tsx"
+    },
+    {
+      "path": "src/react/components/NavbarContext.tsx",
+      "content": "/* @ts-nocheck */\nimport { createContext, useContext } from 'react';\n\nexport const NavbarContext = createContext({\n  navbar: false,\n});\n\nexport const useNavbarContext = () => useContext(NavbarContext);\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/NavbarContext.tsx"
+    },
+    {
+      "path": "src/react/components/Glass.tsx",
+      "content": "/* @ts-nocheck */\nimport React, { useEffect, useRef, useContext } from 'react';\nimport { GlassClasses } from '../../shared/classes/GlassClasses.js';\nimport { GlassColors } from '../../shared/colors/GlassColors.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { useTheme } from '../shared/use-theme.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\nimport { useIosHighlight } from '../../shared/use-ios-highlight.js';\nimport { CapacitorContext } from '../shared/CapacitorContext.js';\n\nconst Glass = (props) => {\n  const {\n    component = 'div',\n    colors: colorsProp,\n    className,\n    highlight = true,\n\n    ios,\n    material,\n\n    // Children\n    children,\n\n    ref,\n\n    // Rest\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const Component = component;\n\n  const attrs = {\n    ...rest,\n  };\n\n  const theme = useTheme();\n\n  const themeClasses = useThemeClasses({ ios, material });\n  const dark = useDarkClasses();\n\n  const colors = GlassColors(colorsProp, dark);\n\n  const { touchHighlight } = useContext(CapacitorContext);\n\n  const highlightData = useRef({});\n  const { attachEvents, detachEvents } = useIosHighlight({\n    getEl: () => elRef.current,\n    enabled: highlight && theme === 'ios' && touchHighlight,\n    data: highlightData.current,\n  });\n\n  const c = themeClasses(GlassClasses(props, colors), className);\n\n  useEffect(() => {\n    attachEvents();\n    return () => detachEvents();\n  });\n\n  return (\n    <Component\n      ref={(el) => {\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n        elRef.current = el;\n      }}\n      className={c.base}\n      {...attrs}\n    >\n      {children}\n    </Component>\n  );\n};\n\nGlass.displayName = 'Glass';\n\nexport default Glass;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/Glass.tsx"
+    }
+  ],
+  "type": "registry:item"
+}

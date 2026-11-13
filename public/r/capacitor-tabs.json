@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-tabs",
+  "title": "Capacitor Tabs (Vue)",
+  "description": "Capacitor Tabs Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Tabs.vue",
+      "content": "<template>\n  <component :is=\"component\" :class=\"classes\">\n    <slot />\n  </component>\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n  import { TabsClasses } from '../../shared/classes/TabsClasses.js';\n  import { TabsColors } from '../../shared/colors/TabsColors.js';\n  import { themeClasses } from '../shared/use-theme-classes.js';\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  export default {\n    name: 'c-tabs',\n    props: {\n      component: {\n        type: String,\n        default: 'div',\n      },\n      colors: { type: Object },\n      ios: { type: Boolean, default: undefined },\n      material: { type: Boolean, default: undefined },\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const colors = computed(() => TabsColors(props.colors || {}, useDarkClasses));\n      const c = useThemeClasses(props, () =>\n        TabsClasses(props, colors.value, { className: ctx.attrs.class }),\n      );\n      const classes = computed(() => c.value.base);\n      return { classes };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Tabs.vue"
+    }
+  ],
+  "type": "registry:item"
+}

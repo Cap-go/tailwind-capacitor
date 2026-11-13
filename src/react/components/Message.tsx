@@ -1,0 +1,83 @@
+/* @ts-nocheck */
+/* eslint-disable jsx-a11y/alt-text */
+import React, { useRef } from 'react';
+import { useThemeClasses } from '../shared/use-theme-classes.js';
+import { cls } from '../../shared/cls.js';
+// import { useTheme } from '../shared/use-theme.js';
+import { useDarkClasses } from '../shared/use-dark-classes.js';
+import { MessageClasses } from '../../shared/classes/MessageClasses.js';
+import { MessageColors } from '../../shared/colors/MessageColors.js';
+
+const Message = (props) => {
+  const {
+    component = 'div',
+    className,
+    colors: colorsProp,
+    ref,
+    id,
+    text,
+    name,
+    type = 'sent',
+    header,
+    footer,
+    textHeader,
+    textFooter,
+    avatar,
+
+    ios,
+    material,
+
+    children,
+    ...rest
+  } = props;
+
+  const elRef = useRef(null);
+
+  const themeClasses = useThemeClasses({ ios, material });
+  const dark = useDarkClasses();
+  const colors = MessageColors(colorsProp, dark);
+
+  const c = themeClasses(MessageClasses({ ...props }, colors, className));
+  const Component = component;
+
+  const attrs = {
+    ...rest,
+  };
+
+  const classes = cls(c.message, {
+    [c.messageSent]: type === 'sent',
+    [c.messageReceived]: type === 'received',
+  });
+
+  return (
+    <Component
+      id={id}
+      ref={(el) => {
+        elRef.current = el;
+        if (ref && typeof ref === 'function') ref(el);
+        else if (ref) ref.current = el;
+      }}
+      className={classes}
+      {...attrs}
+    >
+      {avatar && <div className={c.messageAvatar}>{avatar}</div>}
+      <div className={c.messageContent}>
+        {name && <div className={c.messageName}>{name}</div>}
+        {header && <div className={c.messageHeader}>{header}</div>}
+        <div className={c.messageBubble}>
+          {textHeader && (
+            <div className={c.messageTextHeader}>{textHeader}</div>
+          )}
+          {text && <div className={c.messageText}>{text}</div>}
+          {textFooter && (
+            <div className={c.messageTextFooter}>{textFooter}</div>
+          )}
+        </div>
+        {footer && <div className={c.messageFooter}>{footer}</div>}
+      </div>
+    </Component>
+  );
+};
+
+Message.displayName = 'Message';
+export default Message;

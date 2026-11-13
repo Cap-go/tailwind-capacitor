@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-card",
+  "title": "Capacitor Card (Vue)",
+  "description": "Capacitor Card Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Card.vue",
+      "content": "<template>\n  <component :is=\"component\" :class=\"c.base[style]\">\n    <div v-if=\"header || slots.header\" :class=\"c.header\">\n      {{ header }}<slot name=\"header\" />\n    </div>\n\n    <div v-if=\"contentWrap\" :class=\"c.content\">\n      <slot />\n    </div>\n    <slot v-else />\n\n    <div v-if=\"footer || slots.footer\" :class=\"c.footer\">\n      {{ footer }}<slot name=\"footer\" />\n    </div>\n  </component>\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  import { useTheme } from '../shared/use-theme.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  import { CardClasses } from '../../shared/classes/CardClasses.js';\n\n  import { CardColors } from '../../shared/colors/CardColors.js';\n\n  export default {\n    name: 'c-card',\n    props: {\n      component: {\n        type: String,\n        default: 'div',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      margin: { type: String, default: 'm-4' },\n      header: { type: [String, Number] },\n      footer: { type: [String, Number] },\n      contentWrap: { type: Boolean, default: true },\n      contentWrapPadding: { type: String, default: 'p-4' },\n      // Style\n      raised: { type: Boolean, default: undefined },\n      raisedIos: { type: Boolean, default: undefined },\n      raisedMaterial: { type: Boolean, default: undefined },\n      outline: { type: Boolean, default: undefined },\n      outlineIos: { type: Boolean, default: undefined },\n      outlineMaterial: { type: Boolean, default: undefined },\n      headerDivider: { type: Boolean, default: false },\n      footerDivider: { type: Boolean, default: false },\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const colors = computed(() =>\n        CardColors(props.colors || {}, useDarkClasses)\n      );\n\n      const theme = useTheme({}, context);\n\n      const isOutline = computed(() =>\n        typeof props.outline === 'undefined'\n          ? theme.value === 'ios'\n            ? props.outlineIos\n            : props.outlineMaterial\n          : props.outline\n      );\n      const isRaised = computed(() =>\n        typeof props.raised === 'undefined'\n          ? theme.value === 'ios'\n            ? props.raisedIos\n            : props.raisedMaterial\n          : props.raised\n      );\n\n      const style = computed(() =>\n        isOutline.value ? 'outline' : isRaised.value ? 'raised' : 'plain'\n      );\n      const c = useThemeClasses(props, () =>\n        CardClasses(\n          { ...props, raised: isRaised.value, outline: isOutline.value },\n          colors.value,\n          useDarkClasses\n        )\n      );\n\n      return {\n        c,\n        style,\n        slots: ctx.slots,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Card.vue"
+    }
+  ],
+  "type": "registry:item"
+}

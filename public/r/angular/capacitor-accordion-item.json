@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-accordion-item",
+  "title": "Capacitor AccordionItem (Angular)",
+  "description": "Capacitor AccordionItem Angular component.",
+  "dependencies": [
+    "@angular/core"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/angular/components/AccordionItem.component.ts",
+      "content": "import {\n  Component,\n  Input,\n  inject,\n  OnChanges,\n  HostBinding,\n} from '@angular/core';\nimport { AccordionItemClasses } from '../../shared/classes/AccordionItemClasses.js';\nimport { AccordionItemColors } from '../../shared/colors/AccordionItemColors.js';\nimport { CAPACITOR_CONTEXT } from '../shared/capacitor-context.js';\nimport { resolveTheme, themeClasses } from '../shared/use-theme-classes.js';\n\n@Component({\n  selector: 'c-accordion-item',\n  standalone: true,\n  template: '<ng-content />',\n})\nexport class AccordionItemComponent implements OnChanges {\n  @Input() ios?: boolean;\n  @Input() material?: boolean;\n  @Input() colors?: Record<string, unknown>;\n  @Input() class = '';\n\n  @HostBinding('class')\n  hostClass = '';\n\n  private readonly ctx = inject(CAPACITOR_CONTEXT);\n\n  ngOnChanges(): void {\n    const theme = resolveTheme(this.ctx, this);\n    const colors = AccordionItemColors(this.colors || {});\n    const props = this as Record<string, unknown>;\n    const raw = AccordionItemClasses(props, colors, { className: this.class });\n    const c = themeClasses(raw, theme, this.class);\n    const base = c.base;\n    if (typeof base === 'string') {\n      this.hostClass = base;\n    } else if (base && typeof base === 'object') {\n      this.hostClass = (base as { default?: string }).default || '';\n    } else {\n      this.hostClass = '';\n    }\n  }\n}\n",
+      "type": "registry:file",
+      "target": "src/capacitor/angular/components/AccordionItem.component.ts"
+    }
+  ],
+  "type": "registry:item"
+}

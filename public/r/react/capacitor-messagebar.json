@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-messagebar",
+  "title": "Capacitor Messagebar (React)",
+  "description": "Capacitor Messagebar React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-toolbar.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/Messagebar.tsx",
+      "content": "/* @ts-nocheck */\nimport React, { useRef, useState } from 'react';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\nimport { MessagebarClasses } from '../../shared/classes/MessagebarClasses.js';\nimport { MessagebarColors } from '../../shared/colors/MessagebarColors.js';\nimport Toolbar from './Toolbar.tsx';\nimport Glass from './Glass.tsx';\n\nconst Messagebar = (props) => {\n  const {\n    component = 'div',\n    className,\n    colors: colorsProp,\n    id,\n    style,\n    name,\n    placeholder = 'Message',\n    value,\n    outline = false,\n    // eslint-disable-next-line\n    leftClassName = '',\n    // eslint-disable-next-line\n    rightClassName = '',\n    textareaId,\n    disabled,\n    size,\n\n    left,\n    right,\n\n    ios,\n    material,\n\n    onInput,\n    onChange,\n    onFocus,\n\n    children,\n    ref,\n\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n  const areaElRef = useRef(null);\n\n  const [isFocused, setIsFocused] = useState(false);\n\n  const themeClasses = useThemeClasses({ ios, material });\n  const dark = useDarkClasses();\n\n  const colors = MessagebarColors(colorsProp, dark);\n\n  const onFocusInternal = (e) => {\n    setIsFocused(true);\n    if (onFocus) onFocus(e);\n  };\n\n  const c = themeClasses(\n    MessagebarClasses(\n      { ...props },\n      colors,\n      {\n        isFocused,\n      },\n      className\n    )\n  );\n\n  const Component = component;\n\n  const attrs = {\n    ...rest,\n  };\n\n  return (\n    <Component\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      id={id}\n      style={style}\n      className={c.base}\n      {...attrs}\n    >\n      <Toolbar\n        colors={colors}\n        outline={outline}\n        className={c.toolbar}\n        innerClassName={c.toolbarInner}\n      >\n        {left && <div className={c.left}>{left}</div>}\n        <Glass className={c.messagebarArea}>\n          <textarea\n            id={textareaId}\n            ref={areaElRef}\n            type=\"textarea\"\n            className={c.messagebarInput}\n            placeholder={placeholder}\n            name={name}\n            size={size}\n            disabled={disabled}\n            onInput={onInput}\n            onChange={onChange}\n            onFocus={onFocusInternal}\n            value={value}\n          />\n        </Glass>\n        {right && <div className={c.right}>{right}</div>}\n      </Toolbar>\n    </Component>\n  );\n};\n\nMessagebar.displayName = 'Messagebar';\nexport default Messagebar;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/Messagebar.tsx"
+    },
+    {
+      "path": "src/react/components/Glass.tsx",
+      "content": "/* @ts-nocheck */\nimport React, { useEffect, useRef, useContext } from 'react';\nimport { GlassClasses } from '../../shared/classes/GlassClasses.js';\nimport { GlassColors } from '../../shared/colors/GlassColors.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { useTheme } from '../shared/use-theme.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\nimport { useIosHighlight } from '../../shared/use-ios-highlight.js';\nimport { CapacitorContext } from '../shared/CapacitorContext.js';\n\nconst Glass = (props) => {\n  const {\n    component = 'div',\n    colors: colorsProp,\n    className,\n    highlight = true,\n\n    ios,\n    material,\n\n    // Children\n    children,\n\n    ref,\n\n    // Rest\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const Component = component;\n\n  const attrs = {\n    ...rest,\n  };\n\n  const theme = useTheme();\n\n  const themeClasses = useThemeClasses({ ios, material });\n  const dark = useDarkClasses();\n\n  const colors = GlassColors(colorsProp, dark);\n\n  const { touchHighlight } = useContext(CapacitorContext);\n\n  const highlightData = useRef({});\n  const { attachEvents, detachEvents } = useIosHighlight({\n    getEl: () => elRef.current,\n    enabled: highlight && theme === 'ios' && touchHighlight,\n    data: highlightData.current,\n  });\n\n  const c = themeClasses(GlassClasses(props, colors), className);\n\n  useEffect(() => {\n    attachEvents();\n    return () => detachEvents();\n  });\n\n  return (\n    <Component\n      ref={(el) => {\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n        elRef.current = el;\n      }}\n      className={c.base}\n      {...attrs}\n    >\n      {children}\n    </Component>\n  );\n};\n\nGlass.displayName = 'Glass';\n\nexport default Glass;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/Glass.tsx"
+    }
+  ],
+  "type": "registry:item"
+}
