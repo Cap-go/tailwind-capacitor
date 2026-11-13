@@ -20,7 +20,7 @@
     props: {
       component: {
         type: String,
-        default: 'span',
+        default: 'div',
       },
       colors: {
         type: Object,
@@ -35,7 +35,7 @@
       },
       withBlock: {
         type: Boolean,
-        default: true,
+        default: false,
       },
       medium: {
         type: Boolean,

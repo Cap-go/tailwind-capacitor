@@ -4,11 +4,11 @@ export const SegmentedColors = (colorsProp = {}, dark) => {
   return {
     strongBgIos: cls(
       'bg-neutral-200/80',
-      dark('dark:bg-white/10')
+      dark('dark:bg-white/12 dark:border dark:border-white/20')
     ),
     strongBgMaterial: cls(
       'bg-md-light-surface-variant',
-      dark('dark:bg-md-dark-surface-variant')
+      dark('dark:bg-white/12 dark:border dark:border-white/20')
     ),
 
     borderIos: 'border-primary',

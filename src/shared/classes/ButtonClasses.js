@@ -97,8 +97,8 @@ export const ButtonClasses = (props, colors, classes, darkClasses) => {
       },
       segmentedStrong: {
         common: cls(
-          '!bg-transparent shadow-none text-primary',
-          darkClasses('dark:text-white/80'),
+          '!bg-transparent shadow-none text-primary relative z-0',
+          darkClasses('dark:text-white/55'),
           `active:bg-black active:bg-opacity-10`,
           darkClasses(
             'dark:active:bg-white dark:active:bg-opacity-10 dark:touch-ripple-white'
@@ -107,11 +107,11 @@ export const ButtonClasses = (props, colors, classes, darkClasses) => {
         ),
         ios: cls(
           !disabled && colors.textIos,
-          darkClasses('dark:text-white dark:text-opacity-75')
+          darkClasses('dark:text-white/55')
         ),
         material: cls(
           !disabled && colors.textMaterial,
-          darkClasses('dark:text-white dark:text-opacity-75')
+          darkClasses('dark:text-white/55')
         ),
       },
       segmentedStrongActive: {

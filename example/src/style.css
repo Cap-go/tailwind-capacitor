@@ -4,14 +4,65 @@
 @source "./capacitor/**/*.vue";
 
 .demo-shell {
-  min-height: 2200px;
+  min-height: 0;
+  padding-bottom: 1.5rem;
 }
 
-.c-app,
-.safe-areas.c-page {
+.demo-shell .c-block-title {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem !important;
+  position: relative;
+  z-index: 2;
+}
+
+.demo-shell .c-block-title + * {
+  margin-top: 0 !important;
+}
+
+.dark .demo-shell .c-segmented {
+  background-color: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.demo-media-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+.demo-split-pane > * {
+  min-width: 0;
+  flex: 1 1 0%;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+  height: auto;
+}
+
+#app,
+#app .c-app,
+#app .h-full {
   position: relative !important;
   height: auto !important;
   min-height: 100vh;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.demo-page.safe-areas.c-page {
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
   overflow: visible !important;
 }
 

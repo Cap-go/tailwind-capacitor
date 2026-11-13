@@ -14,10 +14,10 @@ const AFTER_ONLY = process.env.CAPTURE_AFTER_ONLY === '1';
 const BEFORE_COMMIT = process.env.SCREENSHOT_BEFORE_COMMIT || 'e6437809852749b566a8489cd59db362006741f0';
 
 const THEME_MATRIX = [
-  { key: 'ios-light', theme: { ios: true, light: true } },
-  { key: 'ios-dark', theme: { ios: true, dark: true } },
-  { key: 'material-light', theme: { material: true, light: true } },
-  { key: 'material-dark', theme: { material: true, dark: true } },
+  { key: 'ios-light', query: '?theme=ios&dark=0' },
+  { key: 'ios-dark', query: '?theme=ios&dark=1' },
+  { key: 'material-light', query: '?theme=material&dark=0' },
+  { key: 'material-dark', query: '?theme=material&dark=1' },
 ];
 
 async function waitForUrl(url, attempts = 40) {
@@ -33,25 +33,17 @@ async function waitForUrl(url, attempts = 40) {
   throw new Error(`server did not respond at ${url}`);
 }
 
-async function applyTheme(page, { ios, material, light, dark }) {
-  if (material) {
-    await page.getByRole('button', { name: 'Material', exact: true }).click();
-  } else if (ios) {
-    await page.getByRole('button', { name: 'iOS', exact: true }).click();
-  }
-  if (dark) {
-    await page.getByRole('button', { name: 'Dark', exact: true }).click();
-  } else if (light) {
-    await page.getByRole('button', { name: 'Light', exact: true }).click();
-  }
-  await sleep(400);
-}
-
-async function captureSet({ cwd, port, shots }) {
-  const server = spawn('npm', ['run', 'dev', '--', '--host', '127.0.0.1', '--port', String(port)], {
-    cwd,
-    stdio: 'pipe',
-  });
+async function captureSet({ cwd, port, shots, preview = false }) {
+  const server = spawn(
+    preview ? 'npm' : 'npm',
+    preview
+      ? ['run', 'preview', '--', '--host', '127.0.0.1', '--port', String(port)]
+      : ['run', 'dev', '--', '--host', '127.0.0.1', '--port', String(port)],
+    {
+      cwd,
+      stdio: 'pipe',
+    },
+  );
   const url = `http://127.0.0.1:${port}/`;
   await waitForUrl(url);
 
@@ -60,29 +52,15 @@ async function captureSet({ cwd, port, shots }) {
 
   for (const shot of shots) {
     await page.setViewportSize({ width: shot.width, height: shot.height });
-    await page.goto(url, { waitUntil: 'networkidle' });
+    const target = shot.query ? `${url.split('?')[0]}${shot.query}` : url;
+    await page.goto(target, { waitUntil: 'domcontentloaded', timeout: 60_000 });
+    await page.waitForSelector('.demo-shell .theme-chip', { timeout: 30_000 });
     await page.evaluate('window.scrollTo(0, 0)');
-    if (shot.theme) await applyTheme(page, shot.theme);
-    await page.evaluate('window.scrollTo(0, 0)');
-    await sleep(150);
-    if (shot.fullPage) {
-      await page.evaluate(`(() => {
-        const shell = document.querySelector('.demo-shell');
-        if (shell) shell.style.minHeight = '2800px';
-      })()`);
-      const scrollHeight = await page.evaluate(`Math.max(
-        document.body.scrollHeight,
-        document.documentElement.scrollHeight,
-      )`);
-      const minHeight = shot.width >= 900 ? 3200 : 4200;
-      const capHeight = Math.min(Math.max(shot.height, scrollHeight + 32, minHeight), 12000);
-      await page.setViewportSize({ width: shot.width, height: capHeight });
-    }
     await page.evaluate('window.scrollTo(0, 0)');
     await sleep(150);
     await page.screenshot({
       path: join(outDir, shot.name),
-      fullPage: false,
+      fullPage: !!shot.fullPage,
     });
   }
 
@@ -121,27 +99,33 @@ if (!process.env.SKIP_REGISTRY_SYNC) {
 }
 
 const afterShots = [];
-for (const { key, theme } of THEME_MATRIX) {
+for (const { key, query } of THEME_MATRIX) {
   afterShots.push({
     name: `after-${key}-desktop.png`,
     width: 1280,
     height: 800,
-    theme,
+    query,
     fullPage: true,
   });
   afterShots.push({
     name: `after-${key}-mobile.png`,
     width: 390,
     height: 844,
-    theme,
+    query,
     fullPage: true,
   });
 }
+
+spawnSync('npm', ['run', 'build'], {
+  cwd: join(repoRoot, 'example'),
+  stdio: 'inherit',
+});
 
 await captureSet({
   cwd: join(repoRoot, 'example'),
   port: 4173,
   shots: afterShots,
+  preview: true,
 });
 
 const files = [

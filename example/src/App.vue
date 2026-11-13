@@ -55,7 +55,7 @@
             <Refresher>Pull to refresh</Refresher>
             <Alert>Default alert banner text</Alert>
             <Note>Supporting note text</Note>
-            <div class="flex gap-3 items-center py-2">
+            <div class="demo-media-row">
               <Avatar>MD</Avatar>
               <Thumbnail>IMG</Thumbnail>
             </div>
@@ -103,10 +103,10 @@
               <MenuListItem title="Menu item A" />
               <MenuListItem title="Menu item B" />
             </MenuList>
-            <ItemSliding class="p-3">
+            <ItemSliding class="p-3 mt-2">
               <ListItem title="Sliding list item" />
             </ItemSliding>
-            <Reorder class="p-1">
+            <Reorder class="p-1 mt-2">
               <List strong inset>
                 <ListItem title="Reorder row 1" />
                 <ListItem title="Reorder row 2" />
@@ -137,12 +137,14 @@
 
           <Block strong inset>
             <BlockTitle>Layout primitives</BlockTitle>
-            <SplitPane>
-              <div class="flex-1 p-3 rounded-lg bg-primary/10 text-center text-xs">
+            <SplitPane class="demo-split-pane min-h-20">
+              <div
+                class="p-3 rounded-lg bg-primary/10 text-center text-xs leading-snug"
+              >
                 Split left
               </div>
               <div
-                class="flex-1 p-3 rounded-lg bg-black/5 dark:bg-white/10 text-center text-xs"
+                class="p-3 rounded-lg bg-black/5 dark:bg-white/10 text-center text-xs leading-snug"
               >
                 Split right
               </div>
@@ -163,7 +165,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import {
   TailwindCapacitorProvider,
   App,
@@ -211,4 +213,15 @@ const platformTheme = ref('ios')
 const darkMode = ref(false)
 const tab = ref('a')
 const tab2 = ref('one')
+
+onMounted(() => {
+  const params = new URLSearchParams(window.location.search)
+  const theme = params.get('theme')
+  if (theme === 'ios' || theme === 'material') {
+    platformTheme.value = theme
+  }
+  const dark = params.get('dark')
+  if (dark === '1' || dark === 'true') darkMode.value = true
+  if (dark === '0' || dark === 'false') darkMode.value = false
+})
 </script>
