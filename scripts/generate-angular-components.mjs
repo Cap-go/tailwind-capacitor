@@ -937,6 +937,7 @@ writeFileSync(
   OnChanges,
   OnDestroy,
   OnInit,
+  ApplicationRef,
   SimpleChanges,
 } from '@angular/core';
 import { CAPACITOR_CONTEXT } from './capacitor-context.js';
@@ -975,6 +976,7 @@ export class TailwindCapacitorProviderComponent
 
   effectiveDark = false;
 
+  private readonly appRef = inject(ApplicationRef);
   private media?: MediaQueryList;
   private onSchemeChange?: () => void;
 
@@ -994,6 +996,7 @@ export class TailwindCapacitorProviderComponent
 
   ngOnChanges(_changes: SimpleChanges): void {
     this.refreshEffectiveDark();
+    this.appRef.tick();
   }
 
   ngOnDestroy(): void {
