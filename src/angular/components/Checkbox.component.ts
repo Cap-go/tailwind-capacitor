@@ -93,6 +93,12 @@ export class CheckboxComponent implements OnInit, OnChanges, AfterViewInit, DoCh
 
   onCheckedChange(ev: Event): void {
     ev.stopPropagation();
+    const input = ev.target as HTMLInputElement | null;
+    if (input && typeof input.checked === 'boolean') {
+      this.checked = input.checked;
+      this.syncClasses();
+      this.cdr.markForCheck();
+    }
     this.checkedChange.emit(ev);
   }
 

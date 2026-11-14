@@ -246,12 +246,15 @@ export class AppComponent implements OnInit {
   }
 
   onToggle(ev: Event): void {
-    this.toggleCount += 1;
-    window.__toggleCount = this.toggleCount;
-    const input = ev.target as HTMLInputElement | null;
-    if (input && typeof input.checked === 'boolean') {
-      this.toggleChecked = input.checked;
-    }
+    this.zone.run(() => {
+      this.toggleCount += 1;
+      window.__toggleCount = this.toggleCount;
+      const input = ev.target as HTMLInputElement | null;
+      if (input && typeof input.checked === 'boolean') {
+        this.toggleChecked = input.checked;
+      }
+      this.cdr.detectChanges();
+    });
   }
 }
 `,
@@ -304,7 +307,10 @@ try {
   await toggle.waitFor({ state: 'attached' });
 
   const toggleInput = page.locator('c-toggle#probe-toggle input[role="switch"]');
-  await toggleInput.click();
+  await toggle.locator('input[role="switch"]').click({ force: true });
+  await page.waitForFunction('window.__toggleCount === 1', undefined, {
+    timeout: 60_000,
+  });
   await page.waitForFunction(
     `document.querySelector('c-toggle#probe-toggle input[role="switch"]')?.getAttribute('aria-checked') === 'true'`,
     undefined,

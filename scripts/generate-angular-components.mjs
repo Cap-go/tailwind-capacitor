@@ -158,8 +158,23 @@ const interactiveDoCheckMethod = `  private lastCtxDark?: boolean;
     }
   }
 
-  onCheckedChange(ev: Event): void {
+`;
+
+const relayCheckedChangeMethod = `  onCheckedChange(ev: Event): void {
     ev.stopPropagation();
+    this.checkedChange.emit(ev);
+  }
+
+`;
+
+const syncCheckedChangeMethod = `  onCheckedChange(ev: Event): void {
+    ev.stopPropagation();
+    const input = ev.target as HTMLInputElement | null;
+    if (input && typeof input.checked === 'boolean') {
+      this.checked = input.checked;
+      this.syncClasses();
+      this.cdr.markForCheck();
+    }
     this.checkedChange.emit(ev);
   }
 
@@ -274,7 +289,7 @@ export class ToggleComponent implements OnInit, OnChanges, DoCheck {
   c: Record<string, unknown> = {};
   state: 'checked' | 'notChecked' = 'notChecked';
 
-${resolveClassMethod}${interactiveDoCheckMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
+${resolveClassMethod}${interactiveDoCheckMethod}${syncCheckedChangeMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   ngOnInit(): void {
     this.lastCtxDark = this.ctx.dark;
@@ -347,7 +362,7 @@ export class CheckboxComponent implements OnInit, OnChanges, AfterViewInit, DoCh
   c: Record<string, unknown> = {};
   state: 'checked' | 'notChecked' = 'notChecked';
 
-${resolveClassMethod}${interactiveDoCheckMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
+${resolveClassMethod}${interactiveDoCheckMethod}${syncCheckedChangeMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   ngOnInit(): void {
     this.lastCtxDark = this.ctx.dark;
@@ -429,7 +444,7 @@ export class RadioComponent implements OnInit, OnChanges, DoCheck {
   state: 'checked' | 'notChecked' = 'notChecked';
   theme = 'ios';
 
-${resolveClassMethod}${interactiveDoCheckMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
+${resolveClassMethod}${interactiveDoCheckMethod}${syncCheckedChangeMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   ngOnInit(): void {
     this.lastCtxDark = this.ctx.dark;
@@ -506,7 +521,7 @@ export class RangeComponent implements OnInit, OnChanges, DoCheck {
   valueWidth = 0;
   rangeInputClass = '';
 
-${resolveClassMethod}${interactiveDoCheckMethod}${valueInputMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
+${resolveClassMethod}${interactiveDoCheckMethod}${relayCheckedChangeMethod}${valueInputMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   get currentValue(): number {
     return this.value ?? this.min;
@@ -604,7 +619,7 @@ export class SearchbarComponent implements OnInit, OnChanges, DoCheck {
   c: Record<string, unknown> = {};
   isEnabled = false;
 
-${resolveClassMethod}${interactiveDoCheckMethod}${valueInputMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
+${resolveClassMethod}${interactiveDoCheckMethod}${relayCheckedChangeMethod}${valueInputMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   get displayValue(): string {
     if (this.value === undefined || this.value === null) return '';
@@ -727,7 +742,7 @@ export class ListInputComponent implements OnInit, OnChanges, DoCheck {
   inputClass = '';
   focused = false;
 
-${resolveClassMethod}${interactiveDoCheckMethod}${valueInputMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
+${resolveClassMethod}${interactiveDoCheckMethod}${relayCheckedChangeMethod}${valueInputMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   get textValue(): string {
     if (this.value === undefined || this.value === null) return '';
