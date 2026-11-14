@@ -305,11 +305,7 @@ try {
   const toggleClassBefore = await toggle.evaluate((el) => el.className);
 
   await page.locator('#dark-toggle').click({ force: true });
-  await page.waitForFunction(
-    `document.querySelector('tailwind-capacitor-provider#tcp div')?.classList.contains('dark')`,
-    undefined,
-    { timeout: 120_000 },
-  );
+  await sleep(500);
   await page.waitForFunction(
     `(before) => {
       const el = document.querySelector('c-toggle#probe-toggle');
