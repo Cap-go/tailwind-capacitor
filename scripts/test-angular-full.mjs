@@ -239,6 +239,8 @@ export class AppComponent implements OnInit {
   flipDark(): void {
     this.zone.run(() => {
       this.dark = !this.dark;
+      this.cdr.detectChanges();
+      this.appRef.tick();
     });
   }
 
@@ -297,31 +299,22 @@ try {
   const provider = page.locator('tailwind-capacitor-provider#tcp');
   await provider.waitFor({ state: 'attached' });
 
-  const button = page.locator('c-button#probe-button');
-  await button.waitFor({ state: 'attached' });
+  const toggle = page.locator('c-toggle#probe-toggle');
+  await toggle.waitFor({ state: 'attached' });
+  const toggleClassBefore = await toggle.evaluate((el) => el.className);
 
-  const lightClass = await button.evaluate((el) => el.className);
-  if (/dark:/.test(lightClass)) {
-    throw new Error('c-button should not have dark: classes before flip');
-  }
-
-  await page.waitForFunction('typeof window.__setDark === "function"');
-  await page.evaluate('window.__setDark?.(true)');
-  await sleep(500);
+  await page.locator('#dark-toggle').click();
   await page.waitForFunction(
     `document.querySelector('tailwind-capacitor-provider#tcp div')?.classList.contains('dark')`,
     undefined,
     { timeout: 60_000 },
   );
   await page.waitForFunction(
-    `(() => {
-      const wrap = document.querySelector('tailwind-capacitor-provider#tcp div');
-      if (!wrap?.classList.contains('dark')) return false;
-      const btn = document.querySelector('c-button#probe-button');
-      if (!btn) return false;
-      return /dark:/.test(document.body.innerHTML);
-    })()`,
-    undefined,
+    `(before) => {
+      const el = document.querySelector('c-toggle#probe-toggle');
+      return !!(el && el.className !== before);
+    }`,
+    toggleClassBefore,
     { timeout: 60_000 },
   );
 

@@ -148,11 +148,13 @@ function resolveClassRef(path) {
 }
 
 const interactiveDoCheckMethod = `  private lastCtxDark?: boolean;
+  private readonly cdr = inject(ChangeDetectorRef);
 
   ngDoCheck(): void {
     if (this.lastCtxDark !== this.ctx.dark) {
       this.lastCtxDark = this.ctx.dark;
       this.syncClasses();
+      this.cdr.markForCheck();
     }
   }
 
@@ -171,11 +173,13 @@ const valueInputMethod = `  onValueInput(ev: Event): void {
 `;
 
 const hostDoCheckMethod = `  private lastCtxDark?: boolean;
+  private readonly cdr = inject(ChangeDetectorRef);
 
   ngDoCheck(): void {
     if (this.lastCtxDark !== this.ctx.dark) {
       this.lastCtxDark = this.ctx.dark;
       this.syncHostClass();
+      this.cdr.markForCheck();
     }
   }
 
@@ -217,6 +221,7 @@ function interactiveComponent(name, meta, colorsFn) {
   OnInit,
   OnChanges,
   DoCheck,
+  ChangeDetectorRef,
   ViewChild,
   ElementRef,
   AfterViewInit,
@@ -866,6 +871,7 @@ for (const name of names) {
   OnInit,
   OnChanges,
   DoCheck,
+  ChangeDetectorRef,
   HostBinding,
 } from '@angular/core';
 import { ${meta.classesFn} } from '../../shared/classes/${classFile}.js';

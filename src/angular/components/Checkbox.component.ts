@@ -7,6 +7,7 @@ import {
   OnInit,
   OnChanges,
   DoCheck,
+  ChangeDetectorRef,
   ViewChild,
   ElementRef,
   AfterViewInit,
@@ -80,11 +81,13 @@ export class CheckboxComponent implements OnInit, OnChanges, AfterViewInit, DoCh
   }
 
   private lastCtxDark?: boolean;
+  private readonly cdr = inject(ChangeDetectorRef);
 
   ngDoCheck(): void {
     if (this.lastCtxDark !== this.ctx.dark) {
       this.lastCtxDark = this.ctx.dark;
       this.syncClasses();
+      this.cdr.markForCheck();
     }
   }
 

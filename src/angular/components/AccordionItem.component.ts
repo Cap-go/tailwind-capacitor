@@ -5,6 +5,7 @@ import {
   OnInit,
   OnChanges,
   DoCheck,
+  ChangeDetectorRef,
   HostBinding,
 } from '@angular/core';
 import { AccordionItemClasses } from '../../shared/classes/AccordionItemClasses.js';
@@ -39,11 +40,13 @@ export class AccordionItemComponent implements OnInit, OnChanges, DoCheck {
   }
 
   private lastCtxDark?: boolean;
+  private readonly cdr = inject(ChangeDetectorRef);
 
   ngDoCheck(): void {
     if (this.lastCtxDark !== this.ctx.dark) {
       this.lastCtxDark = this.ctx.dark;
       this.syncHostClass();
+      this.cdr.markForCheck();
     }
   }
 
