@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-message",
   "type": "registry:item",
-  "title": "Capacitor Message",
+  "title": "Capacitor Message (Vue)",
   "description": "Capacitor Message Vue component.",
   "dependencies": [
     "vue"

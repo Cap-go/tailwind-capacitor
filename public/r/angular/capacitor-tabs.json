@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-tabs",
+  "type": "registry:item",
+  "title": "Capacitor Tabs (Angular)",
+  "description": "Capacitor Tabs Angular component.",
+  "dependencies": [
+    "@angular/core"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-segmented.json"
+  ],
+  "files": [
+    {
+      "path": "src/angular/components/Tabs.component.ts",
+      "content": "import { Component, Input } from '@angular/core';\nimport { SegmentedComponent } from './Segmented.component.js';\n\n@Component({\n  selector: 'c-tabs',\n  standalone: true,\n  imports: [SegmentedComponent],\n  template: `<c-segmented [strong]=\"true\" [rounded]=\"true\"><ng-content /></c-segmented>`,\n})\nexport class TabsComponent {\n  \n}\n",
+      "type": "registry:file",
+      "target": "src/capacitor/angular/components/Tabs.component.ts"
+    }
+  ]
+}

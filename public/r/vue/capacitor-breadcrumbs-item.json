@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-breadcrumbs-item",
+  "type": "registry:item",
+  "title": "Capacitor BreadcrumbsItem (Vue)",
+  "description": "Capacitor BreadcrumbsItem Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/BreadcrumbsItem.vue",
+      "content": "<template>\n  <component\n    :is=\"Component\"\n    :class=\"c.base\"\n    :href=\"resolvedHref\"\n    :aria-current=\"active ? 'page' : undefined\"\n    :role=\"linkRole\"\n    tabindex=\"0\"\n  >\n    <slot />\n  </component>\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { BreadcrumbsItemClasses } from '../../shared/classes/BreadcrumbsItemClasses.js';\n\n  import { BreadcrumbsItemColors } from '../../shared/colors/BreadcrumbsItemColors.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  export default {\n    name: 'c-breadcrumbs-item',\n    props: {\n      component: {\n        type: String,\n        default: 'span',\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      colors: {\n        type: Object,\n      },\n      active: {\n        type: Boolean,\n        default: false,\n      },\n      href: {\n        type: [String, Boolean],\n        default: undefined,\n      },\n    },\n    setup(props) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const colors = computed(() =>\n        BreadcrumbsItemColors(props.colors, useDarkClasses)\n      );\n      const c = useThemeClasses(props, () =>\n        BreadcrumbsItemClasses(props, colors.value)\n      );\n      const Component = computed(() => {\n        if (props.href || props.href === '') return 'a';\n        return props.component;\n      });\n      const resolvedHref = computed(() => {\n        if (props.href || props.href === '') {\n          return typeof props.href === 'string' ? props.href : '';\n        }\n        return undefined;\n      });\n      const linkRole = computed(() =>\n        props.href || props.href === '' ? undefined : 'menuitem'\n      );\n      return {\n        c,\n        Component,\n        resolvedHref,\n        linkRole,\n        active: computed(() => props.active),\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/BreadcrumbsItem.vue"
+    }
+  ]
+}

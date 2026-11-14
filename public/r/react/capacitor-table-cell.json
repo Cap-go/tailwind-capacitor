@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-table-cell",
+  "type": "registry:item",
+  "title": "Capacitor TableCell (React)",
+  "description": "Capacitor TableCell React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/TableCell.tsx",
+      "content": "// @ts-nocheck\nimport React, { useRef } from 'react';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\nimport { TableCellClasses } from '../../shared/classes/TableCellClasses.js';\nimport { TableCellColors } from '../../shared/colors/TableCellColors.js';\n\nconst TableCell = (props) => {\n  const {\n    className,\n    colors: colorsProp,\n    header,\n\n    ios,\n    material,\n\n    children,\n\n    ref,\n\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const Component = header ? 'th' : 'td';\n\n  const themeClasses = useThemeClasses({ ios, material });\n  const dark = useDarkClasses();\n  const colors = TableCellColors(colorsProp, dark);\n\n  const c = themeClasses(TableCellClasses({ ...props }, colors, className));\n\n  const attrs = {\n    ...rest,\n  };\n\n  return (\n    <Component\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      className={c.base}\n      {...attrs}\n    >\n      {children}\n    </Component>\n  );\n};\n\nTableCell.displayName = 'TableCell';\nexport default TableCell;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/TableCell.tsx"
+    }
+  ]
+}

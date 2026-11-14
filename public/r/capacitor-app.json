@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-app",
   "type": "registry:item",
-  "title": "Capacitor App",
+  "title": "Capacitor App (Vue)",
   "description": "Capacitor App Vue component.",
   "dependencies": [
     "vue"

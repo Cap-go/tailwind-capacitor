@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-progressbar",
+  "type": "registry:item",
+  "title": "Capacitor Progressbar (React)",
+  "description": "Capacitor Progressbar React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/Progressbar.tsx",
+      "content": "// @ts-nocheck\nimport React, { useRef } from 'react';\nimport { ProgressbarClasses } from '../../shared/classes/ProgressbarClasses.js';\nimport { ProgressbarColors } from '../../shared/colors/ProgressbarColors.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\nimport { useTheme } from '../shared/use-theme.js';\n\nconst Progressbar = (props) => {\n  const {\n    component = 'span',\n    className,\n    colors: colorsProp,\n\n    ios,\n    material,\n\n    progress = 0,\n\n    // Children\n    children,\n\n    ref,\n\n    // Rest\n    ...rest\n  } = props;\n  const elRef = useRef(null);\n\n  const Component = component;\n\n  const attrs = {\n    ...rest,\n  };\n  const theme = useTheme({ ios, material });\n  const themeClasses = useThemeClasses({ ios, material });\n  const dark = useDarkClasses();\n  const colors = ProgressbarColors(colorsProp, dark);\n\n  const c = themeClasses(ProgressbarClasses(colors, className));\n\n  return (\n    <Component\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      className={c.base}\n      {...attrs}\n    >\n      <span\n        className={c.inner}\n        style={{ transform: `translateX(-${100 - (progress / 1) * 100}%)` }}\n      />\n      {theme === 'material' && (\n        <>\n          <span\n            className={c.empty}\n            style={{\n              transform: `translateX(calc(${progress * 100}%${progress > 0 ? ' + 4px' : ''}))`,\n            }}\n          />\n          <span className={c.stop} />\n        </>\n      )}\n      {children}\n    </Component>\n  );\n};\n\nProgressbar.displayName = 'Progressbar';\n\nexport default Progressbar;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/Progressbar.tsx"
+    }
+  ]
+}

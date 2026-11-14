@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-notification",
   "type": "registry:item",
-  "title": "Capacitor Notification",
+  "title": "Capacitor Notification (Vue)",
   "description": "Capacitor Notification Vue component.",
   "dependencies": [
     "vue"

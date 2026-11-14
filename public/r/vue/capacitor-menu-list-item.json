@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-menu-list-item",
+  "type": "registry:item",
+  "title": "Capacitor MenuListItem (Vue)",
+  "description": "Capacitor MenuListItem Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-list-item.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/MenuListItem.vue",
+      "content": "<template>\n  <c-list-item v-bind=\"listItemProps\">\n    <slot />\n    <template v-if=\"slots.title\" #title>\n      <slot name=\"title\" />\n    </template>\n    <template v-if=\"slots.media\" #media>\n      <slot name=\"media\" />\n    </template>\n    <template v-if=\"slots.header\" #header>\n      <slot name=\"header\" />\n    </template>\n    <template v-if=\"slots.after\" #after>\n      <slot name=\"after\" />\n    </template>\n    <template v-if=\"slots.subtitle\" #subtitle>\n      <slot name=\"subtitle\" />\n    </template>\n    <template v-if=\"slots.text\" #text>\n      <slot name=\"text\" />\n    </template>\n    <template v-if=\"slots.footer\" #footer>\n      <slot name=\"footer\" />\n    </template>\n    <template v-if=\"slots.inner\" #inner>\n      <slot name=\"inner\" />\n    </template>\n    <template v-if=\"slots.content\" #content>\n      <slot name=\"content\" />\n    </template>\n  </c-list-item>\n</template>\n<script>\n  import { computed } from 'vue';\n  import cListItem from './ListItem.vue';\n\n  export default {\n    name: 'c-menu-list-item',\n    components: {\n      cListItem,\n    },\n    props: {\n      ...cListItem.props,\n      href: { type: [String, Boolean], default: undefined },\n      active: Boolean,\n    },\n    setup(props, ctx) {\n      const listItemProps = computed(() => ({\n        ...props,\n        menuListItem: true,\n        menuListItemActive: props.active,\n        href: props.href || false,\n      }));\n      return {\n        listItemProps,\n        slots: ctx.slots,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/MenuListItem.vue"
+    }
+  ]
+}

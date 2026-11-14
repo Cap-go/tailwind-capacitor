@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-tabbar-link",
+  "type": "registry:item",
+  "title": "Capacitor TabbarLink (Vue)",
+  "description": "Capacitor TabbarLink Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-link.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/TabbarLink.vue",
+      "content": "<template>\n  <c-link\n    tabbar\n    :tabbar-active=\"active\"\n    :component=\"component\"\n    :colors=\"colors\"\n    :touch-ripple=\"touchRipple\"\n    v-bind=\"linkProps\"\n  >\n    <span :class=\"c.content\">\n      <template v-if=\"slots.icon\">\n        <span :class=\"c.iconContainer\">\n          <span :class=\"c.iconBg\" />\n          <slot name=\"icon\" />\n        </span>\n      </template>\n      <template v-if=\"label || slots.label || slots.default\">\n        <span :class=\"c.label\">\n          {{ label }}\n          <slot name=\"label\" />\n          <slot />\n        </span>\n      </template>\n    </span>\n  </c-link>\n</template>\n<script>\n  import { computed, ref, onBeforeUpdate } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { TabbarLinkClasses } from '../../shared/classes/TabbarLinkClasses.js';\n\n  import { TabbarLinkColors } from '../../shared/colors/TabbarLinkColors.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n  import cLink from './Link.vue';\n\n  export default {\n    name: 'c-tabbar-link',\n    components: {\n      cLink,\n    },\n    props: {\n      component: {\n        type: String,\n        default: 'a',\n      },\n      colors: {\n        type: Object,\n      },\n      touchRipple: { type: Boolean, default: true },\n      linkProps: { type: Object, default: () => ({}) },\n      active: {\n        type: Boolean,\n        default: false,\n      },\n      label: { type: String, default: undefined },\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const colors = computed(() =>\n        TabbarLinkColors(props.colors, useDarkClasses)\n      );\n      const hasIcon = ref(ctx.slots.icon);\n      const hasLabel = ref(props.label || ctx.slots.label || ctx.slots.default);\n      const c = useThemeClasses(props, () =>\n        TabbarLinkClasses(\n          {\n            active: props.active,\n            hasIcon: hasIcon.value,\n            hasLabel: hasLabel.value,\n          },\n          colors.value\n        )\n      );\n      onBeforeUpdate(() => {\n        hasIcon.value = ctx.slots.icon;\n        hasLabel.value = props.label || ctx.slots.label || ctx.slots.default;\n      });\n      return {\n        c,\n        slots: ctx.slots,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/TabbarLink.vue"
+    }
+  ]
+}

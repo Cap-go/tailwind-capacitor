@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-range",
   "type": "registry:item",
-  "title": "Capacitor Range",
+  "title": "Capacitor Range (Vue)",
   "description": "Capacitor Range Vue component.",
   "dependencies": [
     "vue"

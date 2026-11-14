@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-actions",
+  "type": "registry:item",
+  "title": "Capacitor Actions (React)",
+  "description": "Capacitor Actions React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/Actions.tsx",
+      "content": "// @ts-nocheck\nimport React, { useRef } from 'react';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { ActionsClasses } from '../../shared/classes/ActionsClasses.js';\n\nconst Actions = (props) => {\n  const {\n    component = 'div',\n    className,\n\n    ios,\n    material,\n\n    opened,\n    backdrop = true,\n    onBackdropClick,\n\n    // Children\n    children,\n\n    ref,\n\n    // Rest\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const state = opened ? 'opened' : 'closed';\n\n  const Component = component;\n\n  const attrs = {\n    ...rest,\n  };\n\n  const themeClasses = useThemeClasses({ ios, material });\n\n  const c = themeClasses(ActionsClasses(props), className);\n\n  return (\n    <>\n      {backdrop && (\n        <div className={c.backdrop[state]} onClick={onBackdropClick} />\n      )}\n      <Component\n        ref={(el) => {\n          elRef.current = el;\n          if (ref && typeof ref === 'function') ref(el);\n          else if (ref) ref.current = el;\n        }}\n        className={c.base[state]}\n        {...attrs}\n      >\n        {children}\n      </Component>\n    </>\n  );\n};\n\nActions.displayName = 'Actions';\n\nexport default Actions;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/Actions.tsx"
+    }
+  ]
+}

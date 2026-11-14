@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-actions",
+  "type": "registry:item",
+  "title": "Capacitor Actions (Vue)",
+  "description": "Capacitor Actions Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Actions.vue",
+      "content": "<template>\n  <div v-if=\"backdrop\" :class=\"c.backdrop[state]\" @click=\"onBackdropClick\" />\n  <component :is=\"component\" :class=\"c.base[state]\">\n    <slot />\n  </component>\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { ActionsClasses } from '../../shared/classes/ActionsClasses.js';\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  export default {\n    name: 'c-actions',\n    props: {\n      component: {\n        type: String,\n        default: 'div',\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      opened: Boolean,\n      backdrop: { type: Boolean, default: true },\n    },\n    emits: ['backdropclick'],\n    setup(props, ctx) {\n      const context = useContext();\n      const useThemeClasses = themeClasses(context);\n      const state = computed(() => (props.opened ? 'opened' : 'closed'));\n\n      const c = useThemeClasses(props, () =>\n        ActionsClasses(props, ctx.attrs.class)\n      );\n\n      const onBackdropClick = (e) => {\n        ctx.emit('backdropclick', e);\n      };\n\n      return {\n        onBackdropClick,\n        c,\n        state,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Actions.vue"
+    }
+  ]
+}

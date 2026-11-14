@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-item-sliding",
+  "type": "registry:item",
+  "title": "Capacitor ItemSliding (React)",
+  "description": "Capacitor ItemSliding React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/ItemSliding.tsx",
+      "content": "// @ts-nocheck\nimport React from 'react';\nimport { ItemSlidingClasses } from '../../shared/classes/ItemSlidingClasses.js';\nimport { ItemSlidingColors } from '../../shared/colors/ItemSlidingColors.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\n\nconst ItemSliding = (props) => {\n  const {\n    component: Component = 'div',\n    className,\n    colors: colorsProp,\n    ios,\n    material,\n    children,\n    ...rest\n  } = props;\n  const themeClassesFn = useThemeClasses({ ios, material });\n  const colors = ItemSlidingColors(colorsProp);\n  const c = themeClassesFn(ItemSlidingClasses(props, colors, { className }), className);\n  return (\n    <Component className={c.base} {...rest}>\n      {children}\n    </Component>\n  );\n};\n\nItemSliding.displayName = 'ItemSliding';\nexport default ItemSliding;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/ItemSliding.tsx"
+    }
+  ]
+}

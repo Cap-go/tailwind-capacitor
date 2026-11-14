@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-app",
+  "type": "registry:item",
+  "title": "Capacitor App (React)",
+  "description": "Capacitor App React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/App.tsx",
+      "content": "// @ts-nocheck\nimport React, { useRef } from 'react';\nimport { TailwindCapacitorProvider } from '../shared/TailwindCapacitorProvider.tsx';\nimport { useAutoTheme } from '../shared/use-auto-theme.js';\nimport { AppClasses } from '../../shared/classes/AppClasses.js';\n\nconst App = (props) => {\n  const {\n    component = 'div',\n    className,\n\n    theme = 'material',\n    dark = true,\n    touchRipple = true,\n    touchHighlight = true,\n    safeAreas = true,\n\n    ref,\n\n    // Children\n    children,\n\n    // Rest\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const Component = component;\n\n  const attrs = {\n    ...rest,\n  };\n\n  const currentTheme = useAutoTheme(theme);\n\n  const classes = AppClasses({ ...props, safeAreas }, currentTheme, className);\n\n  return (\n    <TailwindCapacitorProvider\n      theme={currentTheme}\n      dark={dark}\n      touchRipple={touchRipple}\n      touchHighlight={touchHighlight}\n      autoThemeDetection={false}\n    >\n      <Component\n        ref={(el) => {\n          elRef.current = el;\n          if (ref && typeof ref === 'function') ref(el);\n          else if (ref) ref.current = el;\n        }}\n        className={classes}\n        {...attrs}\n      >\n        {children}\n      </Component>\n    </TailwindCapacitorProvider>\n  );\n};\n\nApp.displayName = 'App';\n\nexport default App;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/App.tsx"
+    }
+  ]
+}

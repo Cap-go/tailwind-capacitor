@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-checkbox",
+  "type": "registry:item",
+  "title": "Capacitor Checkbox (Angular)",
+  "description": "Capacitor Checkbox Angular component.",
+  "dependencies": [
+    "@angular/core"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-icons.json"
+  ],
+  "files": [
+    {
+      "path": "src/angular/components/Checkbox.component.ts",
+      "content": "import {\n  Component,\n  Input,\n  Output,\n  EventEmitter,\n  inject,\n  OnInit,\n  OnChanges,\n  DoCheck,\n  ChangeDetectorRef,\n  ViewChild,\n  ElementRef,\n  AfterViewInit,\n} from '@angular/core';\nimport { CheckboxClasses } from '../../shared/classes/CheckboxClasses.js';\nimport { CheckboxColors } from '../../shared/colors/CheckboxColors.js';\nimport { CAPACITOR_CONTEXT } from '../shared/capacitor-context.js';\nimport { resolveTheme, themeClasses } from '../shared/use-theme-classes.js';\nimport { cls } from '../../shared/cls.js';\nimport { CheckboxIconComponent } from './icons/CheckboxIcon.component.js';\n\n@Component({\n  selector: 'c-checkbox',\n  standalone: true,\n  imports: [CheckboxIconComponent],\n  template: `<label [class]=\"resolveClass(c['base'])\" [attr.aria-checked]=\"checked || indeterminate\">\n    <input\n      #inputEl\n      type=\"checkbox\"\n      [class]=\"resolveClass(c['input'])\"\n      [name]=\"name\"\n      [value]=\"value\"\n      [disabled]=\"disabled\"\n      [readOnly]=\"readonly\"\n      [checked]=\"checked\"\n      (change)=\"onCheckedChange($event)\"\n    />\n    <i [class]=\"resolveStateClass(c['iconWrap'], state)\">\n      @if (indeterminate) {\n        <span [class]=\"resolveClass(c['indeterminateIcon'])\"></span>\n      } @else {\n        <c-checkbox-icon [ios]=\"ios\" [material]=\"material\" [class]=\"resolveStateClass(c['icon'], state)\" />\n      }\n    </i>\n    <ng-content />\n  </label>`,\n})\nexport class CheckboxComponent implements OnInit, OnChanges, AfterViewInit, DoCheck {\n  @Input() ios?: boolean;\n  @Input() material?: boolean;\n  @Input() colors?: Record<string, unknown>;\n  @Input() class = '';\n  @Input() checked = false;\n  @Input() indeterminate = false;\n  @Input() name?: string;\n  @Input() value?: string | number;\n  @Input() disabled = false;\n  @Input() readonly = false;\n\n  @Output() checkedChange = new EventEmitter<Event>();\n\n  @ViewChild('inputEl') inputEl?: ElementRef<HTMLInputElement>;\n\n  c: Record<string, unknown> = {};\n  state: 'checked' | 'notChecked' = 'notChecked';\n\n  resolveClass(value: unknown): string {\n    if (typeof value === 'string') return value;\n    if (value && typeof value === 'object') {\n      const obj = value as Record<string, unknown>;\n      const d = obj['default'];\n      if (typeof d === 'string') return d;\n    }\n    return '';\n  }\n\n  resolveStateClass(value: unknown, state: string): string {\n    if (!value || typeof value !== 'object') return '';\n    const bucket = value as Record<string, unknown>;\n    return this.resolveClass(bucket[state]);\n  }\n\n  private lastCtxDark?: boolean;\n  private readonly cdr = inject(ChangeDetectorRef);\n\n  ngDoCheck(): void {\n    if (this.lastCtxDark !== this.ctx.dark) {\n      this.lastCtxDark = this.ctx.dark;\n      this.syncClasses();\n      this.cdr.markForCheck();\n    }\n  }\n\n  onCheckedChange(ev: Event): void {\n    ev.stopPropagation();\n    this.checkedChange.emit(ev);\n  }\n\n  private readonly ctx = inject(CAPACITOR_CONTEXT);\n\n  ngOnInit(): void {\n    this.lastCtxDark = this.ctx.dark;\n    this.syncClasses();\n  }\n\n  ngOnChanges(): void {\n    this.syncClasses();\n    this.syncIndeterminate();\n  }\n\n  ngAfterViewInit(): void {\n    this.syncIndeterminate();\n  }\n\n  private syncIndeterminate(): void {\n    if (this.inputEl?.nativeElement) {\n      this.inputEl.nativeElement.indeterminate = this.indeterminate;\n    }\n  }\n\n  private syncClasses(): void {\n    this.state =\n      this.checked || this.indeterminate ? 'checked' : 'notChecked';\n    const theme = resolveTheme(this.ctx, this);\n    const dark = (classNames: string) => (this.ctx.dark ? classNames : '');\n    const colors = CheckboxColors(this.colors || {}, dark);\n    const props = this as Record<string, unknown>;\n    const raw = CheckboxClasses(props, colors, { className: this.class }, dark);\n    this.c = themeClasses(raw, theme, this.class);\n  }\n}\n",
+      "type": "registry:file",
+      "target": "src/capacitor/angular/components/Checkbox.component.ts"
+    }
+  ]
+}

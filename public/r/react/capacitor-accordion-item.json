@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-accordion-item",
+  "type": "registry:item",
+  "title": "Capacitor AccordionItem (React)",
+  "description": "Capacitor AccordionItem React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/AccordionItem.tsx",
+      "content": "// @ts-nocheck\nimport React from 'react';\nimport { AccordionItemClasses } from '../../shared/classes/AccordionItemClasses.js';\nimport { AccordionItemColors } from '../../shared/colors/AccordionItemColors.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\n\nconst AccordionItem = (props) => {\n  const {\n    component: Component = 'div',\n    className,\n    colors: colorsProp,\n    ios,\n    material,\n    children,\n    ...rest\n  } = props;\n  const themeClassesFn = useThemeClasses({ ios, material });\n  const colors = AccordionItemColors(colorsProp);\n  const c = themeClassesFn(AccordionItemClasses(props, colors, { className }), className);\n  return (\n    <Component className={c.base} {...rest}>\n      {children}\n    </Component>\n  );\n};\n\nAccordionItem.displayName = 'AccordionItem';\nexport default AccordionItem;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/AccordionItem.tsx"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-sheet",
+  "type": "registry:item",
+  "title": "Capacitor Sheet (Vue)",
+  "description": "Capacitor Sheet Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Sheet.vue",
+      "content": "<template>\n  <div v-if=\"backdrop\" :class=\"c.backdrop[state]\" @click=\"onBackdropClick\" />\n  <component :is=\"component\" :class=\"classes\">\n    <slot />\n  </component>\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { cls } from '../../shared/cls.js';\n\n  import { SheetClasses } from '../../shared/classes/SheetClasses.js';\n\n  import { SheetColors } from '../../shared/colors/SheetColors.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  export default {\n    name: 'c-sheet',\n    props: {\n      component: {\n        type: String,\n        default: 'div',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      opened: Boolean,\n      backdrop: { type: Boolean, default: true },\n    },\n    emits: ['backdropclick'],\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const state = computed(() => (props.opened ? 'opened' : 'closed'));\n\n      const colors = computed(() =>\n        SheetColors(props.colors || {}, useDarkClasses)\n      );\n\n      const c = useThemeClasses(props, () =>\n        SheetClasses(props, colors.value, ctx.attrs.class)\n      );\n\n      const onBackdropClick = (e) => {\n        ctx.emit('backdropclick', e);\n      };\n\n      const classes = computed(() =>\n        cls(c.value.base[state.value], ctx.attrs.class)\n      );\n\n      return {\n        onBackdropClick,\n        c,\n        state,\n        classes,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Sheet.vue"
+    }
+  ]
+}

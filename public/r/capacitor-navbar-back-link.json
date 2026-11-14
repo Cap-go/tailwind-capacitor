@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-navbar-back-link",
   "type": "registry:item",
-  "title": "Capacitor NavbarBackLink",
+  "title": "Capacitor NavbarBackLink (Vue)",
   "description": "Capacitor NavbarBackLink Vue component.",
   "dependencies": [
     "vue"

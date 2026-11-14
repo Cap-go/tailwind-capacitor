@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-segmented-button",
   "type": "registry:item",
-  "title": "Capacitor SegmentedButton",
+  "title": "Capacitor SegmentedButton (Vue)",
   "description": "Capacitor SegmentedButton Vue component.",
   "dependencies": [
     "vue"

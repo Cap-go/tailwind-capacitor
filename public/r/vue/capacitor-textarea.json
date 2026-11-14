@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-textarea",
+  "type": "registry:item",
+  "title": "Capacitor Textarea (Vue)",
+  "description": "Capacitor Textarea Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-list.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-list-input.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Textarea.vue",
+      "content": "<template>\n  <c-list strong inset class=\"!my-0\">\n    <c-list-input type=\"textarea\" :label=\"label\" :placeholder=\"placeholder\" />\n  </c-list>\n</template>\n<script>\n  import cList from './List.vue';\n  import cListInput from './ListInput.vue';\n\n  export default {\n    name: 'c-textarea',\n    components: { cList, cListInput },\n    props: {\n      label: { type: String, default: 'Notes' },\n      placeholder: { type: String, default: '' },\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Textarea.vue"
+    }
+  ]
+}

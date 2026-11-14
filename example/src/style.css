@@ -3,6 +3,180 @@
 @source "./**/*.vue";
 @source "./capacitor/**/*.vue";
 
+.demo-shell {
+  min-height: 0;
+  padding-bottom: 1.5rem;
+}
+
+.demo-shell .c-block-title {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem !important;
+  position: relative;
+  z-index: 2;
+}
+
+.demo-shell .c-block-title + * {
+  margin-top: 0 !important;
+}
+
+.dark .demo-shell .c-segmented {
+  background-color: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.demo-media-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  margin-bottom: 0;
+}
+
+.demo-thumbnail img {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.demo-item-sliding {
+  padding: 0.75rem;
+}
+
+.demo-page .c-reorder .c-list {
+  width: 100%;
+}
+
+.demo-split-pane > * {
+  min-width: 0;
+  flex: 1 1 0%;
+}
+
+html,
+body {
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+#app,
+#app > div,
+#app .c-app,
+#app .c-app > div,
+#app .min-h-full,
+#app .min-h-screen,
+#app .h-full {
+  display: block;
+  position: relative !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.demo-page.safe-areas.c-page,
+.demo-page.no-safe-areas-top {
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+/* Demo chrome (navbar, tabbar, links) must stay content-sized, not viewport tall */
+.demo-page .c-navbar,
+.demo-page .c-app {
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+.demo-page.c-page {
+  position: relative !important;
+  inset: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+.demo-page .c-toolbar,
+.demo-page .c-header,
+.demo-page .c-footer {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  padding-bottom: 0 !important;
+}
+
+.demo-page .c-navbar {
+  position: relative !important;
+  top: auto !important;
+  padding-top: 0 !important;
+}
+
+.demo-page .c-navbar > div:nth-child(2),
+.demo-page .c-toolbar > div:nth-child(2) {
+  position: relative !important;
+  z-index: 1;
+  height: auto !important;
+  min-height: 2.75rem;
+  max-height: 4rem;
+}
+
+.demo-page .c-link {
+  height: auto !important;
+  max-height: 4rem !important;
+  align-self: center !important;
+}
+
+.demo-page .c-toolbar > div:first-child {
+  height: 100% !important;
+  max-height: 100% !important;
+}
+
+.demo-page .c-tabbar .c-toolbar,
+.demo-page .c-tabbar {
+  height: auto !important;
+  max-height: 4rem !important;
+}
+
+.demo-back-row {
+  height: auto !important;
+  min-height: 0 !important;
+  align-items: center !important;
+}
+
+.demo-page .h-full {
+  height: auto !important;
+}
+
+.theme-chip {
+  appearance: none;
+  cursor: pointer;
+  border-radius: 9999px;
+  border: 2px solid var(--color-primary, #007aff);
+  background: transparent;
+  color: var(--color-primary, #007aff);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0.35rem 0.85rem;
+}
+
+.theme-chip.theme-chip-active {
+  background-color: var(--color-primary, #007aff);
+  border-color: var(--color-primary, #007aff);
+  color: #ffffff !important;
+}
+
+.dark .theme-chip:not(.theme-chip-active) {
+  border-color: var(--color-primary, #0a84ff);
+  color: var(--color-primary, #0a84ff);
+}
+
 body {
   margin: 0;
   font-family:

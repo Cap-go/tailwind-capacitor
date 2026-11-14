@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-icon",
+  "type": "registry:item",
+  "title": "Capacitor Icon (React)",
+  "description": "Capacitor Icon React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-badge.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/Icon.tsx",
+      "content": "// @ts-nocheck\nimport React, { useRef } from 'react';\nimport { useTheme } from '../shared/use-theme.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport Badge from './Badge.tsx';\nimport { IconClasses } from '../../shared/classes/IconClasses.js';\n\nconst Icon = (props) => {\n  const {\n    component = 'i',\n    className,\n\n    ios,\n    material,\n\n    badge,\n    badgeColors,\n\n    // Children\n    children,\n\n    ref,\n\n    // Rest\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const Component = component;\n\n  const attrs = {\n    ...rest,\n  };\n\n  const themeClasses = useThemeClasses();\n  const theme = useTheme();\n\n  const c = themeClasses(IconClasses(), className);\n\n  return (\n    <Component\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      className={c.base}\n      {...attrs}\n    >\n      {theme === 'ios' ? ios : material}\n      {typeof badge !== 'undefined' && badge !== null && (\n        <Badge small className={c.badge} colors={badgeColors}>\n          {badge}\n        </Badge>\n      )}\n      {children}\n    </Component>\n  );\n};\n\nIcon.displayName = 'Icon';\n\nexport default Icon;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/Icon.tsx"
+    }
+  ]
+}

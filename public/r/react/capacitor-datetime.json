@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-datetime",
+  "type": "registry:item",
+  "title": "Capacitor Datetime (React)",
+  "description": "Capacitor Datetime React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/Datetime.tsx",
+      "content": "// @ts-nocheck\nimport React from 'react';\nimport { DatetimeClasses } from '../../shared/classes/DatetimeClasses.js';\nimport { DatetimeColors } from '../../shared/colors/DatetimeColors.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\n\nconst Datetime = (props) => {\n  const {\n    component: Component = 'div',\n    className,\n    colors: colorsProp,\n    ios,\n    material,\n    children,\n    ...rest\n  } = props;\n  const themeClassesFn = useThemeClasses({ ios, material });\n  const colors = DatetimeColors(colorsProp);\n  const c = themeClassesFn(DatetimeClasses(props, colors, { className }), className);\n  return (\n    <Component className={c.base} {...rest}>\n      {children}\n    </Component>\n  );\n};\n\nDatetime.displayName = 'Datetime';\nexport default Datetime;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/Datetime.tsx"
+    }
+  ]
+}

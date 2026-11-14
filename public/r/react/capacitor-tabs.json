@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-tabs",
+  "type": "registry:item",
+  "title": "Capacitor Tabs (React)",
+  "description": "Capacitor Tabs React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-segmented.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/Tabs.tsx",
+      "content": "// @ts-nocheck\nimport React from 'react';\nimport Segmented from './Segmented.tsx';\n\nconst Tabs = (props) => {\n  const { children, ...rest } = props;\n  return (\n    <Segmented strong rounded {...rest}>\n      {children}\n    </Segmented>\n  );\n};\n\nTabs.displayName = 'Tabs';\nexport default Tabs;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/Tabs.tsx"
+    }
+  ]
+}

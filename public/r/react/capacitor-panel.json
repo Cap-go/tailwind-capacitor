@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-panel",
+  "type": "registry:item",
+  "title": "Capacitor Panel (React)",
+  "description": "Capacitor Panel React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/Panel.tsx",
+      "content": "// @ts-nocheck\nimport React, { useRef } from 'react';\nimport { cls } from '../../shared/cls.js';\nimport { PanelClasses } from '../../shared/classes/PanelClasses.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { PanelColors } from '../../shared/colors/PanelColors.js';\nimport Glass from './Glass.tsx';\nimport { useTheme } from '../shared/use-theme.js';\n\nconst Panel = (props) => {\n  const {\n    component = 'div',\n    className,\n    colors: colorsProp,\n\n    side = 'left',\n    opened,\n    backdrop = true,\n    floating = false,\n    onBackdropClick,\n\n    ios,\n    material,\n\n    // Children\n    children,\n\n    ref,\n\n    // Rest\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const state = opened ? 'opened' : 'closed';\n\n  const Component = component;\n\n  const attrs = {\n    ...rest,\n  };\n\n  const theme = useTheme({ ios, material });\n\n  const themeClasses = useThemeClasses({ ios, material });\n  const dark = useDarkClasses();\n\n  const colors = PanelColors(colorsProp, dark);\n\n  const c = themeClasses(\n    PanelClasses({ ...props, floating }, colors),\n    className\n  );\n\n  const classes = cls(c.base, c[side][state]);\n\n  const setRef = (el) => {\n    elRef.current = el;\n    if (ref && typeof ref === 'function') ref(el);\n    else if (ref) ref.current = el;\n  };\n\n  return (\n    <>\n      {backdrop && (\n        <div className={c.backdrop[state]} onClick={onBackdropClick} />\n      )}\n      {theme === 'ios' && floating ? (\n        <Glass\n          component={component}\n          ref={setRef}\n          className={classes}\n          highlight={false}\n          {...attrs}\n        >\n          {children}\n        </Glass>\n      ) : (\n        <Component ref={setRef} className={classes} {...attrs}>\n          {children}\n        </Component>\n      )}\n    </>\n  );\n};\n\nPanel.displayName = 'Panel';\n\nexport default Panel;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/Panel.tsx"
+    },
+    {
+      "path": "src/react/components/Glass.tsx",
+      "content": "// @ts-nocheck\nimport React, { useEffect, useRef, useContext } from 'react';\nimport { GlassClasses } from '../../shared/classes/GlassClasses.js';\nimport { GlassColors } from '../../shared/colors/GlassColors.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { useTheme } from '../shared/use-theme.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\nimport { useIosHighlight } from '../../shared/use-ios-highlight.js';\nimport { CapacitorContext } from '../shared/CapacitorContext.js';\n\nconst Glass = (props) => {\n  const {\n    component = 'div',\n    colors: colorsProp,\n    className,\n    highlight = true,\n\n    ios,\n    material,\n\n    // Children\n    children,\n\n    ref,\n\n    // Rest\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const Component = component;\n\n  const attrs = {\n    ...rest,\n  };\n\n  const theme = useTheme();\n\n  const themeClasses = useThemeClasses({ ios, material });\n  const dark = useDarkClasses();\n\n  const colors = GlassColors(colorsProp, dark);\n\n  const { touchHighlight } = useContext(CapacitorContext);\n\n  const highlightData = useRef({});\n  const { attachEvents, detachEvents } = useIosHighlight({\n    getEl: () => elRef.current,\n    enabled: highlight && theme === 'ios' && touchHighlight,\n    data: highlightData.current,\n  });\n\n  const c = themeClasses(GlassClasses(props, colors), className);\n\n  useEffect(() => {\n    attachEvents();\n    return () => detachEvents();\n  });\n\n  return (\n    <Component\n      ref={(el) => {\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n        elRef.current = el;\n      }}\n      className={c.base}\n      {...attrs}\n    >\n      {children}\n    </Component>\n  );\n};\n\nGlass.displayName = 'Glass';\n\nexport default Glass;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/Glass.tsx"
+    }
+  ]
+}

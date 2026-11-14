@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-breadcrumbs-separator",
   "type": "registry:item",
-  "title": "Capacitor BreadcrumbsSeparator",
+  "title": "Capacitor BreadcrumbsSeparator (Vue)",
   "description": "Capacitor BreadcrumbsSeparator Vue component.",
   "dependencies": [
     "vue"

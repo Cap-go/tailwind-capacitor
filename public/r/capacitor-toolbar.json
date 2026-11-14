@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-toolbar",
   "type": "registry:item",
-  "title": "Capacitor Toolbar",
+  "title": "Capacitor Toolbar (Vue)",
   "description": "Capacitor Toolbar Vue component.",
   "dependencies": [
     "vue"

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-stepper",
   "type": "registry:item",
-  "title": "Capacitor Stepper",
+  "title": "Capacitor Stepper (Vue)",
   "description": "Capacitor Stepper Vue component.",
   "dependencies": [
     "vue"

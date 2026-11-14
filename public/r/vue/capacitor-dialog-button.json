@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-dialog-button",
+  "type": "registry:item",
+  "title": "Capacitor DialogButton (Vue)",
+  "description": "Capacitor DialogButton Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-button.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/DialogButton.vue",
+      "content": "<template>\n  <component\n    :is=\"Component\"\n    v-if=\"theme === 'ios'\"\n    ref=\"rippleElRef\"\n    :class=\"c.base\"\n    :disabled=\"disabled\"\n    role=\"button\"\n    tabindex=\"0\"\n  >\n    <slot />\n  </component>\n  <c-button\n    v-else\n    :component=\"component\"\n    inline\n    rounded\n    :disabled=\"disabled\"\n    :clear=\"!isStrong\"\n  >\n    <slot />\n  </c-button>\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  import { useTheme } from '../shared/use-theme.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  import { DialogButtonClasses } from '../../shared/classes/DialogButtonClasses.js';\n\n  import { DialogButtonColors } from '../../shared/colors/DialogButtonColors.js';\n  import Button from './Button.vue';\n\n  export default {\n    name: 'c-dialog-button',\n    components: { cButton: Button },\n    props: {\n      component: {\n        type: String,\n        default: 'button',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n\n      strong: { type: Boolean, default: undefined },\n      strongIos: { type: Boolean, default: false },\n      strongMaterial: { type: Boolean, default: false },\n\n      disabled: {\n        type: Boolean,\n        default: false,\n      },\n    },\n    setup(props) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const Component = computed(() => props.component);\n      const theme = useTheme({}, context);\n\n      const isStrong = computed(() =>\n        typeof props.strong === 'undefined'\n          ? theme.value === 'ios'\n            ? props.strongIos\n            : props.strongMaterial\n          : props.strong\n      );\n\n      const colors = computed(() =>\n        DialogButtonColors(props.colors || {}, useDarkClasses)\n      );\n\n      const c = useThemeClasses(props, () =>\n        DialogButtonClasses({ props, strong: isStrong.value }, colors.value)\n      );\n\n      return {\n        theme,\n        c,\n        isStrong,\n        Component,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/DialogButton.vue"
+    }
+  ]
+}

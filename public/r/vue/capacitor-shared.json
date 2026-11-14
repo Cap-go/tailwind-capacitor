@@ -1,0 +1,1986 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-shared",
+  "type": "registry:item",
+  "title": "Tailwind Capacitor shared tokens",
+  "description": "Shared class and color maps for capacitor components.",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json"
+  ],
+  "files": [
+    {
+      "path": "src/shared/calc-popover-position.js",
+      "content": "export const calcPopoverPosition = ({\n  popoverEl,\n  targetEl,\n  angleEl,\n  needsAngle,\n  targetX,\n  targetY,\n  targetWidth = 0,\n  targetHeight = 0,\n  theme,\n}) => {\n  if (targetEl.current) {\n    targetEl = targetEl.current;\n  } else if (targetEl.value) {\n    targetEl = targetEl.value;\n  } else if (targetEl.el) {\n    targetEl = targetEl.el;\n  } else if (targetEl.$el) {\n    targetEl = targetEl.$el;\n  }\n\n  if (typeof targetEl === 'string') {\n    // eslint-disable-next-line\n    targetEl = document.querySelector(targetEl);\n  }\n\n  /* eslint-disable */\n  let appWidth = document.body.offsetWidth;\n  let appHeight = document.body.offsetHeight;\n  if (appWidth === 0) {\n    appWidth = window.innerWidth;\n  }\n  if (appHeight === 0) {\n    appHeight = window.innerHeight;\n  }\n  /* eslint-enable */\n  const [popoverWidth, popoverHeight] = [\n    popoverEl.offsetWidth,\n    popoverEl.offsetHeight,\n  ];\n  let angleSize = 0;\n  let angleLeft;\n  let angleTop;\n  let anglePosition = '';\n  if (needsAngle) {\n    angleSize = angleEl.offsetWidth / 2;\n  }\n\n  let targetOffsetLeft;\n  let targetOffsetTop;\n  let safeAreaTop = 0;\n  let safeAreaLeft = 0;\n  let safeAreaRight = 0;\n  if (targetEl) {\n    // eslint-disable-next-line\n    const targetElStyles = window.getComputedStyle(targetEl);\n    safeAreaTop =\n      parseInt(targetElStyles.getPropertyValue('--c-safe-area-top'), 10) || 0;\n    safeAreaLeft =\n      parseInt(targetElStyles.getPropertyValue('--c-safe-area-left'), 10) || 0;\n    safeAreaRight =\n      parseInt(targetElStyles.getPropertyValue('--c-safe-area-right'), 10) || 0;\n    if (Number.isNaN(safeAreaTop)) safeAreaTop = 0;\n    if (Number.isNaN(safeAreaLeft)) safeAreaLeft = 0;\n    if (Number.isNaN(safeAreaRight)) safeAreaRight = 0;\n    targetWidth = targetEl.offsetWidth;\n    targetHeight = targetEl.offsetHeight;\n\n    const targetElBox = targetEl.getBoundingClientRect();\n    targetOffsetLeft = targetElBox.left;\n    targetOffsetTop = targetElBox.top;\n  } else if (typeof targetX !== 'undefined' && targetY !== 'undefined') {\n    targetOffsetLeft = targetX;\n    targetOffsetTop = targetY;\n  }\n\n  let [left, top, diff] = [0, 0, 0];\n\n  const angleMin = theme === 'ios' ? 13 : 23;\n\n  // Top Position\n  let position = 'top';\n\n  if (popoverHeight + angleSize < targetOffsetTop - safeAreaTop) {\n    // On top\n    top = targetOffsetTop - popoverHeight - angleSize;\n  } else if (\n    popoverHeight + angleSize <\n    appHeight - targetOffsetTop - targetHeight\n  ) {\n    // On bottom\n    position = 'bottom';\n    top = targetOffsetTop + targetHeight + angleSize;\n  } else {\n    // On middle\n    position = 'middle';\n    top = targetHeight / 2 + targetOffsetTop - popoverHeight / 2;\n    diff = top;\n    top = Math.max(5, Math.min(top, appHeight - popoverHeight - 5));\n    diff -= top;\n  }\n\n  // Horizontal Position\n  if (position === 'top' || position === 'bottom') {\n    left = targetWidth / 2 + targetOffsetLeft - popoverWidth / 2;\n    diff = left;\n    left = Math.max(5, Math.min(left, appWidth - popoverWidth - 5));\n    if (safeAreaLeft) {\n      left = Math.max(left, safeAreaLeft);\n    }\n    if (safeAreaRight && left + popoverWidth > appWidth - 5 - safeAreaRight) {\n      left = appWidth - 5 - safeAreaRight - popoverWidth;\n    }\n    if (position === 'top') {\n      anglePosition = 'bottom';\n    }\n    if (position === 'bottom') {\n      anglePosition = 'top';\n    }\n    diff -= left;\n    angleLeft = popoverWidth / 2 - angleSize + diff;\n    angleLeft = Math.max(\n      Math.min(angleLeft, popoverWidth - angleSize * 2 - angleMin),\n      angleMin\n    );\n  } else if (position === 'middle') {\n    left = targetOffsetLeft - popoverWidth - angleSize;\n    anglePosition = 'right';\n    if (\n      left < 5 ||\n      left + popoverWidth + safeAreaRight > appWidth ||\n      left < safeAreaLeft\n    ) {\n      if (left < 5) left = targetOffsetLeft + targetWidth + angleSize;\n      if (left + popoverWidth + safeAreaRight > appWidth)\n        left = appWidth - popoverWidth - 5 - safeAreaRight;\n      if (left < safeAreaLeft) left = safeAreaLeft;\n      anglePosition = 'left';\n    }\n    angleTop = popoverHeight / 2 - angleSize + diff;\n    angleTop = Math.max(\n      Math.min(angleTop, popoverHeight - angleSize * 2 - angleMin),\n      angleMin\n    );\n  }\n\n  const popoverVerticalPosition = position;\n  const popoverHorizontalPosition = left < targetOffsetLeft ? 'left' : 'right';\n\n  return {\n    set: true,\n    angleTop: typeof angleTop === 'undefined' ? undefined : `${angleTop}px`,\n    angleLeft: typeof angleLeft === 'undefined' ? undefined : `${angleLeft}px`,\n    anglePosition,\n    popoverTop: `${top}px`,\n    popoverLeft: `${left}px`,\n    popoverPosition: `${popoverVerticalPosition}-${popoverHorizontalPosition}`,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/calc-popover-position.js"
+    },
+    {
+      "path": "src/shared/classes/AccordionClasses.d.ts",
+      "content": "export const AccordionClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/AccordionClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/AccordionClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const AccordionClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls('overflow-hidden', className),\n    ios: cls('rounded-xl hairline', colors.bgIos),\n    material: cls('rounded-2xl elevation-1', colors.bgMaterial),\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/AccordionClasses.js"
+    },
+    {
+      "path": "src/shared/classes/AccordionItemClasses.d.ts",
+      "content": "export const AccordionItemClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/AccordionItemClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/AccordionItemClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const AccordionItemClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(\n      'flex items-center justify-between w-full px-4 py-3 text-left text-sm font-medium cursor-pointer',\n      className,\n    ),\n    ios: cls('hairline-b last:hairline-b-0', colors.textIos, colors.activeIos),\n    material: cls(colors.textMaterial, colors.activeMaterial),\n  },\n  chevron: {\n    common: 'opacity-40 ms-2 shrink-0',\n    ios: 'w-2 h-2',\n    material: 'w-2 h-2',\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/AccordionItemClasses.js"
+    },
+    {
+      "path": "src/shared/classes/ActionsButtonClasses.d.ts",
+      "content": "export const ActionsButtonClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ActionsButtonClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/ActionsButtonClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ActionsButtonClasses = (props, colors, darkClasses) => {\n  const { fontSizeIos, fontSizeMaterial, bold, dividers } = props;\n  return {\n    base: {\n      common: cls(\n        `flex items-center w-full px-4 relative z-10 overflow-hidden`,\n        dividers && 'hairline-b'\n      ),\n      ios: cls(\n        `h-14`,\n        colors.textIos,\n        colors.bgIos,\n        colors.activeBgIos,\n        fontSizeIos,\n        'first:rounded-t-xl last:rounded-b-xl justify-center',\n        bold && 'font-semibold'\n      ),\n      material: cls(\n        `h-12`,\n        colors.textMaterial,\n        colors.bgMaterial,\n        colors.activeBgMaterial,\n        fontSizeMaterial,\n        'justify-start',\n        darkClasses('dark:touch-ripple-white'),\n        bold && 'font-medium'\n      ),\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ActionsButtonClasses.js"
+    },
+    {
+      "path": "src/shared/classes/ActionsClasses.d.ts",
+      "content": "export const ActionsClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ActionsClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/ActionsClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const ActionsClasses = (props, classes) => {\n  return {\n    base: {\n      common: cls(\n        'transition-transform z-40 left-1/2 bottom-0 transform -translate-x-1/2 max-w-md w-full overflow-hidden',\n        positionClass('fixed', classes)\n      ),\n      ios: 'pt-2 px-2 pb-2-safe duration-300',\n      material:\n        'pb-safe last-child-hairline-b-none rounded-t-2xl duration-400 ease-material-in',\n      opened: '',\n      closed: 'translate-y-full',\n    },\n    backdrop: {\n      common:\n        'fixed z-40 w-full h-full left-0 top-0 bg-black bg-opacity-50 duration-300',\n      opened: '',\n      closed: 'opacity-0 pointer-events-none',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ActionsClasses.js"
+    },
+    {
+      "path": "src/shared/classes/ActionsGroupClasses.d.ts",
+      "content": "export const ActionsGroupClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ActionsGroupClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/ActionsGroupClasses.js",
+      "content": "import { cls } from '../cls.js';\n\n// eslint-disable-next-line\nexport const ActionsGroupClasses = (props) => {\n  const { dividers } = props;\n  return {\n    base: {\n      common: `relative`,\n      ios: `mt-2 first:mt-0 last-child-hairline-b-none`,\n      material: cls(dividers && `hairline-b`),\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ActionsGroupClasses.js"
+    },
+    {
+      "path": "src/shared/classes/ActionsLabelClasses.d.ts",
+      "content": "export const ActionsLabelClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ActionsLabelClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/ActionsLabelClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ActionsLabelClasses = (props, colors) => {\n  const { fontSizeIos, fontSizeMaterial, dividers } = props;\n  return {\n    base: {\n      common: cls(\n        `flex items-center w-full px-4 relative z-10 overflow-hidden ${colors.activeBg}`,\n        dividers && 'hairline-b'\n      ),\n      ios: cls(\n        `h-14`,\n        colors.bgIos,\n        colors.textIos,\n        fontSizeIos,\n        'first:rounded-t-xl last:rounded-b-xl justify-center'\n      ),\n      material: cls(\n        `h-12`,\n        colors.bgMaterial,\n        colors.textMaterial,\n        fontSizeMaterial,\n        'font-medium',\n        'justify-start'\n      ),\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ActionsLabelClasses.js"
+    },
+    {
+      "path": "src/shared/classes/AlertClasses.d.ts",
+      "content": "export const AlertClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/AlertClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/AlertClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const AlertClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls('px-4 py-3 text-sm font-medium mb-2', className),\n    ios: cls('rounded-xl', colors.bgIos, colors.textIos),\n    material: cls('rounded-lg elevation-1', colors.bgMaterial, colors.textMaterial),\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/AlertClasses.js"
+    },
+    {
+      "path": "src/shared/classes/AppClasses.d.ts",
+      "content": "export const AppClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/AppClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/AppClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const AppClasses = (props, currentTheme, classes) => {\n  const { safeAreas } = props;\n  return cls(\n    currentTheme === 'ios' && `c-ios`,\n    currentTheme === 'material' && 'c-material',\n    'c-app w-full h-full min-h-screen',\n    safeAreas && 'safe-areas',\n    positionClass('relative', classes),\n    classes\n  );\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/AppClasses.js"
+    },
+    {
+      "path": "src/shared/classes/AvatarClasses.d.ts",
+      "content": "export const AvatarClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/AvatarClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/AvatarClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const AvatarClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(\n      'inline-flex items-center justify-center font-semibold shrink-0 select-none',\n      className,\n    ),\n    ios: cls('w-12 h-12 text-base rounded-full', colors.bgIos, colors.textIos),\n    material: cls(\n      'w-10 h-10 text-sm rounded-full',\n      colors.bgMaterial,\n      colors.textMaterial,\n    ),\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/AvatarClasses.js"
+    },
+    {
+      "path": "src/shared/classes/BadgeClasses.d.ts",
+      "content": "export const BadgeClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/BadgeClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/BadgeClasses.js",
+      "content": "export const BadgeClasses = (props, colors) => {\n  return {\n    base: {\n      common: `${colors.text} ${colors.bg} inline-flex items-center justify-center rounded-full leading-none`,\n      ios: `font-semibold`,\n      material: `font-medium`,\n      sm: 'text-2xs min-w-4 min-h-4 px-0.5',\n      md: 'text-xs min-w-5 min-h-5 px-1.5 py-0.5',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/BadgeClasses.js"
+    },
+    {
+      "path": "src/shared/classes/BlockClasses.d.ts",
+      "content": "export const BlockClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/BlockClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/BlockClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const BlockClasses = (props, colors, classes) => {\n  const { inset, nested, margin, padding, strong, outline } = props;\n  return {\n    base: {\n      common: cls(\n        `text-sm z-10`,\n        positionClass('relative', classes),\n        !inset && !nested && outline && 'hairline-t hairline-b',\n        inset && outline && 'border',\n        inset && 'px-4',\n        !inset && 'pl-4-safe pr-4-safe',\n        !nested && margin,\n        (strong || outline) && padding\n      ),\n      ios: cls(\n        colors.textIos,\n        strong && colors.strongBgIos,\n        inset && outline && colors.outlineIos\n      ),\n      material: cls(\n        colors.textMaterial,\n        strong && colors.strongBgMaterial,\n        inset && outline && colors.outlineMaterial\n      ),\n    },\n    inset: {\n      common: `ml-4-safe mr-4-safe overflow-hidden`,\n      ios: `rounded-lg`,\n      material: `rounded-2xl`,\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/BlockClasses.js"
+    },
+    {
+      "path": "src/shared/classes/BlockFooterClasses.d.ts",
+      "content": "export const BlockFooterClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/BlockFooterClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/BlockFooterClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const BlockFooterClasses = (props, colors) => {\n  const { inset } = props;\n  return {\n    base: {\n      common: cls(\n        `mb-8 flex items-center -mt-6 text-sm`,\n        inset ? 'pl-8-safe pr-8-safe' : 'pl-4-safe pr-4-safe'\n      ),\n      ios: colors.textIos,\n      material: colors.textMaterial,\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/BlockFooterClasses.js"
+    },
+    {
+      "path": "src/shared/classes/BlockHeaderClasses.d.ts",
+      "content": "export const BlockHeaderClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/BlockHeaderClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/BlockHeaderClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const BlockHeaderClasses = (props, colors) => {\n  const { inset } = props;\n  return {\n    base: {\n      common: cls(\n        `mt-8 flex items-center -mb-6 text-sm`,\n        inset ? 'pl-8-safe pr-8-safe' : 'pl-4-safe pr-4-safe'\n      ),\n      ios: colors.textIos,\n      material: colors.textMaterial,\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/BlockHeaderClasses.js"
+    },
+    {
+      "path": "src/shared/classes/BlockTitleClasses.d.ts",
+      "content": "export const BlockTitleClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/BlockTitleClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/BlockTitleClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const BlockTitleClasses = (props, colors) => {\n  const { withBlock, medium, large } = props;\n  return {\n    base: {\n      common: withBlock\n        ? 'pl-4-safe pr-4-safe mt-8 -mb-6 flex justify-between items-center'\n        : 'block w-full mb-3 mt-0',\n      ios: cls(\n        `font-semibold ${colors.textIos}`,\n        large && 'text-[1.5rem]',\n        medium && 'text-[1.125rem]',\n        !medium && !large && 'text-[1rem]'\n      ),\n      material: cls(\n        `font-medium ${colors.textMaterial}`,\n        large && 'text-[1.375rem]',\n        medium && 'text-[1rem]',\n        !medium && !large && 'text-[0.875rem]'\n      ),\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/BlockTitleClasses.js"
+    },
+    {
+      "path": "src/shared/classes/BreadcrumbsClasses.d.ts",
+      "content": "export const BreadcrumbsClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/BreadcrumbsClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/BreadcrumbsClasses.js",
+      "content": "export const BreadcrumbsClasses = (props) => {\n  const { fontSizeIos, fontSizeMaterial } = props;\n  return {\n    base: {\n      common: `flex items-center justify-start overflow-auto whitespace-nowrap py-1 px-0 space-x-3 no-scrollbar rtl:space-x-reverse`,\n      ios: fontSizeIos,\n      material: fontSizeMaterial,\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/BreadcrumbsClasses.js"
+    },
+    {
+      "path": "src/shared/classes/BreadcrumbsCollapsedClasses.d.ts",
+      "content": "export const BreadcrumbsCollapsedClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/BreadcrumbsCollapsedClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/BreadcrumbsCollapsedClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const BreadcrumbsCollapsedClasses = (props, colors) => {\n  return {\n    base: {\n      common: `flex items-center cursor-pointer space-x-0.75 rtl:space-x-reverse ${colors.bg}`,\n      ios: cls(\n        `rounded active:opacity-30 px-1.5 h-[1em] duration-300 active:duration-0`,\n        colors.bgIos\n      ),\n      material: cls('py-3 px-2 rounded-lg', colors.bgMaterial),\n    },\n    dot: {\n      common: `w-1 h-1 rounded-full ${colors.dotBg}`,\n      ios: colors.dotBgIos,\n      material: colors.dotBgMaterial,\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/BreadcrumbsCollapsedClasses.js"
+    },
+    {
+      "path": "src/shared/classes/BreadcrumbsItemClasses.d.ts",
+      "content": "export const BreadcrumbsItemClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/BreadcrumbsItemClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/BreadcrumbsItemClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const BreadcrumbsItemClasses = (props, colors) => {\n  const { active } = props;\n  return {\n    base: {\n      common: cls(`flex items-center overflow-hidden`),\n      ios: cls(\n        colors.textIos,\n        colors.bgIos,\n        active ? colors.textActiveIos : colors.textIos,\n        active && 'font-semibold'\n      ),\n      material: cls(\n        `font-medium px-2 py-1 rounded-lg`,\n        colors.bgMaterial,\n        active ? colors.textActiveMaterial : colors.textMaterial\n      ),\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/BreadcrumbsItemClasses.js"
+    },
+    {
+      "path": "src/shared/classes/BreadcrumbsSeparatorClasses.d.ts",
+      "content": "export const BreadcrumbsSeparatorClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/BreadcrumbsSeparatorClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/BreadcrumbsSeparatorClasses.js",
+      "content": "export const BreadcrumbsSeparatorClasses = () => {\n  return {\n    base: {\n      common: `w-3 opacity-35 flex justify-center`,\n      ios: ``,\n      material: ``,\n    },\n    icon: {\n      common: 'rtl:rotate-180',\n      ios: 'h-3',\n      material: 'h-2.5',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/BreadcrumbsSeparatorClasses.js"
+    },
+    {
+      "path": "src/shared/classes/ButtonClasses.d.ts",
+      "content": "export const ButtonClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ButtonClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/ButtonClasses.js",
+      "content": "import { positionClass } from '../position-class.js';\nimport { cls } from '../cls.js';\n\nexport const ButtonClasses = (props, colors, classes, darkClasses) => {\n  const { inline, segmented, segmentedStrong, segmentedActive, disabled } =\n    props;\n  return {\n    base: {\n      common: cls(\n        'flex text-center justify-center items-center appearance-none py-1 transition-colors focus:outline-none cursor-pointer select-none overflow-hidden z-10',\n        inline ? 'inline-flex' : 'w-full flex',\n        positionClass('relative', classes),\n        disabled && 'pointer-events-none',\n        segmentedStrong && segmentedActive && 'c-segmented-strong-button-active'\n      ),\n      ios: `uppercase duration-100 font-semibold px-2`,\n      material: `duration-300 font-medium px-4`,\n\n      square: {\n        ios:\n          segmented && !segmentedStrong\n            ? 'first:rounded-s last:rounded-e'\n            : 'rounded',\n        material:\n          segmented && !segmentedStrong\n            ? 'first:rounded-lg-s last:rounded-lg-e'\n            : 'rounded-lg',\n      },\n\n      rounded: segmented && !segmentedStrong ? '' : 'rounded-full',\n    },\n    style: {\n      fill: {\n        common: cls(disabled && cls(colors.disabledBg, colors.disabledText)),\n        ios: cls(\n          disabled\n            ? cls(colors.disabledBg, colors.disabledText)\n            : `${colors.fillTextIos} ${colors.fillBgIos} ${colors.fillActiveBgIos}`\n        ),\n        material: cls(\n          disabled\n            ? cls(colors.disabledBg, colors.disabledText)\n            : cls(\n                colors.fillTextMaterial,\n                colors.fillBgMaterial,\n                colors.fillActiveBgMaterial,\n                colors.fillTouchRipple\n              )\n        ),\n      },\n      outline: {\n        common: cls(\n          disabled\n            ? cls(colors.disabledText, colors.disabledBorder)\n            : cls('active:bg-opacity-15', colors.touchRipple)\n        ),\n        ios: cls(\n          !segmented && 'border-2',\n          !disabled && !segmented && colors.outlineBorderIos,\n          !disabled && cls(colors.textIos, colors.activeBgIos)\n        ),\n        material: cls(\n          !segmented && 'border',\n          !disabled && !segmented && colors.outlineBorderMaterial,\n          !disabled && cls(colors.textMaterial, colors.activeBgMaterial)\n        ),\n      },\n      clear: {\n        common: cls(\n          disabled\n            ? colors.disabledText\n            : `active:bg-opacity-15 ${colors.touchRipple}`\n        ),\n        ios: !disabled && cls(colors.textIos, colors.activeBgIos),\n        material:\n          !disabled && cls(colors.textMaterial, colors.activeBgMaterial),\n      },\n      tonal: {\n        common: disabled\n          ? cls(colors.disabledBg, colors.disabledText)\n          : cls(colors.touchRipple),\n        ios:\n          !disabled &&\n          cls(\n            colors.tonalTextIos,\n            colors.tonalBgIos,\n            colors.activeBgIos,\n            'bg-opacity-15 active:bg-opacity-25'\n          ),\n        material:\n          !disabled &&\n          cls(\n            colors.tonalTextMaterial,\n            colors.tonalBgMaterial,\n            colors.activeBgMaterial\n          ),\n      },\n      segmentedStrong: {\n        common: cls(\n          '!bg-transparent shadow-none text-primary relative z-0',\n          darkClasses('dark:text-white/55'),\n          `active:bg-black active:bg-opacity-10`,\n          darkClasses(\n            'dark:active:bg-white dark:active:bg-opacity-10 dark:touch-ripple-white'\n          ),\n          colors.touchRipple\n        ),\n        ios: cls(\n          !disabled && colors.textIos,\n          darkClasses('dark:text-white/55')\n        ),\n        material: cls(\n          !disabled && colors.textMaterial,\n          darkClasses('dark:text-white/55')\n        ),\n      },\n      segmentedStrongActive: {\n        common: 'duration-0 relative z-10 bg-transparent shadow-none',\n        ios: cls(\n          !disabled && 'text-black',\n          darkClasses('dark:text-white')\n        ),\n        material: cls(\n          !disabled && 'text-black',\n          darkClasses('dark:text-white')\n        ),\n      },\n    },\n    size: {\n      small: {\n        ios: `text-xs h-7`,\n        material: `text-sm h-8`,\n      },\n      medium: {\n        common: 'text-sm',\n        ios: `h-7`,\n        material: `h-10`,\n      },\n      large: {\n        ios: `h-11`,\n        material: `h-12`,\n      },\n    },\n    raised: `shadow active:shadow-lg`,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ButtonClasses.js"
+    },
+    {
+      "path": "src/shared/classes/CardClasses.d.ts",
+      "content": "export const CardClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/CardClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/CardClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const CardClasses = (props, colors) => {\n  const { margin, headerDivider, footerDivider, contentWrapPadding } = props;\n  return {\n    base: {\n      common: cls(margin, `overflow-hidden`),\n      ios: cls('rounded-lg', colors.bgIos, colors.textIos),\n      material: cls('rounded-2xl', colors.bgMaterial, colors.textMaterial),\n      plain: '',\n      raised: 'shadow',\n      outline: {\n        common: cls(`border`),\n        ios: colors.outlineIos,\n        material: colors.outlineMaterial,\n      },\n    },\n    header: {\n      common: cls(headerDivider && `border-b`, `p-4`),\n      ios: cls(headerDivider && colors.outlineIos, props.headerFontSizeIos),\n      material: cls(\n        headerDivider && colors.outlineMaterial,\n        props.headerFontSizeMaterial\n      ),\n    },\n    content: cls(contentWrapPadding, 'text-sm'),\n    footer: {\n      common: cls(headerDivider && `border-t`, `text-sm p-4`),\n      ios: cls(colors.footerTextIos, footerDivider && colors.outlineIos),\n      material: cls(\n        colors.footerTextMaterial,\n        footerDivider && colors.outlineMaterial\n      ),\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/CardClasses.js"
+    },
+    {
+      "path": "src/shared/classes/CheckboxClasses.d.ts",
+      "content": "export const CheckboxClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/CheckboxClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/CheckboxClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const CheckboxClasses = (props, colors, classes, darkClasses) => {\n  return {\n    base: cls(\n      `cursor-pointer inline-flex align-middle`,\n      positionClass('relative', classes),\n      darkClasses('dark:touch-ripple-white')\n    ),\n    iconWrap: {\n      common: cls(\n        `flex items-center justify-center text-white`,\n        darkClasses('dark:text-black')\n      ),\n      ios: 'w-5.5 h-5.5 rounded-full border',\n      material: 'w-4.5 h-4.5 rounded-sm border-2',\n      notChecked: {\n        ios: colors.borderIos,\n        material: colors.borderMaterial,\n      },\n      checked: {\n        ios: `${colors.bgCheckedIos} ${colors.borderCheckedIos}`,\n        material: `${colors.bgCheckedMaterial} ${colors.borderCheckedMaterial}`,\n      },\n    },\n    icon: {\n      notChecked: 'opacity-0',\n      checked: 'opacity-100',\n    },\n    indeterminateIcon: {\n      common: cls(`bg-white w-3/4`, darkClasses('dark:bg-black')),\n      ios: 'h-0.5 rounded-full',\n      material: 'h-0.5',\n    },\n    input: 'hidden',\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/CheckboxClasses.js"
+    },
+    {
+      "path": "src/shared/classes/ChipClasses.d.ts",
+      "content": "export const ChipClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ChipClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/ChipClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ChipClasses = (props, colors) => {\n  return {\n    base: {\n      common: `text-sm inline-flex items-center justify-center align-middle rounded-full px-3`,\n      ios: 'rounded-full h-7',\n      material: 'rounded-lg h-8 font-medium',\n      fill: {\n        ios: cls(\n          colors.fillBg || colors.fillBgIos,\n          colors.fillText || colors.fillTextIos\n        ),\n        material: cls(\n          colors.fillBg || colors.fillBgMaterial,\n          colors.fillText || colors.fillTextMaterial\n        ),\n      },\n      outline: {\n        common: `border`,\n        ios: cls(\n          colors.outlineText || colors.outlineTextIos,\n          colors.outlineBorder || colors.outlineBorderIos\n        ),\n        material: cls(\n          colors.outlineText || colors.outlineTextMaterial,\n          colors.outlineBorder || colors.outlineBorderMaterial\n        ),\n      },\n    },\n    media: {\n      common: '-my-1 me-1 select-none',\n      ios: '-ms-3',\n      material: '-ms-2',\n    },\n    deleteButton:\n      '-me-2 -my-1 ms-1 h-full flex items-center justify-center w-6 cursor-pointer opacity-50 active:opacity-100 select-none',\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ChipClasses.js"
+    },
+    {
+      "path": "src/shared/classes/DatetimeClasses.d.ts",
+      "content": "export const DatetimeClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/DatetimeClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/DatetimeClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const DatetimeClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls('px-4 py-3 text-sm mb-2', className),\n    ios: cls('rounded-xl', colors.bgIos, colors.textIos),\n    material: cls('rounded-lg', colors.bgMaterial, colors.textMaterial),\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/DatetimeClasses.js"
+    },
+    {
+      "path": "src/shared/classes/DialogButtonClasses.d.ts",
+      "content": "export const DialogButtonClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/DialogButtonClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/DialogButtonClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const DialogButtonClasses = (props, colors) => {\n  const { strong, disabled } = props;\n  return {\n    base: {\n      ios: cls(\n        'text-center text-[17px] flex items-center justify-center h-11 w-full hairline-r rtl:hairline-l relative first:rounded-bl-xl last:rounded-br-xl rtl:first:rounded-br-xl rtl:first:rounded-bl-none rtl:last:rounded-bl-xl rtl:last:rounded-br-none',\n        disabled ? colors.disabledTextIos : colors.textIos,\n        strong && 'font-semibold',\n        !disabled && colors.activeBgIos\n      ),\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/DialogButtonClasses.js"
+    },
+    {
+      "path": "src/shared/classes/DialogClasses.d.ts",
+      "content": "export const DialogClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/DialogClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/DialogClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const DialogClasses = (props, colors, classes, { hasButtons }) => {\n  const {\n    titleFontSizeMaterial,\n    titleFontSizeIos,\n    translucent,\n    sizeIos,\n    sizeMaterial,\n  } = props;\n  return {\n    base: {\n      common: cls(\n        'left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 max-h-full overflow-hidden duration-400',\n        positionClass('fixed', classes)\n      ),\n      ios: cls(\n        'rounded-xl max-w-full',\n        sizeIos,\n        colors.bgIos,\n        translucent && 'translucent'\n      ),\n      material: cls(\n        'rounded-[1.75rem] p-6 max-w-[90%]',\n        sizeMaterial,\n        colors.bgMaterial\n      ),\n      opened: '',\n      closed: 'scale-[0.85] opacity-0 pointer-events-none',\n    },\n    contentWrap: {\n      common: 'flex flex-col items-center justify-center',\n      material: 'space-y-3',\n      ios: cls('p-4 space-y-1 relative', hasButtons && 'hairline-b'),\n    },\n    title: {\n      common: cls('w-full'),\n      ios: cls(colors.titleIos, titleFontSizeIos, 'font-semibold text-center'),\n      material: cls(colors.titleMaterial, titleFontSizeMaterial),\n    },\n    content: {\n      common: cls('text-sm w-full'),\n      ios: cls(colors.contentTextIos, 'text-center'),\n      material: cls(colors.contentTextMaterial),\n    },\n    buttons: {\n      common: 'flex items-center',\n      ios: cls('justify-center last-child-hairline-r-none'),\n      material: cls('justify-end pt-6 space-x-2 rtl:space-x-reverse'),\n    },\n    backdrop: {\n      common:\n        'fixed z-40 w-full h-full left-0 top-0 bg-black bg-opacity-50 duration-400',\n      opened: '',\n      closed: 'opacity-0 pointer-events-none',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/DialogClasses.js"
+    },
+    {
+      "path": "src/shared/classes/FabClasses.d.ts",
+      "content": "export const FabClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/FabClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/FabClasses.js",
+      "content": "export const FabClasses = (props, colors) => {\n  return {\n    base: {\n      common: `flex items-center justify-center space-x-2 rtl:!space-x-reverse cursor-pointer overflow-hidden select-none`,\n      ios: `h-12 duration-100 rounded-full shadow-lg ${colors.bgIos} ${colors.activeBgIos} ${colors.textIos}`,\n      material: `duration-300 rounded-2xl shadow ${colors.bgMaterial} ${colors.activeBgMaterial} ${colors.textMaterial} ${colors.touchRipple}`,\n      iconOnly: {\n        ios: 'w-12',\n        material: 'w-14 h-14',\n      },\n      withText: {\n        common: 'px-4',\n        material: 'h-14',\n      },\n    },\n    text: {\n      common: 'text-sm',\n      ios: 'font-semibold uppercase',\n      material: 'font-medium',\n    },\n    icon: {\n      common: 'h-1em w-1em',\n      ios: 'text-icon-ios',\n      material: 'text-icon-material',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/FabClasses.js"
+    },
+    {
+      "path": "src/shared/classes/FooterClasses.d.ts",
+      "content": "export const FooterClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/FooterClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/FooterClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const FooterClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls('block', className),\n    ios: cls(colors.bgIos, colors.textIos),\n    material: cls(colors.bgMaterial, colors.textMaterial),\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/FooterClasses.js"
+    },
+    {
+      "path": "src/shared/classes/GlassClasses.d.ts",
+      "content": "export const GlassClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/GlassClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/GlassClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const GlassClasses = (props, colors, baseClassName) => {\n  return {\n    base: {\n      common: cls('k-glass', baseClassName),\n      ios: cls(colors.bgIos, colors.shadowIos, 'backdrop-blur-lg touch-none'),\n      material: '',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/GlassClasses.js"
+    },
+    {
+      "path": "src/shared/classes/HeaderClasses.d.ts",
+      "content": "export const HeaderClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/HeaderClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/HeaderClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const HeaderClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls('block', className),\n    ios: cls(colors.bgIos, colors.textIos),\n    material: cls(colors.bgMaterial, colors.textMaterial),\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/HeaderClasses.js"
+    },
+    {
+      "path": "src/shared/classes/IconClasses.d.ts",
+      "content": "export const IconClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/IconClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/IconClasses.js",
+      "content": "import { positionClass } from '../position-class.js';\n\nexport const IconClasses = (props, classes) => {\n  return {\n    base: `${positionClass('relative', classes)} inline-block not-italic`,\n    badge: 'absolute -end-1.5 -top-0.5',\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/IconClasses.js"
+    },
+    {
+      "path": "src/shared/classes/InfiniteScrollClasses.d.ts",
+      "content": "export const InfiniteScrollClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/InfiniteScrollClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/InfiniteScrollClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const InfiniteScrollClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls('px-4 py-2 text-xs text-center mb-2', className),\n    ios: cls('rounded-lg', colors.bgIos, colors.textIos),\n    material: cls('rounded-lg', colors.bgMaterial, colors.textMaterial),\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/InfiniteScrollClasses.js"
+    },
+    {
+      "path": "src/shared/classes/InputOtpClasses.d.ts",
+      "content": "export const InputOtpClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/InputOtpClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/InputOtpClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const InputOtpClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(\n      'flex gap-2 justify-center px-2 py-3 text-lg font-semibold tracking-widest mb-2',\n      className,\n    ),\n    ios: cls('rounded-xl', colors.bgIos, colors.textIos),\n    material: cls('rounded-lg', colors.bgMaterial, colors.textMaterial),\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/InputOtpClasses.js"
+    },
+    {
+      "path": "src/shared/classes/ItemSlidingClasses.d.ts",
+      "content": "export const ItemSlidingClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ItemSlidingClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/ItemSlidingClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ItemSlidingClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls('mb-2 overflow-hidden', className),\n    ios: cls('rounded-xl', colors.bgIos, colors.textIos),\n    material: cls('rounded-lg', colors.bgMaterial, colors.textMaterial),\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ItemSlidingClasses.js"
+    },
+    {
+      "path": "src/shared/classes/LinkClasses.d.ts",
+      "content": "export const LinkClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/LinkClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/LinkClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const LinkClasses = (\n  props,\n  { textColor, needsTouchRipple },\n  classes\n) => {\n  const { iconOnly, tabbar } = props;\n  return {\n    base: {\n      common: cls(\n        !tabbar && textColor,\n        `inline-flex space-x-1 rtl:!space-x-reverse justify-center items-center cursor-pointer select-none`,\n        needsTouchRipple &&\n          `touch-ripple-primary ${positionClass('relative', classes)} z-10`\n      ),\n      notTabbar: {\n        ios: `active:opacity-30 duration-300 active:duration-0`,\n        material: needsTouchRipple ? '' : `active:opacity-55`,\n      },\n    },\n    tabbar: {\n      common: cls(\n        positionClass('relative', classes),\n        `w-full h-full duration-300`\n      ),\n      material: 'font-medium text-sm z-10',\n      active: 'c-tabbar-link-active',\n      inactive: '',\n    },\n    toolbar: {\n      common: cls(`h-full max-h-12`, iconOnly && 'c-touch-ripple-inset'),\n      material: 'px-3 text-sm font-medium',\n    },\n    navbar: {\n      common: cls(\n        'inline-flex flex-row items-center gap-0.5 shrink-0',\n        `h-full max-h-12`,\n        iconOnly && 'c-touch-ripple-inset',\n      ),\n      material: 'px-3',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/LinkClasses.js"
+    },
+    {
+      "path": "src/shared/classes/ListButtonClasses.d.ts",
+      "content": "export const ListButtonClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ListButtonClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/ListButtonClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const ListButtonClasses = (props, colors, classes) => {\n  const { dividers } = props;\n  return {\n    base: ``,\n    button: {\n      common: cls(\n        positionClass('relative', classes),\n        dividers && 'hairline-b active:hairline-transparent',\n        `flex items-center justify-center px-4 space-x-1 w-full duration-300 active:duration-0 focus:outline-none ${colors.touchRipple} overflow-hidden select-none`\n      ),\n      ios: cls('h-11', colors.textIos, colors.activeBgIos, colors.activeBgIos),\n      material: cls('h-12', colors.textMaterial, colors.activeBgMaterial),\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ListButtonClasses.js"
+    },
+    {
+      "path": "src/shared/classes/ListClasses.d.ts",
+      "content": "export const ListClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ListClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/ListClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const ListClasses = (props, colors, classes) => {\n  const { nested, margin, inset, strong, outline } = props;\n  return {\n    base: {\n      common: cls(\n        !nested && margin,\n        !inset && !nested && outline && 'hairline-t hairline-b',\n        inset && outline && 'border',\n        positionClass('relative', classes),\n        'z-10'\n      ),\n      ios: cls(\n        strong && colors.strongBgIos,\n        inset && outline && colors.outlineIos\n      ),\n      material: cls(\n        strong && colors.strongBgMaterial,\n        inset && outline && colors.outlineMaterial\n      ),\n    },\n    ul: {\n      common: cls(inset && 'no-safe-areas', 'last-child-hairline-b-none'),\n    },\n    inset: {\n      common: `ml-4-safe mr-4-safe overflow-hidden`,\n      ios: `rounded-lg`,\n      material: `rounded-2xl`,\n    },\n    menuList: {\n      common: 'py-1',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ListClasses.js"
+    },
+    {
+      "path": "src/shared/classes/ListInputClasses.d.ts",
+      "content": "export const ListInputClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ListInputClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/ListInputClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ListInputClasses = (\n  props,\n  colors,\n  { isFloatingTransformed, isFocused, darkClasses, getLabelColor, hasLabel }\n) => {\n  const { error, type, outline, inputClassName = '', inputClass = '' } = props;\n  return {\n    base: {\n      common: '',\n      ios: cls(outline && 'my-4'),\n      material: cls('py-2'),\n    },\n    itemContent: {\n      common: 'relative',\n      ios: cls(outline && 'ml-4 mr-4 rounded-lg', !outline && colors.bgIos),\n      material: cls(\n        'min-h-[56px] ml-4 mr-4',\n        outline ? cls('rounded') : cls(colors.bgMaterial, 'rounded-t relative ')\n      ),\n    },\n    inner: {\n      common: '',\n      material: cls(!outline ? 'pt-2 pb-2' : 'pt-4 pb-4'),\n      stacked: '',\n      floating: '',\n    },\n    label: {\n      common: cls(`duration-200 text-xs`, getLabelColor(), outline && 'flex'),\n      ios: cls(outline && '-mt-4'),\n      material: cls(outline && '-mt-4'),\n      stacked: '',\n      floating: {\n        common: cls(\n          `pointer-events-none duration-200 transform origin-left rtl:origin-right max-w-[66%]`,\n          isFloatingTransformed && 'scale-133'\n        ),\n        ios: isFloatingTransformed\n          ? outline\n            ? 'translate-y-6'\n            : 'translate-y-4'\n          : '',\n        material: isFloatingTransformed\n          ? outline\n            ? 'translate-y-8'\n            : 'translate-y-3'\n          : '',\n      },\n    },\n    labelText: {\n      common: cls(outline && 'relative p-1 block -m-1'),\n      ios: cls(outline && cls('-top-1', colors.outlineLabelBgIos)),\n      material: cls(outline && cls('-top-2', colors.outlineLabelBgMaterial)),\n    },\n    inputWrap: {\n      common: 'relative',\n      ios: cls((!hasLabel || outline) && '-mt-2.5', '-mb-2.5'),\n      stacked: '',\n      floating: '',\n    },\n    media: {\n      material: '',\n    },\n    titleWrap: {\n      material: `duration-200 ${getLabelColor()}`,\n    },\n    input: {\n      common: `block text-base appearance-none w-full focus:outline-none bg-transparent ${\n        inputClassName || inputClass\n      }`,\n      ios: 'h-10',\n      material: 'h-6',\n      notFloating: {\n        common: cls(\n          'placeholder-black placeholder-opacity-30',\n          darkClasses('dark:placeholder-white dark:placeholder-opacity-30')\n        ),\n        material: cls(type === 'textarea' && 'py-1'),\n        ios: cls(type === 'textarea' && 'py-2'),\n      },\n\n      floating: isFloatingTransformed\n        ? 'placeholder-transparent'\n        : cls(\n            `placeholder-black placeholder-opacity-30`,\n            darkClasses('dark:placeholder-white dark:placeholder-opacity-30')\n          ),\n    },\n    errorInfo: {\n      common: 'text-xs relative z-10',\n      ios: 'mt-1',\n      material: '',\n    },\n    error: colors.errorText,\n    info: 'opacity-50',\n    clearButton: {\n      common:\n        'absolute end-0 top-1/2 transform -translate-y-1/2 cursor-pointer',\n      ios: cls('w-3.5 h-3.5 opacity-45 active:opacity-30', colors.labelTextIos),\n      material: cls('w-6 h-6 active:opacity-55', colors.labelTextMaterial),\n    },\n    dropdown:\n      'absolute end-0 top-1/2 transform -translate-y-1/2 pointer-events-none opacity-50',\n    border: {\n      common:\n        'pointer-events-none absolute start-0 bottom-0 duration-200 w-full',\n      ios:\n        outline &&\n        cls(\n          error\n            ? colors.errorBorder\n            : isFocused\n            ? colors.outlineBorderFocusIos\n            : colors.outlineBorderIos,\n          'h-full border rounded-lg -z-10'\n        ),\n      material: cls(\n        error\n          ? colors.errorBorder\n          : isFocused\n          ? colors.outlineBorderFocusMaterial\n          : colors.outlineBorderMaterial,\n        outline && cls('h-full border rounded -z-10', isFocused && 'border-2'),\n        !outline &&\n          cls('border-b h-px origin-bottom', isFocused && 'scale-y-[2]')\n      ),\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ListInputClasses.js"
+    },
+    {
+      "path": "src/shared/classes/ListItemClasses.d.ts",
+      "content": "export const ListItemClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ListItemClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/ListItemClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const ListItemClasses = (\n  props,\n  colors,\n  {\n    className,\n    isMediaItem,\n    theme,\n    textColor,\n    needsTouchRipple,\n    isMenuListItemActive,\n    autoStrongTitle,\n  }\n) => {\n  const {\n    menuListItem,\n    dividers,\n    mediaClassName = '',\n    mediaClass = '',\n    innerClassName = '',\n    innerClass = '',\n    contentClassName = '',\n    contentClass = '',\n    titleWrapClassName = '',\n    titleWrapClass = '',\n    titleFontSizeIos,\n    titleFontSizeMaterial,\n    strongTitle,\n    contacts,\n  } = props;\n  return {\n    base: {\n      common: menuListItem ? `${textColor} py-1` : '',\n      material: contacts && '[&:nth-child(2)]:-mt-12',\n    },\n    itemContent: {\n      common: cls(`flex items-center ${contentClassName || contentClass}`),\n      ios: cls(\n        !menuListItem && cls(colors.primaryTextIos, 'ps-4-safe'),\n        menuListItem && 'rounded-lg ml-2-safe mr-2-safe ps-2'\n      ),\n      material: cls(\n        !menuListItem &&\n          cls(\n            colors.primaryTextMaterial,\n            isMediaItem ? 'ml-2-safe mr-2-safe rounded-2xl ps-2' : 'ps-4-safe',\n            contacts && 'ml-10'\n          ),\n        menuListItem && 'rounded-full min-h-[3.5rem] ml-4-safe mr-4-safe ps-4'\n      ),\n      link: cls(\n        'duration-300 active:duration-0 cursor-pointer select-none',\n        dividers && theme === 'ios' && 'active:hairline-transparent',\n        needsTouchRipple &&\n          cls(`relative overflow-hidden z-10`, colors.touchRipple),\n        isMenuListItemActive\n          ? cls(\n              theme === 'ios'\n                ? colors.menuListItemActiveBgIos\n                : colors.menuListItemActiveBgMaterial\n            )\n          : menuListItem\n          ? cls(\n              theme === 'ios'\n                ? colors.menuListItemBgIos\n                : colors.menuListItemBgMaterial\n            )\n          : cls(theme === 'ios' ? colors.activeBgIos : colors.activeBgMaterial)\n      ),\n    },\n\n    media: {\n      common: `shrink-0 flex ${mediaClassName || mediaClass}`,\n      ios: 'py-2 me-4',\n      material: cls('py-3', menuListItem ? 'me-3' : 'me-4'),\n    },\n    inner: {\n      common: cls(\n        'w-full relative',\n        !menuListItem && dividers && 'hairline-b',\n        innerClassName || innerClass\n      ),\n      ios: 'py-2.5 pe-4-safe',\n      material: cls(\n        'py-3',\n        isMediaItem && !menuListItem ? 'pe-2' : 'pe-4-safe'\n      ),\n    },\n    titleWrap: {\n      common: cls(\n        `flex justify-between items-center ${\n          titleWrapClassName || titleWrapClass\n        }`\n      ),\n      ios: cls(!menuListItem && titleFontSizeIos),\n      material: cls(!menuListItem && titleFontSizeMaterial),\n    },\n    title: {\n      common: `shrink`,\n      menuListItem: cls(\n        'text-sm',\n        strongTitle === true || autoStrongTitle\n          ? 'font-semibold'\n          : 'font-medium'\n      ),\n      strong: {\n        common: '',\n        ios: 'font-semibold',\n        material: 'font-medium',\n      },\n    },\n    after: {\n      common: cls(`shrink-0 ms-auto ps-1 flex items-center space-x-1`),\n      ios: colors.secondaryTextIos,\n      material: cls(colors.secondaryTextMaterial, 'text-sm'),\n    },\n    chevron: 'opacity-20 shrink-0 ms-3 rtl:rotate-180',\n    subtitle: 'text-sm',\n    text: {\n      common: cls(`text-sm line-clamp-2`),\n      ios: colors.secondaryTextIos,\n      material: colors.secondaryTextMaterial,\n    },\n    header: {\n      common: 'text-xs mb-0.5',\n      ios: colors.secondaryTextIos,\n      material: colors.secondaryTextMaterial,\n    },\n    footer: {\n      common: cls(`text-xs mt-0.5`),\n      ios: colors.secondaryTextIos,\n      material: colors.secondaryTextMaterial,\n    },\n\n    groupTitle: {\n      common: cls(\n        `pl-4-safe pr-4-safe py-1 flex items-center z-20`,\n        positionClass('relative', className)\n        // divider ? 'relative' : 'sticky top-0'\n      ),\n      ios: `h-8${dividers ? ' hairline-t' : ''} -mt-px ${titleFontSizeIos} ${\n        colors.secondaryTextIos\n      } ${colors.groupTitleBgIos} ${\n        contacts &&\n        cls(\n          'font-semibold top-11-safe sticky',\n          colors.groupTitleContactsTextIos,\n          colors.groupTitleContactsBgIos\n        )\n      }`,\n      material: `h-12 ${titleFontSizeMaterial} ${\n        colors.secondaryTextMaterial\n      } ${colors.groupTitleBgMaterial} ${\n        contacts &&\n        cls(\n          'pointer-events-none overflow-visible h-12 box-border text-xl font-medium flex max-w-full items-center px-4 top-16-safe sticky',\n          colors.groupTitleContactsTextMaterial,\n          colors.groupTitleContactsBgMaterial\n        )\n      }`,\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ListItemClasses.js"
+    },
+    {
+      "path": "src/shared/classes/MessageClasses.d.ts",
+      "content": "export const MessageClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/MessageClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/MessageClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const MessageClasses = (props, colors) => {\n  const { type } = props;\n  return {\n    message: {\n      common:\n        'max-w-[70%] box-border flex relative z-1 transform translate-z-0 mb-2 first:mt-2',\n    },\n    messageSent: {\n      common: cls('self-end', colors.messageSent),\n    },\n    messageReceived: {\n      common: colors.messageReceived,\n    },\n    messageName: {\n      common: 'text-xs',\n      ios: cls('mb-0.5 ms-4', colors.messageNameIos),\n      material: cls('ms-4 mb-0.5', colors.messageNameMd),\n    },\n    messageHeader: {\n      common: 'text-xs',\n      ios: cls('mb-0.5 ms-4', colors.messageNameIos),\n      material: cls('ms-4 mb-0.5', colors.messageNameMd),\n    },\n    messageFooter: {\n      common: 'text-xs',\n      ios: cls('mb-0.5 ms-4', colors.messageNameIos),\n      material: cls('ms-4 mb-0.5', colors.messageNameMd),\n    },\n    messageAvatar: {\n      common: cls(\n        'rounded-full relative bg-cover self-end shrink-0 me-1.5 w-8 h-8'\n      ),\n    },\n    messageContent: {\n      common: 'flex flex-col',\n    },\n    messageBubble: {\n      ...(type === 'sent' && {\n        ios: cls(\n          'rounded-3xl box-border break-words flex flex-col relative rounded-2xl py-1.5 px-4',\n          colors.bubbleSentIos\n        ),\n        material: cls(\n          'box-border break-words flex flex-col relative rounded-3xl py-2.5 px-4',\n          colors.bubbleSentMd\n        ),\n      }),\n      ...(type === 'received' && {\n        ios: cls(\n          'rounded-2xl box-border break-words flex flex-col relative rounded-2xl py-1.5 px-4',\n          colors.bubbleReceivedIos\n        ),\n        material: cls(\n          'box-border break-words flex flex-col relative rounded-3xl py-2.5 px-4 ',\n          colors.bubbleReceivedMd\n        ),\n      }),\n    },\n    messageTextHeader: {\n      common: 'w-full text-left leading-tight text-sm opacity-80',\n    },\n    messageTextFooter: {\n      common: 'w-full text-left leading-tight text-sm opacity-80',\n    },\n    messageText: {\n      common: 'w-full text-left leading-tight',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/MessageClasses.js"
+    },
+    {
+      "path": "src/shared/classes/MessagebarClasses.d.ts",
+      "content": "export const MessagebarClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/MessagebarClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/MessagebarClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const MessagebarClasses = (props, colors, { isFocused }) => {\n  const {\n    rightClassName = '',\n    rightClass = '',\n    leftClassName = '',\n    leftClass = '',\n  } = props;\n  return {\n    base: {\n      common: 'fixed bottom-0 start-0 w-full',\n    },\n    toolbar: {\n      material: colors.bgMessage,\n    },\n    left: {\n      common: cls('mt-1 -ms-2', leftClassName || leftClass),\n      ios: cls('px-2', colors.toolbarIconIos),\n      material: cls('', colors.toolbarIconMd),\n    },\n    right: {\n      common: cls('mt-1 -me-2', rightClassName || rightClass),\n      ios: cls('px-2', colors.toolbarIconIos),\n    },\n    messagebarArea: {\n      common: 'w-full',\n    },\n    messagebarInput: {\n      common: cls(\n        'block w-full focus:outline-none resize-none',\n        isFocused && 'outline-offset-0'\n      ),\n      ios: cls(\n        'border h-8 rounded-3xl px-4 leading-4 py-1.5',\n        colors.inputBgIos,\n        colors.borderIos,\n        colors.placeholderIos\n      ),\n      material: cls(\n        'rounded-3xl h-12 px-4 py-4 leading-4 ',\n        colors.inputBgMd,\n        colors.placeholderMd\n      ),\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/MessagebarClasses.js"
+    },
+    {
+      "path": "src/shared/classes/MessagesClasses.d.ts",
+      "content": "export const MessagesClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/MessagesClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/MessagesClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const MessagesClasses = () => {\n  return {\n    base: {\n      common: cls('flex flex-col relative z-1 px-2'),\n      ios: 'mb-12',\n      material: 'mb-16',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/MessagesClasses.js"
+    },
+    {
+      "path": "src/shared/classes/MessagesTitleClasses.d.ts",
+      "content": "export const MessagesTitleClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/MessagesTitleClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/MessagesTitleClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const MessagesTitleClasses = (props, colors) => {\n  return {\n    base: {\n      common: cls('text-center text-xs leading-none'),\n      ios: cls('w-full mt-2.5', colors.titleIos),\n      material: cls('mt-4', colors.titleMd),\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/MessagesTitleClasses.js"
+    },
+    {
+      "path": "src/shared/classes/ModalClasses.d.ts",
+      "content": "export const ModalClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ModalClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/ModalClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ModalClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls('px-4 py-3 text-sm mb-2', className),\n    ios: cls('rounded-xl', colors.bgIos, colors.textIos),\n    material: cls('rounded-lg', colors.bgMaterial, colors.textMaterial),\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ModalClasses.js"
+    },
+    {
+      "path": "src/shared/classes/NavbarBackLinkClasses.d.ts",
+      "content": "export const NavbarBackLinkClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/NavbarBackLinkClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/NavbarBackLinkClasses.js",
+      "content": "export const NavbarBackLinkClasses = () => {\n  return {\n    base: {\n      common: 'cursor-pointer',\n      material: 'min-w-12 c-touch-ripple-inset',\n    },\n    icon: 'rtl:rotate-180',\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/NavbarBackLinkClasses.js"
+    },
+    {
+      "path": "src/shared/classes/NavbarClasses.d.ts",
+      "content": "export const NavbarClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/NavbarClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/NavbarClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const NavbarClasses = (props, colors, classes) => {\n  const {\n    outline,\n    translucent,\n    large,\n    medium,\n    transparent,\n    left,\n    right,\n    fontSizeIos,\n    fontSizeMaterial,\n    titleFontSizeIos,\n    titleFontSizeMaterial,\n    titleLargeFontSizeIos,\n    titleLargeFontSizeMaterial,\n    titleMediumFontSizeIos,\n    titleMediumFontSizeMaterial,\n    bgClassName = '',\n    bgClass = '',\n    subnavbarClassName = '',\n    subnavbarClass = '',\n    innerClassName = '',\n    innerClass = '',\n    leftClassName = '',\n    leftClass = '',\n    titleClassName = '',\n    titleClass = '',\n    subtitleClassName = '',\n    subtitleClass = '',\n    rightClassName = '',\n    rightClass = '',\n    centerTitle,\n  } = props;\n  return {\n    base: {\n      common: cls(\n        `w-full z-20 top-0 pt-safe`,\n        (large || medium) && 'pointer-events-none',\n        positionClass('sticky', classes)\n      ),\n      ios: cls(fontSizeIos, colors.textIos),\n      material: cls(fontSizeMaterial, colors.textMaterial),\n    },\n    bg: {\n      common: cls(\n        'absolute w-full h-full left-0 top-0',\n        outline && 'hairline-b',\n        bgClassName || bgClass\n      ),\n      ios: cls(colors.bgIos, translucent && 'translucent'),\n      material: `${colors.bgMaterial}`,\n    },\n    subnavbar: {\n      common: cls(\n        'relative flex items-center',\n        subnavbarClassName || subnavbarClass,\n        (large || medium) && 'pointer-events-auto'\n      ),\n      ios: 'h-11 pl-2-safe pr-2-safe',\n      material: 'h-14 pl-4-safe pr-4-safe',\n    },\n    inner: {\n      common: cls(\n        'flex relative items-center w-full overflow-hidden',\n        innerClassName || innerClass,\n        (large || medium) && 'pointer-events-auto z-10'\n      ),\n      ios: cls(\n        'pl-2-safe pr-2-safe h-11',\n        !left && right ? 'justify-end' : 'justify-between'\n      ),\n      material: 'justify-start h-16 pl-safe pr-safe',\n    },\n    titleContainer: {\n      common: cls(\n        'flex items-center px-4 relative',\n        (large || medium) && 'pointer-events-auto'\n      ),\n      ios: cls(\n        medium && cls(titleMediumFontSizeIos, 'h-11 font-semibold'),\n        large && cls(titleLargeFontSizeIos, 'h-13 font-bold')\n      ),\n      material: cls(\n        medium && cls(titleMediumFontSizeMaterial, 'h-12 pb-4'),\n        large && cls(titleLargeFontSizeMaterial, 'h-[5.5rem]')\n      ),\n    },\n    left: {\n      common: cls(\n        'flex justify-center items-center h-full',\n        leftClassName || leftClass\n      ),\n      ios: 'me-2 transform transform-gpu',\n      material: 'mx-1',\n    },\n    title: {\n      common: cls(\n        `whitespace-nowrap leading-tight`,\n        titleClassName || titleClass,\n        (large || medium || transparent) && 'opacity-0',\n        centerTitle\n          ? `absolute top-1/2 left-1/2 transform-gpu -translate-x-1/2 -translate-y-1/2 text-center`\n          : 'text-start'\n      ),\n      ios: cls(\n        `${titleFontSizeIos} font-semibold`,\n        !centerTitle && 'first:mx-2'\n      ),\n      material: cls(\n        `${titleFontSizeMaterial} font-normal`,\n\n        !centerTitle && 'first:mx-4'\n      ),\n    },\n    subtitle: {\n      common: cls(\n        'font-normal leading-none',\n        subtitleClassName || subtitleClass\n      ),\n      ios: 'text-2xs opacity-55',\n      material: 'text-sm opacity-85',\n    },\n    right: {\n      common: cls(\n        'flex justify-center items-center h-full',\n        rightClassName || rightClass\n      ),\n      ios: cls('transform transform-gpu', centerTitle ? 'ms-2' : 'ms-auto'),\n      material: 'ms-auto me-1',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/NavbarClasses.js"
+    },
+    {
+      "path": "src/shared/classes/NoteClasses.d.ts",
+      "content": "export const NoteClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/NoteClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/NoteClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const NoteClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls('text-xs uppercase font-medium tracking-wide px-4', className),\n    ios: cls(colors.textIos),\n    material: cls(colors.textMaterial),\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/NoteClasses.js"
+    },
+    {
+      "path": "src/shared/classes/NotificationsClasses.d.ts",
+      "content": "export const NotificationsClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/NotificationsClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/NotificationsClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const NotificationsClasses = (props, colors, classes) => {\n  const { opened, translucent } = props;\n  return {\n    base: {\n      common: cls(\n        positionClass('absolute', classes),\n        'z-50 transform transition-transform-opacity box-border duration-500',\n        !opened &&\n          '-translate-y-full opacity-0 pointer-events-none transition duration-500',\n        'md:w-[568px] md:end-auto md:start-1/2 md:-ms-[256px]'\n      ),\n      ios: cls(\n        'rounded-xl px-2.5 py-2.5 start-2 end-2 top-2 shadow-lg',\n        colors.bgIos,\n        translucent && 'translucent'\n      ),\n      material: cls(\n        'rounded-2xl py-5 px-4 start-4 end-4 top-4',\n        colors.bgMaterial\n      ),\n    },\n    content: {\n      common: '',\n      ios: 'mt-2.5 ',\n      material: cls('mt-2'),\n    },\n    header: {\n      common: cls('flex justify-start'),\n      ios: 'items-center',\n      material: 'items-start',\n    },\n    icon: {\n      ios: cls('me-2'),\n      material: 'me-4',\n    },\n    contentTitle: {\n      material: cls('flex flex-row items-center'),\n    },\n    title: {\n      ios: cls('tracking-wide text-[13px] uppercase', colors.titleIos),\n      material: cls('font-medium'),\n    },\n    titleRightText: {\n      ios: cls('me-1 ms-auto text-[13px]', colors.titleRightIos),\n      material: cls(\n        'ms-1 text-xs before:w-0.75 before:h-0.75 before:rounded-full before:inline-block before:align-middle before:me-1',\n        colors.titleRightMd\n      ),\n    },\n    button: {\n      ios: cls('me-1 ms-auto cursor-pointer'),\n      material: cls('ms-auto cursor-pointer'),\n    },\n    deleteIcon: {\n      ios: cls('w-5 h-5', colors.deleteIconIos),\n      material: cls('w-6 h-6', colors.deleteIconMd),\n    },\n    subtitle: {\n      ios: cls('text-[15px] font-semibold', colors.subtitleIos),\n      material: cls('text-sm'),\n    },\n    text: {\n      ios: cls('text-[15px]'),\n      material: cls('text-sm', colors.textMaterial),\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/NotificationsClasses.js"
+    },
+    {
+      "path": "src/shared/classes/PageClasses.d.ts",
+      "content": "export const PageClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/PageClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/PageClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const PageClasses = (props, colors, classes) => {\n  return {\n    base: {\n      common: cls(\n        'h-full w-full left-0 top-0 overflow-auto',\n        positionClass('absolute', classes)\n      ),\n      ios: colors.bgIos,\n      material: colors.bgMaterial,\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/PageClasses.js"
+    },
+    {
+      "path": "src/shared/classes/PanelClasses.d.ts",
+      "content": "export const PanelClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/PanelClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/PanelClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const PanelClasses = (props, colors, classes) => {\n  const { size, floating } = props;\n  return {\n    base: {\n      common: cls(\n        'transition-transform transform duration-400 z-40 max-w-full overflow-hidden',\n        floating ? 'top-2-safe bottom-2-safe !h-auto' : 'top-0 max-h-full',\n        colors.bg,\n        positionClass('fixed', classes),\n        size\n      ),\n      ios: '',\n      material: 'ease-material-in',\n    },\n    left: {\n      common: cls(\n        'no-safe-areas-right',\n        floating ? 'right-full -mr-2 rounded-2xl' : 'right-full'\n      ),\n      material: cls(!floating && 'rounded-r-2xl'),\n      opened: 'translate-x-full',\n      closed: '-translate-x-2',\n    },\n    right: {\n      common: cls(\n        'no-safe-areas-left',\n        floating ? 'left-full -ml-2 rounded-2xl' : 'left-full'\n      ),\n      material: cls(!floating && 'rounded-l-2xl'),\n      opened: '-translate-x-full',\n      closed: 'translate-x-2',\n    },\n    backdrop: {\n      common:\n        'fixed z-40 w-full h-full left-0 top-0 bg-black bg-opacity-50 duration-400',\n      opened: '',\n      closed: 'opacity-0 pointer-events-none',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/PanelClasses.js"
+    },
+    {
+      "path": "src/shared/classes/PickerClasses.d.ts",
+      "content": "export const PickerClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/PickerClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/PickerClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const PickerClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls('px-4 py-3 text-sm mb-2', className),\n    ios: cls('rounded-xl', colors.bgIos, colors.textIos),\n    material: cls('rounded-lg', colors.bgMaterial, colors.textMaterial),\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/PickerClasses.js"
+    },
+    {
+      "path": "src/shared/classes/PopoverClasses.d.ts",
+      "content": "export const PopoverClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/PopoverClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/PopoverClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const PopoverClasses = (props, colors, classes) => {\n  const { size, translucent, angleClassName, angleClass } = props;\n  return {\n    base: {\n      common: cls(\n        'transition-transform-opacity z-40 no-safe-areas',\n        positionClass('fixed', classes),\n        size\n      ),\n      ios: 'duration-300',\n      material: 'duration-400 ease-material-in',\n      opened: '',\n      closed: {\n        common: 'opacity-0 pointer-events-none',\n        ios: '',\n        material: 'scale-x-90 scale-y-75',\n      },\n    },\n    inner: {\n      common: cls('overflow-hidden relative'),\n      ios: cls('rounded-xl', translucent && 'translucent', colors.bgIos),\n      material: cls('rounded-[1.75rem]', colors.bgMaterial),\n    },\n    angleWrap: {\n      common: cls(angleClassName || angleClass || '', 'pointer-events-none'),\n      ios: cls(\n        'absolute w-6.5 h-6.5 z-50 overflow-hidden',\n        translucent && 'opacity-80'\n      ),\n      material: cls('absolute w-6.5 h-6.5 z-50 overflow-hidden'),\n      bottom: 'top-full',\n      top: 'bottom-full',\n      left: 'right-full',\n      right: 'left-full',\n    },\n    angleArrow: {\n      common: cls('absolute rounded w-full h-full transform rotate-45'),\n      ios: colors.bgIos,\n      material: colors.bgMaterial,\n      bottom: '-top-4.75',\n      top: 'top-4.75',\n      left: 'left-4.75',\n      right: '-left-4.75',\n    },\n    backdrop: {\n      common:\n        'fixed z-40 w-full h-full left-0 top-0 bg-black bg-opacity-50 duration-300',\n      opened: '',\n      closed: 'opacity-0 pointer-events-none',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/PopoverClasses.js"
+    },
+    {
+      "path": "src/shared/classes/PopupClasses.d.ts",
+      "content": "export const PopupClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/PopupClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/PopupClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const PopupClasses = (props, colors, classes) => {\n  const { size } = props;\n  return {\n    base: {\n      common: cls(\n        'left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas',\n        colors.bg,\n        positionClass('fixed', classes),\n        size\n      ),\n      ios: 'duration-400 md:rounded-lg',\n      material: ' md:rounded-[1.75rem]',\n      opened: {\n        common: '-translate-y-1/2',\n        material: cls('ease-material-in-popup duration-[600ms]'),\n      },\n      closed: { common: 'translate-y-full', material: 'duration-400' },\n    },\n    backdrop: {\n      common:\n        'fixed z-40 w-full h-full left-0 top-0 bg-black bg-opacity-50 duration-400',\n      opened: '',\n      closed: 'opacity-0 pointer-events-none',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/PopupClasses.js"
+    },
+    {
+      "path": "src/shared/classes/PreloaderClasses.d.ts",
+      "content": "export const PreloaderClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/PreloaderClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/PreloaderClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const PreloaderClasses = (props, colors, theme) => {\n  const { size } = props;\n  return {\n    base: {\n      common: cls(\n        theme === 'ios' ? 'c-ios-preloader' : 'c-material-preloader',\n        `inline-block ${size}`\n      ),\n      ios: colors.iconIos,\n      material: `stroke-4 ${colors.iconMaterial}`,\n    },\n    inner: {\n      common: `block w-full h-full`,\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/PreloaderClasses.js"
+    },
+    {
+      "path": "src/shared/classes/ProgressbarClasses.d.ts",
+      "content": "export const ProgressbarClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ProgressbarClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/ProgressbarClasses.js",
+      "content": "export const ProgressbarClasses = (colors) => {\n  return {\n    base: {\n      common: `block h-1 bg-opacity-30 dark:bg-opacity-30 overflow-hidden rtl:rotate-180`,\n      ios: `bg-black rounded-full`,\n      material: colors.bgMaterial,\n    },\n    inner: {\n      common: `block duration-200 w-full h-full`,\n      ios: colors.bgIos,\n      material: colors.bgMaterial,\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ProgressbarClasses.js"
+    },
+    {
+      "path": "src/shared/classes/RadioClasses.d.ts",
+      "content": "export const RadioClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/RadioClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/RadioClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const RadioClasses = (props, colors, classes, darkClasses) => {\n  return {\n    base: cls(\n      `cursor-pointer inline-flex align-middle`,\n      positionClass('relative', classes),\n      darkClasses('dark:touch-ripple-white')\n    ),\n    iconWrap: {\n      common: 'flex items-center justify-center rounded-full',\n      ios: 'w-5.5 h-5.5 border',\n      material: 'w-5 h-5 border-2',\n      notChecked: {\n        ios: colors.borderIos,\n        material: colors.borderMaterial,\n      },\n      checked: {\n        ios: colors.borderCheckedIos,\n        material: colors.borderCheckedMaterial,\n      },\n    },\n    icon: {\n      ios: 'text-primary',\n      material: `w-3 h-3 rounded-full ${colors.bgCheckedMaterial}`,\n      notChecked: 'opacity-0',\n      checked: 'opacity-100',\n    },\n    indeterminateIcon: {\n      common: 'bg-white w-3/4',\n      ios: 'h-0.25',\n      material: 'h-0.5',\n    },\n    input: {\n      common: 'hidden',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/RadioClasses.js"
+    },
+    {
+      "path": "src/shared/classes/RangeClasses.d.ts",
+      "content": "export const RangeClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/RangeClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/RangeClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const RangeClasses = (props, colors, darkClasses) => {\n  return {\n    base: {\n      common: 'block relative select-none w-full self-center touch-pan-y',\n      ios: 'h-7',\n      material: 'h-5',\n    },\n    trackBg: {\n      common: cls(\n        'absolute top-1/2 left-0 w-full transform -translate-y-1/2 bg-black bg-opacity-20',\n        darkClasses('dark:bg-white dark:bg-opacity-20')\n      ),\n      ios: 'h-1 rounded-full',\n      material: 'h-0.5',\n    },\n    trackValue: {\n      common: `absolute top-1/2 start-0 w-full transform -translate-y-1/2`,\n      ios: `h-1 rounded-full ${colors.valueBgIos}`,\n      material: `h-0.5 ${colors.valueBgMaterial}`,\n    },\n    input: {\n      common:\n        'appearance-none w-full bg-transparent cursor-pointer block focus:outline-none relative',\n      ios: 'h-7',\n      material: 'h-5',\n    },\n\n    inputThumb: {\n      common:\n        'range-thumb:relative range-thumb:appearance-none range-thumb:rounded-full range-thumb:border-none',\n      ios: `range-thumb:w-7 range-thumb:h-7 range-thumb:-mt-3.5 ${colors.thumbBgIos} range-thumb:shadow-ios-toggle`,\n      material: `range-thumb:w-3 range-thumb:h-3 ${colors.thumbBgMaterial} range-thumb:-mt-1.5 range-thumb:transform range-thumb:duration-200 active:range-thumb:scale-150`,\n    },\n    inputTrack: {\n      common: 'range-track:appearance-none range-track:h-px',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/RangeClasses.js"
+    },
+    {
+      "path": "src/shared/classes/RefresherClasses.d.ts",
+      "content": "export const RefresherClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/RefresherClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/RefresherClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const RefresherClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls('px-4 py-2 text-xs text-center mb-2', className),\n    ios: cls('rounded-lg', colors.bgIos, colors.textIos),\n    material: cls('rounded-lg', colors.bgMaterial, colors.textMaterial),\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/RefresherClasses.js"
+    },
+    {
+      "path": "src/shared/classes/ReorderClasses.d.ts",
+      "content": "export const ReorderClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ReorderClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/ReorderClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ReorderClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls('mb-2', className),\n    ios: cls('rounded-xl', colors.bgIos, colors.textIos),\n    material: cls('rounded-lg', colors.bgMaterial, colors.textMaterial),\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ReorderClasses.js"
+    },
+    {
+      "path": "src/shared/classes/SearchbarClasses.d.ts",
+      "content": "export const SearchbarClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/SearchbarClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/SearchbarClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const SearchbarClasses = (props, colors, { isEnabled, darkClasses }) => {\n  return {\n    base: {\n      common: 'relative flex overflow-hidden items-center',\n      ios: 'px-2 w-full',\n      material: 'px-0 py-2 -mx-2 w-[calc(100%+32px)]',\n    },\n    inner: {\n      common: 'w-full shrink-1 relative',\n      ios: 'transition-all duration-300',\n    },\n    searchIconWrap: {\n      common: 'absolute inset-y-0 flex items-center z-40',\n      ios: 'start-2',\n      material: 'start-4',\n    },\n    clearButton: {\n      common:\n        'absolute justify-center inset-y-0 flex items-center z-40 cursor-pointer end-0',\n      ios: 'w-8 h-8',\n      material: 'w-12 h-12',\n    },\n    input: {\n      common: 'block appearance-none  w-full py-2  focus:outline-none z-30',\n      ios: cls(\n        'h-8 bg-black/10 pl-7 pr-7 rounded-lg text-base',\n        darkClasses(\n          'dark:placeholder-white dark:placeholder-opacity-30 dark:bg-white/10'\n        ),\n        colors.placeholderIos,\n        colors.inputBgIos\n      ),\n      material: cls(\n        'h-12 ps-12 pe-4 rounded-full',\n        colors.placeholderMaterial,\n        colors.inputBgMaterial\n      ),\n    },\n    deleteIcon: {\n      common: '',\n      ios: 'w-3.5 h-3.5 opacity-45',\n      material: 'w-6 h-6 active:opacity-20',\n    },\n    searchIcon: {\n      common: '',\n      ios: cls('w-4 h-4 opacity-45'),\n      material: cls(\n        'w-5 h-5 z-30',\n        isEnabled\n          ? 'opacity-0 transform rotate-90 scale-50 transition-transform-opacity  duration-400 '\n          : 'block transform transition-transform-opacity scale-100 rotate-0 duration-400'\n      ),\n    },\n    cancelButton: {\n      ios: cls(\n        'ps-2 flex items-center h-8 cursor-pointer bg-transparent text-primary shrink-0 z-40 transition-all duration-300 active:opacity-30',\n        isEnabled ? '' : 'opacity-0'\n      ),\n      material: cls(\n        'absolute left-4 cursor-pointer',\n        isEnabled\n          ? 'z-40 transform scale-100 rotate-0 transition-transform-opacity  duration-400'\n          : 'opacity-0 transform -rotate-90 scale-50 transition-transform-opacity duration-400'\n      ),\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/SearchbarClasses.js"
+    },
+    {
+      "path": "src/shared/classes/SegmentedClasses.d.ts",
+      "content": "export const SegmentedClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/SegmentedClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/SegmentedClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const SegmentedClasses = (props, colors, darkClasses) => {\n  const { outline, rounded } = props;\n  return {\n    base: {\n      common: `flex justify-center items-center overflow-hidden w-full`,\n      square: {\n        ios: 'rounded',\n        material: 'rounded-lg',\n      },\n      rounded: 'rounded-full',\n    },\n    raised: outline\n      ? 'shadow'\n      : `shadow divide-x divide-black divide-opacity-10 rtl:divide-x-reverse`,\n    outline: {\n      common: ``,\n      ios: `${colors.borderIos} border-2`,\n      material: `${colors.borderMaterial} border`,\n    },\n    outlineInner: {\n      common: `-m-0.5 flex w-full justify-center items-center rtl:divide-x-reverse`,\n      ios: `divide-x-2 ${colors.divideIos}`,\n      material: `divide-x ${colors.divideMaterial}`,\n    },\n    strong: {\n      common: cls('p-0.5 space-x-1 relative w-full min-h-9'),\n      ios: colors.strongBgIos,\n      material: colors.strongBgMaterial,\n    },\n    strongHighlight: {\n      common: cls(\n        'absolute start-0.5 top-0.5 bottom-0.5 !ms-0 pointer-events-none duration-200',\n        rounded && 'rounded-full',\n        `bg-white shadow`,\n        darkClasses('dark:bg-neutral-600 dark:shadow-md')\n      ),\n      ios: cls(!rounded && 'rounded'),\n      material: cls(!rounded && 'rounded-md'),\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/SegmentedClasses.js"
+    },
+    {
+      "path": "src/shared/classes/SelectClasses.d.ts",
+      "content": "export const SelectClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/SelectClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/SelectClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const SelectClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(colors.bg, colors.text, className),\n    ios: colors.iosSurface,\n    material: colors.materialSurface,\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/SelectClasses.js"
+    },
+    {
+      "path": "src/shared/classes/SheetClasses.d.ts",
+      "content": "export const SheetClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/SheetClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/SheetClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const SheetClasses = (props, colors, classes) => {\n  return {\n    base: {\n      common: cls(\n        'left-0 top-full transition-transform duration-400 z-40 overflow-hidden',\n        positionClass('fixed', classes)\n      ),\n      ios: '',\n      material: `rounded-t-2xl ease-material-in ${colors.bgIos}`,\n      opened: `-translate-y-full ${colors.bgMaterial}`,\n      closed: '',\n    },\n    backdrop: {\n      common:\n        'fixed z-40 w-full h-full left-0 top-0 bg-black bg-opacity-50 duration-400',\n      opened: '',\n      closed: 'opacity-0 pointer-events-none',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/SheetClasses.js"
+    },
+    {
+      "path": "src/shared/classes/SkeletonClasses.d.ts",
+      "content": "export const SkeletonClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/SkeletonClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/SkeletonClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const SkeletonClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(\n      'animate-pulse rounded',\n      colors.block,\n      className,\n    ),\n    ios: 'rounded-lg',\n    material: 'rounded-md',\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/SkeletonClasses.js"
+    },
+    {
+      "path": "src/shared/classes/SplitPaneClasses.d.ts",
+      "content": "export const SplitPaneClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/SplitPaneClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/SplitPaneClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const SplitPaneClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(\n      'flex flex-row gap-2 min-h-16 mb-2 text-sm items-stretch',\n      className,\n    ),\n    ios: colors.textIos,\n    material: colors.textMaterial,\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/SplitPaneClasses.js"
+    },
+    {
+      "path": "src/shared/classes/StepperClasses.d.ts",
+      "content": "export const StepperClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/StepperClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/StepperClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const StepperClasses = (props, colors) => {\n  const { buttonsOnly } = props;\n\n  return {\n    base: `${colors.text} inline-flex items-stretch`,\n    raised: 'shadow',\n    size: {\n      small: {\n        ios: `h-6`,\n        material: `h-8`,\n      },\n      medium: {\n        ios: `h-7`,\n        material: `h-10`,\n      },\n      large: {\n        ios: `h-11`,\n        material: `h-12`,\n      },\n    },\n    shape: {\n      square: { ios: 'rounded', material: 'rounded-lg' },\n      rounded: 'rounded-full',\n    },\n    button: {\n      common:\n        'relative flex items-center justify-center w-10 cursor-pointer overflow-hidden z-10 select-none',\n    },\n    buttonLeftShape: {\n      square: {\n        ios: 'rounded-s',\n        material: 'rounded-s-lg',\n      },\n      rounded: 'rounded-s-full',\n    },\n    buttonRightShape: {\n      square: {\n        ios: 'rounded-e',\n        material: 'rounded-e-lg',\n      },\n      rounded: 'rounded-e-full',\n    },\n    buttonStyle: {\n      fill: {\n        common: cls(\n          colors.fillTouchRipple,\n          buttonsOnly &&\n            'first:border-r border-black border-opacity-10 rtl:first:border-l rtl:first:border-r-0'\n        ),\n        ios: cls(colors.fillBgIos, colors.fillTextIos, colors.fillActiveBgIos),\n        material: cls(\n          colors.fillBgMaterial,\n          colors.fillTextMaterial,\n          colors.fillActiveBgMaterial\n        ),\n      },\n      outline: {\n        common: cls(\n          colors.touchRipple,\n          'active:bg-opacity-15',\n          buttonsOnly && 'first:border-r-0 rtl:last:border-r-0'\n        ),\n        ios: cls(\n          'border-2',\n          colors.textIos,\n          colors.activeBgIos,\n          colors.outlineBorderIos,\n          buttonsOnly && 'rtl:first:border-r-2'\n        ),\n        material: cls(\n          'border',\n          colors.textMaterial,\n          colors.activeBgMaterial,\n          colors.outlineBorderMaterial,\n          buttonsOnly && 'rtl:first:border-r'\n        ),\n      },\n\n      clear: {\n        common: `${colors.touchRipple} active:bg-opacity-15 last:border-l rtl:last:border-l-0 rtl:first:border-l border-black border-opacity-10`,\n        ios: cls(colors.textIos, colors.activeBgIos),\n        material: cls(colors.textMaterial, colors.activeBgMaterial),\n      },\n    },\n    input: {\n      common: 'focus:outline-none text-center appearance-none bg-transparent',\n    },\n    value: {\n      common: `w-11 flex items-center justify-center font-medium`,\n      ios: `text-base ${colors.textIos}`,\n      material: `text-sm ${colors.textMaterial}`,\n      fill: {\n        common: ``,\n        ios: `border-t-2 border-b-2 ${colors.outlineBorderIos}`,\n        material: `border-t border-b ${colors.outlineBorderMaterial}`,\n      },\n      outline: {\n        common: ``,\n        ios: `border-t-2 border-b-2 ${colors.outlineBorderIos}`,\n        material: `border-t border-b ${colors.outlineBorderMaterial}`,\n      },\n      clear: 'border-l border-black border-opacity-10',\n    },\n    hBar: 'w-4 h-0.5 bg-current block',\n    vBar: 'w-0.5 h-4 bg-current block absolute inset-1/2 transform -translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2',\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/StepperClasses.js"
+    },
+    {
+      "path": "src/shared/classes/TabClasses.d.ts",
+      "content": "export const TabClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TabClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/TabClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const TabClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(colors.bg, colors.text, className),\n    ios: colors.iosSurface,\n    material: colors.materialSurface,\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TabClasses.js"
+    },
+    {
+      "path": "src/shared/classes/TabbarLinkClasses.d.ts",
+      "content": "export const TabbarLinkClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TabbarLinkClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/TabbarLinkClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const TabbarLinkClasses = (\n  { hasIcon, hasLabel, active } = {},\n  colors = {}\n) => {\n  return {\n    content: {\n      common: 'flex flex-col items-center justify-center h-full',\n      ios: cls('py-1', active ? colors.textActiveIos : colors.textIos),\n      material: cls(\n        'py-2',\n        hasIcon && hasLabel && 'space-y-1',\n        active ? colors.textActiveMaterial : colors.textMaterial\n      ),\n    },\n    iconContainer: {\n      common: 'flex items-center justify-center c-tabbar-link-icon relative',\n      ios: cls('w-7 h-7'),\n      material: cls('w-16 h-8 rounded-full'),\n    },\n    iconBg: {\n      common:\n        'absolute left-0 top-0 w-full h-full rounded-full duration-200 -z-10 pointer-events-none',\n      ios: cls(active ? colors.iconBgActiveIos : colors.iconBgIos),\n      material: cls(\n        active ? colors.iconBgActiveMaterial : colors.iconBgMaterial,\n        !active && 'scale-x-[0.5] opacity-0'\n      ),\n    },\n    label: {\n      ios: cls(hasIcon ? 'text-xs font-medium' : '', ''),\n      material: cls(hasIcon ? 'text-xs' : 'text-sm', 'font-medium'),\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TabbarLinkClasses.js"
+    },
+    {
+      "path": "src/shared/classes/TableBodyClasses.d.ts",
+      "content": "export const TableBodyClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TableBodyClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/TableBodyClasses.js",
+      "content": "export const TableBodyClasses = () => {\n  return {\n    base: {\n      common: 'text-sm',\n      ios: '',\n      material: ``,\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TableBodyClasses.js"
+    },
+    {
+      "path": "src/shared/classes/TableCellClasses.d.ts",
+      "content": "export const TableCellClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TableCellClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/TableCellClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const TableCellClasses = (props, colors, classes) => {\n  const { header } = props;\n  return {\n    base: {\n      common: cls('align-middle', classes),\n      ios: cls(\n        header\n          ? `text-xs font-semibold overflow-hidden whitespace-nowrap leading-4 h-11 bg-transparent ${colors.textHeaderIos} py-0 px-4`\n          : `h-11 relative py-0 px-4`\n      ),\n      material: cls(\n        header\n          ? `${colors.textHeaderMaterial} px-6 py-0  text-xs font-medium overflow-hidden text-ellipsis whitespace-nowrap leading-4 h-14 bg-transparent`\n          : `py-0 first:px-6 px-7 h-12`\n      ),\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TableCellClasses.js"
+    },
+    {
+      "path": "src/shared/classes/TableClasses.d.ts",
+      "content": "export const TableClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TableClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/TableClasses.js",
+      "content": "export const TableClasses = () => {\n  return {\n    base: {\n      common: 'w-full border-none p-0 m-0 border-collapse text-left table',\n      ios: '',\n      material: ``,\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TableClasses.js"
+    },
+    {
+      "path": "src/shared/classes/TableHeadClasses.d.ts",
+      "content": "export const TableHeadClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TableHeadClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/TableHeadClasses.js",
+      "content": "export const TableHeadClasses = () => {\n  return {\n    base: {\n      common: 'align-middle relative',\n      ios: 'hairline-b',\n      material: '',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TableHeadClasses.js"
+    },
+    {
+      "path": "src/shared/classes/TableRowClasses.d.ts",
+      "content": "export const TableRowClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TableRowClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/TableRowClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const TableRowClasses = (props, colors) => {\n  const { header } = props;\n  return {\n    base: {\n      common: 'align-middle relative',\n      ios: header\n        ? ''\n        : cls(colors.bgIos, 'hairline-b last:hairline-transparent'),\n      material: header\n        ? ''\n        : cls(colors.bgMaterial, `border-t ${colors.dividerMaterial}`),\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TableRowClasses.js"
+    },
+    {
+      "path": "src/shared/classes/TabsClasses.d.ts",
+      "content": "export const TabsClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TabsClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/TabsClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const TabsClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(colors.bg, colors.text, className),\n    ios: colors.iosSurface,\n    material: colors.materialSurface,\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TabsClasses.js"
+    },
+    {
+      "path": "src/shared/classes/TextareaClasses.d.ts",
+      "content": "export const TextareaClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TextareaClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/TextareaClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const TextareaClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(colors.bg, colors.text, className),\n    ios: colors.iosSurface,\n    material: colors.materialSurface,\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TextareaClasses.js"
+    },
+    {
+      "path": "src/shared/classes/ThumbnailClasses.d.ts",
+      "content": "export const ThumbnailClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ThumbnailClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/ThumbnailClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ThumbnailClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(\n      'overflow-hidden flex items-center justify-center text-xs font-medium shrink-0',\n      className,\n    ),\n    ios: cls('w-14 h-14 rounded-lg', colors.bgIos, colors.textIos),\n    material: cls('w-12 h-12 rounded-md', colors.bgMaterial, colors.textMaterial),\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ThumbnailClasses.js"
+    },
+    {
+      "path": "src/shared/classes/ToastClasses.d.ts",
+      "content": "export const ToastClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ToastClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/ToastClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const ToastClasses = (props, colors, classes) => {\n  const { translucent, opened } = props;\n  return {\n    base: {\n      common: cls(\n        positionClass('fixed', classes),\n        'z-50 transform transition-transform-opacity w-full sm:w-auto start-0 bottom-0 sm:max-w-lg',\n        !opened && 'translate-y-full opacity-0 pointer-events-none'\n      ),\n      ios: cls(\n        `sm:rounded-lg duration-300`,\n        colors.textIos,\n        colors.bgIos,\n        translucent && 'translucent'\n      ),\n      material: cls(\n        `sm:rounded-2xl duration-200`,\n        colors.textMaterial,\n        colors.bgMaterial\n      ),\n      left: 'sm:start-4-safe sm:bottom-4-safe',\n      right: 'sm:end-4-safe sm:bottom-4-safe sm:start-auto',\n      center: 'sm:left-1/2 sm:bottom-4-safe sm:-translate-x-1/2',\n    },\n    content: {\n      common: 'flex items-center justify-between',\n      ios: 'pl-4-safe pr-4-safe pt-3 pb-3-safe sm:px-4 sm:py-3',\n      material: 'pl-6-safe pr-6-safe py-3.5 pb-3.5-safe sm:px-6 sm:py-3.5',\n    },\n    button: {\n      common: '-my-2 shrink-0 ms-4',\n      ios: '',\n      material: '-me-2',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ToastClasses.js"
+    },
+    {
+      "path": "src/shared/classes/ToggleClasses.d.ts",
+      "content": "export const ToggleClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ToggleClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/ToggleClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const ToggleClasses = (props, colors, classes, dark) => {\n  return {\n    base: {\n      common: cls(\n        positionClass('relative', classes),\n        `cursor-pointer select-none inline-block align-middle relative duration-300 rounded-full group`,\n        dark('dark:touch-ripple-white')\n      ),\n      ios: 'h-8 w-13 p-0.5',\n      material: 'w-13 h-8 border-2',\n      notChecked: {\n        ios: colors.bgIos,\n        material: cls(colors.bgMaterial, colors.borderMaterial),\n      },\n      checked: {\n        ios: `${colors.checkedBgIos}`,\n        material: cls(colors.checkedBgMaterial, colors.checkedBorderMaterial),\n      },\n    },\n    inner: {\n      ios: cls(\n        'w-full h-full bg-white rounded-full block duration-300 transform',\n        dark('dark:bg-opacity-0')\n      ),\n      notChecked: {},\n      checked: {\n        ios: 'scale-0',\n      },\n    },\n    thumbWrap: {\n      common: 'rounded-full absolute duration-300 transform',\n      ios: 'w-7 h-7 start-0.5 top-0.5',\n      material: 'w-6 h-6 start-0.5 top-0.5',\n      checked: {\n        ios: cls('translate-x-5 rtl:!-translate-x-5'),\n        material: cls(`translate-x-5 rtl:!-translate-x-5`),\n      },\n      notChecked: '',\n    },\n    thumb: {\n      common:\n        'w-full h-full rounded-full absolute duration-300 transform start-0 top-0',\n      ios: 'shadow-ios-toggle',\n      material: 'group-active:scale-[1.1]',\n      checked: {\n        ios: cls(colors.checkedThumbBgIos),\n        material: cls(colors.checkedThumbBgMaterial),\n      },\n      notChecked: {\n        ios: colors.thumbBgIos,\n        material: cls('scale-[0.666]', colors.thumbBgMaterial),\n      },\n    },\n    input: {\n      common: 'hidden',\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ToggleClasses.js"
+    },
+    {
+      "path": "src/shared/classes/ToolbarClasses.d.ts",
+      "content": "export const ToolbarClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ToolbarClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/ToolbarClasses.js",
+      "content": "import { cls } from '../cls.js';\nimport { positionClass } from '../position-class.js';\n\nexport const ToolbarClasses = (props, colors, classes) => {\n  const {\n    bgClassName = '',\n    bgClass = '',\n    outline,\n    translucent,\n    innerClassName = '',\n    innerClass = '',\n    tabbar,\n    tabbarIcons,\n    top,\n  } = props;\n  return {\n    base: {\n      common: cls(\n        `w-full z-20`,\n        positionClass('relative', classes),\n        !top && 'pb-safe'\n      ),\n    },\n    bg: {\n      common: cls(\n        'absolute w-full h-full left-0 top-0',\n        outline && (top ? 'hairline-b' : 'hairline-t'),\n        bgClassName || bgClass\n      ),\n      ios: cls(colors.bgIos, translucent && 'translucent'),\n      material: cls(`${colors.bgMaterial}`),\n    },\n    inner: {\n      common: cls(\n        `flex relative justify-between items-center w-full overflow-hidden`,\n        innerClassName || innerClass\n      ),\n      ios: cls('pl-2-safe pr-2-safe', tabbarIcons ? 'h-12.5' : 'h-11'),\n      material: cls(\n        !tabbar ? 'pl-2-safe pr-2-safe' : '',\n        tabbarIcons ? 'h-20' : 'h-14'\n      ),\n    },\n    highlight: {\n      common: cls(\n        top ? 'bottom-0' : 'top-0',\n        'absolute left-0 w-full h-0.5 duration-200 pointer-events-none transition-transform'\n      ),\n      ios: colors.tabbarHighlightBgIos,\n      material: colors.tabbarHighlightBgMaterial,\n    },\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/ToolbarClasses.js"
+    },
+    {
+      "path": "src/shared/classes/TouchRippleClasses.d.ts",
+      "content": "export const TouchRippleClasses: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TouchRippleClasses.d.ts"
+    },
+    {
+      "path": "src/shared/classes/TouchRippleClasses.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const TouchRippleClasses = (props, colors, { className } = {}) => ({\n  base: {\n    common: cls(colors.bg, colors.text, className),\n    ios: colors.iosSurface,\n    material: colors.materialSurface,\n  },\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/classes/TouchRippleClasses.js"
+    },
+    {
+      "path": "src/shared/cls.d.ts",
+      "content": "export const cls: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/cls.d.ts"
+    },
+    {
+      "path": "src/shared/cls.js",
+      "content": "export function cls(...args) {\n  const classes = [];\n  args.forEach((arg) => {\n    if (typeof arg === 'object' && arg.constructor === Object) {\n      Object.keys(arg).forEach((key) => {\n        if (arg[key]) classes.push(key);\n      });\n    } else if (Array.isArray(arg)) {\n      classes.push(...arg);\n    } else if (typeof arg === 'function') {\n      classes.push(arg());\n    } else if (arg && arg.value) {\n      classes.push(arg.value);\n    } else if (arg) classes.push(arg);\n  });\n  const uniqueClasses = [];\n  classes.forEach((c) => {\n    if (uniqueClasses.indexOf(c) < 0) uniqueClasses.push(c);\n  });\n  return uniqueClasses.filter((c) => !!c).join(' ');\n}\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/cls.js"
+    },
+    {
+      "path": "src/shared/colors/AccordionColors.d.ts",
+      "content": "export const AccordionColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/AccordionColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/AccordionColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const AccordionColors = (colorsProp = {}, dark) => ({\n  bgIos: cls('bg-ios-light-surface-1', dark('dark:bg-ios-dark-surface-1')),\n  bgMaterial: cls('bg-md-light-surface-1', dark('dark:bg-md-dark-surface-1')),\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/AccordionColors.js"
+    },
+    {
+      "path": "src/shared/colors/AccordionItemColors.d.ts",
+      "content": "export const AccordionItemColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/AccordionItemColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/AccordionItemColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const AccordionItemColors = (colorsProp = {}, dark) => ({\n  textIos: cls('text-ios-light-primary', dark('dark:text-ios-dark-primary')),\n  activeIos: cls('active:bg-ios-light-surface-1-shade', dark('dark:active:bg-ios-dark-surface-1-shade')),\n  textMaterial: cls(\n    'text-md-light-primary',\n    dark('dark:text-md-dark-primary'),\n  ),\n  activeMaterial: cls(\n    'active:bg-md-light-surface-1-shade',\n    dark('dark:active:bg-md-dark-surface-1-shade'),\n  ),\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/AccordionItemColors.js"
+    },
+    {
+      "path": "src/shared/colors/ActionsButtonColors.d.ts",
+      "content": "export const ActionsButtonColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ActionsButtonColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ActionsButtonColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ActionsButtonColors = (colorsProp = {}, dark) => {\n  return {\n    bgIos: cls('bg-white', dark('dark:bg-neutral-800')),\n    bgMaterial: cls('bg-md-light-surface-3', dark('dark:bg-md-dark-surface-3')),\n    activeBgIos: cls(\n      'active:bg-neutral-200',\n      dark('dark:active:bg-neutral-700')\n    ),\n    activeBgMaterial: '',\n    textIos: 'text-primary',\n    textMaterial: cls(\n      'text-md-light-on-surface',\n      dark('dark:text-md-dark-on-surface')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ActionsButtonColors.js"
+    },
+    {
+      "path": "src/shared/colors/ActionsColors.d.ts",
+      "content": "export const ActionsColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ActionsColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ActionsColors.js",
+      "content": "export const ActionsColors = () => {\n  return {};\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ActionsColors.js"
+    },
+    {
+      "path": "src/shared/colors/ActionsGroupColors.d.ts",
+      "content": "export const ActionsGroupColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ActionsGroupColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ActionsGroupColors.js",
+      "content": "export const ActionsGroupColors = () => {\n  return {};\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ActionsGroupColors.js"
+    },
+    {
+      "path": "src/shared/colors/ActionsLabelColors.d.ts",
+      "content": "export const ActionsLabelColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ActionsLabelColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ActionsLabelColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ActionsLabelColors = (colorsProp = {}, dark) => {\n  return {\n    bgIos: cls('bg-white', dark('dark:bg-neutral-800')),\n    bgMaterial: cls('bg-md-light-surface-3', dark('dark:bg-md-dark-surface-3')),\n    textIos: cls(\n      'text-black text-opacity-55',\n      dark('dark:text-white dark:text-opacity-55')\n    ),\n    textMaterial: cls(\n      'text-md-light-primary',\n      dark('dark:text-md-dark-primary')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ActionsLabelColors.js"
+    },
+    {
+      "path": "src/shared/colors/AlertColors.d.ts",
+      "content": "export const AlertColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/AlertColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/AlertColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const AlertColors = (colorsProp = {}, dark) => ({\n  bgIos: cls(\n    'bg-ios-light-primary/10 border border-ios-light-primary/25',\n    dark('dark:bg-ios-dark-primary/15 dark:border-ios-dark-primary/30'),\n  ),\n  textIos: cls('text-ios-light-primary', dark('dark:text-ios-dark-primary')),\n  bgMaterial: cls(\n    'bg-md-light-primary/10 border border-md-light-primary/25',\n    dark('dark:bg-md-dark-primary/15 dark:border-md-dark-primary/30'),\n  ),\n  textMaterial: cls(\n    'text-md-light-primary',\n    dark('dark:text-md-dark-primary'),\n  ),\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/AlertColors.js"
+    },
+    {
+      "path": "src/shared/colors/AppColors.d.ts",
+      "content": "export const AppColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/AppColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/AppColors.js",
+      "content": "export const AppColors = () => {\n  return {};\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/AppColors.js"
+    },
+    {
+      "path": "src/shared/colors/AvatarColors.d.ts",
+      "content": "export const AvatarColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/AvatarColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/AvatarColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const AvatarColors = (colorsProp = {}, dark) => ({\n  bgIos: cls('bg-primary', dark('dark:bg-primary')),\n  textIos: 'text-white',\n  bgMaterial: cls('bg-primary', dark('dark:bg-primary')),\n  textMaterial: 'text-white',\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/AvatarColors.js"
+    },
+    {
+      "path": "src/shared/colors/BadgeColors.d.ts",
+      "content": "export const BadgeColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/BadgeColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/BadgeColors.js",
+      "content": "export const BadgeColors = (colorsProp = {}) => {\n  return {\n    bg: 'bg-primary',\n    text: 'text-white',\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/BadgeColors.js"
+    },
+    {
+      "path": "src/shared/colors/BlockColors.d.ts",
+      "content": "export const BlockColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/BlockColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/BlockColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const BlockColors = (colorsProp = {}, dark) => {\n  return {\n    outlineIos: cls(\n      'border-black border-opacity-20',\n      dark('dark:border-white dark:border-opacity-15')\n    ),\n    outlineMaterial: cls(\n      'border-md-light-outline',\n      dark('border-md-dark-outline')\n    ),\n    strongBgIos: cls(\n      `bg-ios-light-surface-1`,\n      dark('dark:bg-ios-dark-surface-1')\n    ),\n    strongBgMaterial: cls(\n      'bg-md-light-surface-1',\n      dark('dark:bg-md-dark-surface-1')\n    ),\n    textIos: '',\n    textMaterial: cls(\n      'text-md-light-on-surface',\n      dark('dark:text-md-dark-on-surface')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/BlockColors.js"
+    },
+    {
+      "path": "src/shared/colors/BlockFooterColors.d.ts",
+      "content": "export const BlockFooterColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/BlockFooterColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/BlockFooterColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const BlockFooterColors = (colorsProp = {}, dark) => {\n  return {\n    textIos: cls(\n      'text-black text-opacity-75',\n      dark('dark:text-white dark:text-opacity-75')\n    ),\n    textMaterial: cls(\n      'text-md-light-on-surface-variant',\n      dark('dark:text-md-dark-on-surface-variant')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/BlockFooterColors.js"
+    },
+    {
+      "path": "src/shared/colors/BlockHeaderColors.d.ts",
+      "content": "export const BlockHeaderColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/BlockHeaderColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/BlockHeaderColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const BlockHeaderColors = (colorsProp = {}, dark) => {\n  return {\n    textIos: cls('text-black', dark('dark:text-white')),\n    textMaterial: cls(\n      'text-md-light-on-surface-variant',\n      dark('dark:text-md-dark-on-surface-variant')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/BlockHeaderColors.js"
+    },
+    {
+      "path": "src/shared/colors/BlockTitleColors.d.ts",
+      "content": "export const BlockTitleColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/BlockTitleColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/BlockTitleColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const BlockTitleColors = (colorsProp = {}, dark) => {\n  return {\n    textIos: '',\n    textMaterial: cls(\n      'text-md-light-primary',\n      dark('dark:text-md-dark-primary')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/BlockTitleColors.js"
+    },
+    {
+      "path": "src/shared/colors/BreadcrumbsCollapsedColors.d.ts",
+      "content": "export const BreadcrumbsCollapsedColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/BreadcrumbsCollapsedColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/BreadcrumbsCollapsedColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const BreadcrumbsCollapsedColors = (colorsProp = {}, dark) => {\n  return {\n    bgIos: cls(\n      'bg-black bg-opacity-15',\n      dark('dark:bg-white dark:bg-opacity-15')\n    ),\n    bgMaterial: cls(\n      'bg-md-light-secondary-container',\n      dark('dark:bg-md-dark-secondary-container')\n    ),\n    dotBgIos: cls('bg-black', dark('dark:bg-white')),\n    dotBgMaterial: cls('bg-md-light-primary', dark('dark:bg-md-dark-primary')),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/BreadcrumbsCollapsedColors.js"
+    },
+    {
+      "path": "src/shared/colors/BreadcrumbsColors.d.ts",
+      "content": "export const BreadcrumbsColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/BreadcrumbsColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/BreadcrumbsColors.js",
+      "content": "export const BreadcrumbsColors = (colorsProp = {}) => {\n  return {\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/BreadcrumbsColors.js"
+    },
+    {
+      "path": "src/shared/colors/BreadcrumbsItemColors.d.ts",
+      "content": "export const BreadcrumbsItemColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/BreadcrumbsItemColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/BreadcrumbsItemColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const BreadcrumbsItemColors = (colorsProp = {}, dark) => {\n  return {\n    textIos: cls(\n      'text-black text-opacity-55',\n      dark('dark:text-white dark:text-opacity-55')\n    ),\n    textMaterial: cls(\n      'text-md-light-on-secondary-container',\n      dark('dark:text-md-dark-on-secondary-container')\n    ),\n    bgIos: '',\n    bgMaterial: cls(\n      'bg-md-light-secondary-container',\n      dark('dark:bg-md-dark-secondary-container')\n    ),\n    textActiveIos: cls('text-black', dark('dark:text-white')),\n    textActiveMaterial: cls(\n      'text-md-light-on-secondary-container',\n      dark('dark:text-md-dark-on-secondary-container')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/BreadcrumbsItemColors.js"
+    },
+    {
+      "path": "src/shared/colors/BreadcrumbsSeparatorColors.d.ts",
+      "content": "export const BreadcrumbsSeparatorColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/BreadcrumbsSeparatorColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/BreadcrumbsSeparatorColors.js",
+      "content": "export const BreadcrumbsSeparatorColors = () => {\n  return {};\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/BreadcrumbsSeparatorColors.js"
+    },
+    {
+      "path": "src/shared/colors/ButtonColors.d.ts",
+      "content": "export const ButtonColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ButtonColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ButtonColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ButtonColors = (colorsProp = {}, dark) => {\n  return {\n    activeBgIos: 'active:bg-primary',\n    activeBgMaterial: '',\n    textIos: 'text-primary',\n    textMaterial: cls('text-md-light-primary', 'dark:text-md-dark-primary'),\n    fillTextIos: cls('text-white'),\n    fillTextMaterial: cls(\n      'text-md-light-on-primary',\n      dark('dark:text-md-dark-on-primary')\n    ),\n    fillActiveBgIos: 'active:bg-ios-primary-shade',\n    fillActiveBgMaterial: '',\n    fillBgIos: 'bg-primary',\n    fillBgMaterial: cls('bg-md-light-primary', dark('dark:bg-md-dark-primary')),\n    fillTouchRipple: cls('touch-ripple-white', 'dark:touch-ripple-primary'),\n    outlineBorderIos: 'border-primary',\n    outlineBorderMaterial: cls(\n      'border-md-light-outline',\n      dark('dark:border-md-dark-outline')\n    ),\n    tonalBgIos: 'bg-primary',\n    tonalBgMaterial: cls(\n      'bg-md-light-secondary-container',\n      dark('dark:bg-md-dark-secondary-container')\n    ),\n    tonalTextIos: 'text-primary',\n    tonalTextMaterial: cls(\n      'text-md-light-on-secondary-container',\n      dark('dark:text-md-dark-on-secondary-container')\n    ),\n    touchRipple: 'touch-ripple-primary',\n    disabledText: cls(\n      'text-black text-opacity-30',\n      dark('dark:text-white dark:text-opacity-30')\n    ),\n    disabledBg: cls(\n      'bg-black bg-opacity-10',\n      dark('dark:bg-white dark:bg-opacity-10')\n    ),\n    disabledBorder: cls(\n      'border-black border-opacity-10',\n      dark('dark:border-white dark:border-opacity-10')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ButtonColors.js"
+    },
+    {
+      "path": "src/shared/colors/CardColors.d.ts",
+      "content": "export const CardColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/CardColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/CardColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const CardColors = (colorsProp = {}, dark) => {\n  return {\n    textIos: cls(''),\n    textMaterial: cls(\n      'text-md-light-on-surface',\n      dark('dark:text-md-dark-on-surface')\n    ),\n    bgIos: cls(`bg-ios-light-surface-1`, dark('dark:bg-ios-dark-surface-1')),\n    bgMaterial: cls('bg-md-light-surface-1', dark('dark:bg-md-dark-surface-1')),\n    footerTextIos: cls(\n      `text-black text-opacity-55`,\n      dark('dark:text-white dark:text-opacity-55')\n    ),\n    footerTextMaterial: cls(\n      `text-md-light-on-surface-variant`,\n      dark('dark:text-md-dark-on-surface-variant')\n    ),\n    outlineIos: cls(\n      'border-black border-opacity-20',\n      dark('dark:border-white dark:border-opacity-20')\n    ),\n    outlineMaterial: cls(\n      'border-md-light-outline',\n      dark('dark:border-md-dark-outline')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/CardColors.js"
+    },
+    {
+      "path": "src/shared/colors/CheckboxColors.d.ts",
+      "content": "export const CheckboxColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/CheckboxColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/CheckboxColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const CheckboxColors = (colorsProp = {}, dark) => {\n  return {\n    borderIos: cls(\n      `border-black border-opacity-30`,\n      dark('dark:border-white dark:border-opacity-30')\n    ),\n    borderMaterial: cls(\n      `border-md-light-outline`,\n      dark('dark:border-md-dark-outline')\n    ),\n    bgCheckedIos: 'bg-primary',\n    bgCheckedMaterial: cls(\n      'bg-md-light-primary',\n      dark('dark:bg-md-dark-primary')\n    ),\n    borderCheckedIos: 'border-primary',\n    borderCheckedMaterial: cls(\n      'border-md-light-primary',\n      dark('dark:border-md-dark-primary')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/CheckboxColors.js"
+    },
+    {
+      "path": "src/shared/colors/ChipColors.d.ts",
+      "content": "export const ChipColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ChipColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ChipColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ChipColors = (colorsProp = {}, dark) => {\n  return {\n    fillTextIos: 'text-current',\n    fillTextMaterial: cls(\n      'text-md-light-on-secondary-container',\n      dark('dark:text-md-dark-on-secondary-container')\n    ),\n    fillBgIos: cls(\n      `bg-black bg-opacity-10`,\n      dark('dark:bg-white dark:bg-opacity-10')\n    ),\n    fillBgMaterial: cls(\n      'bg-md-light-secondary-container',\n      dark('dark:bg-md-dark-secondary-container')\n    ),\n    outlineTextIos: cls('text-current'),\n    outlineTextMaterial: cls(\n      'text-md-light-on-surface',\n      dark('dark:text-md-dark-on-surface')\n    ),\n    outlineBorderIos: cls(\n      `border-black border-opacity-20`,\n      dark('dark:border-white dark:border-opacity-20')\n    ),\n    outlineBorderMaterial: cls(\n      `border-md-light-outline`,\n      dark('dark:border-md-dark-outline')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ChipColors.js"
+    },
+    {
+      "path": "src/shared/colors/DatetimeColors.d.ts",
+      "content": "export const DatetimeColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/DatetimeColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/DatetimeColors.js",
+      "content": "import { ionicSurfaceColors } from './ionicSurfaceColors.js';\n\nexport const DatetimeColors = (colorsProp = {}, dark) => ({\n  ...ionicSurfaceColors(dark),\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/DatetimeColors.js"
+    },
+    {
+      "path": "src/shared/colors/DialogButtonColors.d.ts",
+      "content": "export const DialogButtonColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/DialogButtonColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/DialogButtonColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const DialogButtonColors = (colorsProp = {}, dark) => {\n  return {\n    activeBgIos: cls(\n      'active:bg-black active:bg-opacity-10',\n      dark('dark:active:bg-white dark:active:bg-opacity-10')\n    ),\n    textIos: 'text-primary',\n    disabledTextIos: cls(\n      'text-black text-opacity-30',\n      dark('dark:text-white dark:text-opacity-30')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/DialogButtonColors.js"
+    },
+    {
+      "path": "src/shared/colors/DialogColors.d.ts",
+      "content": "export const DialogColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/DialogColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/DialogColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const DialogColors = (colorsProp = {}, dark) => {\n  return {\n    bgIos: cls('bg-white', dark('dark:bg-neutral-800')),\n    bgMaterial: cls('bg-md-light-surface-3', dark('dark:bg-md-dark-surface-3')),\n    titleIos: '',\n    titleMaterial: cls(\n      'text-md-light-on-surface',\n      dark('dark:text-md-dark-on-surface')\n    ),\n    contentTextIos: '',\n    contentTextMaterial: cls(\n      'text-md-light-on-surface-variant',\n      dark('dark:text-md-dark-on-surface-variant')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/DialogColors.js"
+    },
+    {
+      "path": "src/shared/colors/FabColors.d.ts",
+      "content": "export const FabColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/FabColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/FabColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const FabColors = (colorsProp = {}, dark) => {\n  return {\n    bgIos: 'bg-primary',\n    bgMaterial: cls(\n      'bg-md-light-primary-container',\n      dark('dark:bg-md-dark-primary-container')\n    ),\n    activeBgIos: 'active:bg-ios-primary-shade',\n    activeBgMaterial: '',\n    textIos: 'text-white',\n    textMaterial: cls(\n      'text-md-light-on-primary-container',\n      dark('dark:text-md-dark-on-primary-container')\n    ),\n    touchRipple: cls('touch-ripple-primary', dark('dark:touch-ripple-white')),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/FabColors.js"
+    },
+    {
+      "path": "src/shared/colors/FooterColors.d.ts",
+      "content": "export const FooterColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/FooterColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/FooterColors.js",
+      "content": "import { ionicSurfaceColors } from './ionicSurfaceColors.js';\n\nexport const FooterColors = (colorsProp = {}, dark) => ({\n  ...ionicSurfaceColors(dark),\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/FooterColors.js"
+    },
+    {
+      "path": "src/shared/colors/GlassColors.d.ts",
+      "content": "export const GlassColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/GlassColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/GlassColors.js",
+      "content": "import { cls } from '../cls.js';\nimport { filterColors } from '../filter-colors.js';\n\nexport const GlassColors = (colorsProp = {}, dark) => {\n  return {\n    bgIos: cls('bg-ios-light-glass', dark('dark:bg-ios-dark-glass')),\n    shadowIos: cls(\n      'shadow-ios-light-glass',\n      dark('dark:shadow-ios-dark-glass')\n    ),\n    ...filterColors(colorsProp),\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/GlassColors.js"
+    },
+    {
+      "path": "src/shared/colors/HeaderColors.d.ts",
+      "content": "export const HeaderColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/HeaderColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/HeaderColors.js",
+      "content": "import { ionicSurfaceColors } from './ionicSurfaceColors.js';\n\nexport const HeaderColors = (colorsProp = {}, dark) => ({\n  ...ionicSurfaceColors(dark),\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/HeaderColors.js"
+    },
+    {
+      "path": "src/shared/colors/IconColors.d.ts",
+      "content": "export const IconColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/IconColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/IconColors.js",
+      "content": "export const IconColors = () => {\n  return {};\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/IconColors.js"
+    },
+    {
+      "path": "src/shared/colors/InfiniteScrollColors.d.ts",
+      "content": "export const InfiniteScrollColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/InfiniteScrollColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/InfiniteScrollColors.js",
+      "content": "import { ionicSurfaceColors } from './ionicSurfaceColors.js';\n\nexport const InfiniteScrollColors = (colorsProp = {}, dark) => ({\n  ...ionicSurfaceColors(dark),\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/InfiniteScrollColors.js"
+    },
+    {
+      "path": "src/shared/colors/InputOtpColors.d.ts",
+      "content": "export const InputOtpColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/InputOtpColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/InputOtpColors.js",
+      "content": "import { ionicSurfaceColors } from './ionicSurfaceColors.js';\n\nexport const InputOtpColors = (colorsProp = {}, dark) => ({\n  ...ionicSurfaceColors(dark),\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/InputOtpColors.js"
+    },
+    {
+      "path": "src/shared/colors/ItemSlidingColors.d.ts",
+      "content": "export const ItemSlidingColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ItemSlidingColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ItemSlidingColors.js",
+      "content": "import { ionicSurfaceColors } from './ionicSurfaceColors.js';\n\nexport const ItemSlidingColors = (colorsProp = {}, dark) => ({\n  ...ionicSurfaceColors(dark),\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ItemSlidingColors.js"
+    },
+    {
+      "path": "src/shared/colors/LinkColors.d.ts",
+      "content": "export const LinkColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/LinkColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/LinkColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const LinkColors = (colorsProp = {}, dark) => {\n  return {\n    textIos: 'text-primary',\n    textMaterial: cls(\n      'text-md-light-primary',\n      dark('dark:text-md-dark-primary')\n    ),\n    navbarTextIos: 'text-primary',\n    navbarTextMaterial: '',\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/LinkColors.js"
+    },
+    {
+      "path": "src/shared/colors/ListButtonColors.d.ts",
+      "content": "export const ListButtonColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ListButtonColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ListButtonColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ListButtonColors = (colorsProp = {}, dark) => {\n  return {\n    textIos: 'text-primary',\n    textMaterial: cls(\n      'text-md-light-primary',\n      dark('dark:text-md-dark-primary')\n    ),\n    activeBgIos: 'active:bg-primary active:bg-opacity-15',\n    activeBgMaterial: '',\n    touchRipple: 'touch-ripple-primary',\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ListButtonColors.js"
+    },
+    {
+      "path": "src/shared/colors/ListColors.d.ts",
+      "content": "export const ListColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ListColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ListColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ListColors = (colorsProp = {}, dark) => {\n  return {\n    outlineIos: cls(\n      'border-black border-opacity-20',\n      dark('dark:border-white dark:border-opacity-15')\n    ),\n    outlineMaterial: cls(\n      'border-md-light-outline',\n      dark('border-md-dark-outline')\n    ),\n    strongBgIos: cls(\n      `bg-ios-light-surface-1`,\n      dark('dark:bg-ios-dark-surface-1')\n    ),\n    strongBgMaterial: cls(\n      'bg-md-light-surface-1',\n      dark('dark:bg-md-dark-surface-1')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ListColors.js"
+    },
+    {
+      "path": "src/shared/colors/ListGroupColors.d.ts",
+      "content": "export const ListGroupColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ListGroupColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ListGroupColors.js",
+      "content": "export const ListGroupColors = () => {\n  return {};\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ListGroupColors.js"
+    },
+    {
+      "path": "src/shared/colors/ListInputColors.d.ts",
+      "content": "export const ListInputColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ListInputColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ListInputColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ListInputColors = (colorsProp = {}, dark) => {\n  return {\n    bgIos: '',\n    bgMaterial: cls(\n      'bg-md-light-surface-variant',\n      dark('dark:bg-md-dark-surface-variant')\n    ),\n    outlineBorderIos: cls(\n      'border-black border-opacity-30',\n      dark('dark:border-white dark:border-opacity-30')\n    ),\n    outlineBorderFocusIos: 'border-primary',\n    outlineBorderMaterial: cls(\n      'border-md-light-on-surface',\n      dark('dark:border-md-dark-on-surface')\n    ),\n    outlineBorderFocusMaterial: cls(\n      'border-md-light-primary',\n      dark('dark:border-md-dark-primary')\n    ),\n    outlineLabelBgIos: cls(\n      'bg-ios-light-surface-1',\n      dark('dark:bg-ios-dark-surface-1')\n    ),\n    outlineLabelBgMaterial: cls(\n      'bg-md-light-surface',\n      dark('dark:bg-md-dark-surface')\n    ),\n    labelTextIos: '',\n    labelTextFocusIos: '',\n    labelTextMaterial: cls(\n      'text-md-light-on-surface-variant',\n      dark('dark:text-md-dark-on-surface-variant')\n    ),\n    labelTextFocusMaterial: cls(\n      'text-md-light-primary',\n      dark('dark:text-md-dark-primary')\n    ),\n    errorText: 'text-red-500',\n    errorBorder: 'border-red-500',\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ListInputColors.js"
+    },
+    {
+      "path": "src/shared/colors/ListItemColors.d.ts",
+      "content": "export const ListItemColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ListItemColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ListItemColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ListItemColors = (colorsProp = {}, dark) => {\n  return {\n    primaryTextIos: cls(`text-black`, dark('dark:text-white')),\n    primaryTextMaterial: cls(\n      `text-md-light-on-surface`,\n      dark('dark:text-md-dark-on-surface')\n    ),\n    secondaryTextIos: cls(\n      'text-black text-opacity-55',\n      dark('dark:text-white dark:text-opacity-55')\n    ),\n    secondaryTextMaterial: cls(\n      'text-md-light-on-surface-variant',\n      dark('dark:text-md-dark-on-surface-variant')\n    ),\n    activeBgIos: cls(\n      `active:bg-black active:bg-opacity-10`,\n      dark('dark:active:bg-white dark:active:bg-opacity-10')\n    ),\n    activeBgMaterial: '',\n    groupTitleBgIos: cls(\n      'bg-ios-light-surface-variant',\n      dark('dark:bg-ios-dark-surface-variant')\n    ),\n    groupTitleBgMaterial: cls(\n      'bg-md-light-surface-2',\n      dark('dark:bg-md-dark-surface-2')\n    ),\n    menuListItemTextIos: cls(`text-black`, dark('dark:text-white')),\n    menuListItemTextMaterial: cls(\n      `text-md-light-on-surface-variant`,\n      dark('dark:text-md-dark-on-surface-variant')\n    ),\n    menuListItemBgIos: cls(\n      `active:bg-black active:bg-opacity-10`,\n      dark('dark:active:bg-white dark:active:bg-opacity-10')\n    ),\n    menuListItemBgMaterial: cls(\n      'bg-md-light-surface-1',\n      dark('dark:bg-md-dark-surface-1')\n    ),\n    menuListItemActiveTextIos: cls(`text-primary`, dark('dark:text-white')),\n    menuListItemActiveTextMaterial: cls(\n      `text-md-light-on-secondary-container`,\n      dark('dark:text-md-dark-on-secondary-container')\n    ),\n    menuListItemActiveBgIos: cls(\n      `bg-primary bg-opacity-15`,\n      dark('dark:bg-primary')\n    ),\n    menuListItemActiveBgMaterial: cls(\n      `bg-md-light-secondary-container`,\n      dark('dark:bg-md-dark-secondary-container')\n    ),\n    touchRipple: cls('touch-ripple-black', dark('dark:touch-ripple-white')),\n    groupTitleContactsTextIos: cls(\n      'text-opacity-90',\n      dark('dark:text-opacity-90')\n    ),\n    groupTitleContactsTextMaterial: cls(\n      'text-md-light-primary',\n      dark('dark:text-md-dark-primary')\n    ),\n    groupTitleContactsBgIos: cls(dark('dark:bg-[#323234]')),\n    groupTitleContactsBgMaterial: cls(\n      'bg-transparent',\n      dark('dark:bg-transparent')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ListItemColors.js"
+    },
+    {
+      "path": "src/shared/colors/MenuListColors.d.ts",
+      "content": "export const MenuListColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/MenuListColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/MenuListColors.js",
+      "content": "export const MenuListColors = () => {\n  return {};\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/MenuListColors.js"
+    },
+    {
+      "path": "src/shared/colors/MenuListItemColors.d.ts",
+      "content": "export const MenuListItemColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/MenuListItemColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/MenuListItemColors.js",
+      "content": "export const MenuListItemColors = () => {\n  return {};\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/MenuListItemColors.js"
+    },
+    {
+      "path": "src/shared/colors/MessageColors.d.ts",
+      "content": "export const MessageColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/MessageColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/MessageColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const MessageColors = (colorsProp = {}, dark) => {\n  return {\n    messageSent: 'text-white',\n    messageReceived: 'text-inherit',\n    messageNameIos: cls(\n      'text-black text-opacity-45',\n      dark('dark:text-white dark:text-opacity-45')\n    ),\n    messageNameMd: cls(\n      'text-md-light-on-surface-variant',\n      dark('dark:text-md-dark-on-surface-variant')\n    ),\n    bubbleSentIos: cls('bg-primary'),\n    bubbleSentMd: cls(\n      'bg-md-light-primary',\n      dark('dark:bg-md-dark-primary dark:text-md-dark-on-primary')\n    ),\n    bubbleReceivedIos: cls('bg-[#e5e5ea]', dark('dark:bg-[#252525]')),\n    bubbleReceivedMd: cls(\n      dark('dark:bg-md-dark-surface-variant'),\n      'bg-[#e5e5ea]'\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/MessageColors.js"
+    },
+    {
+      "path": "src/shared/colors/MessagebarColors.d.ts",
+      "content": "export const MessagebarColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/MessagebarColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/MessagebarColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const MessagebarColors = (colorsProp = {}, dark) => {\n  return {\n    toolbarIconIos: cls('fill-primary', dark('dark:fill-md-dark-primary')),\n    toolbarIconMd: cls('fill-black'),\n    inputBgIos: cls('bg-transparent'),\n    borderIos: cls(\n      'border-[#c8c8cd]',\n      dark('dark:border-white dark:border-opacity-30')\n    ),\n    inputBgMd: cls(\n      'bg-md-light-surface-2',\n      dark('dark:bg-md-dark-surface-variant')\n    ),\n    placeholderIos: cls(\n      dark('dark:placeholder-white dark:placeholder-opacity-40')\n    ),\n    placeholderMd: cls(\n      'placeholder-md-light-on-surface-variant',\n      dark('dark:placeholder-md-dark-on-surface-variant')\n    ),\n    bgIos: cls('bg-white', dark('dark:bg-black')),\n    bgMaterial: cls('bg-md-light-surface', dark('dark:bg-md-dark-surface')),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/MessagebarColors.js"
+    },
+    {
+      "path": "src/shared/colors/MessagesTitleColors.d.ts",
+      "content": "export const MessagesTitleColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/MessagesTitleColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/MessagesTitleColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const MessagesTitleColors = (colorsProp = {}, dark) => {\n  return {\n    titleIos: cls(\n      'text-black text-opacity-45',\n      dark('dark:text-white dark:text-opacity-45')\n    ),\n    titleMd: cls(\n      'text-md-light-on-surface-variant',\n      dark('dark:text-md-dark-on-surface-variant')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/MessagesTitleColors.js"
+    },
+    {
+      "path": "src/shared/colors/ModalColors.d.ts",
+      "content": "export const ModalColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ModalColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ModalColors.js",
+      "content": "import { ionicSurfaceColors } from './ionicSurfaceColors.js';\n\nexport const ModalColors = (colorsProp = {}, dark) => ({\n  ...ionicSurfaceColors(dark),\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ModalColors.js"
+    },
+    {
+      "path": "src/shared/colors/NavbarBackLinkColors.d.ts",
+      "content": "export const NavbarBackLinkColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/NavbarBackLinkColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/NavbarBackLinkColors.js",
+      "content": "export const NavbarBackLinkColors = () => {\n  return {};\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/NavbarBackLinkColors.js"
+    },
+    {
+      "path": "src/shared/colors/NavbarColors.d.ts",
+      "content": "export const NavbarColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/NavbarColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/NavbarColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const NavbarColors = (colorsProp, dark) => {\n  return {\n    bgIos: cls('bg-ios-light-surface-2', dark('dark:bg-ios-dark-surface-2')),\n    bgMaterial: cls('bg-md-light-surface-2', dark('dark:bg-md-dark-surface-2')),\n    textIos: cls('text-black', dark('dark:text-white')),\n    textMaterial: cls(\n      'text-md-light-on-surface',\n      dark('dark:text-md-dark-on-surface')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/NavbarColors.js"
+    },
+    {
+      "path": "src/shared/colors/NoteColors.d.ts",
+      "content": "export const NoteColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/NoteColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/NoteColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const NoteColors = (colorsProp = {}, dark) => ({\n  textIos: cls('text-ios-light-secondary', dark('dark:text-ios-dark-secondary')),\n  textMaterial: cls(\n    'text-md-light-secondary',\n    dark('dark:text-md-dark-secondary'),\n  ),\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/NoteColors.js"
+    },
+    {
+      "path": "src/shared/colors/NotificationsColors.d.ts",
+      "content": "export const NotificationsColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/NotificationsColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/NotificationsColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const NotificationsColors = (colorsProp, dark) => {\n  return {\n    bgIos: cls('bg-white', dark('dark:bg-[#1e1e1e]')),\n    bgMaterial: cls('bg-md-light-surface-5', dark('dark:bg-md-dark-surface-5')),\n    titleIos: cls('text-black', dark('dark:text-white')),\n    titleRightIos: cls(\n      'text-opacity-45 text-black',\n      dark('dark:text-white dark:text-opacity-45')\n    ),\n    titleRightMd: cls(\n      'text-md-light-on-surface-variant before:bg-md-light-on-surface-variant',\n      dark(\n        'dark:text-md-dark-on-surface-variant before:dark:bg-md-dark-on-surface-variant'\n      )\n    ),\n    subtitleIos: cls('text-black ', dark('dark:text-white')),\n    textMaterial: cls(\n      'text-md-light-on-surface-variant',\n      dark('dark:text-md-dark-on-surface-variant ')\n    ),\n    deleteIconIos: cls(\n      'fill-stone-400 active:fill-stone-200',\n      dark('dark:fill-stone-500 dark:active:fill-stone-700')\n    ),\n    deleteIconMd: cls(\n      'text-md-light-on-surface-variant',\n      dark('dark:text-md-dark-on-surface-variant')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/NotificationsColors.js"
+    },
+    {
+      "path": "src/shared/colors/PageColors.d.ts",
+      "content": "export const PageColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/PageColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/PageColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const PageColors = (colorsProp = {}, dark) => {\n  return {\n    bgIos: cls('bg-ios-light-surface', dark('dark:bg-ios-dark-surface')),\n    bgMaterial: cls('bg-md-light-surface', dark('dark:bg-md-dark-surface')),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/PageColors.js"
+    },
+    {
+      "path": "src/shared/colors/PanelColors.d.ts",
+      "content": "export const PanelColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/PanelColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/PanelColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const PanelColors = (colorsProp = {}, dark) => {\n  return {\n    bg: cls('bg-white', dark('dark:bg-black')),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/PanelColors.js"
+    },
+    {
+      "path": "src/shared/colors/PickerColors.d.ts",
+      "content": "export const PickerColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/PickerColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/PickerColors.js",
+      "content": "import { ionicSurfaceColors } from './ionicSurfaceColors.js';\n\nexport const PickerColors = (colorsProp = {}, dark) => ({\n  ...ionicSurfaceColors(dark),\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/PickerColors.js"
+    },
+    {
+      "path": "src/shared/colors/PopoverColors.d.ts",
+      "content": "export const PopoverColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/PopoverColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/PopoverColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const PopoverColors = (colorsProp = {}, dark) => {\n  return {\n    bgIos: cls('bg-ios-light-surface-3', dark('dark:bg-ios-dark-surface-3')),\n    bgMaterial: cls('bg-md-light-surface-3', dark('dark:bg-md-dark-surface-3')),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/PopoverColors.js"
+    },
+    {
+      "path": "src/shared/colors/PopupColors.d.ts",
+      "content": "export const PopupColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/PopupColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/PopupColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const PopupColors = (colorsProp = {}, dark) => {\n  return {\n    bg: cls('bg-white', dark('dark:bg-black')),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/PopupColors.js"
+    },
+    {
+      "path": "src/shared/colors/PreloaderColors.d.ts",
+      "content": "export const PreloaderColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/PreloaderColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/PreloaderColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const PreloaderColors = (colorsProp = {}, dark) => {\n  return {\n    iconIos: 'text-primary',\n    iconMaterial: cls(\n      'text-md-light-primary',\n      dark('dark:text-md-dark-primary')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/PreloaderColors.js"
+    },
+    {
+      "path": "src/shared/colors/ProgressbarColors.d.ts",
+      "content": "export const ProgressbarColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ProgressbarColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ProgressbarColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ProgressbarColors = (colorsProp = {}, dark) => {\n  return {\n    bgIos: 'bg-primary',\n    bgMaterial: cls('bg-md-light-primary', dark('dark:bg-md-dark-primary')),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ProgressbarColors.js"
+    },
+    {
+      "path": "src/shared/colors/RadioColors.d.ts",
+      "content": "export const RadioColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/RadioColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/RadioColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const RadioColors = (colorsProp = {}, dark) => {\n  return {\n    borderIos: cls(\n      'border-black border-opacity-30',\n      dark('dark:border-white dark:border-opacity-30')\n    ),\n    borderMaterial: cls(\n      `border-md-light-outline`,\n      dark('dark:border-md-dark-outline')\n    ),\n    bgCheckedIos: 'bg-primary',\n    bgCheckedMaterial: cls(\n      'bg-md-light-primary',\n      dark('dark:bg-md-dark-primary')\n    ),\n    borderCheckedIos: 'border-primary',\n    borderCheckedMaterial: cls(\n      'border-md-light-primary',\n      dark('dark:border-md-dark-primary')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/RadioColors.js"
+    },
+    {
+      "path": "src/shared/colors/RangeColors.d.ts",
+      "content": "export const RangeColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/RangeColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/RangeColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const RangeColors = (colorsProp = {}, dark) => {\n  return {\n    valueBgIos: 'bg-primary',\n    valueBgMaterial: cls(\n      'bg-md-light-primary',\n      dark('dark:bg-md-dark-primary')\n    ),\n    thumbBgIos: 'range-thumb:bg-white',\n    thumbBgMaterial: cls(\n      'range-thumb:bg-md-light-primary',\n      dark('dark:range-thumb:bg-md-dark-primary')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/RangeColors.js"
+    },
+    {
+      "path": "src/shared/colors/RefresherColors.d.ts",
+      "content": "export const RefresherColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/RefresherColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/RefresherColors.js",
+      "content": "import { ionicSurfaceColors } from './ionicSurfaceColors.js';\n\nexport const RefresherColors = (colorsProp = {}, dark) => ({\n  ...ionicSurfaceColors(dark),\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/RefresherColors.js"
+    },
+    {
+      "path": "src/shared/colors/ReorderColors.d.ts",
+      "content": "export const ReorderColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ReorderColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ReorderColors.js",
+      "content": "import { ionicSurfaceColors } from './ionicSurfaceColors.js';\n\nexport const ReorderColors = (colorsProp = {}, dark) => ({\n  ...ionicSurfaceColors(dark),\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ReorderColors.js"
+    },
+    {
+      "path": "src/shared/colors/SearchbarColors.d.ts",
+      "content": "export const SearchbarColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/SearchbarColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/SearchbarColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const SearchbarColors = (colorsProp = {}, dark) => {\n  return {\n    inputBgIos: '',\n    inputBgMaterial: cls(\n      'bg-md-light-secondary-container',\n      dark('dark:bg-md-dark-secondary-container')\n    ),\n    placeholderIos: '',\n    placeholderMaterial: cls(\n      'placeholder-md-light-on-surface-variant',\n      dark('dark:placeholder-md-dark-on-surface-variant')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/SearchbarColors.js"
+    },
+    {
+      "path": "src/shared/colors/SegmentedButtonColors.d.ts",
+      "content": "export const SegmentedButtonColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/SegmentedButtonColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/SegmentedButtonColors.js",
+      "content": "export const SegmentedButtonColors = () => {\n  return {};\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/SegmentedButtonColors.js"
+    },
+    {
+      "path": "src/shared/colors/SegmentedColors.d.ts",
+      "content": "export const SegmentedColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/SegmentedColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/SegmentedColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const SegmentedColors = (colorsProp = {}, dark) => {\n  return {\n    strongBgIos: cls(\n      'bg-neutral-200/80',\n      dark('dark:bg-white/12 dark:border dark:border-white/20')\n    ),\n    strongBgMaterial: cls(\n      'bg-md-light-surface-variant',\n      dark('dark:bg-white/12 dark:border dark:border-white/20')\n    ),\n\n    borderIos: 'border-primary',\n    borderMaterial: cls(\n      'border-md-light-outline',\n      dark('dark:border-md-dark-outline')\n    ),\n    divideIos: 'divide-primary',\n    divideMaterial: cls(\n      'divide-md-light-outline',\n      dark('dark:divide-md-dark-outline')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/SegmentedColors.js"
+    },
+    {
+      "path": "src/shared/colors/SelectColors.d.ts",
+      "content": "export const SelectColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/SelectColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/SelectColors.js",
+      "content": "export const SelectColors = (colorsProp = {}) => ({\n  bg: 'bg-light',\n  text: 'text-black dark:text-white',\n  iosSurface: 'ios:rounded-xl',\n  materialSurface: 'android:rounded-2xl',\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/SelectColors.js"
+    },
+    {
+      "path": "src/shared/colors/SheetColors.d.ts",
+      "content": "export const SheetColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/SheetColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/SheetColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const SheetColors = (colorsProp = {}, dark) => {\n  return {\n    bgIos: cls('bg-white', dark('dark:bg-black')),\n    bgMaterial: cls('bg-md-light-surface', dark('dark:bg-md-dark-surface')),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/SheetColors.js"
+    },
+    {
+      "path": "src/shared/colors/SkeletonColors.d.ts",
+      "content": "export const SkeletonColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/SkeletonColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/SkeletonColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const SkeletonColors = (colorsProp = {}, dark) => ({\n  block: cls(\n    'bg-ios-light-surface-1-shade',\n    dark('dark:bg-ios-dark-surface-1-shade'),\n    'android:bg-md-light-surface-1-shade',\n    dark('dark:android:bg-md-dark-surface-1-shade'),\n  ),\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/SkeletonColors.js"
+    },
+    {
+      "path": "src/shared/colors/SplitPaneColors.d.ts",
+      "content": "export const SplitPaneColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/SplitPaneColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/SplitPaneColors.js",
+      "content": "import { ionicSurfaceColors } from './ionicSurfaceColors.js';\n\nexport const SplitPaneColors = (colorsProp = {}, dark) => ({\n  ...ionicSurfaceColors(dark),\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/SplitPaneColors.js"
+    },
+    {
+      "path": "src/shared/colors/StepperColors.d.ts",
+      "content": "export const StepperColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/StepperColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/StepperColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const StepperColors = (colorsProp = {}, dark) => {\n  return {\n    activeBgIos: 'active:bg-primary',\n    activeBgMaterial: '',\n    textIos: 'text-primary',\n    textMaterial: cls('text-md-light-primary', 'dark:text-md-dark-primary'),\n    fillTextIos: cls('text-white'),\n    fillTextMaterial: cls(\n      'text-md-light-on-primary',\n      dark('dark:text-md-dark-on-primary')\n    ),\n    fillBgIos: 'bg-primary',\n    fillBgMaterial: cls('bg-md-light-primary', dark('dark:bg-md-dark-primary')),\n    fillActiveBgIos: 'active:bg-ios-primary-shade',\n    fillActiveBgMaterial: '',\n    fillTouchRipple: cls('touch-ripple-white', 'dark:touch-ripple-primary'),\n    outlineBorderIos: 'border-primary',\n    outlineBorderMaterial: cls(\n      'border-md-light-outline',\n      dark('dark:border-md-dark-outline')\n    ),\n    touchRipple: 'touch-ripple-primary',\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/StepperColors.js"
+    },
+    {
+      "path": "src/shared/colors/TabColors.d.ts",
+      "content": "export const TabColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/TabColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/TabColors.js",
+      "content": "export const TabColors = (colorsProp = {}) => ({\n  bg: 'bg-light',\n  text: 'text-black dark:text-white',\n  iosSurface: 'ios:rounded-xl',\n  materialSurface: 'android:rounded-2xl',\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/TabColors.js"
+    },
+    {
+      "path": "src/shared/colors/TabbarColors.d.ts",
+      "content": "export const TabbarColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/TabbarColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/TabbarColors.js",
+      "content": "export const TabbarColors = () => {\n  return {};\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/TabbarColors.js"
+    },
+    {
+      "path": "src/shared/colors/TabbarLinkColors.d.ts",
+      "content": "export const TabbarLinkColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/TabbarLinkColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/TabbarLinkColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const TabbarLinkColors = (colorsProp = {}, dark) => {\n  return {\n    textIos: cls(\n      'text-black text-opacity-40',\n      dark('dark:text-white dark:text-opacity-55')\n    ),\n    textActiveIos: 'text-primary',\n    textMaterial: cls(\n      'text-md-light-on-surface-variant',\n      dark('dark:text-md-dark-on-surface-variant')\n    ),\n    textActiveMaterial: cls(\n      'text-md-light-on-secondary-container',\n      dark('dark:text-md-dark-on-secondary-container')\n    ),\n    iconBgIos: '',\n    iconBgActiveIos: '',\n    iconBgMaterial: '',\n    iconBgActiveMaterial: cls(\n      'bg-md-light-secondary-container',\n      dark('dark:bg-md-dark-secondary-container')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/TabbarLinkColors.js"
+    },
+    {
+      "path": "src/shared/colors/TableCellColors.d.ts",
+      "content": "export const TableCellColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/TableCellColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/TableCellColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const TableCellColors = (colorsProp = {}, dark) => {\n  return {\n    textHeaderIos: cls('text-black/45', dark('dark:text-white/55')),\n    textHeaderMaterial: cls(\n      'text-md-light-on-surface-variant',\n      dark('dark:text-md-dark-on-surface-variant')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/TableCellColors.js"
+    },
+    {
+      "path": "src/shared/colors/TableRowColors.d.ts",
+      "content": "export const TableRowColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/TableRowColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/TableRowColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const TableRowColors = (colorsProp = {}, dark) => {\n  return {\n    bgIos: cls('hover:bg-black/5', dark('dark:hover:bg-white/10')),\n    bgMaterial: cls(\n      'hover:bg-md-light-secondary-container',\n      dark('dark:hover:bg-md-dark-secondary-container')\n    ),\n    dividerMaterial: cls(\n      'border-md-light-outline',\n      dark('dark:border-md-dark-outline')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/TableRowColors.js"
+    },
+    {
+      "path": "src/shared/colors/TabsColors.d.ts",
+      "content": "export const TabsColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/TabsColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/TabsColors.js",
+      "content": "export const TabsColors = (colorsProp = {}) => ({\n  bg: 'bg-light',\n  text: 'text-black dark:text-white',\n  iosSurface: 'ios:rounded-xl',\n  materialSurface: 'android:rounded-2xl',\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/TabsColors.js"
+    },
+    {
+      "path": "src/shared/colors/TextareaColors.d.ts",
+      "content": "export const TextareaColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/TextareaColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/TextareaColors.js",
+      "content": "export const TextareaColors = (colorsProp = {}) => ({\n  bg: 'bg-light',\n  text: 'text-black dark:text-white',\n  iosSurface: 'ios:rounded-xl',\n  materialSurface: 'android:rounded-2xl',\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/TextareaColors.js"
+    },
+    {
+      "path": "src/shared/colors/ThumbnailColors.d.ts",
+      "content": "export const ThumbnailColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ThumbnailColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ThumbnailColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ThumbnailColors = (colorsProp = {}, dark) => ({\n  bgIos: cls('bg-ios-light-surface-1-shade', dark('dark:bg-ios-dark-surface-1-shade')),\n  textIos: cls('text-ios-light-secondary', dark('dark:text-ios-dark-secondary')),\n  bgMaterial: cls('bg-md-light-surface-1-shade', dark('dark:bg-md-dark-surface-1-shade')),\n  textMaterial: cls(\n    'text-md-light-secondary',\n    dark('dark:text-md-dark-secondary'),\n  ),\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ThumbnailColors.js"
+    },
+    {
+      "path": "src/shared/colors/ToastColors.d.ts",
+      "content": "export const ToastColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ToastColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ToastColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ToastColors = (colorsProp = {}, dark) => {\n  return {\n    bgIos: 'bg-black',\n    bgMaterial: cls('bg-md-light-surface-5', dark('dark:bg-md-dark-surface-5')),\n    textIos: 'text-white',\n    textMaterial: cls(\n      'text-md-light-primary',\n      dark('dark:text-md-dark-primary')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ToastColors.js"
+    },
+    {
+      "path": "src/shared/colors/ToggleColors.d.ts",
+      "content": "export const ToggleColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ToggleColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ToggleColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ToggleColors = (colorsProp = {}, dark) => {\n  return {\n    bgIos: cls(\n      'bg-black bg-opacity-10',\n      dark('dark:bg-white dark:bg-opacity-20')\n    ),\n    checkedBgIos: 'bg-primary',\n    thumbBgIos: 'bg-white',\n    checkedThumbBgIos: 'bg-white',\n    bgMaterial: cls(\n      'bg-md-light-surface-variant',\n      dark('dark:bg-md-dark-surface-variant')\n    ),\n    checkedBgMaterial: cls(\n      'bg-md-light-primary',\n      dark('dark:bg-md-dark-primary')\n    ),\n    borderMaterial: cls(\n      'border-md-light-outline',\n      dark('dark:border-md-dark-outline')\n    ),\n    checkedBorderMaterial: cls(\n      'border-md-light-primary',\n      dark('dark:border-md-dark-primary')\n    ),\n    thumbBgMaterial: cls(\n      'bg-md-light-outline',\n      dark('dark:bg-md-dark-outline')\n    ),\n    checkedThumbBgMaterial: cls(\n      'bg-md-light-on-primary',\n      dark('dark:bg-md-dark-on-primary')\n    ),\n\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ToggleColors.js"
+    },
+    {
+      "path": "src/shared/colors/ToolbarColors.d.ts",
+      "content": "export const ToolbarColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ToolbarColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ToolbarColors.js",
+      "content": "import { cls } from '../cls.js';\n\nexport const ToolbarColors = (colorsProp = {}, dark) => {\n  return {\n    bgIos: cls('bg-ios-light-surface-2', dark('dark:bg-ios-dark-surface-2')),\n    bgMaterial: cls('bg-md-light-surface-2', dark('dark:bg-md-dark-surface-2')),\n    tabbarHighlightBgIos: 'bg-primary',\n    tabbarHighlightBgMaterial: cls(\n      'bg-md-light-primary',\n      dark('dark:bg-md-dark-primary')\n    ),\n    ...colorsProp,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ToolbarColors.js"
+    },
+    {
+      "path": "src/shared/colors/TouchRippleColors.d.ts",
+      "content": "export const TouchRippleColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/TouchRippleColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/TouchRippleColors.js",
+      "content": "export const TouchRippleColors = (colorsProp = {}) => ({\n  bg: 'bg-light',\n  text: 'text-black dark:text-white',\n  iosSurface: 'ios:rounded-xl',\n  materialSurface: 'android:rounded-2xl',\n  ...colorsProp,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/TouchRippleColors.js"
+    },
+    {
+      "path": "src/shared/colors/ionicSurfaceColors.d.ts",
+      "content": "export const ionicSurfaceColors: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ionicSurfaceColors.d.ts"
+    },
+    {
+      "path": "src/shared/colors/ionicSurfaceColors.js",
+      "content": "import { cls } from '../cls.js';\n\n/** Shared list/surface tokens for Ionic-style blocks in the demo and scaffolds. */\nexport const ionicSurfaceColors = (dark, extra = {}) => ({\n  bgIos: cls(\n    'bg-ios-light-surface-1 border border-black/10',\n    dark('dark:bg-ios-dark-surface-1 dark:border-white/10'),\n  ),\n  textIos: cls('text-ios-light-label', dark('dark:text-ios-dark-label')),\n  bgMaterial: cls(\n    'bg-md-light-surface-2 border border-md-light-outline',\n    dark('dark:bg-md-dark-surface-2 dark:border-md-dark-outline'),\n  ),\n  textMaterial: cls(\n    'text-md-light-on-surface',\n    dark('dark:text-md-dark-on-surface'),\n  ),\n  ...extra,\n});\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/colors/ionicSurfaceColors.js"
+    },
+    {
+      "path": "src/shared/filter-colors.js",
+      "content": "export function filterColors(obj) {\n  if (!obj || typeof obj !== 'object') {\n    return {};\n  }\n\n  const filtered = {};\n  Object.keys(obj).forEach((key) => {\n    if (obj[key] != null) {\n      filtered[key] = obj[key];\n    }\n  });\n  return filtered;\n}\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/filter-colors.js"
+    },
+    {
+      "path": "src/shared/position-class.d.ts",
+      "content": "export const positionClass: (...args: any[]) => any;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/position-class.d.ts"
+    },
+    {
+      "path": "src/shared/position-class.js",
+      "content": "export const positionClass = (position, className = '') => {\n  if (!className || typeof className !== 'string') return position;\n  const classes = ['static', 'relative', 'absolute', 'fixed', 'sticky'];\n  const hasPositionClass =\n    classes.filter((c) => className.indexOf(c) >= 0).length > 0;\n  return hasPositionClass ? '' : position;\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/position-class.js"
+    },
+    {
+      "path": "src/shared/touch-ripple-class.d.ts",
+      "content": "\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/touch-ripple-class.d.ts"
+    },
+    {
+      "path": "src/shared/touch-ripple-class.js",
+      "content": "export class TouchRipple {\n  constructor(el, x, y) {\n    const ripple = this;\n\n    if (!el) return undefined;\n    ripple.el = el;\n\n    const { left, top, width, height } = el.getBoundingClientRect();\n    const center = {\n      x: x - left,\n      y: y - top,\n    };\n    let diameter = Math.max((height ** 2 + width ** 2) ** 0.5, 48);\n\n    const isInset = el.classList.contains('c-touch-ripple-inset');\n\n    if (isInset) {\n      diameter = Math.max(Math.min(width, height), 48);\n    }\n\n    /* eslint-disable no-restricted-globals */\n    const isOverflowHidden =\n      typeof window !== 'undefined' &&\n      window.getComputedStyle(el, null).getPropertyValue('overflow') ===\n        'hidden';\n\n    /* eslint-enable no-restricted-globals */\n    if (!isInset && isOverflowHidden) {\n      const distanceFromCenter =\n        ((center.x - width / 2) ** 2 + (center.y - height / 2) ** 2) ** 0.5;\n      const scale = (diameter / 2 + distanceFromCenter) / (diameter / 2);\n      ripple.rippleTransform = `translate3d(0px, 0px, 0) scale(${scale})`;\n    } else {\n      // prettier-ignore\n      ripple.rippleTransform = `translate3d(${-center.x + width / 2}px, ${-center.y + height / 2}px, 0) scale(1)`;\n    }\n\n    // eslint-disable-next-line\n    ripple.rippleWaveEl = document.createElement('span');\n    ripple.rippleWaveEl.classList.add('c-touch-ripple-wave');\n    ripple.rippleWaveEl.setAttribute('hidden', '');\n\n    ripple.rippleWaveEl.style = `\n      width: ${diameter}px;\n      height: ${diameter}px;\n      margin-top:-${diameter / 2}px;\n      margin-left:-${diameter / 2}px;\n      left:${center.x}px;\n      top:${center.y}px; --c-ripple-transform: ${ripple.rippleTransform}`;\n\n    el.insertAdjacentElement('afterbegin', ripple.rippleWaveEl);\n\n    const animationEnd = () => {\n      ripple.rippleWaveEl.removeEventListener('animationend', animationEnd);\n      if (!ripple.rippleWaveEl) return;\n      if (ripple.rippleWaveEl.classList.contains('c-touch-ripple-wave-out'))\n        return;\n      ripple.rippleWaveEl.classList.add('c-touch-ripple-wave-in');\n      if (ripple.shouldBeRemoved) {\n        ripple.out();\n      }\n    };\n    ripple.rippleWaveEl.addEventListener('animationend', animationEnd);\n\n    return ripple;\n  }\n\n  destroy() {\n    let ripple = this;\n    if (ripple.rippleWaveEl) {\n      ripple.el.removeChild(ripple.rippleWaveEl);\n    }\n    Object.keys(ripple).forEach((key) => {\n      ripple[key] = null;\n      delete ripple[key];\n    });\n    ripple = null;\n  }\n\n  out() {\n    const ripple = this;\n    const { rippleWaveEl } = this;\n    clearTimeout(ripple.removeTimeout);\n    rippleWaveEl.classList.add('c-touch-ripple-wave-out');\n\n    ripple.removeTimeout = setTimeout(() => {\n      ripple.destroy();\n    }, 300);\n    const animationEnd = () => {\n      ripple.rippleWaveEl.removeEventListener('animationend', animationEnd);\n      clearTimeout(ripple.removeTimeout);\n      ripple.destroy();\n    };\n    ripple.rippleWaveEl.addEventListener('animationend', animationEnd);\n  }\n\n  remove() {\n    const ripple = this;\n    if (ripple.shouldBeRemoved) return;\n    ripple.removeTimeout = setTimeout(() => {\n      ripple.destroy();\n    }, 400);\n    ripple.shouldBeRemoved = true;\n    if (ripple.rippleWaveEl.classList.contains('c-touch-ripple-wave-in')) {\n      ripple.out();\n    }\n  }\n}\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/touch-ripple-class.js"
+    },
+    {
+      "path": "src/shared/use-ios-highlight.js",
+      "content": "const nextTick = (fn) => {\n  requestAnimationFrame(() => {\n    requestAnimationFrame(fn);\n  });\n};\n\nexport const useIosHighlight = ({\n  getEl,\n  zIndex = 10,\n  opacity = 1,\n  offset = 1,\n  enabled = true,\n  data = {},\n}) => {\n  const isEnabled = () => {\n    if (typeof enabled === 'function') {\n      return enabled();\n    }\n    return enabled;\n  };\n  const removeHoverHighlight = () => {\n    const el = getEl();\n    if (el && data.elScale) {\n      data.elScale = false;\n      el.style.scale = '';\n\n      const onTransitionEnd = () => {\n        el.style.transitionDuration = '';\n        el.style.transitionTimingFunction = '';\n        el.removeEventListener('transitionend', onTransitionEnd);\n      };\n      el.addEventListener('transitionend', onTransitionEnd);\n    }\n\n    if (data.lightElWrap) {\n      const lightElWrap = data.lightElWrap;\n      if (lightElWrap.style.opacity === '0') {\n        lightElWrap.remove();\n      } else {\n        lightElWrap.addEventListener('transitionend', () => {\n          lightElWrap.remove();\n        });\n        lightElWrap.style.opacity = 0;\n      }\n    }\n  };\n\n  const setLightPosition = (e) => {\n    if (data.lightEl) {\n      const { x, y } = e;\n      const offsetX = x - data.rect.x;\n      const offsetY = y - data.rect.y;\n      data.lightEl.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0)`;\n    }\n  };\n\n  const onPointerEnter = (e) => {\n    if (!isEnabled()) return;\n    const d = data;\n    const el = getEl();\n\n    d.rect = el.getBoundingClientRect();\n    const lightElWrap = document.createElement('span');\n    lightElWrap.className = 'rounded-[inherit]';\n    lightElWrap.style = `left: ${offset}px; top: ${offset}px; right: ${offset}px; bottom: ${offset}px;transition-duration: 300ms; opacity: 0; position: absolute; overflow: hidden; pointer-events: none`;\n    const lightEl = document.createElement('span');\n    const { width, height } = d.rect;\n    const radius = (width ** 2 + height ** 2) ** 0.5;\n    lightEl.style.position = `absolute`;\n    lightEl.style.zIndex = zIndex;\n    lightEl.style.width = `${radius * 2}px`;\n    lightEl.style.left = `${-radius}px`;\n    lightEl.style.height = `${radius * 2}px`;\n    lightEl.style.top = `${-radius}px`;\n    lightEl.style.borderRadius = `50%`;\n    const lightColor = 'var(--color-ios-hover-highlight)';\n\n    lightEl.style.backgroundImage = `radial-gradient(circle at center, color-mix(in oklab, ${lightColor} ${opacity * 100}%, transparent), transparent 50%)`;\n\n    lightEl.style.pointerEvents = 'none';\n    d.lightEl = lightEl;\n    d.lightElWrap = lightElWrap;\n    setLightPosition(e);\n    lightElWrap.append(lightEl);\n    el.append(lightElWrap);\n    if (e.pointerType !== 'mouse') {\n      if (e.pointerType !== 'mouse') {\n        d.elScale = true;\n        let scale = 1.25;\n        if (d.rect.width > 60 || d.rect.height > 60) {\n          scale = 1.05;\n        }\n        el.style.scale = scale;\n        el.style.transitionDuration = '300ms';\n        el.style.transitionTimingFunction = 'ease-in-out';\n      }\n    }\n    nextTick(() => {\n      lightElWrap.style.opacity = 1;\n    });\n  };\n\n  const onPointerMove = (e) => {\n    if (!isEnabled()) return;\n    setLightPosition(e);\n  };\n  const onPointerLeave = (e) => {\n    removeHoverHighlight();\n  };\n  const attachEvents = () => {\n    const el = getEl();\n    if (!el) return;\n    el.addEventListener('pointerenter', onPointerEnter);\n    el.addEventListener('pointermove', onPointerMove);\n    el.addEventListener('pointerleave', onPointerLeave);\n  };\n  const detachEvents = () => {\n    const el = getEl();\n    if (!el) return;\n    el.removeEventListener('pointerenter', onPointerEnter);\n    el.removeEventListener('pointermove', onPointerMove);\n    el.removeEventListener('pointerleave', onPointerLeave);\n  };\n\n  return {\n    removeHoverHighlight,\n    attachEvents,\n    detachEvents,\n  };\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/shared/use-ios-highlight.js"
+    }
+  ]
+}

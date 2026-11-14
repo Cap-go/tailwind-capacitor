@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-menu-list",
+  "type": "registry:item",
+  "title": "Capacitor MenuList (Angular)",
+  "description": "Capacitor MenuList Angular component.",
+  "dependencies": [
+    "@angular/core"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-list.json"
+  ],
+  "files": [
+    {
+      "path": "src/angular/components/MenuList.component.ts",
+      "content": "import { Component, Input } from '@angular/core';\nimport { ListComponent } from './List.component.js';\n\n@Component({\n  selector: 'c-menu-list',\n  standalone: true,\n  imports: [ListComponent],\n  template: `<c-list [menuList]=\"true\"><ng-content /></c-list>`,\n})\nexport class MenuListComponent {\n  \n}\n",
+      "type": "registry:file",
+      "target": "src/capacitor/angular/components/MenuList.component.ts"
+    }
+  ]
+}

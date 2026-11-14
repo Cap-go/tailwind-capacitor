@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-skeleton",
+  "type": "registry:item",
+  "title": "Capacitor Skeleton (Vue)",
+  "description": "Capacitor Skeleton Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Skeleton.vue",
+      "content": "<template>\n  <component :is=\"component\" :class=\"c.base\" />\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n  import { SkeletonClasses } from '../../shared/classes/SkeletonClasses.js';\n  import { SkeletonColors } from '../../shared/colors/SkeletonColors.js';\n  import { themeClasses } from '../shared/use-theme-classes.js';\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  export default {\n    name: 'c-skeleton',\n    props: {\n      component: { type: String, default: 'div' },\n      colors: { type: Object },\n      ios: { type: Boolean, default: undefined },\n      material: { type: Boolean, default: undefined },\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const colors = computed(() =>\n        SkeletonColors(props.colors || {}, useDarkClasses),\n      );\n      const c = useThemeClasses(props, () =>\n        SkeletonClasses(props, colors.value, { className: ctx.attrs.class }),\n      );\n      return { c };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Skeleton.vue"
+    }
+  ]
+}

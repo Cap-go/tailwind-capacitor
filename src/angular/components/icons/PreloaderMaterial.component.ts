@@ -1,0 +1,29 @@
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'c-preloader-material',
+  standalone: true,
+  template: `<svg viewBox="0 0 36 36" fill="none" stroke="currentcolor" class="animate-spin">
+    <circle
+      cx="18"
+      cy="18"
+      r="16"
+      stroke-width="3"
+      stroke-linecap="round"
+      stroke-dasharray="42 84"
+    />
+  </svg>`,
+})
+export class PreloaderMaterialComponent {
+  @Input() theme?: 'ios' | 'material';
+  @Input() ios?: boolean;
+  @Input() material?: boolean;
+  @Input() fill?: string;
+
+  resolveTheme(): 'ios' | 'material' {
+    if (this.ios) return 'ios';
+    if (this.material) return 'material';
+    if (this.theme === 'ios' || this.theme === 'material') return this.theme;
+    return 'material';
+  }
+}

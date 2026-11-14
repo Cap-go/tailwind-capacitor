@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-tabs",
+  "type": "registry:item",
+  "title": "Capacitor Tabs (Vue)",
+  "description": "Capacitor Tabs Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-segmented.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Tabs.vue",
+      "content": "<template>\n  <c-segmented class=\"w-full\" strong rounded v-bind=\"passProps\">\n    <slot />\n  </c-segmented>\n</template>\n<script>\n  import { computed } from 'vue';\n  import cSegmented from './Segmented.vue';\n\n  export default {\n    name: 'c-tabs',\n    components: { cSegmented },\n    props: {\n      ...cSegmented.props,\n    },\n    setup(props) {\n      const passProps = computed(() => ({ ...props }));\n      return { passProps };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Tabs.vue"
+    }
+  ]
+}

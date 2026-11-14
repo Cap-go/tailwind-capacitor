@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-breadcrumbs-separator",
+  "type": "registry:item",
+  "title": "Capacitor BreadcrumbsSeparator (Vue)",
+  "description": "Capacitor BreadcrumbsSeparator Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-icons.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/BreadcrumbsSeparator.vue",
+      "content": "<template>\n  <component :is=\"component\" :class=\"c.base\">\n    <chevron-icon :class=\"c.icon\" />\n    <slot />\n  </component>\n</template>\n<script>\n  import { BreadcrumbsSeparatorClasses } from '../../shared/classes/BreadcrumbsSeparatorClasses.js';\n  import { useContext } from '../shared/use-context.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n  import ChevronIcon from './icons/ChevronIcon.vue';\n\n  export default {\n    name: 'c-breadcrumbs-separator',\n    components: { ChevronIcon },\n    props: {\n      component: {\n        type: String,\n        default: 'span',\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n    },\n    setup(props) {\n      const context = useContext();\n      const useThemeClasses = themeClasses(context);\n      const c = useThemeClasses(props, () =>\n        BreadcrumbsSeparatorClasses(props)\n      );\n      return {\n        c,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/BreadcrumbsSeparator.vue"
+    }
+  ]
+}
