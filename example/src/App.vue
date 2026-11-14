@@ -57,9 +57,16 @@
             <Note>Supporting note text</Note>
             <div class="demo-media-row">
               <Avatar>MD</Avatar>
-              <Thumbnail>IMG</Thumbnail>
+              <Thumbnail class="demo-thumbnail">
+                <img
+                  src="https://picsum.photos/seed/capgo-demo/96/96"
+                  alt="Sample thumbnail"
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                />
+              </Thumbnail>
             </div>
-            <Skeleton class="h-4 w-full" />
           </Block>
 
           <Block strong inset>
@@ -89,7 +96,7 @@
               <TabbarLink>Settings</TabbarLink>
             </Tabbar>
             <div class="demo-back-row flex items-center gap-2 mt-2">
-              <NavbarBackLink @click.prevent />
+              <NavbarBackLink :show-text="false" @click.prevent />
               <span class="text-sm">Back button</span>
             </div>
           </Block>
@@ -103,8 +110,8 @@
               <MenuListItem title="Menu item A" />
               <MenuListItem title="Menu item B" />
             </MenuList>
-            <ItemSliding class="p-3 mt-2">
-              <ListItem title="Sliding list item" />
+            <ItemSliding class="demo-item-sliding mt-2">
+              <ListItem component="div" title="Sliding list item" />
             </ItemSliding>
             <Reorder class="p-1 mt-2">
               <List strong inset>

@@ -11,7 +11,8 @@ const outDir = join(repoRoot, 'docs/screenshots');
 mkdirSync(outDir, { recursive: true });
 
 const AFTER_ONLY = process.env.CAPTURE_AFTER_ONLY === '1';
-const BEFORE_COMMIT = process.env.SCREENSHOT_BEFORE_COMMIT || 'e6437809852749b566a8489cd59db362006741f0';
+const BEFORE_REF =
+  process.env.SCREENSHOT_BEFORE_REF || 'origin/main';
 
 const THEME_MATRIX = [
   { key: 'ios-light', query: '?theme=ios&dark=0' },
@@ -33,7 +34,7 @@ async function waitForUrl(url, attempts = 40) {
   throw new Error(`server did not respond at ${url}`);
 }
 
-async function captureSet({ cwd, port, shots, preview = false }) {
+async function captureSet({ cwd, port, shots, preview = false, requireThemeChip = true }) {
   const server = spawn(
     preview ? 'npm' : 'npm',
     preview
@@ -54,7 +55,12 @@ async function captureSet({ cwd, port, shots, preview = false }) {
     await page.setViewportSize({ width: shot.width, height: shot.height });
     const target = shot.query ? `${url.split('?')[0]}${shot.query}` : url;
     await page.goto(target, { waitUntil: 'domcontentloaded', timeout: 60_000 });
-    await page.waitForSelector('.demo-shell .theme-chip', { timeout: 30_000 });
+    if (requireThemeChip) {
+      await page.waitForSelector('.demo-shell .theme-chip', { timeout: 30_000 });
+    } else {
+      await page.waitForSelector('body', { timeout: 30_000 });
+      await sleep(500);
+    }
     await page.evaluate('window.scrollTo(0, 0)');
     await page.evaluate('window.scrollTo(0, 0)');
     await sleep(150);
@@ -70,10 +76,14 @@ async function captureSet({ cwd, port, shots, preview = false }) {
 
 if (!AFTER_ONLY) {
   const beforeRoot = mkdtempSync(join(tmpdir(), 'tc-before-'));
-  const checkout = spawnSync('git', ['worktree', 'add', '--detach', beforeRoot, BEFORE_COMMIT], {
-    cwd: repoRoot,
-    encoding: 'utf8',
-  });
+  const checkout = spawnSync(
+    'git',
+    ['worktree', 'add', '--detach', beforeRoot, BEFORE_REF],
+    {
+      cwd: repoRoot,
+      encoding: 'utf8',
+    },
+  );
   if (checkout.status !== 0) {
     console.error(checkout.stderr);
     process.exit(1);
@@ -81,14 +91,28 @@ if (!AFTER_ONLY) {
 
   spawnSync('npm', ['ci'], { cwd: beforeRoot, stdio: 'inherit' });
   spawnSync('npm', ['ci'], { cwd: join(beforeRoot, 'example'), stdio: 'inherit' });
+  spawnSync('npm', ['run', 'build:registry'], {
+    cwd: beforeRoot,
+    stdio: 'inherit',
+  });
+  spawnSync('npm', ['run', 'sync:example'], {
+    cwd: beforeRoot,
+    stdio: 'inherit',
+  });
+  spawnSync('npm', ['run', 'build'], {
+    cwd: join(beforeRoot, 'example'),
+    stdio: 'inherit',
+  });
 
   await captureSet({
     cwd: join(beforeRoot, 'example'),
     port: 4174,
+    requireThemeChip: false,
     shots: [
       { name: 'before-desktop.png', width: 1280, height: 800, fullPage: true },
       { name: 'before-mobile.png', width: 390, height: 844, fullPage: true },
     ],
+    preview: true,
   });
 
   spawnSync('git', ['worktree', 'remove', '--force', beforeRoot], { cwd: repoRoot });

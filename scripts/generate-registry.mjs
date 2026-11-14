@@ -43,19 +43,26 @@ const iconFilesReact = readdirSync(join(reactDir, 'icons'))
 function sharedClassColorFiles() {
   const dirs = ['classes', 'colors'];
   const files = [];
+  const pushPair = (rel) => {
+    files.push(rel);
+    const dts = rel.replace(/\.js$/, '.d.ts');
+    if (existsSync(join(root, dts))) files.push(dts);
+  };
   for (const dir of dirs) {
     for (const name of readdirSync(join(sharedDir, dir))) {
-      if (name.endsWith('.js')) files.push(`src/shared/${dir}/${name}`);
+      if (name.endsWith('.js')) pushPair(`src/shared/${dir}/${name}`);
     }
   }
-  files.push(
-    'src/shared/cls.js',
-    'src/shared/calc-popover-position.js',
-    'src/shared/position-class.js',
-    'src/shared/touch-ripple-class.js',
-    'src/shared/use-ios-highlight.js',
-    'src/shared/filter-colors.js',
-  );
+  for (const util of [
+    'cls.js',
+    'calc-popover-position.js',
+    'position-class.js',
+    'touch-ripple-class.js',
+    'use-ios-highlight.js',
+    'filter-colors.js',
+  ]) {
+    pushPair(`src/shared/${util}`);
+  }
   return files.sort();
 }
 
@@ -81,6 +88,7 @@ const styleJsFiles = [
 const vueProviderFiles = [
   'src/vue/shared/TailwindCapacitorProvider.vue',
   'src/vue/shared/use-auto-theme.js',
+  'src/vue/shared/use-effective-dark.js',
   'src/vue/shared/use-context.js',
   'src/vue/shared/use-dark-classes.js',
   'src/vue/shared/use-theme-classes.js',
@@ -92,6 +100,7 @@ const reactProviderFiles = [
   'src/react/shared/TailwindCapacitorProvider.tsx',
   'src/react/shared/CapacitorContext.ts',
   'src/react/shared/use-auto-theme.ts',
+  'src/react/shared/use-effective-dark.js',
   'src/react/shared/use-dark-classes.ts',
   'src/react/shared/use-theme-classes.ts',
   'src/react/shared/use-theme.ts',
@@ -191,6 +200,28 @@ function collectReactDeps(source, names) {
     const imp = match[1];
     if (imp.startsWith('icons/')) continue;
     const imported = basename(imp, '.tsx');
+    if (!names.includes(imported)) continue;
+    const sibling = dep(`capacitor-${toKebab(imported)}`, false);
+    if (!registryDeps.includes(sibling)) registryDeps.push(sibling);
+  }
+  return registryDeps;
+}
+
+function collectAngularDeps(source, names) {
+  const registryDeps = [
+    dep('capacitor-tailwind', true),
+    dep('capacitor-provider', false),
+    dep('capacitor-shared', true),
+  ];
+  if (/components\/icons\/|\.\/icons\//.test(source)) {
+    registryDeps.push(dep('capacitor-icons', false));
+  }
+  for (const match of source.matchAll(
+    /from\s+['"]\.\/([^'"]+\.component\.js)['"]/g,
+  )) {
+    const imp = match[1];
+    if (imp.startsWith('icons/')) continue;
+    const imported = basename(imp, '.component.js');
     if (!names.includes(imported)) continue;
     const sibling = dep(`capacitor-${toKebab(imported)}`, false);
     if (!registryDeps.includes(sibling)) registryDeps.push(sibling);
@@ -368,16 +399,13 @@ const angularNames = readdirSync(join(root, 'src/angular/components'))
 for (const name of angularNames) {
   const kebab = toKebab(name);
   const angularPath = `src/angular/components/${name}.component.ts`;
+  const angularSource = readFileSync(join(root, angularPath), 'utf8');
   angularItems.push({
     name: `capacitor-${kebab}`,
     type: 'registry:item',
     title: `Capacitor ${name} (Angular)`,
     description: `Capacitor ${name} Angular component.`,
-    registryDependencies: [
-      dep('capacitor-tailwind', true),
-      dep('capacitor-provider', false),
-      dep('capacitor-shared', true),
-    ],
+    registryDependencies: collectAngularDeps(angularSource, angularNames),
     dependencies: ['@angular/core'],
     files: [
       fileEntry(

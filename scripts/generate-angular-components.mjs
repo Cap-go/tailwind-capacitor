@@ -50,8 +50,10 @@ const wrappers = {
   SegmentedButton: {
     imports: "import { ButtonComponent } from './Button.component.js';",
     deps: 'ButtonComponent',
-    template: '<c-button [segmented]="true"><ng-content /></c-button>',
-    inputs: '',
+    template:
+      '<c-button [segmented]="true" [segmentedStrong]="strong" [rounded]="rounded" [segmentedActive]="active"><ng-content /></c-button>',
+    inputs:
+      '@Input() strong = false;\n  @Input() rounded = false;\n  @Input() active = false;',
   },
   Tabbar: {
     imports: "import { ToolbarComponent } from './Toolbar.component.js';",
@@ -93,6 +95,645 @@ const wrappers = {
   },
 };
 
+const extraInputs = {
+  List: [
+    ['nested', false],
+    ['menuList', false],
+    ['strong', undefined],
+    ['inset', undefined],
+  ],
+  ListItem: [['menuListItem', false]],
+  Button: [
+    ['segmented', false],
+    ['rounded', undefined],
+    ['segmentedActive', false],
+    ['segmentedStrong', false],
+  ],
+  Toolbar: [['tabbar', false]],
+  Segmented: [
+    ['strong', false],
+    ['rounded', false],
+  ],
+  SegmentedButton: [
+    ['strong', false],
+    ['rounded', false],
+    ['active', false],
+  ],
+  ListInput: [
+    ['label', ''],
+    ['placeholder', ''],
+    ['type', 'text'],
+  ],
+};
+
+function extraInputLines(name) {
+  const specs = extraInputs[name];
+  if (!specs) return '';
+  return specs
+    .map(([key, def]) => {
+      if (def === undefined) return `@Input() ${key}?: boolean;`;
+      if (typeof def === 'string') return `@Input() ${key} = ${JSON.stringify(def)};`;
+      return `@Input() ${key} = ${def};`;
+    })
+    .join('\n  ');
+}
+
+function classBinding(path) {
+  return `typeof ${path} === 'string' ? ${path} : (${path} as { default?: string })?.default || ''`;
+}
+
+function interactiveComponent(name, meta, colorsFn) {
+  const classFile = `${meta.file}Classes`;
+  const colorsImport = colorsFn
+    ? `import { ${colorsFn} } from '../../shared/colors/${meta.file}Colors.js';`
+    : '';
+  const colorsDecl = colorsFn
+    ? `const colors = ${colorsFn}(this.colors || {}, dark);`
+    : 'const colors = {};';
+
+  const commonHeader = `import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  inject,
+  OnInit,
+  OnChanges,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+} from '@angular/core';
+import { ${meta.classesFn} } from '../../shared/classes/${classFile}.js';
+${colorsImport}
+import { CAPACITOR_CONTEXT } from '../shared/capacitor-context.js';
+import { resolveTheme, themeClasses } from '../shared/use-theme-classes.js';
+import { cls } from '../../shared/cls.js';`;
+
+  if (name === 'Toggle') {
+    return `${commonHeader}
+
+@Component({
+  selector: 'c-toggle',
+  standalone: true,
+  template: \`<label [class]="${classBinding('c.base[state]')}" [attr.aria-checked]="checked">
+    <input
+      type="checkbox"
+      [class]="${classBinding('c.input')}"
+      [name]="name"
+      [value]="value"
+      [disabled]="disabled"
+      [readOnly]="readonly"
+      [checked]="checked"
+      (change)="change.emit($event)"
+    />
+    <span [class]="${classBinding('c.inner[state]')}"></span>
+    <span [class]="${classBinding('c.thumbWrap[state]')}">
+      <span [class]="${classBinding('c.thumb[state]')}"></span>
+    </span>
+    <ng-content />
+  </label>\`,
+})
+export class ToggleComponent implements OnInit, OnChanges {
+  @Input() ios?: boolean;
+  @Input() material?: boolean;
+  @Input() colors?: Record<string, unknown>;
+  @Input() class = '';
+  @Input() checked = false;
+  @Input() name?: string;
+  @Input() value?: string | number;
+  @Input() disabled = false;
+  @Input() readonly = false;
+
+  @Output() change = new EventEmitter<Event>();
+
+  c: Record<string, unknown> = {};
+  state: 'checked' | 'notChecked' = 'notChecked';
+
+  private readonly ctx = inject(CAPACITOR_CONTEXT);
+
+  ngOnInit(): void {
+    this.syncClasses();
+  }
+
+  ngOnChanges(): void {
+    this.syncClasses();
+  }
+
+  private syncClasses(): void {
+    this.state = this.checked ? 'checked' : 'notChecked';
+    const theme = resolveTheme(this.ctx, this);
+    const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
+    ${colorsDecl}
+    const props = this as Record<string, unknown>;
+    const raw = ${meta.classesFn}(props, colors, { className: this.class }, dark);
+    this.c = themeClasses(raw, theme, this.class);
+  }
+}
+`;
+  }
+
+  if (name === 'Checkbox') {
+    return `${commonHeader}
+import { CheckboxIconComponent } from './icons/CheckboxIcon.component.js';
+
+@Component({
+  selector: 'c-checkbox',
+  standalone: true,
+  imports: [CheckboxIconComponent],
+  template: \`<label [class]="${classBinding('c.base')}" [attr.aria-checked]="checked || indeterminate">
+    <input
+      #inputEl
+      type="checkbox"
+      [class]="${classBinding('c.input')}"
+      [name]="name"
+      [value]="value"
+      [disabled]="disabled"
+      [readOnly]="readonly"
+      [checked]="checked"
+      (change)="change.emit($event)"
+    />
+    <i [class]="${classBinding('c.iconWrap[state]')}">
+      @if (indeterminate) {
+        <span [class]="${classBinding('c.indeterminateIcon')}"></span>
+      } @else {
+        <c-checkbox-icon [ios]="ios" [material]="material" [class]="${classBinding('c.icon[state]')}" />
+      }
+    </i>
+    <ng-content />
+  </label>\`,
+})
+export class CheckboxComponent implements OnInit, OnChanges, AfterViewInit {
+  @Input() ios?: boolean;
+  @Input() material?: boolean;
+  @Input() colors?: Record<string, unknown>;
+  @Input() class = '';
+  @Input() checked = false;
+  @Input() indeterminate = false;
+  @Input() name?: string;
+  @Input() value?: string | number;
+  @Input() disabled = false;
+  @Input() readonly = false;
+
+  @Output() change = new EventEmitter<Event>();
+
+  @ViewChild('inputEl') inputEl?: ElementRef<HTMLInputElement>;
+
+  c: Record<string, unknown> = {};
+  state: 'checked' | 'notChecked' = 'notChecked';
+
+  private readonly ctx = inject(CAPACITOR_CONTEXT);
+
+  ngOnInit(): void {
+    this.syncClasses();
+  }
+
+  ngOnChanges(): void {
+    this.syncClasses();
+    this.syncIndeterminate();
+  }
+
+  ngAfterViewInit(): void {
+    this.syncIndeterminate();
+  }
+
+  private syncIndeterminate(): void {
+    if (this.inputEl?.nativeElement) {
+      this.inputEl.nativeElement.indeterminate = this.indeterminate;
+    }
+  }
+
+  private syncClasses(): void {
+    this.state =
+      this.checked || this.indeterminate ? 'checked' : 'notChecked';
+    const theme = resolveTheme(this.ctx, this);
+    const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
+    ${colorsDecl}
+    const props = this as Record<string, unknown>;
+    const raw = ${meta.classesFn}(props, colors, { className: this.class }, dark);
+    this.c = themeClasses(raw, theme, this.class);
+  }
+}
+`;
+  }
+
+  if (name === 'Radio') {
+    return `${commonHeader}
+import { CheckboxIconComponent } from './icons/CheckboxIcon.component.js';
+
+@Component({
+  selector: 'c-radio',
+  standalone: true,
+  imports: [CheckboxIconComponent],
+  template: \`<label [class]="${classBinding('c.base')}" [attr.aria-checked]="checked">
+    <input
+      type="radio"
+      [class]="${classBinding('c.input')}"
+      [name]="name"
+      [value]="value"
+      [disabled]="disabled"
+      [readOnly]="readonly"
+      [checked]="checked"
+      (change)="change.emit($event)"
+    />
+    <i [class]="${classBinding('c.iconWrap[state]')}">
+      @if (theme === 'ios') {
+        <c-checkbox-icon [class]="${classBinding('c.icon[state]')}" />
+      } @else {
+        <span [class]="${classBinding('c.icon[state]')}"></span>
+      }
+    </i>
+    <ng-content />
+  </label>\`,
+})
+export class RadioComponent implements OnInit, OnChanges {
+  @Input() ios?: boolean;
+  @Input() material?: boolean;
+  @Input() colors?: Record<string, unknown>;
+  @Input() class = '';
+  @Input() checked = false;
+  @Input() name?: string;
+  @Input() value?: string | number;
+  @Input() disabled = false;
+  @Input() readonly = false;
+
+  @Output() change = new EventEmitter<Event>();
+
+  c: Record<string, unknown> = {};
+  state: 'checked' | 'notChecked' = 'notChecked';
+  theme = 'ios';
+
+  private readonly ctx = inject(CAPACITOR_CONTEXT);
+
+  ngOnInit(): void {
+    this.syncClasses();
+  }
+
+  ngOnChanges(): void {
+    this.syncClasses();
+  }
+
+  private syncClasses(): void {
+    this.state = this.checked ? 'checked' : 'notChecked';
+    this.theme = resolveTheme(this.ctx, this);
+    const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
+    ${colorsDecl}
+    const props = this as Record<string, unknown>;
+    const raw = ${meta.classesFn}(props, colors, { className: this.class }, dark);
+    this.c = themeClasses(raw, this.theme, this.class);
+  }
+}
+`;
+  }
+
+  if (name === 'Range') {
+    return `${commonHeader}
+
+@Component({
+  selector: 'c-range',
+  standalone: true,
+  template: \`<div [class]="${classBinding('c.base')}">
+    <span [class]="${classBinding('c.trackBg')}"></span>
+    <span [class]="${classBinding('c.trackValue')}" [style.width.%]="valueWidth"></span>
+    <input
+      [class]="rangeInputClass"
+      type="range"
+      [attr.id]="inputId"
+      [name]="name"
+      [min]="min"
+      [max]="max"
+      [step]="step"
+      [value]="currentValue"
+      [readOnly]="readonly"
+      [disabled]="disabled"
+      [attr.aria-valuemin]="min"
+      [attr.aria-valuemax]="max"
+      [attr.aria-valuenow]="currentValue"
+      (input)="input.emit($event)"
+      (change)="change.emit($event)"
+      (focus)="focus.emit($event)"
+      (blur)="blur.emit($event)"
+    />
+  </div>\`,
+})
+export class RangeComponent implements OnInit, OnChanges {
+  @Input() ios?: boolean;
+  @Input() material?: boolean;
+  @Input() colors?: Record<string, unknown>;
+  @Input() class = '';
+  @Input() inputId?: string;
+  @Input() name?: string;
+  @Input() value?: number;
+  @Input() readonly = false;
+  @Input() disabled = false;
+  @Input() step = 1;
+  @Input() min = 0;
+  @Input() max = 100;
+
+  @Output() input = new EventEmitter<Event>();
+  @Output() change = new EventEmitter<Event>();
+  @Output() focus = new EventEmitter<Event>();
+  @Output() blur = new EventEmitter<Event>();
+
+  c: Record<string, unknown> = {};
+  valueWidth = 0;
+  rangeInputClass = '';
+
+  private readonly ctx = inject(CAPACITOR_CONTEXT);
+
+  get currentValue(): number {
+    return this.value ?? this.min;
+  }
+
+  ngOnInit(): void {
+    this.syncClasses();
+  }
+
+  ngOnChanges(): void {
+    this.syncClasses();
+  }
+
+  private syncClasses(): void {
+    const theme = resolveTheme(this.ctx, this);
+    const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
+    ${colorsDecl}
+    const props = this as Record<string, unknown>;
+    const raw = ${meta.classesFn}(props, colors, dark);
+    this.c = themeClasses(raw, theme, this.class);
+    const range = this.max - this.min;
+    const val = this.currentValue;
+    this.valueWidth =
+      range > 0 ? Math.max(0, Math.min(100, ((val - this.min) / range) * 100)) : 0;
+    const c = this.c;
+    this.rangeInputClass = cls(
+      c.input as string,
+      c.inputThumb as string,
+      c.inputTrack as string,
+    );
+  }
+}
+`;
+  }
+
+  if (name === 'Searchbar') {
+    return `${commonHeader}
+import { SearchIconComponent } from './icons/SearchIcon.component.js';
+import { DeleteIconComponent } from './icons/DeleteIcon.component.js';
+
+@Component({
+  selector: 'c-searchbar',
+  standalone: true,
+  imports: [SearchIconComponent, DeleteIconComponent],
+  template: \`<div [class]="${classBinding('c.base')}" role="search">
+    <div [class]="${classBinding('c.inner')}">
+      <span [class]="${classBinding('c.searchIconWrap')}">
+        <c-search-icon [class]="${classBinding('c.searchIcon')}" />
+      </span>
+      <input
+        #searchEl
+        [attr.id]="inputId"
+        type="search"
+        name="search"
+        [class]="${classBinding('c.input')}"
+        [placeholder]="placeholder"
+        [value]="displayValue"
+        [attr.aria-label]="placeholder"
+        (input)="input.emit($event)"
+        (change)="change.emit($event)"
+        (focus)="onFocus($event)"
+        (blur)="blur.emit($event)"
+      />
+      @if (displayValue && clearButton) {
+        <button
+          type="button"
+          [class]="${classBinding('c.clearButton')}"
+          [attr.aria-label]="'Clear search'"
+          (click)="clear.emit($event)"
+        >
+          <c-delete-icon [class]="${classBinding('c.deleteIcon')}" />
+        </button>
+      }
+    </div>
+    <ng-content />
+  </div>\`,
+})
+export class SearchbarComponent implements OnInit, OnChanges {
+  @Input() ios?: boolean;
+  @Input() material?: boolean;
+  @Input() colors?: Record<string, unknown>;
+  @Input() class = '';
+  @Input() placeholder = 'Search';
+  @Input() value?: string | number;
+  @Input() inputId?: string;
+  @Input() clearButton = true;
+
+  @Output() change = new EventEmitter<Event>();
+  @Output() input = new EventEmitter<Event>();
+  @Output() focus = new EventEmitter<Event>();
+  @Output() blur = new EventEmitter<Event>();
+  @Output() clear = new EventEmitter<Event>();
+
+  c: Record<string, unknown> = {};
+  isEnabled = false;
+
+  private readonly ctx = inject(CAPACITOR_CONTEXT);
+
+  get displayValue(): string {
+    if (this.value === undefined || this.value === null) return '';
+    return String(this.value);
+  }
+
+  ngOnInit(): void {
+    this.syncClasses();
+  }
+
+  ngOnChanges(): void {
+    this.syncClasses();
+  }
+
+  onFocus(event: Event): void {
+    this.isEnabled = true;
+    this.syncClasses();
+    this.focus.emit(event);
+  }
+
+  private syncClasses(): void {
+    const theme = resolveTheme(this.ctx, this);
+    const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
+    ${colorsDecl}
+    const props = { ...(this as Record<string, unknown>), isEnabled: this.isEnabled };
+    const raw = ${meta.classesFn}(props, colors, {
+      isEnabled: this.isEnabled,
+      darkClasses: dark,
+    });
+    this.c = themeClasses(raw, theme, this.class);
+  }
+}
+`;
+  }
+
+  if (name === 'ListInput') {
+    return `${commonHeader}
+
+@Component({
+  selector: 'c-list-input',
+  standalone: true,
+  template: \`<li [class]="baseClass">
+    @if (label) {
+      <div [class]="labelClass">
+        <div [class]="labelTextClass">{{ label }}</div>
+      </div>
+    }
+    <div [class]="inputWrapClass">
+      @if (type === 'textarea') {
+        <textarea
+          [class]="inputClass"
+          [name]="name"
+          [placeholder]="placeholder"
+          [disabled]="disabled"
+          [readOnly]="readonly"
+          [required]="required"
+          [attr.aria-label]="label || placeholder"
+          (input)="input.emit($event)"
+          (change)="change.emit($event)"
+          (focus)="onFocus($event)"
+          (blur)="onBlur($event)"
+        >{{ textValue }}</textarea>
+      } @else if (type === 'select') {
+        <select
+          [class]="inputClass"
+          [name]="name"
+          [disabled]="disabled"
+          [required]="required"
+          [attr.aria-label]="label || placeholder"
+          (change)="change.emit($event)"
+          (focus)="onFocus($event)"
+          (blur)="onBlur($event)"
+        >
+          <ng-content />
+        </select>
+      } @else {
+        <input
+          [class]="inputClass"
+          [type]="type"
+          [name]="name"
+          [placeholder]="placeholder"
+          [disabled]="disabled"
+          [readOnly]="readonly"
+          [required]="required"
+          [value]="textValue"
+          [attr.aria-label]="label || placeholder"
+          (input)="input.emit($event)"
+          (change)="change.emit($event)"
+          (focus)="onFocus($event)"
+          (blur)="onBlur($event)"
+        />
+      }
+    </div>
+    <ng-content />
+  </li>\`,
+})
+export class ListInputComponent implements OnInit, OnChanges {
+  @Input() ios?: boolean;
+  @Input() material?: boolean;
+  @Input() colors?: Record<string, unknown>;
+  @Input() class = '';
+  ${extraInputLines('ListInput')}
+  @Input() name?: string;
+  @Input() value?: string | number;
+  @Input() readonly = false;
+  @Input() required = false;
+  @Input() disabled = false;
+
+  @Output() change = new EventEmitter<Event>();
+  @Output() input = new EventEmitter<Event>();
+  @Output() focus = new EventEmitter<Event>();
+  @Output() blur = new EventEmitter<Event>();
+
+  c: Record<string, unknown> = {};
+  baseClass = '';
+  labelClass = '';
+  labelTextClass = '';
+  inputWrapClass = '';
+  inputClass = '';
+  focused = false;
+
+  private readonly ctx = inject(CAPACITOR_CONTEXT);
+
+  get textValue(): string {
+    if (this.value === undefined || this.value === null) return '';
+    return String(this.value);
+  }
+
+  ngOnInit(): void {
+    this.syncClasses();
+  }
+
+  ngOnChanges(): void {
+    this.syncClasses();
+  }
+
+  onFocus(event: Event): void {
+    this.focused = true;
+    this.syncClasses();
+    this.focus.emit(event);
+  }
+
+  onBlur(event: Event): void {
+    this.focused = false;
+    this.syncClasses();
+    this.blur.emit(event);
+  }
+
+  private pickClass(segment: unknown): string {
+    if (typeof segment === 'string') return segment;
+    if (segment && typeof segment === 'object') {
+      const obj = segment as Record<string, string>;
+      return obj.default || obj.stacked || obj.notFloating || '';
+    }
+    return '';
+  }
+
+  private syncClasses(): void {
+    const theme = resolveTheme(this.ctx, this);
+    const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
+    ${colorsDecl}
+    const props = this as Record<string, unknown>;
+    const getLabelColor = () => '';
+    const raw = ${meta.classesFn}(props, colors, {
+      isFloatingTransformed: false,
+      isFocused: this.focused,
+      darkClasses: dark,
+      getLabelColor,
+      outline: false,
+      hasLabel: !!this.label,
+    });
+    this.c = themeClasses(raw, theme, this.class);
+    const c = this.c as Record<string, unknown>;
+    this.baseClass = this.pickClass(c.base);
+    const label = c.label as Record<string, unknown> | undefined;
+    this.labelClass = this.pickClass(label?.stacked);
+    this.labelTextClass = this.pickClass(c.labelText);
+    const inputWrap = c.inputWrap as Record<string, unknown> | undefined;
+    this.inputWrapClass = this.pickClass(inputWrap?.stacked);
+    const input = c.input as Record<string, unknown> | undefined;
+    this.inputClass = this.pickClass(input?.notFloating) || this.pickClass(input);
+  }
+}
+`;
+  }
+
+  return null;
+}
+
+const interactiveNames = new Set([
+  'Toggle',
+  'Checkbox',
+  'Radio',
+  'Range',
+  'Searchbar',
+  'ListInput',
+]);
+
 function writeWrapper(name, spec) {
   const selector = `c-${toKebab(name)}`;
   const ts = `import { Component, Input } from '@angular/core';
@@ -133,6 +774,16 @@ for (const name of names) {
   const colorsFn = parseColorsImport(source);
   const selector = `c-${toKebab(name)}`;
   const classFile = `${meta.file}Classes`;
+  const extra = extraInputLines(name);
+
+  if (interactiveNames.has(name)) {
+    const src = interactiveComponent(name, meta, colorsFn);
+    if (src) {
+      writeFileSync(join(outDir, `${name}.component.ts`), src);
+      continue;
+    }
+  }
+
   const colorsImport = colorsFn
     ? `import { ${colorsFn} } from '../../shared/colors/${meta.file}Colors.js';`
     : '';
@@ -165,6 +816,7 @@ export class ${name}Component implements OnInit, OnChanges {
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
   @Input() class = '';
+  ${extra}
 
   @HostBinding('class')
   hostClass = '';
@@ -201,29 +853,74 @@ export class ${name}Component implements OnInit, OnChanges {
 
 writeFileSync(
   join(root, 'src/angular/shared/tailwind-capacitor-provider.component.ts'),
-  `import { Component, Input } from '@angular/core';
+  `import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { CAPACITOR_CONTEXT } from './capacitor-context.js';
 
 @Component({
   selector: 'tailwind-capacitor-provider',
   standalone: true,
-  template: '<ng-content />',
+  template:
+    '<div class="min-h-full w-full" [class.dark]="effectiveDark"><ng-content /></div>',
   providers: [
     {
       provide: CAPACITOR_CONTEXT,
       useFactory: (parent: TailwindCapacitorProviderComponent) => ({
         theme: parent.theme,
-        dark: parent.dark,
+        dark: parent.effectiveDark,
         touchRipple: parent.touchRipple,
       }),
       deps: [TailwindCapacitorProviderComponent],
     },
   ],
 })
-export class TailwindCapacitorProviderComponent {
+export class TailwindCapacitorProviderComponent
+  implements OnInit, OnChanges, OnDestroy
+{
   @Input() theme: 'ios' | 'material' = 'material';
-  @Input() dark = true;
+  @Input() dark?: boolean;
   @Input() touchRipple = true;
+
+  effectiveDark = false;
+
+  private media?: MediaQueryList;
+  private onSchemeChange?: () => void;
+
+  ngOnInit(): void {
+    this.refreshEffectiveDark();
+    if (this.dark === undefined && typeof window !== 'undefined') {
+      this.media = window.matchMedia('(prefers-color-scheme: dark)');
+      this.effectiveDark = this.media.matches;
+      this.onSchemeChange = () => {
+        if (this.dark === undefined && this.media) {
+          this.effectiveDark = this.media.matches;
+        }
+      };
+      this.media.addEventListener('change', this.onSchemeChange);
+    }
+  }
+
+  ngOnChanges(_changes: SimpleChanges): void {
+    this.refreshEffectiveDark();
+  }
+
+  ngOnDestroy(): void {
+    if (this.media && this.onSchemeChange) {
+      this.media.removeEventListener('change', this.onSchemeChange);
+    }
+  }
+
+  private refreshEffectiveDark(): void {
+    if (this.dark !== undefined) {
+      this.effectiveDark = this.dark;
+    }
+  }
 }
 `,
 );

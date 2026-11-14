@@ -39,15 +39,24 @@ npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacito
 npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-button.json
 ```
 
+## Dark mode (all frameworks)
+
+The `dark` prop on `TailwindCapacitorProvider` is optional. When omitted, components follow `prefers-color-scheme`. Set `:dark="true"` or `:dark="false"` to force light or dark. Vue, React, and Angular all apply the `dark` class on a full-width wrapper when dark mode is active so Tailwind `dark:*` utilities work the same way. Vue and React wrap children in a `min-h-full w-full` div; keep that in mind if your layout depends on a direct `h-full` parent chain.
+
 ## Angular
 
-[@spartan-ng/cli](https://www.spartan.ng/) does not install arbitrary remote registry JSON. Use the same registry layout and `node scripts/registry-add.mjs <url-or-path>` (works like shadcn copy install). Committed items live under `public/r/angular/`.
+[@spartan-ng/cli](https://www.spartan.ng/) does not install arbitrary remote registry JSON. Use `npx @capgo/tailwind-capacitor registry-add <url-or-path>` (or `node node_modules/@capgo/tailwind-capacitor/scripts/registry-add.mjs`) to copy items like shadcn. URLs and local JSON paths are supported; dependencies resolve within the framework folder (`public/r/angular/`).
 
 ```bash
-node scripts/registry-add.mjs https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json
-node scripts/registry-add.mjs https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json
-node scripts/registry-add.mjs https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-button.json
+npx @capgo/tailwind-capacitor registry-add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json
+npx @capgo/tailwind-capacitor registry-add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json
+npx @capgo/tailwind-capacitor registry-add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json
+npx @capgo/tailwind-capacitor registry-add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-button.json
 ```
+
+### Angular component scope
+
+Most Angular registry items are class host wrappers around shared Konsta class maps (theme and `dark:*` styling). These items ship interactive controls with real DOM, inputs, outputs, and ARIA: `Toggle`, `Checkbox`, `Radio`, `Range`, `Searchbar`, and `ListInput`. Remaining Angular items focus on layout and styling; use Vue or React registry items when you need full Konsta behavior out of the box.
 
 ## Styles
 

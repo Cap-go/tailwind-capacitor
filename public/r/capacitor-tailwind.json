@@ -19,7 +19,7 @@
     },
     {
       "path": "registry/capacitor/styles/variants.css",
-      "content": "@custom-variant ios (&:is(.c-ios *, .ios *));\n@custom-variant android (&:is(.c-material *, .md *));\n@custom-variant capacitor (.capacitor &);\n@custom-variant electron (.electron &);\n@custom-variant cordova (.cordova &);\n@custom-variant mobile (@media (max-width: 767px));\n@custom-variant tablet (@media (min-width: 768px) and (max-width: 1023px));\n@custom-variant desktop (@media (min-width: 1024px));\n@custom-variant portrait (@media (orientation: portrait));\n@custom-variant landscape (@media (orientation: landscape));\n@custom-variant theme-ios (&:is(.c-ios *, .ios *));\n@custom-variant theme-material (&:is(.c-material *, .md *));\n",
+      "content": "@custom-variant ios (&:is(.c-ios *, .ios *));\n@custom-variant android (&:is(.c-material *, .md *));\n@custom-variant capacitor (.capacitor &);\n@custom-variant electron (.electron &);\n@custom-variant cordova (.cordova &);\n@custom-variant mobile (@media (max-width: 767px));\n@custom-variant tablet (@media (min-width: 768px) and (max-width: 1023px));\n@custom-variant desktop (@media (min-width: 1024px));\n@custom-variant portrait (@media (orientation: portrait));\n@custom-variant landscape (@media (orientation: landscape));\n@custom-variant theme-ios (&:is(.c-ios *, .ios *));\n@custom-variant theme-material (&:is(.c-material *, .md *));\n@custom-variant dark (&:where(.dark, .dark *));\n",
       "type": "registry:file",
       "target": "src/capacitor/styles/variants.css"
     },

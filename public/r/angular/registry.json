@@ -18,9 +18,19 @@
           "target": "src/capacitor/shared/calc-popover-position.js"
         },
         {
+          "path": "src/shared/classes/AccordionClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/AccordionClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/AccordionClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/AccordionClasses.js"
+        },
+        {
+          "path": "src/shared/classes/AccordionItemClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/AccordionItemClasses.d.ts"
         },
         {
           "path": "src/shared/classes/AccordionItemClasses.js",
@@ -28,9 +38,19 @@
           "target": "src/capacitor/shared/classes/AccordionItemClasses.js"
         },
         {
+          "path": "src/shared/classes/ActionsButtonClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ActionsButtonClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/ActionsButtonClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/ActionsButtonClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ActionsClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ActionsClasses.d.ts"
         },
         {
           "path": "src/shared/classes/ActionsClasses.js",
@@ -38,9 +58,19 @@
           "target": "src/capacitor/shared/classes/ActionsClasses.js"
         },
         {
+          "path": "src/shared/classes/ActionsGroupClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ActionsGroupClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/ActionsGroupClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/ActionsGroupClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ActionsLabelClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ActionsLabelClasses.d.ts"
         },
         {
           "path": "src/shared/classes/ActionsLabelClasses.js",
@@ -48,9 +78,19 @@
           "target": "src/capacitor/shared/classes/ActionsLabelClasses.js"
         },
         {
+          "path": "src/shared/classes/AlertClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/AlertClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/AlertClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/AlertClasses.js"
+        },
+        {
+          "path": "src/shared/classes/AppClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/AppClasses.d.ts"
         },
         {
           "path": "src/shared/classes/AppClasses.js",
@@ -58,9 +98,19 @@
           "target": "src/capacitor/shared/classes/AppClasses.js"
         },
         {
+          "path": "src/shared/classes/AvatarClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/AvatarClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/AvatarClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/AvatarClasses.js"
+        },
+        {
+          "path": "src/shared/classes/BadgeClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/BadgeClasses.d.ts"
         },
         {
           "path": "src/shared/classes/BadgeClasses.js",
@@ -68,9 +118,19 @@
           "target": "src/capacitor/shared/classes/BadgeClasses.js"
         },
         {
+          "path": "src/shared/classes/BlockClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/BlockClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/BlockClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/BlockClasses.js"
+        },
+        {
+          "path": "src/shared/classes/BlockFooterClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/BlockFooterClasses.d.ts"
         },
         {
           "path": "src/shared/classes/BlockFooterClasses.js",
@@ -78,9 +138,19 @@
           "target": "src/capacitor/shared/classes/BlockFooterClasses.js"
         },
         {
+          "path": "src/shared/classes/BlockHeaderClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/BlockHeaderClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/BlockHeaderClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/BlockHeaderClasses.js"
+        },
+        {
+          "path": "src/shared/classes/BlockTitleClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/BlockTitleClasses.d.ts"
         },
         {
           "path": "src/shared/classes/BlockTitleClasses.js",
@@ -88,9 +158,19 @@
           "target": "src/capacitor/shared/classes/BlockTitleClasses.js"
         },
         {
+          "path": "src/shared/classes/BreadcrumbsClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/BreadcrumbsClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/BreadcrumbsClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/BreadcrumbsClasses.js"
+        },
+        {
+          "path": "src/shared/classes/BreadcrumbsCollapsedClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/BreadcrumbsCollapsedClasses.d.ts"
         },
         {
           "path": "src/shared/classes/BreadcrumbsCollapsedClasses.js",
@@ -98,9 +178,19 @@
           "target": "src/capacitor/shared/classes/BreadcrumbsCollapsedClasses.js"
         },
         {
+          "path": "src/shared/classes/BreadcrumbsItemClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/BreadcrumbsItemClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/BreadcrumbsItemClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/BreadcrumbsItemClasses.js"
+        },
+        {
+          "path": "src/shared/classes/BreadcrumbsSeparatorClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/BreadcrumbsSeparatorClasses.d.ts"
         },
         {
           "path": "src/shared/classes/BreadcrumbsSeparatorClasses.js",
@@ -108,9 +198,19 @@
           "target": "src/capacitor/shared/classes/BreadcrumbsSeparatorClasses.js"
         },
         {
+          "path": "src/shared/classes/ButtonClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ButtonClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/ButtonClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/ButtonClasses.js"
+        },
+        {
+          "path": "src/shared/classes/CardClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/CardClasses.d.ts"
         },
         {
           "path": "src/shared/classes/CardClasses.js",
@@ -118,9 +218,19 @@
           "target": "src/capacitor/shared/classes/CardClasses.js"
         },
         {
+          "path": "src/shared/classes/CheckboxClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/CheckboxClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/CheckboxClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/CheckboxClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ChipClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ChipClasses.d.ts"
         },
         {
           "path": "src/shared/classes/ChipClasses.js",
@@ -128,9 +238,19 @@
           "target": "src/capacitor/shared/classes/ChipClasses.js"
         },
         {
+          "path": "src/shared/classes/DatetimeClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/DatetimeClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/DatetimeClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/DatetimeClasses.js"
+        },
+        {
+          "path": "src/shared/classes/DialogButtonClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/DialogButtonClasses.d.ts"
         },
         {
           "path": "src/shared/classes/DialogButtonClasses.js",
@@ -138,9 +258,19 @@
           "target": "src/capacitor/shared/classes/DialogButtonClasses.js"
         },
         {
+          "path": "src/shared/classes/DialogClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/DialogClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/DialogClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/DialogClasses.js"
+        },
+        {
+          "path": "src/shared/classes/FabClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/FabClasses.d.ts"
         },
         {
           "path": "src/shared/classes/FabClasses.js",
@@ -148,9 +278,19 @@
           "target": "src/capacitor/shared/classes/FabClasses.js"
         },
         {
+          "path": "src/shared/classes/FooterClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/FooterClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/FooterClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/FooterClasses.js"
+        },
+        {
+          "path": "src/shared/classes/GlassClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/GlassClasses.d.ts"
         },
         {
           "path": "src/shared/classes/GlassClasses.js",
@@ -158,9 +298,19 @@
           "target": "src/capacitor/shared/classes/GlassClasses.js"
         },
         {
+          "path": "src/shared/classes/HeaderClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/HeaderClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/HeaderClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/HeaderClasses.js"
+        },
+        {
+          "path": "src/shared/classes/IconClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/IconClasses.d.ts"
         },
         {
           "path": "src/shared/classes/IconClasses.js",
@@ -168,9 +318,19 @@
           "target": "src/capacitor/shared/classes/IconClasses.js"
         },
         {
+          "path": "src/shared/classes/InfiniteScrollClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/InfiniteScrollClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/InfiniteScrollClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/InfiniteScrollClasses.js"
+        },
+        {
+          "path": "src/shared/classes/InputOtpClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/InputOtpClasses.d.ts"
         },
         {
           "path": "src/shared/classes/InputOtpClasses.js",
@@ -178,9 +338,19 @@
           "target": "src/capacitor/shared/classes/InputOtpClasses.js"
         },
         {
+          "path": "src/shared/classes/ItemSlidingClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ItemSlidingClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/ItemSlidingClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/ItemSlidingClasses.js"
+        },
+        {
+          "path": "src/shared/classes/LinkClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/LinkClasses.d.ts"
         },
         {
           "path": "src/shared/classes/LinkClasses.js",
@@ -188,9 +358,19 @@
           "target": "src/capacitor/shared/classes/LinkClasses.js"
         },
         {
+          "path": "src/shared/classes/ListButtonClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ListButtonClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/ListButtonClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/ListButtonClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ListClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ListClasses.d.ts"
         },
         {
           "path": "src/shared/classes/ListClasses.js",
@@ -198,9 +378,19 @@
           "target": "src/capacitor/shared/classes/ListClasses.js"
         },
         {
+          "path": "src/shared/classes/ListInputClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ListInputClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/ListInputClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/ListInputClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ListItemClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ListItemClasses.d.ts"
         },
         {
           "path": "src/shared/classes/ListItemClasses.js",
@@ -208,9 +398,19 @@
           "target": "src/capacitor/shared/classes/ListItemClasses.js"
         },
         {
+          "path": "src/shared/classes/MessageClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/MessageClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/MessageClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/MessageClasses.js"
+        },
+        {
+          "path": "src/shared/classes/MessagebarClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/MessagebarClasses.d.ts"
         },
         {
           "path": "src/shared/classes/MessagebarClasses.js",
@@ -218,9 +418,19 @@
           "target": "src/capacitor/shared/classes/MessagebarClasses.js"
         },
         {
+          "path": "src/shared/classes/MessagesClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/MessagesClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/MessagesClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/MessagesClasses.js"
+        },
+        {
+          "path": "src/shared/classes/MessagesTitleClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/MessagesTitleClasses.d.ts"
         },
         {
           "path": "src/shared/classes/MessagesTitleClasses.js",
@@ -228,9 +438,19 @@
           "target": "src/capacitor/shared/classes/MessagesTitleClasses.js"
         },
         {
+          "path": "src/shared/classes/ModalClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ModalClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/ModalClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/ModalClasses.js"
+        },
+        {
+          "path": "src/shared/classes/NavbarBackLinkClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/NavbarBackLinkClasses.d.ts"
         },
         {
           "path": "src/shared/classes/NavbarBackLinkClasses.js",
@@ -238,9 +458,19 @@
           "target": "src/capacitor/shared/classes/NavbarBackLinkClasses.js"
         },
         {
+          "path": "src/shared/classes/NavbarClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/NavbarClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/NavbarClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/NavbarClasses.js"
+        },
+        {
+          "path": "src/shared/classes/NoteClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/NoteClasses.d.ts"
         },
         {
           "path": "src/shared/classes/NoteClasses.js",
@@ -248,9 +478,19 @@
           "target": "src/capacitor/shared/classes/NoteClasses.js"
         },
         {
+          "path": "src/shared/classes/NotificationsClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/NotificationsClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/NotificationsClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/NotificationsClasses.js"
+        },
+        {
+          "path": "src/shared/classes/PageClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/PageClasses.d.ts"
         },
         {
           "path": "src/shared/classes/PageClasses.js",
@@ -258,9 +498,19 @@
           "target": "src/capacitor/shared/classes/PageClasses.js"
         },
         {
+          "path": "src/shared/classes/PanelClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/PanelClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/PanelClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/PanelClasses.js"
+        },
+        {
+          "path": "src/shared/classes/PickerClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/PickerClasses.d.ts"
         },
         {
           "path": "src/shared/classes/PickerClasses.js",
@@ -268,9 +518,19 @@
           "target": "src/capacitor/shared/classes/PickerClasses.js"
         },
         {
+          "path": "src/shared/classes/PopoverClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/PopoverClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/PopoverClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/PopoverClasses.js"
+        },
+        {
+          "path": "src/shared/classes/PopupClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/PopupClasses.d.ts"
         },
         {
           "path": "src/shared/classes/PopupClasses.js",
@@ -278,9 +538,19 @@
           "target": "src/capacitor/shared/classes/PopupClasses.js"
         },
         {
+          "path": "src/shared/classes/PreloaderClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/PreloaderClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/PreloaderClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/PreloaderClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ProgressbarClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ProgressbarClasses.d.ts"
         },
         {
           "path": "src/shared/classes/ProgressbarClasses.js",
@@ -288,9 +558,19 @@
           "target": "src/capacitor/shared/classes/ProgressbarClasses.js"
         },
         {
+          "path": "src/shared/classes/RadioClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/RadioClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/RadioClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/RadioClasses.js"
+        },
+        {
+          "path": "src/shared/classes/RangeClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/RangeClasses.d.ts"
         },
         {
           "path": "src/shared/classes/RangeClasses.js",
@@ -298,9 +578,19 @@
           "target": "src/capacitor/shared/classes/RangeClasses.js"
         },
         {
+          "path": "src/shared/classes/RefresherClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/RefresherClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/RefresherClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/RefresherClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ReorderClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ReorderClasses.d.ts"
         },
         {
           "path": "src/shared/classes/ReorderClasses.js",
@@ -308,9 +598,19 @@
           "target": "src/capacitor/shared/classes/ReorderClasses.js"
         },
         {
+          "path": "src/shared/classes/SearchbarClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/SearchbarClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/SearchbarClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/SearchbarClasses.js"
+        },
+        {
+          "path": "src/shared/classes/SegmentedClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/SegmentedClasses.d.ts"
         },
         {
           "path": "src/shared/classes/SegmentedClasses.js",
@@ -318,9 +618,19 @@
           "target": "src/capacitor/shared/classes/SegmentedClasses.js"
         },
         {
+          "path": "src/shared/classes/SelectClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/SelectClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/SelectClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/SelectClasses.js"
+        },
+        {
+          "path": "src/shared/classes/SheetClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/SheetClasses.d.ts"
         },
         {
           "path": "src/shared/classes/SheetClasses.js",
@@ -328,9 +638,19 @@
           "target": "src/capacitor/shared/classes/SheetClasses.js"
         },
         {
+          "path": "src/shared/classes/SkeletonClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/SkeletonClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/SkeletonClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/SkeletonClasses.js"
+        },
+        {
+          "path": "src/shared/classes/SplitPaneClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/SplitPaneClasses.d.ts"
         },
         {
           "path": "src/shared/classes/SplitPaneClasses.js",
@@ -338,9 +658,19 @@
           "target": "src/capacitor/shared/classes/SplitPaneClasses.js"
         },
         {
+          "path": "src/shared/classes/StepperClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/StepperClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/StepperClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/StepperClasses.js"
+        },
+        {
+          "path": "src/shared/classes/TabClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TabClasses.d.ts"
         },
         {
           "path": "src/shared/classes/TabClasses.js",
@@ -348,9 +678,19 @@
           "target": "src/capacitor/shared/classes/TabClasses.js"
         },
         {
+          "path": "src/shared/classes/TabbarLinkClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TabbarLinkClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/TabbarLinkClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/TabbarLinkClasses.js"
+        },
+        {
+          "path": "src/shared/classes/TableBodyClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TableBodyClasses.d.ts"
         },
         {
           "path": "src/shared/classes/TableBodyClasses.js",
@@ -358,9 +698,19 @@
           "target": "src/capacitor/shared/classes/TableBodyClasses.js"
         },
         {
+          "path": "src/shared/classes/TableCellClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TableCellClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/TableCellClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/TableCellClasses.js"
+        },
+        {
+          "path": "src/shared/classes/TableClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TableClasses.d.ts"
         },
         {
           "path": "src/shared/classes/TableClasses.js",
@@ -368,9 +718,19 @@
           "target": "src/capacitor/shared/classes/TableClasses.js"
         },
         {
+          "path": "src/shared/classes/TableHeadClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TableHeadClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/TableHeadClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/TableHeadClasses.js"
+        },
+        {
+          "path": "src/shared/classes/TableRowClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TableRowClasses.d.ts"
         },
         {
           "path": "src/shared/classes/TableRowClasses.js",
@@ -378,9 +738,19 @@
           "target": "src/capacitor/shared/classes/TableRowClasses.js"
         },
         {
+          "path": "src/shared/classes/TabsClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TabsClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/TabsClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/TabsClasses.js"
+        },
+        {
+          "path": "src/shared/classes/TextareaClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TextareaClasses.d.ts"
         },
         {
           "path": "src/shared/classes/TextareaClasses.js",
@@ -388,9 +758,19 @@
           "target": "src/capacitor/shared/classes/TextareaClasses.js"
         },
         {
+          "path": "src/shared/classes/ThumbnailClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ThumbnailClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/ThumbnailClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/ThumbnailClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ToastClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ToastClasses.d.ts"
         },
         {
           "path": "src/shared/classes/ToastClasses.js",
@@ -398,9 +778,19 @@
           "target": "src/capacitor/shared/classes/ToastClasses.js"
         },
         {
+          "path": "src/shared/classes/ToggleClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ToggleClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/ToggleClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/ToggleClasses.js"
+        },
+        {
+          "path": "src/shared/classes/ToolbarClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/ToolbarClasses.d.ts"
         },
         {
           "path": "src/shared/classes/ToolbarClasses.js",
@@ -408,9 +798,19 @@
           "target": "src/capacitor/shared/classes/ToolbarClasses.js"
         },
         {
+          "path": "src/shared/classes/TouchRippleClasses.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/classes/TouchRippleClasses.d.ts"
+        },
+        {
           "path": "src/shared/classes/TouchRippleClasses.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/classes/TouchRippleClasses.js"
+        },
+        {
+          "path": "src/shared/cls.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/cls.d.ts"
         },
         {
           "path": "src/shared/cls.js",
@@ -418,9 +818,19 @@
           "target": "src/capacitor/shared/cls.js"
         },
         {
+          "path": "src/shared/colors/AccordionColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/AccordionColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/AccordionColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/AccordionColors.js"
+        },
+        {
+          "path": "src/shared/colors/AccordionItemColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/AccordionItemColors.d.ts"
         },
         {
           "path": "src/shared/colors/AccordionItemColors.js",
@@ -428,9 +838,19 @@
           "target": "src/capacitor/shared/colors/AccordionItemColors.js"
         },
         {
+          "path": "src/shared/colors/ActionsButtonColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ActionsButtonColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/ActionsButtonColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/ActionsButtonColors.js"
+        },
+        {
+          "path": "src/shared/colors/ActionsColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ActionsColors.d.ts"
         },
         {
           "path": "src/shared/colors/ActionsColors.js",
@@ -438,9 +858,19 @@
           "target": "src/capacitor/shared/colors/ActionsColors.js"
         },
         {
+          "path": "src/shared/colors/ActionsGroupColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ActionsGroupColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/ActionsGroupColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/ActionsGroupColors.js"
+        },
+        {
+          "path": "src/shared/colors/ActionsLabelColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ActionsLabelColors.d.ts"
         },
         {
           "path": "src/shared/colors/ActionsLabelColors.js",
@@ -448,9 +878,19 @@
           "target": "src/capacitor/shared/colors/ActionsLabelColors.js"
         },
         {
+          "path": "src/shared/colors/AlertColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/AlertColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/AlertColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/AlertColors.js"
+        },
+        {
+          "path": "src/shared/colors/AppColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/AppColors.d.ts"
         },
         {
           "path": "src/shared/colors/AppColors.js",
@@ -458,9 +898,19 @@
           "target": "src/capacitor/shared/colors/AppColors.js"
         },
         {
+          "path": "src/shared/colors/AvatarColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/AvatarColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/AvatarColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/AvatarColors.js"
+        },
+        {
+          "path": "src/shared/colors/BadgeColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/BadgeColors.d.ts"
         },
         {
           "path": "src/shared/colors/BadgeColors.js",
@@ -468,9 +918,19 @@
           "target": "src/capacitor/shared/colors/BadgeColors.js"
         },
         {
+          "path": "src/shared/colors/BlockColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/BlockColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/BlockColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/BlockColors.js"
+        },
+        {
+          "path": "src/shared/colors/BlockFooterColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/BlockFooterColors.d.ts"
         },
         {
           "path": "src/shared/colors/BlockFooterColors.js",
@@ -478,9 +938,19 @@
           "target": "src/capacitor/shared/colors/BlockFooterColors.js"
         },
         {
+          "path": "src/shared/colors/BlockHeaderColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/BlockHeaderColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/BlockHeaderColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/BlockHeaderColors.js"
+        },
+        {
+          "path": "src/shared/colors/BlockTitleColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/BlockTitleColors.d.ts"
         },
         {
           "path": "src/shared/colors/BlockTitleColors.js",
@@ -488,9 +958,19 @@
           "target": "src/capacitor/shared/colors/BlockTitleColors.js"
         },
         {
+          "path": "src/shared/colors/BreadcrumbsCollapsedColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/BreadcrumbsCollapsedColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/BreadcrumbsCollapsedColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/BreadcrumbsCollapsedColors.js"
+        },
+        {
+          "path": "src/shared/colors/BreadcrumbsColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/BreadcrumbsColors.d.ts"
         },
         {
           "path": "src/shared/colors/BreadcrumbsColors.js",
@@ -498,9 +978,19 @@
           "target": "src/capacitor/shared/colors/BreadcrumbsColors.js"
         },
         {
+          "path": "src/shared/colors/BreadcrumbsItemColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/BreadcrumbsItemColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/BreadcrumbsItemColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/BreadcrumbsItemColors.js"
+        },
+        {
+          "path": "src/shared/colors/BreadcrumbsSeparatorColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/BreadcrumbsSeparatorColors.d.ts"
         },
         {
           "path": "src/shared/colors/BreadcrumbsSeparatorColors.js",
@@ -508,9 +998,19 @@
           "target": "src/capacitor/shared/colors/BreadcrumbsSeparatorColors.js"
         },
         {
+          "path": "src/shared/colors/ButtonColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ButtonColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/ButtonColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/ButtonColors.js"
+        },
+        {
+          "path": "src/shared/colors/CardColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/CardColors.d.ts"
         },
         {
           "path": "src/shared/colors/CardColors.js",
@@ -518,9 +1018,19 @@
           "target": "src/capacitor/shared/colors/CardColors.js"
         },
         {
+          "path": "src/shared/colors/CheckboxColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/CheckboxColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/CheckboxColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/CheckboxColors.js"
+        },
+        {
+          "path": "src/shared/colors/ChipColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ChipColors.d.ts"
         },
         {
           "path": "src/shared/colors/ChipColors.js",
@@ -528,9 +1038,19 @@
           "target": "src/capacitor/shared/colors/ChipColors.js"
         },
         {
+          "path": "src/shared/colors/DatetimeColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/DatetimeColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/DatetimeColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/DatetimeColors.js"
+        },
+        {
+          "path": "src/shared/colors/DialogButtonColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/DialogButtonColors.d.ts"
         },
         {
           "path": "src/shared/colors/DialogButtonColors.js",
@@ -538,9 +1058,19 @@
           "target": "src/capacitor/shared/colors/DialogButtonColors.js"
         },
         {
+          "path": "src/shared/colors/DialogColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/DialogColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/DialogColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/DialogColors.js"
+        },
+        {
+          "path": "src/shared/colors/FabColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/FabColors.d.ts"
         },
         {
           "path": "src/shared/colors/FabColors.js",
@@ -548,9 +1078,19 @@
           "target": "src/capacitor/shared/colors/FabColors.js"
         },
         {
+          "path": "src/shared/colors/FooterColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/FooterColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/FooterColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/FooterColors.js"
+        },
+        {
+          "path": "src/shared/colors/GlassColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/GlassColors.d.ts"
         },
         {
           "path": "src/shared/colors/GlassColors.js",
@@ -558,9 +1098,19 @@
           "target": "src/capacitor/shared/colors/GlassColors.js"
         },
         {
+          "path": "src/shared/colors/HeaderColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/HeaderColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/HeaderColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/HeaderColors.js"
+        },
+        {
+          "path": "src/shared/colors/IconColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/IconColors.d.ts"
         },
         {
           "path": "src/shared/colors/IconColors.js",
@@ -568,9 +1118,19 @@
           "target": "src/capacitor/shared/colors/IconColors.js"
         },
         {
+          "path": "src/shared/colors/InfiniteScrollColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/InfiniteScrollColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/InfiniteScrollColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/InfiniteScrollColors.js"
+        },
+        {
+          "path": "src/shared/colors/InputOtpColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/InputOtpColors.d.ts"
         },
         {
           "path": "src/shared/colors/InputOtpColors.js",
@@ -578,9 +1138,19 @@
           "target": "src/capacitor/shared/colors/InputOtpColors.js"
         },
         {
+          "path": "src/shared/colors/ItemSlidingColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ItemSlidingColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/ItemSlidingColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/ItemSlidingColors.js"
+        },
+        {
+          "path": "src/shared/colors/LinkColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/LinkColors.d.ts"
         },
         {
           "path": "src/shared/colors/LinkColors.js",
@@ -588,9 +1158,19 @@
           "target": "src/capacitor/shared/colors/LinkColors.js"
         },
         {
+          "path": "src/shared/colors/ListButtonColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ListButtonColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/ListButtonColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/ListButtonColors.js"
+        },
+        {
+          "path": "src/shared/colors/ListColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ListColors.d.ts"
         },
         {
           "path": "src/shared/colors/ListColors.js",
@@ -598,9 +1178,19 @@
           "target": "src/capacitor/shared/colors/ListColors.js"
         },
         {
+          "path": "src/shared/colors/ListGroupColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ListGroupColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/ListGroupColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/ListGroupColors.js"
+        },
+        {
+          "path": "src/shared/colors/ListInputColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ListInputColors.d.ts"
         },
         {
           "path": "src/shared/colors/ListInputColors.js",
@@ -608,9 +1198,19 @@
           "target": "src/capacitor/shared/colors/ListInputColors.js"
         },
         {
+          "path": "src/shared/colors/ListItemColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ListItemColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/ListItemColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/ListItemColors.js"
+        },
+        {
+          "path": "src/shared/colors/MenuListColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/MenuListColors.d.ts"
         },
         {
           "path": "src/shared/colors/MenuListColors.js",
@@ -618,9 +1218,19 @@
           "target": "src/capacitor/shared/colors/MenuListColors.js"
         },
         {
+          "path": "src/shared/colors/MenuListItemColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/MenuListItemColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/MenuListItemColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/MenuListItemColors.js"
+        },
+        {
+          "path": "src/shared/colors/MessageColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/MessageColors.d.ts"
         },
         {
           "path": "src/shared/colors/MessageColors.js",
@@ -628,9 +1238,19 @@
           "target": "src/capacitor/shared/colors/MessageColors.js"
         },
         {
+          "path": "src/shared/colors/MessagebarColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/MessagebarColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/MessagebarColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/MessagebarColors.js"
+        },
+        {
+          "path": "src/shared/colors/MessagesTitleColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/MessagesTitleColors.d.ts"
         },
         {
           "path": "src/shared/colors/MessagesTitleColors.js",
@@ -638,9 +1258,19 @@
           "target": "src/capacitor/shared/colors/MessagesTitleColors.js"
         },
         {
+          "path": "src/shared/colors/ModalColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ModalColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/ModalColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/ModalColors.js"
+        },
+        {
+          "path": "src/shared/colors/NavbarBackLinkColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/NavbarBackLinkColors.d.ts"
         },
         {
           "path": "src/shared/colors/NavbarBackLinkColors.js",
@@ -648,9 +1278,19 @@
           "target": "src/capacitor/shared/colors/NavbarBackLinkColors.js"
         },
         {
+          "path": "src/shared/colors/NavbarColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/NavbarColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/NavbarColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/NavbarColors.js"
+        },
+        {
+          "path": "src/shared/colors/NoteColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/NoteColors.d.ts"
         },
         {
           "path": "src/shared/colors/NoteColors.js",
@@ -658,9 +1298,19 @@
           "target": "src/capacitor/shared/colors/NoteColors.js"
         },
         {
+          "path": "src/shared/colors/NotificationsColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/NotificationsColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/NotificationsColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/NotificationsColors.js"
+        },
+        {
+          "path": "src/shared/colors/PageColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/PageColors.d.ts"
         },
         {
           "path": "src/shared/colors/PageColors.js",
@@ -668,9 +1318,19 @@
           "target": "src/capacitor/shared/colors/PageColors.js"
         },
         {
+          "path": "src/shared/colors/PanelColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/PanelColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/PanelColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/PanelColors.js"
+        },
+        {
+          "path": "src/shared/colors/PickerColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/PickerColors.d.ts"
         },
         {
           "path": "src/shared/colors/PickerColors.js",
@@ -678,9 +1338,19 @@
           "target": "src/capacitor/shared/colors/PickerColors.js"
         },
         {
+          "path": "src/shared/colors/PopoverColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/PopoverColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/PopoverColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/PopoverColors.js"
+        },
+        {
+          "path": "src/shared/colors/PopupColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/PopupColors.d.ts"
         },
         {
           "path": "src/shared/colors/PopupColors.js",
@@ -688,9 +1358,19 @@
           "target": "src/capacitor/shared/colors/PopupColors.js"
         },
         {
+          "path": "src/shared/colors/PreloaderColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/PreloaderColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/PreloaderColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/PreloaderColors.js"
+        },
+        {
+          "path": "src/shared/colors/ProgressbarColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ProgressbarColors.d.ts"
         },
         {
           "path": "src/shared/colors/ProgressbarColors.js",
@@ -698,9 +1378,19 @@
           "target": "src/capacitor/shared/colors/ProgressbarColors.js"
         },
         {
+          "path": "src/shared/colors/RadioColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/RadioColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/RadioColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/RadioColors.js"
+        },
+        {
+          "path": "src/shared/colors/RangeColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/RangeColors.d.ts"
         },
         {
           "path": "src/shared/colors/RangeColors.js",
@@ -708,9 +1398,19 @@
           "target": "src/capacitor/shared/colors/RangeColors.js"
         },
         {
+          "path": "src/shared/colors/RefresherColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/RefresherColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/RefresherColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/RefresherColors.js"
+        },
+        {
+          "path": "src/shared/colors/ReorderColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ReorderColors.d.ts"
         },
         {
           "path": "src/shared/colors/ReorderColors.js",
@@ -718,9 +1418,19 @@
           "target": "src/capacitor/shared/colors/ReorderColors.js"
         },
         {
+          "path": "src/shared/colors/SearchbarColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/SearchbarColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/SearchbarColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/SearchbarColors.js"
+        },
+        {
+          "path": "src/shared/colors/SegmentedButtonColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/SegmentedButtonColors.d.ts"
         },
         {
           "path": "src/shared/colors/SegmentedButtonColors.js",
@@ -728,9 +1438,19 @@
           "target": "src/capacitor/shared/colors/SegmentedButtonColors.js"
         },
         {
+          "path": "src/shared/colors/SegmentedColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/SegmentedColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/SegmentedColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/SegmentedColors.js"
+        },
+        {
+          "path": "src/shared/colors/SelectColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/SelectColors.d.ts"
         },
         {
           "path": "src/shared/colors/SelectColors.js",
@@ -738,9 +1458,19 @@
           "target": "src/capacitor/shared/colors/SelectColors.js"
         },
         {
+          "path": "src/shared/colors/SheetColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/SheetColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/SheetColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/SheetColors.js"
+        },
+        {
+          "path": "src/shared/colors/SkeletonColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/SkeletonColors.d.ts"
         },
         {
           "path": "src/shared/colors/SkeletonColors.js",
@@ -748,9 +1478,19 @@
           "target": "src/capacitor/shared/colors/SkeletonColors.js"
         },
         {
+          "path": "src/shared/colors/SplitPaneColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/SplitPaneColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/SplitPaneColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/SplitPaneColors.js"
+        },
+        {
+          "path": "src/shared/colors/StepperColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/StepperColors.d.ts"
         },
         {
           "path": "src/shared/colors/StepperColors.js",
@@ -758,9 +1498,19 @@
           "target": "src/capacitor/shared/colors/StepperColors.js"
         },
         {
+          "path": "src/shared/colors/TabColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TabColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/TabColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/TabColors.js"
+        },
+        {
+          "path": "src/shared/colors/TabbarColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TabbarColors.d.ts"
         },
         {
           "path": "src/shared/colors/TabbarColors.js",
@@ -768,9 +1518,19 @@
           "target": "src/capacitor/shared/colors/TabbarColors.js"
         },
         {
+          "path": "src/shared/colors/TabbarLinkColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TabbarLinkColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/TabbarLinkColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/TabbarLinkColors.js"
+        },
+        {
+          "path": "src/shared/colors/TableCellColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TableCellColors.d.ts"
         },
         {
           "path": "src/shared/colors/TableCellColors.js",
@@ -778,9 +1538,19 @@
           "target": "src/capacitor/shared/colors/TableCellColors.js"
         },
         {
+          "path": "src/shared/colors/TableRowColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TableRowColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/TableRowColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/TableRowColors.js"
+        },
+        {
+          "path": "src/shared/colors/TabsColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TabsColors.d.ts"
         },
         {
           "path": "src/shared/colors/TabsColors.js",
@@ -788,9 +1558,19 @@
           "target": "src/capacitor/shared/colors/TabsColors.js"
         },
         {
+          "path": "src/shared/colors/TextareaColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TextareaColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/TextareaColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/TextareaColors.js"
+        },
+        {
+          "path": "src/shared/colors/ThumbnailColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ThumbnailColors.d.ts"
         },
         {
           "path": "src/shared/colors/ThumbnailColors.js",
@@ -798,9 +1578,19 @@
           "target": "src/capacitor/shared/colors/ThumbnailColors.js"
         },
         {
+          "path": "src/shared/colors/ToastColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ToastColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/ToastColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/ToastColors.js"
+        },
+        {
+          "path": "src/shared/colors/ToggleColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ToggleColors.d.ts"
         },
         {
           "path": "src/shared/colors/ToggleColors.js",
@@ -808,14 +1598,29 @@
           "target": "src/capacitor/shared/colors/ToggleColors.js"
         },
         {
+          "path": "src/shared/colors/ToolbarColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ToolbarColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/ToolbarColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/ToolbarColors.js"
         },
         {
+          "path": "src/shared/colors/TouchRippleColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/TouchRippleColors.d.ts"
+        },
+        {
           "path": "src/shared/colors/TouchRippleColors.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/colors/TouchRippleColors.js"
+        },
+        {
+          "path": "src/shared/colors/ionicSurfaceColors.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/colors/ionicSurfaceColors.d.ts"
         },
         {
           "path": "src/shared/colors/ionicSurfaceColors.js",
@@ -828,9 +1633,19 @@
           "target": "src/capacitor/shared/filter-colors.js"
         },
         {
+          "path": "src/shared/position-class.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/position-class.d.ts"
+        },
+        {
           "path": "src/shared/position-class.js",
           "type": "registry:file",
           "target": "src/capacitor/shared/position-class.js"
+        },
+        {
+          "path": "src/shared/touch-ripple-class.d.ts",
+          "type": "registry:file",
+          "target": "src/capacitor/shared/touch-ripple-class.d.ts"
         },
         {
           "path": "src/shared/touch-ripple-class.js",
@@ -1355,7 +2170,8 @@
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-icons.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -1670,7 +2486,8 @@
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-list.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -1733,7 +2550,8 @@
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-list.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -1754,7 +2572,8 @@
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-list-item.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2111,7 +2930,8 @@
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-icons.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2195,7 +3015,8 @@
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-icons.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2237,7 +3058,8 @@
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-button.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2258,7 +3080,9 @@
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-list.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-list-input.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2363,7 +3187,8 @@
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-segmented-button.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2384,7 +3209,8 @@
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-toolbar.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2531,7 +3357,8 @@
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-segmented.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2552,7 +3379,9 @@
       "registryDependencies": [
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
         "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-list.json",
+        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-list-input.json"
       ],
       "dependencies": [
         "@angular/core"

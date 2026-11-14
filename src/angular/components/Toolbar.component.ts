@@ -21,6 +21,7 @@ export class ToolbarComponent implements OnInit, OnChanges {
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
   @Input() class = '';
+  @Input() tabbar = false;
 
   @HostBinding('class')
   hostClass = '';

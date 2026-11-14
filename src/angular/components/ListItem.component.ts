@@ -21,6 +21,7 @@ export class ListItemComponent implements OnInit, OnChanges {
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
   @Input() class = '';
+  @Input() menuListItem = false;
 
   @HostBinding('class')
   hostClass = '';

@@ -4,9 +4,10 @@
   </div>
 </template>
 <script>
-  import { computed, provide } from 'vue';
+  import { computed, provide, toRef } from 'vue';
 
   import { useAutoTheme } from './use-auto-theme.js';
+  import { useEffectiveDark } from './use-effective-dark.js';
 
   export default {
     name: 'tailwind-capacitor-provider',
@@ -17,7 +18,7 @@
       },
       dark: {
         type: Boolean,
-        default: true,
+        default: undefined,
       },
       touchRipple: {
         type: Boolean,
@@ -31,15 +32,17 @@
     setup(props) {
       const currentTheme = useAutoTheme(props, props.autoThemeDetection);
 
+      const effectiveDark = useEffectiveDark(toRef(props, 'dark'));
+
       const TailwindCapacitorContext = computed(() => ({
         theme: currentTheme.value,
-        dark: props.dark,
+        dark: effectiveDark.value,
         touchRipple: props.touchRipple,
       }));
       provide('TailwindCapacitorContext', TailwindCapacitorContext);
 
       const wrapperClass = computed(() =>
-        props.dark ? 'dark min-h-full w-full' : 'min-h-full w-full'
+        effectiveDark.value ? 'dark min-h-full w-full' : 'min-h-full w-full'
       );
 
       return {

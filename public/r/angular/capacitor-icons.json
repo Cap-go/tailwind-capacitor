@@ -49,7 +49,7 @@
     },
     {
       "path": "src/angular/components/icons/PreloaderMaterial.component.ts",
-      "content": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'c-preloader-material',\n  standalone: true,\n  template: `<svg viewBox=\"0 0 36 36\" fill=\"none\" stroke=\"currentcolor\">\n    <circle cx=\"18\" cy=\"18\" r=\"16\" />\n  </svg>`,\n})\nexport class PreloaderMaterialComponent {}\n",
+      "content": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'c-preloader-material',\n  standalone: true,\n  template: `<svg viewBox=\"0 0 36 36\" fill=\"none\" stroke=\"currentcolor\" class=\"animate-spin\">\n    <circle\n      cx=\"18\"\n      cy=\"18\"\n      r=\"16\"\n      stroke-width=\"3\"\n      stroke-linecap=\"round\"\n      stroke-dasharray=\"42 84\"\n    />\n  </svg>`,\n})\nexport class PreloaderMaterialComponent {}\n",
       "type": "registry:file",
       "target": "src/capacitor/angular/components/icons/PreloaderMaterial.component.ts"
     },

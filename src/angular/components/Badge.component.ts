@@ -21,6 +21,7 @@ export class BadgeComponent implements OnInit, OnChanges {
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
   @Input() class = '';
+  
 
   @HostBinding('class')
   hostClass = '';

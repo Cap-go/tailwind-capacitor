@@ -2,6 +2,7 @@
 import React from 'react';
 import { CapacitorContext } from './CapacitorContext.js';
 import { useAutoTheme } from './use-auto-theme.js';
+import { useEffectiveDark } from './use-effective-dark.js';
 
 const TailwindCapacitorProvider = (props) => {
   const {
@@ -13,17 +14,24 @@ const TailwindCapacitorProvider = (props) => {
   } = props;
 
   const currentTheme = useAutoTheme(theme, autoThemeDetection);
+  const effectiveDark = useEffectiveDark(dark);
 
   return (
-    <CapacitorContext.Provider
-      value={{
-        theme: currentTheme,
-        dark,
-        touchRipple,
-      }}
+    <div
+      className={
+        effectiveDark ? 'dark min-h-full w-full' : 'min-h-full w-full'
+      }
     >
-      {children}
-    </CapacitorContext.Provider>
+      <CapacitorContext.Provider
+        value={{
+          theme: currentTheme,
+          dark: effectiveDark,
+          touchRipple,
+        }}
+      >
+        {children}
+      </CapacitorContext.Provider>
+    </div>
   );
 };
 

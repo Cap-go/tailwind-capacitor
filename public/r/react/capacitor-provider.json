@@ -14,7 +14,7 @@
   "files": [
     {
       "path": "src/react/shared/TailwindCapacitorProvider.tsx",
-      "content": "/* @ts-nocheck */\nimport React from 'react';\nimport { CapacitorContext } from './CapacitorContext.js';\nimport { useAutoTheme } from './use-auto-theme.js';\n\nconst TailwindCapacitorProvider = (props) => {\n  const {\n    theme,\n    dark,\n    touchRipple = true,\n    autoThemeDetection = true,\n    children,\n  } = props;\n\n  const currentTheme = useAutoTheme(theme, autoThemeDetection);\n\n  return (\n    <CapacitorContext.Provider\n      value={{\n        theme: currentTheme,\n        dark,\n        touchRipple,\n      }}\n    >\n      {children}\n    </CapacitorContext.Provider>\n  );\n};\n\nexport { TailwindCapacitorProvider };\n",
+      "content": "/* @ts-nocheck */\nimport React from 'react';\nimport { CapacitorContext } from './CapacitorContext.js';\nimport { useAutoTheme } from './use-auto-theme.js';\nimport { useEffectiveDark } from './use-effective-dark.js';\n\nconst TailwindCapacitorProvider = (props) => {\n  const {\n    theme,\n    dark,\n    touchRipple = true,\n    autoThemeDetection = true,\n    children,\n  } = props;\n\n  const currentTheme = useAutoTheme(theme, autoThemeDetection);\n  const effectiveDark = useEffectiveDark(dark);\n\n  return (\n    <div\n      className={\n        effectiveDark ? 'dark min-h-full w-full' : 'min-h-full w-full'\n      }\n    >\n      <CapacitorContext.Provider\n        value={{\n          theme: currentTheme,\n          dark: effectiveDark,\n          touchRipple,\n        }}\n      >\n        {children}\n      </CapacitorContext.Provider>\n    </div>\n  );\n};\n\nexport { TailwindCapacitorProvider };\n",
       "type": "registry:file",
       "target": "src/capacitor/react/shared/TailwindCapacitorProvider.tsx"
     },
@@ -29,6 +29,12 @@
       "content": "/* @ts-nocheck */\nimport { useState } from 'react';\nimport { useIsomorphicLayoutEffect } from './use-isomorphic-layout-effect.js';\n\nexport const useAutoTheme = (theme, autoThemeDetection = true) => {\n  const [themeState, setThemeState] = useState(theme);\n\n  /* eslint-disable no-restricted-globals */\n  useIsomorphicLayoutEffect(() => {\n    if (!autoThemeDetection) return;\n    if (theme === 'ios' || theme === 'material') {\n      if (themeState !== theme) setThemeState(theme);\n    } else if (\n      themeState === 'parent' &&\n      typeof window !== 'undefined' &&\n      typeof document !== 'undefined'\n    ) {\n      const htmlEl = document.documentElement;\n      if (htmlEl) {\n        if (htmlEl.classList.contains('ios')) {\n          setThemeState('ios');\n        } else if (\n          htmlEl.classList.contains('md') ||\n          htmlEl.classList.contains('material')\n        ) {\n          setThemeState('material');\n        }\n      }\n    }\n  }, [theme]);\n  /* eslint-enable no-restricted-globals */\n  return autoThemeDetection ? themeState : theme;\n};\n",
       "type": "registry:file",
       "target": "src/capacitor/react/shared/use-auto-theme.ts"
+    },
+    {
+      "path": "src/react/shared/use-effective-dark.js",
+      "content": "import { useEffect, useState } from 'react';\n\nexport function useEffectiveDark(dark) {\n  const [prefersDark, setPrefersDark] = useState(false);\n\n  useEffect(() => {\n    if (typeof window === 'undefined') return undefined;\n    const media = window.matchMedia('(prefers-color-scheme: dark)');\n    const onChange = () => setPrefersDark(media.matches);\n    onChange();\n    if (media.addEventListener) {\n      media.addEventListener('change', onChange);\n      return () => media.removeEventListener('change', onChange);\n    }\n    media.addListener(onChange);\n    return () => media.removeListener(onChange);\n  }, []);\n\n  if (dark === undefined || dark === null) {\n    return prefersDark;\n  }\n  return dark;\n}\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/shared/use-effective-dark.js"
     },
     {
       "path": "src/react/shared/use-dark-classes.ts",

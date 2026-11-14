@@ -21,6 +21,10 @@ export class ListComponent implements OnInit, OnChanges {
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
   @Input() class = '';
+  @Input() nested = false;
+  @Input() menuList = false;
+  @Input() strong?: boolean;
+  @Input() inset?: boolean;
 
   @HostBinding('class')
   hostClass = '';

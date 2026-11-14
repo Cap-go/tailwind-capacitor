@@ -10,12 +10,13 @@
   "registryDependencies": [
     "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
     "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-button.json"
   ],
   "files": [
     {
       "path": "src/angular/components/SegmentedButton.component.ts",
-      "content": "import { Component, Input } from '@angular/core';\nimport { ButtonComponent } from './Button.component.js';\n\n@Component({\n  selector: 'c-segmented-button',\n  standalone: true,\n  imports: [ButtonComponent],\n  template: `<c-button [segmented]=\"true\"><ng-content /></c-button>`,\n})\nexport class SegmentedButtonComponent {\n  \n}\n",
+      "content": "import { Component, Input } from '@angular/core';\nimport { ButtonComponent } from './Button.component.js';\n\n@Component({\n  selector: 'c-segmented-button',\n  standalone: true,\n  imports: [ButtonComponent],\n  template: `<c-button [segmented]=\"true\" [segmentedStrong]=\"strong\" [rounded]=\"rounded\" [segmentedActive]=\"active\"><ng-content /></c-button>`,\n})\nexport class SegmentedButtonComponent {\n  @Input() strong = false;\n  @Input() rounded = false;\n  @Input() active = false;\n}\n",
       "type": "registry:file",
       "target": "src/capacitor/angular/components/SegmentedButton.component.ts"
     }

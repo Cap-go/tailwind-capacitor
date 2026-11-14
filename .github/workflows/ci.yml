@@ -22,13 +22,15 @@ jobs:
       - run: npm run verify:registry-refs
       - run: npm run lint
       - run: npm run generate:css
-      - run: npm test
       - run: npm run smoke:tailwind
       - run: npm run build:registry
+      - run: git diff --exit-code public/r registry.json registry-vue.json registry-react.json registry-angular.json
       - run: npm run verify:registry-refs
+      - run: npm test
       - run: npm run test:registry-install:vue
       - run: npm run test:registry-install:react
       - run: npm run test:registry-install:angular
+      - run: npm run test:angular-strict-build
       - run: npm run sync:example
       - run: npm --prefix example ci
       - run: npm --prefix example run build

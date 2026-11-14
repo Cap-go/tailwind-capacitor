@@ -10,7 +10,8 @@
   "registryDependencies": [
     "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
     "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-list-item.json"
   ],
   "files": [
     {

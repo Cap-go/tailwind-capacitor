@@ -21,6 +21,10 @@ export class ButtonComponent implements OnInit, OnChanges {
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
   @Input() class = '';
+  @Input() segmented = false;
+  @Input() rounded?: boolean;
+  @Input() segmentedActive = false;
+  @Input() segmentedStrong = false;
 
   @HostBinding('class')
   hostClass = '';

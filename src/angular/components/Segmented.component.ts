@@ -21,6 +21,8 @@ export class SegmentedComponent implements OnInit, OnChanges {
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
   @Input() class = '';
+  @Input() strong = false;
+  @Input() rounded = false;
 
   @HostBinding('class')
   hostClass = '';

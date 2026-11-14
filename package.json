@@ -3,6 +3,9 @@
   "version": "5.0.0",
   "description": "Tailwind plugin for Capacitor apps",
   "main": "index.js",
+  "bin": {
+    "tailwind-capacitor-registry-add": "scripts/registry-add.mjs"
+  },
   "exports": {
     ".": "./index.js",
     "./vue": "./src/vue/capacitor-vue.js",
@@ -23,7 +26,7 @@
   "scripts": {
     "lint": "eslint .",
     "generate:css": "node scripts/copy-capacitor-config.mjs && node scripts/generate-line-clamp-css.mjs && node scripts/generate-safe-area-css.mjs",
-    "generate:registry": "node scripts/scaffold-ionic-additions.mjs && node scripts/port-konsta-react.mjs && node scripts/generate-angular-components.mjs && node scripts/generate-angular-icons.mjs && node scripts/generate-registry.mjs",
+    "generate:registry": "node scripts/scaffold-ionic-additions.mjs && node scripts/port-konsta-react.mjs && node scripts/generate-shared-dts.mjs && node scripts/generate-angular-components.mjs && node scripts/generate-angular-icons.mjs && node scripts/generate-registry.mjs",
     "build:registry:vue": "npx shadcn build -o public/r registry.json",
     "build:registry:react": "npx shadcn build -o public/r/react registry-react.json",
     "build:registry:angular": "npx shadcn build -o public/r/angular registry-angular.json",
@@ -31,6 +34,7 @@
     "test:registry-install:vue": "REGISTRY_FRAMEWORK=vue node scripts/test-registry-install.mjs",
     "test:registry-install:react": "REGISTRY_FRAMEWORK=react node scripts/test-registry-install.mjs",
     "test:registry-install:angular": "REGISTRY_FRAMEWORK=angular node scripts/test-registry-install.mjs",
+    "test:angular-strict-build": "node scripts/test-angular-strict-build.mjs",
     "verify:registry-refs": "node scripts/verify-registry-refs.mjs",
     "postprocess:registry": "node scripts/postprocess-registry.mjs",
     "pretest": "npm run generate:css",
@@ -76,7 +80,9 @@
     "@tailwindcss/vite": "^4.1.11",
     "eslint": "^9.28.0",
     "globals": "^16.2.0",
+    "@angular/compiler-cli": "^19.0.0",
     "playwright": "^1.51.0",
+    "typescript": "^5.8.3",
     "postcss": "^8.5.6",
     "shadcn": "^3.2.1",
     "tailwindcss": "^4.1.11"
