@@ -295,32 +295,29 @@ try {
     throw new Error('c-button should not have dark: classes before flip');
   }
 
-  await page.waitForFunction(() => typeof window.__setDark === 'function');
-  await page.evaluate(() => window.__setDark?.(true));
+  await page.waitForFunction('typeof window.__setDark === "function"');
+  await page.evaluate('window.__setDark?.(true)');
   await sleep(500);
   await page.waitForFunction(
-    () =>
-      document
-        .querySelector('tailwind-capacitor-provider#tcp div')
-        ?.classList.contains('dark'),
+    `document.querySelector('tailwind-capacitor-provider#tcp div')?.classList.contains('dark')`,
     undefined,
     { timeout: 60_000 },
   );
   await page.waitForFunction(
-    () => {
+    `(() => {
       const wrap = document.querySelector('tailwind-capacitor-provider#tcp div');
       if (!wrap?.classList.contains('dark')) return false;
       const btn = document.querySelector('c-button#probe-button');
       if (!btn) return false;
       return /dark:/.test(document.body.innerHTML);
-    },
+    })()`,
     undefined,
     { timeout: 60_000 },
   );
 
   const toggleInput = page.locator('c-toggle#probe-toggle input[role="switch"]');
   await toggleInput.click();
-  await page.waitForFunction(() => window.__toggleCount === 1);
+  await page.waitForFunction('window.__toggleCount === 1');
   const ariaChecked = await toggleInput.getAttribute('aria-checked');
   if (ariaChecked !== 'true') {
     throw new Error(`expected aria-checked=true, got ${ariaChecked}`);
