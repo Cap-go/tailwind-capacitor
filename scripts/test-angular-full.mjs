@@ -304,8 +304,7 @@ try {
   await toggle.waitFor({ state: 'attached' });
   const toggleClassBefore = await toggle.evaluate((el) => el.className);
 
-  await page.waitForFunction('typeof window.__setDark === "function"');
-  await page.evaluate('window.__setDark(true)');
+  await page.locator('#dark-toggle').click({ force: true });
   await page.waitForFunction(
     `document.querySelector('tailwind-capacitor-provider#tcp div')?.classList.contains('dark')`,
     undefined,
