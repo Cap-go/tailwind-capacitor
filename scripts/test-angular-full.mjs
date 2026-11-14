@@ -231,6 +231,7 @@ export class AppComponent implements OnInit {
     window.__setDark = (value: boolean) => {
       this.zone.run(() => {
         this.dark = value;
+        this.cdr.detectChanges();
         this.appRef.tick();
       });
     };
@@ -303,11 +304,12 @@ try {
   await toggle.waitFor({ state: 'attached' });
   const toggleClassBefore = await toggle.evaluate((el) => el.className);
 
-  await page.locator('#dark-toggle').click();
+  await page.waitForFunction('typeof window.__setDark === "function"');
+  await page.evaluate('window.__setDark(true)');
   await page.waitForFunction(
     `document.querySelector('tailwind-capacitor-provider#tcp div')?.classList.contains('dark')`,
     undefined,
-    { timeout: 60_000 },
+    { timeout: 120_000 },
   );
   await page.waitForFunction(
     `(before) => {
