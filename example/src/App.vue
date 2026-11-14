@@ -112,10 +112,10 @@
             <ItemSliding class="demo-item-sliding mt-2">
               <ListItem component="div" title="Sliding list item" />
             </ItemSliding>
-            <Reorder class="p-1 mt-2">
-              <List strong inset margin="my-0" dividers dividers-ios>
-                <ListItem title="Reorder row 1" />
-                <ListItem title="Reorder row 2" />
+            <Reorder class="p-1 mt-2 w-full">
+              <List strong inset margin="my-0" outline dividers dividers-ios>
+                <ListItem title="Reorder row 1" component="div" />
+                <ListItem title="Reorder row 2" component="div" />
               </List>
             </Reorder>
           </Block>

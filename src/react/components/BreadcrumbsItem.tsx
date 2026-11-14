@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import { BreadcrumbsItemClasses } from '../../shared/classes/BreadcrumbsItemClasses.js';
 import { BreadcrumbsItemColors } from '../../shared/colors/BreadcrumbsItemColors.js';

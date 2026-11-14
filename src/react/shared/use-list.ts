@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import { useContext } from 'react';
 import { ListContext } from './ListContext.js';
 

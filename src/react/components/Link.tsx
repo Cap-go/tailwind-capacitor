@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import { cls } from '../../shared/cls.js';
 import { useTheme } from '../shared/use-theme.js';

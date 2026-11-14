@@ -6,6 +6,7 @@ import {
   inject,
   OnInit,
   OnChanges,
+  DoCheck,
   ViewChild,
   ElementRef,
   AfterViewInit,
@@ -35,8 +36,8 @@ import { cls } from '../../shared/cls.js';
           [readOnly]="readonly"
           [required]="required"
           [attr.aria-label]="label || placeholder"
-          (input)="input.emit($event)"
-          (change)="change.emit($event)"
+          (input)="onValueInput($event)"
+          (change)="onCheckedChange($event)"
           (focus)="onFocus($event)"
           (blur)="onBlur($event)"
         >{{ textValue }}</textarea>
@@ -47,7 +48,7 @@ import { cls } from '../../shared/cls.js';
           [disabled]="disabled"
           [required]="required"
           [attr.aria-label]="label || placeholder"
-          (change)="change.emit($event)"
+          (change)="onCheckedChange($event)"
           (focus)="onFocus($event)"
           (blur)="onBlur($event)"
         >
@@ -64,8 +65,8 @@ import { cls } from '../../shared/cls.js';
           [required]="required"
           [value]="textValue"
           [attr.aria-label]="label || placeholder"
-          (input)="input.emit($event)"
-          (change)="change.emit($event)"
+          (input)="onValueInput($event)"
+          (change)="onCheckedChange($event)"
           (focus)="onFocus($event)"
           (blur)="onBlur($event)"
         />
@@ -74,7 +75,7 @@ import { cls } from '../../shared/cls.js';
     <ng-content />
   </li>`,
 })
-export class ListInputComponent implements OnInit, OnChanges {
+export class ListInputComponent implements OnInit, OnChanges, DoCheck {
   @Input() ios?: boolean;
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
@@ -88,8 +89,8 @@ export class ListInputComponent implements OnInit, OnChanges {
   @Input() required = false;
   @Input() disabled = false;
 
-  @Output() change = new EventEmitter<Event>();
-  @Output() input = new EventEmitter<Event>();
+  @Output() checkedChange = new EventEmitter<Event>();
+  @Output() valueChange = new EventEmitter<Event>();
   @Output() focus = new EventEmitter<Event>();
   @Output() blur = new EventEmitter<Event>();
 
@@ -115,6 +116,25 @@ export class ListInputComponent implements OnInit, OnChanges {
     if (!value || typeof value !== 'object') return '';
     const bucket = value as Record<string, unknown>;
     return this.resolveClass(bucket[state]);
+  }
+
+  private lastCtxDark?: boolean;
+
+  ngDoCheck(): void {
+    if (this.lastCtxDark !== this.ctx.dark) {
+      this.lastCtxDark = this.ctx.dark;
+      this.syncClasses();
+    }
+  }
+
+  onCheckedChange(ev: Event): void {
+    ev.stopPropagation();
+    this.checkedChange.emit(ev);
+  }
+
+  onValueInput(ev: Event): void {
+    ev.stopPropagation();
+    this.valueChange.emit(ev);
   }
 
   private readonly ctx = inject(CAPACITOR_CONTEXT);

@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { HeaderClasses } from '../../shared/classes/HeaderClasses.js';
 import { HeaderColors } from '../../shared/colors/HeaderColors.js';

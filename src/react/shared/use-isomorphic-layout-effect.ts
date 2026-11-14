@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import { useEffect, useLayoutEffect } from 'react';
 
 function useIsomorphicLayoutEffect(callback, deps) {

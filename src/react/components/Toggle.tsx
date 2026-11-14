@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import { ToggleClasses } from '../../shared/classes/ToggleClasses.js';
 import { ToggleColors } from '../../shared/colors/ToggleColors.js';
@@ -52,7 +52,7 @@ const Toggle = (props) => {
   const state =
     checked || (defaultChecked && !onChange) ? 'checked' : 'notChecked';
 
-  const c = themeClasses(ToggleClasses(props, colors, dark), className);
+  const c = themeClasses(ToggleClasses(props, { className: className ?? '' }, dark), className);
 
   return (
     <Component

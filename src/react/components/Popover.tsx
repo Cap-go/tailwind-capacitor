@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 /* eslint-disable no-restricted-globals */
 import React, { useEffect, useRef, useState } from 'react';
 import { cls } from '../../shared/cls.js';
@@ -66,7 +66,7 @@ const Popover = (props) => {
   const colors = PopoverColors(colorsProp, dark);
 
   const c = themeClasses(
-    PopoverClasses({ ...props, angleClassName }, colors, dark),
+    PopoverClasses({ ...props, angleClassName }, { className: className ?? '' }, dark),
     className
   );
 

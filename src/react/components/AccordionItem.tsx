@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { AccordionItemClasses } from '../../shared/classes/AccordionItemClasses.js';
 import { AccordionItemColors } from '../../shared/colors/AccordionItemColors.js';

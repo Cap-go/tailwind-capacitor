@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { TextareaClasses } from '../../shared/classes/TextareaClasses.js';
 import { TextareaColors } from '../../shared/colors/TextareaColors.js';

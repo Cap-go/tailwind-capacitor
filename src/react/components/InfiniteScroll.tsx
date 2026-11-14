@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { InfiniteScrollClasses } from '../../shared/classes/InfiniteScrollClasses.js';
 import { InfiniteScrollColors } from '../../shared/colors/InfiniteScrollColors.js';

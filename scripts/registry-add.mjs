@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { createHash } from 'node:crypto';
 import {
   mkdirSync,
@@ -34,16 +35,21 @@ function mapUrlToLocal(url) {
   const direct = join(registryRoot, rel);
   if (existsSync(direct)) return resolve(direct);
   const name = rel.split('/').pop();
-  if (name) {
-    const atRoot = join(registryRoot, name);
-    if (existsSync(atRoot)) return resolve(atRoot);
-    const inVue = join(registryRoot, 'vue', name);
-    if (existsSync(inVue)) return resolve(inVue);
-    const inReact = join(registryRoot, 'react', name);
-    if (existsSync(inReact)) return resolve(inReact);
-    const inAngular = join(registryRoot, 'angular', name);
-    if (existsSync(inAngular)) return resolve(inAngular);
+  if (!name) return null;
+  if (rel.includes('/angular/')) {
+    const p = join(registryRoot, 'angular', name);
+    return existsSync(p) ? resolve(p) : null;
   }
+  if (rel.includes('/react/')) {
+    const p = join(registryRoot, 'react', name);
+    return existsSync(p) ? resolve(p) : null;
+  }
+  if (rel.includes('/vue/')) {
+    const p = join(registryRoot, 'vue', name);
+    return existsSync(p) ? resolve(p) : null;
+  }
+  const atRoot = join(registryRoot, name);
+  if (existsSync(atRoot)) return resolve(atRoot);
   return null;
 }
 
@@ -61,7 +67,8 @@ async function materializeItemPath(arg) {
   if (!arg) return null;
   if (arg.startsWith('http://') || arg.startsWith('https://')) {
     const target = cachePathForUrl(arg);
-    if (!existsSync(target)) {
+    const force = process.env.REGISTRY_FORCE_FETCH === '1';
+    if (!existsSync(target) || force) {
       const res = await fetch(arg);
       if (!res.ok) {
         throw new Error(`fetch failed (${res.status}): ${arg}`);
@@ -97,7 +104,8 @@ async function ensureRegistryDependency(dep) {
   const local = mapUrlToLocal(dep);
   if (local && existsSync(local)) return local;
   const target = cachePathForUrl(dep);
-  if (!existsSync(target)) {
+  const force = process.env.REGISTRY_FORCE_FETCH === '1';
+  if (!existsSync(target) || force) {
     const res = await fetch(dep);
     if (!res.ok) {
       throw new Error(`fetch failed (${res.status}): ${dep}`);

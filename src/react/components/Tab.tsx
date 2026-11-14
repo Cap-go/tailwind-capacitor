@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import SegmentedButton from './SegmentedButton.tsx';
 

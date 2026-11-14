@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import { PageClasses } from '../../shared/classes/PageClasses.js';
 import { PageColors } from '../../shared/colors/PageColors.js';

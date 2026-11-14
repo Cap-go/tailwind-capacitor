@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import { TailwindCapacitorProvider } from '../shared/TailwindCapacitorProvider.tsx';
 import { useAutoTheme } from '../shared/use-auto-theme.js';

@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { AvatarClasses } from '../../shared/classes/AvatarClasses.js';
 import { AvatarColors } from '../../shared/colors/AvatarColors.js';

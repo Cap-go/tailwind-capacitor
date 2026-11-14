@@ -4,6 +4,7 @@ import {
   inject,
   OnInit,
   OnChanges,
+  DoCheck,
   HostBinding,
 } from '@angular/core';
 import { NavbarBackLinkClasses } from '../../shared/classes/NavbarBackLinkClasses.js';
@@ -16,7 +17,7 @@ import { resolveTheme, themeClasses } from '../shared/use-theme-classes.js';
   standalone: true,
   template: '<ng-content />',
 })
-export class NavbarBackLinkComponent implements OnInit, OnChanges {
+export class NavbarBackLinkComponent implements OnInit, OnChanges, DoCheck {
   @Input() ios?: boolean;
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
@@ -29,12 +30,23 @@ export class NavbarBackLinkComponent implements OnInit, OnChanges {
   private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   ngOnInit(): void {
+    this.lastCtxDark = this.ctx.dark;
     this.syncHostClass();
   }
 
   ngOnChanges(): void {
     this.syncHostClass();
   }
+
+  private lastCtxDark?: boolean;
+
+  ngDoCheck(): void {
+    if (this.lastCtxDark !== this.ctx.dark) {
+      this.lastCtxDark = this.ctx.dark;
+      this.syncHostClass();
+    }
+  }
+
 
   private syncHostClass(): void {
     const theme = resolveTheme(this.ctx, this);

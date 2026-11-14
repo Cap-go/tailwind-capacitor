@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { InputOtpClasses } from '../../shared/classes/InputOtpClasses.js';
 import { InputOtpColors } from '../../shared/colors/InputOtpColors.js';

@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import Button from './Button.tsx';
 import { useSegmentedContext } from './SegmentedContext.tsx';

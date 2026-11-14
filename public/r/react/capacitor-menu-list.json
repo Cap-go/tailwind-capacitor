@@ -17,7 +17,7 @@
   "files": [
     {
       "path": "src/react/components/MenuList.tsx",
-      "content": "/* @ts-nocheck */\nimport React, { useRef } from 'react';\nimport List from './List.tsx';\n\nconst MenuList = (props) => {\n  const {\n    // Children\n    children,\n    ref,\n    // Rest\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const attrs = {\n    ...rest,\n  };\n\n  return (\n    <List\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      menuList\n      {...attrs}\n    >\n      {children}\n    </List>\n  );\n};\n\nMenuList.displayName = 'MenuList';\n\nexport default MenuList;\n",
+      "content": "// @ts-nocheck\nimport React, { useRef } from 'react';\nimport List from './List.tsx';\n\nconst MenuList = (props) => {\n  const {\n    // Children\n    children,\n    ref,\n    // Rest\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const attrs = {\n    ...rest,\n  };\n\n  return (\n    <List\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      menuList\n      {...attrs}\n    >\n      {children}\n    </List>\n  );\n};\n\nMenuList.displayName = 'MenuList';\n\nexport default MenuList;\n",
       "type": "registry:file",
       "target": "src/capacitor/react/components/MenuList.tsx"
     }

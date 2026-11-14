@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import { useContext } from 'react';
 import { CapacitorContext } from './CapacitorContext.js';
 import { cls } from '../../shared/cls.js';

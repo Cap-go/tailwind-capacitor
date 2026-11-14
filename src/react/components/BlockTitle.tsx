@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import { BlockTitleClasses } from '../../shared/classes/BlockTitleClasses.js';
 import { BlockTitleColors } from '../../shared/colors/BlockTitleColors.js';

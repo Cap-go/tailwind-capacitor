@@ -47,16 +47,9 @@ The `dark` prop on `TailwindCapacitorProvider` is optional. When omitted, compon
 
 [@spartan-ng/cli](https://www.spartan.ng/) does not install arbitrary remote registry JSON. Copy items with `registry-add` (same idea as shadcn file install).
 
-**npm 4.0.0 (latest published today)** has no `registry-add` bin. Use the script entry:
+**npm 4.0.0** on the registry today ships no `scripts/` folder and no `registry-add` bin, so Angular file install from that package does not work. Use **5.0.0+** (after publish), a git dependency, or `npm pack` from this repo until then.
 
-```bash
-node node_modules/@capgo/tailwind-capacitor/scripts/registry-add.mjs https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json
-node node_modules/@capgo/tailwind-capacitor/scripts/registry-add.mjs https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json
-node node_modules/@capgo/tailwind-capacitor/scripts/registry-add.mjs https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json
-node node_modules/@capgo/tailwind-capacitor/scripts/registry-add.mjs https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-button.json
-```
-
-**This repo (5.0.0 on disk)** also exposes a bin for local and GitHub installs:
+**Clone or pack (works today on 5.0.0 in this repo):**
 
 ```bash
 node scripts/registry-add.mjs public/r/capacitor-tailwind.json
@@ -81,7 +74,7 @@ npx --package github:Cap-go/tailwind-capacitor registry-add public/r/angular/cap
 
 ### Angular component scope
 
-Most Angular registry items are class host wrappers around shared Konsta class maps (theme and `dark:*` styling). These items ship interactive controls with real DOM, inputs, outputs, and ARIA: `Toggle`, `Checkbox`, `Radio`, `Range`, `Searchbar`, and `ListInput`. Remaining Angular items focus on layout and styling; use Vue or React registry items when you need full Konsta behavior out of the box.
+Most Angular registry items are class host wrappers around shared Konsta class maps (theme and `dark:*` styling). These items ship interactive controls with real DOM, inputs, outputs, and ARIA: `Toggle`, `Checkbox`, `Radio`, `Range`, `Searchbar`, and `ListInput`. `Preloader` and similar animation shells only apply theme classes on the host (no SVG spinner logic in Angular). Use Vue or React registry items when you need full Konsta behavior out of the box.
 
 ## Styles
 

@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { SelectClasses } from '../../shared/classes/SelectClasses.js';
 import { SelectColors } from '../../shared/colors/SelectColors.js';

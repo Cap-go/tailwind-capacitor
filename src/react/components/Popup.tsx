@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import { PopupClasses } from '../../shared/classes/PopupClasses.js';
 import { useDarkClasses } from '../shared/use-dark-classes.js';

@@ -36,8 +36,8 @@ function transformSource(text) {
   for (const [from, to] of replacements) {
     out = out.split(from).join(to);
   }
-  if (!out.startsWith('/* @ts-nocheck */')) {
-    out = `/* @ts-nocheck */\n${out}`;
+  if (!out.startsWith('// @ts-nocheck')) {
+    out = `// @ts-nocheck\n${out}`;
   }
   return out;
 }
@@ -106,7 +106,7 @@ export const CapacitorContext = React.createContext({
 
 writeFileSync(
   join(outRoot, 'shared/TailwindCapacitorProvider.tsx'),
-  `/* @ts-nocheck */
+  `// @ts-nocheck
 import React from 'react';
 import { CapacitorContext } from './CapacitorContext.js';
 import { useAutoTheme } from './use-auto-theme.js';

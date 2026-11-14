@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { NoteClasses } from '../../shared/classes/NoteClasses.js';
 import { NoteColors } from '../../shared/colors/NoteColors.js';

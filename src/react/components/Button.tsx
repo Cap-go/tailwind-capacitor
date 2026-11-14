@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import { cls } from '../../shared/cls.js';
 import { useTheme } from '../shared/use-theme.js';
@@ -109,7 +109,7 @@ const Button = (props) => {
   const colors = ButtonColors(colorsProp, dark);
 
   const c = themeClasses(
-    ButtonClasses({ ...props, ...themeProps }, colors, dark)
+    ButtonClasses({ ...props, ...themeProps }, { className: className ?? '' }, dark)
   );
 
   const classes = cls(

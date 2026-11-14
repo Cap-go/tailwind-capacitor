@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { SplitPaneClasses } from '../../shared/classes/SplitPaneClasses.js';
 import { SplitPaneColors } from '../../shared/colors/SplitPaneColors.js';

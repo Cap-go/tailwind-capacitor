@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import { useState } from 'react';
 import { useIsomorphicLayoutEffect } from './use-isomorphic-layout-effect.js';
 

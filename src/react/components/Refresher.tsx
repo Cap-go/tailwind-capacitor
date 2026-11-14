@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { RefresherClasses } from '../../shared/classes/RefresherClasses.js';
 import { RefresherColors } from '../../shared/colors/RefresherColors.js';

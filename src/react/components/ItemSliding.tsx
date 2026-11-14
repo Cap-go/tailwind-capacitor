@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { ItemSlidingClasses } from '../../shared/classes/ItemSlidingClasses.js';
 import { ItemSlidingColors } from '../../shared/colors/ItemSlidingColors.js';

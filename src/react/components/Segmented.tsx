@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef, useEffect, useState } from 'react';
 import { cls } from '../../shared/cls.js';
 import { SegmentedClasses } from '../../shared/classes/SegmentedClasses.js';
@@ -73,7 +73,7 @@ const Segmented = (props) => {
   const { navbar } = useNavbarContext();
 
   const c = themeClasses(
-    SegmentedClasses({ ...props, ...themeProps, navbar }, colors, dark)
+    SegmentedClasses({ ...props, ...themeProps, navbar }, { className: className ?? '' }, dark)
   );
 
   const Component = theme === 'ios' && navbar ? Glass : component;

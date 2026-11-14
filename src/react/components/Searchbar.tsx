@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 /* eslint-disable no-console */
 import React, { useRef, useState, useEffect } from 'react';
 import { SearchbarClasses } from '../../shared/classes/SearchbarClasses.js';

@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useState, useRef, useEffect } from 'react';
 import { useTheme } from '../shared/use-theme.js';
 import { useThemeClasses } from '../shared/use-theme-classes.js';

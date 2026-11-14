@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import { useTheme } from '../shared/use-theme.js';
 import { useThemeClasses } from '../shared/use-theme-classes.js';
@@ -46,7 +46,7 @@ const Fab = (props) => {
 
   const colors = FabColors(colorsProp, dark);
 
-  const c = themeClasses(FabClasses(props, colors, dark), className);
+  const c = themeClasses(FabClasses(props, { className: className ?? '' }, dark), className);
 
   return (
     <Glass

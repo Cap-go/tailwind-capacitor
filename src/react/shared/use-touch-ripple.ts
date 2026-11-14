@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import { useRef, useEffect, useContext } from 'react';
 import { CapacitorContext } from './CapacitorContext.js';
 import { TouchRipple } from '../../shared/touch-ripple-class.js';

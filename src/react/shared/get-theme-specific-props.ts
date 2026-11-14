@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 export const getThemeSpecificProps = (theme, obj, props) => {
   const res = {};
   Object.keys(obj).forEach((key) => {

@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { AlertClasses } from '../../shared/classes/AlertClasses.js';
 import { AlertColors } from '../../shared/colors/AlertColors.js';

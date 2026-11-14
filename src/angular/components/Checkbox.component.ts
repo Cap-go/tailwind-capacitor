@@ -6,6 +6,7 @@ import {
   inject,
   OnInit,
   OnChanges,
+  DoCheck,
   ViewChild,
   ElementRef,
   AfterViewInit,
@@ -31,7 +32,7 @@ import { CheckboxIconComponent } from './icons/CheckboxIcon.component.js';
       [disabled]="disabled"
       [readOnly]="readonly"
       [checked]="checked"
-      (change)="change.emit($event)"
+      (change)="onCheckedChange($event)"
     />
     <i [class]="resolveStateClass(c['iconWrap'], state)">
       @if (indeterminate) {
@@ -43,7 +44,7 @@ import { CheckboxIconComponent } from './icons/CheckboxIcon.component.js';
     <ng-content />
   </label>`,
 })
-export class CheckboxComponent implements OnInit, OnChanges, AfterViewInit {
+export class CheckboxComponent implements OnInit, OnChanges, AfterViewInit, DoCheck {
   @Input() ios?: boolean;
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
@@ -55,7 +56,7 @@ export class CheckboxComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() disabled = false;
   @Input() readonly = false;
 
-  @Output() change = new EventEmitter<Event>();
+  @Output() checkedChange = new EventEmitter<Event>();
 
   @ViewChild('inputEl') inputEl?: ElementRef<HTMLInputElement>;
 
@@ -78,9 +79,24 @@ export class CheckboxComponent implements OnInit, OnChanges, AfterViewInit {
     return this.resolveClass(bucket[state]);
   }
 
+  private lastCtxDark?: boolean;
+
+  ngDoCheck(): void {
+    if (this.lastCtxDark !== this.ctx.dark) {
+      this.lastCtxDark = this.ctx.dark;
+      this.syncClasses();
+    }
+  }
+
+  onCheckedChange(ev: Event): void {
+    ev.stopPropagation();
+    this.checkedChange.emit(ev);
+  }
+
   private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   ngOnInit(): void {
+    this.lastCtxDark = this.ctx.dark;
     this.syncClasses();
   }
 

@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import List from './List.tsx';
 import { useList } from '../shared/use-list.js';

@@ -17,7 +17,7 @@
   "files": [
     {
       "path": "src/react/components/Tabbar.tsx",
-      "content": "/* @ts-nocheck */\nimport React, { useRef } from 'react';\nimport Toolbar from './Toolbar.tsx';\n\nconst Tabbar = (props) => {\n  const {\n    labels,\n    icons,\n    children,\n    ref,\n\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const attrs = {\n    ...rest,\n  };\n\n  return (\n    <Toolbar\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      tabbar\n      tabbarIcons={icons}\n      tabbarLabels={labels}\n      {...attrs}\n    >\n      {children}\n    </Toolbar>\n  );\n};\n\nTabbar.displayName = 'Tabbar';\n\nexport default Tabbar;\n",
+      "content": "// @ts-nocheck\nimport React, { useRef } from 'react';\nimport Toolbar from './Toolbar.tsx';\n\nconst Tabbar = (props) => {\n  const {\n    labels,\n    icons,\n    children,\n    ref,\n\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const attrs = {\n    ...rest,\n  };\n\n  return (\n    <Toolbar\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      tabbar\n      tabbarIcons={icons}\n      tabbarLabels={labels}\n      {...attrs}\n    >\n      {children}\n    </Toolbar>\n  );\n};\n\nTabbar.displayName = 'Tabbar';\n\nexport default Tabbar;\n",
       "type": "registry:file",
       "target": "src/capacitor/react/components/Tabbar.tsx"
     }

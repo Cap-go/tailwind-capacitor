@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { ReorderClasses } from '../../shared/classes/ReorderClasses.js';
 import { ReorderColors } from '../../shared/colors/ReorderColors.js';

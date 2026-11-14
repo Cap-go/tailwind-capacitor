@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { FooterClasses } from '../../shared/classes/FooterClasses.js';
 import { FooterColors } from '../../shared/colors/FooterColors.js';

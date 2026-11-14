@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import { ChipClasses } from '../../shared/classes/ChipClasses.js';
 import { ChipColors } from '../../shared/colors/ChipColors.js';

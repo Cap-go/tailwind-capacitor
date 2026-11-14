@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { DatetimeClasses } from '../../shared/classes/DatetimeClasses.js';
 import { DatetimeColors } from '../../shared/colors/DatetimeColors.js';

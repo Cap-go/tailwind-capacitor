@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { CapacitorContext } from './CapacitorContext.js';
 import { useAutoTheme } from './use-auto-theme.js';

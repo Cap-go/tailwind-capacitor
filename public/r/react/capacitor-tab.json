@@ -17,7 +17,7 @@
   "files": [
     {
       "path": "src/react/components/Tab.tsx",
-      "content": "/* @ts-nocheck */\nimport React from 'react';\nimport SegmentedButton from './SegmentedButton.tsx';\n\nconst Tab = (props) => {\n  const { active = false, children, ...rest } = props;\n  return (\n    <SegmentedButton active={active} strong rounded {...rest}>\n      {children}\n    </SegmentedButton>\n  );\n};\n\nTab.displayName = 'Tab';\nexport default Tab;\n",
+      "content": "// @ts-nocheck\nimport React from 'react';\nimport SegmentedButton from './SegmentedButton.tsx';\n\nconst Tab = (props) => {\n  const { active = false, children, ...rest } = props;\n  return (\n    <SegmentedButton active={active} strong rounded {...rest}>\n      {children}\n    </SegmentedButton>\n  );\n};\n\nTab.displayName = 'Tab';\nexport default Tab;\n",
       "type": "registry:file",
       "target": "src/capacitor/react/components/Tab.tsx"
     }

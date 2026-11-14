@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useEffect, useRef, useContext } from 'react';
 import { GlassClasses } from '../../shared/classes/GlassClasses.js';
 import { GlassColors } from '../../shared/colors/GlassColors.js';

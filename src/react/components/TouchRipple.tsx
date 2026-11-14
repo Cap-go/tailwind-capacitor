@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { TouchRippleClasses } from '../../shared/classes/TouchRippleClasses.js';
 import { TouchRippleColors } from '../../shared/colors/TouchRippleColors.js';

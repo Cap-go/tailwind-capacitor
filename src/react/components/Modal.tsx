@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { ModalClasses } from '../../shared/classes/ModalClasses.js';
 import { ModalColors } from '../../shared/colors/ModalColors.js';

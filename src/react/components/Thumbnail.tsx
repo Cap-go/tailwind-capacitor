@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { ThumbnailClasses } from '../../shared/classes/ThumbnailClasses.js';
 import { ThumbnailColors } from '../../shared/colors/ThumbnailColors.js';

@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import { TabbarLinkClasses } from '../../shared/classes/TabbarLinkClasses.js';
 import { TabbarLinkColors } from '../../shared/colors/TabbarLinkColors.js';

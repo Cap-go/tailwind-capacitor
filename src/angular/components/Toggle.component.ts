@@ -6,6 +6,7 @@ import {
   inject,
   OnInit,
   OnChanges,
+  DoCheck,
   ViewChild,
   ElementRef,
   AfterViewInit,
@@ -30,7 +31,7 @@ import { cls } from '../../shared/cls.js';
       [readOnly]="readonly"
       [checked]="checked"
       [attr.aria-checked]="checked"
-      (change)="change.emit($event)"
+      (change)="onCheckedChange($event)"
     />
     <span [class]="resolveStateClass(c['inner'], state)"></span>
     <span [class]="resolveStateClass(c['thumbWrap'], state)">
@@ -39,7 +40,7 @@ import { cls } from '../../shared/cls.js';
     <ng-content />
   </label>`,
 })
-export class ToggleComponent implements OnInit, OnChanges {
+export class ToggleComponent implements OnInit, OnChanges, DoCheck {
   @Input() ios?: boolean;
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
@@ -50,7 +51,7 @@ export class ToggleComponent implements OnInit, OnChanges {
   @Input() disabled = false;
   @Input() readonly = false;
 
-  @Output() change = new EventEmitter<Event>();
+  @Output() checkedChange = new EventEmitter<Event>();
 
   c: Record<string, unknown> = {};
   state: 'checked' | 'notChecked' = 'notChecked';
@@ -71,9 +72,24 @@ export class ToggleComponent implements OnInit, OnChanges {
     return this.resolveClass(bucket[state]);
   }
 
+  private lastCtxDark?: boolean;
+
+  ngDoCheck(): void {
+    if (this.lastCtxDark !== this.ctx.dark) {
+      this.lastCtxDark = this.ctx.dark;
+      this.syncClasses();
+    }
+  }
+
+  onCheckedChange(ev: Event): void {
+    ev.stopPropagation();
+    this.checkedChange.emit(ev);
+  }
+
   private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   ngOnInit(): void {
+    this.lastCtxDark = this.ctx.dark;
     this.syncClasses();
   }
 

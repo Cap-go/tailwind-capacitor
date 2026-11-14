@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import { ToastClasses } from '../../shared/classes/ToastClasses.js';
 import { ToastColors } from '../../shared/colors/ToastColors.js';

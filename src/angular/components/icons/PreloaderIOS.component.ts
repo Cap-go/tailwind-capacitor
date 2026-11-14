@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'c-preloader-i-o-s',
+  selector: 'c-preloader-ios',
   standalone: true,
   template: `<svg
     xmlns="http://www.w3.org/2000/svg"
@@ -43,4 +43,16 @@ import { Component } from '@angular/core';
     />
   </svg>`,
 })
-export class PreloaderIOSComponent {}
+export class PreloaderIOSComponent {
+  @Input() theme?: 'ios' | 'material';
+  @Input() ios?: boolean;
+  @Input() material?: boolean;
+  @Input() fill?: string;
+
+  resolveTheme(): 'ios' | 'material' {
+    if (this.ios) return 'ios';
+    if (this.material) return 'material';
+    if (this.theme === 'ios' || this.theme === 'material') return this.theme;
+    return 'material';
+  }
+}

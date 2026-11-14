@@ -30,7 +30,10 @@ jobs:
       - run: npm run test:registry-install:vue
       - run: npm run test:registry-install:react
       - run: npm run test:registry-install:angular
-      - run: npm run test:angular-strict-build
+      - run: npm run test:angular-full
+      - run: npm run test:react-full
+      - run: npm run test:vue-full
+      - run: npm run test:readme-install
       - run: npm run sync:example
       - run: npm --prefix example ci
       - run: npm --prefix example run build

@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import { ProgressbarClasses } from '../../shared/classes/ProgressbarClasses.js';
 import { ProgressbarColors } from '../../shared/colors/ProgressbarColors.js';

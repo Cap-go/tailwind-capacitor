@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { PickerClasses } from '../../shared/classes/PickerClasses.js';
 import { PickerColors } from '../../shared/colors/PickerColors.js';

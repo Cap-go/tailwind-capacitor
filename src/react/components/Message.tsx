@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useRef } from 'react';
 import { useThemeClasses } from '../shared/use-theme-classes.js';

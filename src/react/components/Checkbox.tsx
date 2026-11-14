@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useEffect, useRef } from 'react';
 import { CheckboxClasses } from '../../shared/classes/CheckboxClasses.js';
 import { CheckboxColors } from '../../shared/colors/CheckboxColors.js';
@@ -58,7 +58,7 @@ const Checkbox = (props) => {
       ? 'checked'
       : 'notChecked';
 
-  const c = themeClasses(CheckboxClasses(props, colors, dark), className);
+  const c = themeClasses(CheckboxClasses(props, { className: className ?? '' }, dark), className);
 
   useEffect(() => {
     if (inputElRef.current) {

@@ -6,6 +6,7 @@ import {
   inject,
   OnInit,
   OnChanges,
+  DoCheck,
   ViewChild,
   ElementRef,
   AfterViewInit,
@@ -25,7 +26,7 @@ import { DeleteIconComponent } from './icons/DeleteIcon.component.js';
   template: `<div [class]="resolveClass(c['base'])" role="search">
     <div [class]="resolveClass(c['inner'])">
       <span [class]="resolveClass(c['searchIconWrap'])">
-        <c-search-icon [class]="resolveClass(c['searchIcon'])" />
+        <c-search-icon [ios]="ios" [material]="material" [class]="resolveClass(c['searchIcon'])" />
       </span>
       <input
         #searchEl
@@ -36,8 +37,8 @@ import { DeleteIconComponent } from './icons/DeleteIcon.component.js';
         [placeholder]="placeholder"
         [value]="displayValue"
         [attr.aria-label]="placeholder"
-        (input)="input.emit($event)"
-        (change)="change.emit($event)"
+        (input)="onValueInput($event)"
+        (change)="onCheckedChange($event)"
         (focus)="onFocus($event)"
         (blur)="blur.emit($event)"
       />
@@ -55,7 +56,7 @@ import { DeleteIconComponent } from './icons/DeleteIcon.component.js';
     <ng-content />
   </div>`,
 })
-export class SearchbarComponent implements OnInit, OnChanges {
+export class SearchbarComponent implements OnInit, OnChanges, DoCheck {
   @Input() ios?: boolean;
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
@@ -65,8 +66,8 @@ export class SearchbarComponent implements OnInit, OnChanges {
   @Input() inputId?: string;
   @Input() clearButton = true;
 
-  @Output() change = new EventEmitter<Event>();
-  @Output() input = new EventEmitter<Event>();
+  @Output() checkedChange = new EventEmitter<Event>();
+  @Output() valueChange = new EventEmitter<Event>();
   @Output() focus = new EventEmitter<Event>();
   @Output() blur = new EventEmitter<Event>();
   @Output() clear = new EventEmitter<Event>();
@@ -90,6 +91,25 @@ export class SearchbarComponent implements OnInit, OnChanges {
     return this.resolveClass(bucket[state]);
   }
 
+  private lastCtxDark?: boolean;
+
+  ngDoCheck(): void {
+    if (this.lastCtxDark !== this.ctx.dark) {
+      this.lastCtxDark = this.ctx.dark;
+      this.syncClasses();
+    }
+  }
+
+  onCheckedChange(ev: Event): void {
+    ev.stopPropagation();
+    this.checkedChange.emit(ev);
+  }
+
+  onValueInput(ev: Event): void {
+    ev.stopPropagation();
+    this.valueChange.emit(ev);
+  }
+
   private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   get displayValue(): string {
@@ -98,6 +118,7 @@ export class SearchbarComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.lastCtxDark = this.ctx.dark;
     this.syncClasses();
   }
 

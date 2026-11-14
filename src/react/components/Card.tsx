@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import { CardClasses } from '../../shared/classes/CardClasses.js';
 import { CardColors } from '../../shared/colors/CardColors.js';

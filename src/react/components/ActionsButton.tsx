@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import { useTheme } from '../shared/use-theme.js';
 import { useTouchRipple } from '../shared/use-touch-ripple.js';

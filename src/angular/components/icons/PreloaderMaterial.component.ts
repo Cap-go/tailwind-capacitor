@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'c-preloader-material',
@@ -14,4 +14,16 @@ import { Component } from '@angular/core';
     />
   </svg>`,
 })
-export class PreloaderMaterialComponent {}
+export class PreloaderMaterialComponent {
+  @Input() theme?: 'ios' | 'material';
+  @Input() ios?: boolean;
+  @Input() material?: boolean;
+  @Input() fill?: string;
+
+  resolveTheme(): 'ios' | 'material' {
+    if (this.ios) return 'ios';
+    if (this.material) return 'material';
+    if (this.theme === 'ios' || this.theme === 'material') return this.theme;
+    return 'material';
+  }
+}

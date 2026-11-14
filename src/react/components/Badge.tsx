@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import { BadgeClasses } from '../../shared/classes/BadgeClasses.js';
 import { BadgeColors } from '../../shared/colors/BadgeColors.js';

@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import { useTheme } from '../shared/use-theme.js';
 import { useThemeClasses } from '../shared/use-theme-classes.js';
@@ -51,7 +51,7 @@ const Radio = (props) => {
   const state =
     checked || (defaultChecked && !onChange) ? 'checked' : 'notChecked';
 
-  const c = themeClasses(RadioClasses(props, colors, dark), className);
+  const c = themeClasses(RadioClasses(props, { className: className ?? '' }, dark), className);
 
   return (
     <Component

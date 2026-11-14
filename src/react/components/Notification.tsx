@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React, { useRef } from 'react';
 import { NotificationsClasses } from '../../shared/classes/NotificationsClasses.js';
 import { NotificationsColors } from '../../shared/colors/NotificationsColors.js';

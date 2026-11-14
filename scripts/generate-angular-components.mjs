@@ -147,6 +147,40 @@ function resolveClassRef(path) {
   return `resolveClass(${bracketed})`;
 }
 
+const interactiveDoCheckMethod = `  private lastCtxDark?: boolean;
+
+  ngDoCheck(): void {
+    if (this.lastCtxDark !== this.ctx.dark) {
+      this.lastCtxDark = this.ctx.dark;
+      this.syncClasses();
+    }
+  }
+
+  onCheckedChange(ev: Event): void {
+    ev.stopPropagation();
+    this.checkedChange.emit(ev);
+  }
+
+`;
+
+const valueInputMethod = `  onValueInput(ev: Event): void {
+    ev.stopPropagation();
+    this.valueChange.emit(ev);
+  }
+
+`;
+
+const hostDoCheckMethod = `  private lastCtxDark?: boolean;
+
+  ngDoCheck(): void {
+    if (this.lastCtxDark !== this.ctx.dark) {
+      this.lastCtxDark = this.ctx.dark;
+      this.syncHostClass();
+    }
+  }
+
+`;
+
 const resolveClassMethod = `  resolveClass(value: unknown): string {
     if (typeof value === 'string') return value;
     if (value && typeof value === 'object') {
@@ -182,6 +216,7 @@ function interactiveComponent(name, meta, colorsFn) {
   inject,
   OnInit,
   OnChanges,
+  DoCheck,
   ViewChild,
   ElementRef,
   AfterViewInit,
@@ -209,7 +244,7 @@ import { cls } from '../../shared/cls.js';`;
       [readOnly]="readonly"
       [checked]="checked"
       [attr.aria-checked]="checked"
-      (change)="change.emit($event)"
+      (change)="onCheckedChange($event)"
     />
     <span [class]="${resolveClassRef('c.inner[state]')}"></span>
     <span [class]="${resolveClassRef('c.thumbWrap[state]')}">
@@ -218,7 +253,7 @@ import { cls } from '../../shared/cls.js';`;
     <ng-content />
   </label>\`,
 })
-export class ToggleComponent implements OnInit, OnChanges {
+export class ToggleComponent implements OnInit, OnChanges, DoCheck {
   @Input() ios?: boolean;
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
@@ -229,14 +264,15 @@ export class ToggleComponent implements OnInit, OnChanges {
   @Input() disabled = false;
   @Input() readonly = false;
 
-  @Output() change = new EventEmitter<Event>();
+  @Output() checkedChange = new EventEmitter<Event>();
 
   c: Record<string, unknown> = {};
   state: 'checked' | 'notChecked' = 'notChecked';
 
-${resolveClassMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
+${resolveClassMethod}${interactiveDoCheckMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   ngOnInit(): void {
+    this.lastCtxDark = this.ctx.dark;
     this.syncClasses();
   }
 
@@ -275,7 +311,7 @@ import { CheckboxIconComponent } from './icons/CheckboxIcon.component.js';
       [disabled]="disabled"
       [readOnly]="readonly"
       [checked]="checked"
-      (change)="change.emit($event)"
+      (change)="onCheckedChange($event)"
     />
     <i [class]="${resolveClassRef('c.iconWrap[state]')}">
       @if (indeterminate) {
@@ -287,7 +323,7 @@ import { CheckboxIconComponent } from './icons/CheckboxIcon.component.js';
     <ng-content />
   </label>\`,
 })
-export class CheckboxComponent implements OnInit, OnChanges, AfterViewInit {
+export class CheckboxComponent implements OnInit, OnChanges, AfterViewInit, DoCheck {
   @Input() ios?: boolean;
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
@@ -299,16 +335,17 @@ export class CheckboxComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() disabled = false;
   @Input() readonly = false;
 
-  @Output() change = new EventEmitter<Event>();
+  @Output() checkedChange = new EventEmitter<Event>();
 
   @ViewChild('inputEl') inputEl?: ElementRef<HTMLInputElement>;
 
   c: Record<string, unknown> = {};
   state: 'checked' | 'notChecked' = 'notChecked';
 
-${resolveClassMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
+${resolveClassMethod}${interactiveDoCheckMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   ngOnInit(): void {
+    this.lastCtxDark = this.ctx.dark;
     this.syncClasses();
   }
 
@@ -358,11 +395,11 @@ import { CheckboxIconComponent } from './icons/CheckboxIcon.component.js';
       [disabled]="disabled"
       [readOnly]="readonly"
       [checked]="checked"
-      (change)="change.emit($event)"
+      (change)="onCheckedChange($event)"
     />
     <i [class]="${resolveClassRef('c.iconWrap[state]')}">
       @if (theme === 'ios') {
-        <c-checkbox-icon [class]="${resolveClassRef('c.icon[state]')}" />
+        <c-checkbox-icon [ios]="ios" [material]="material" [class]="${resolveClassRef('c.icon[state]')}" />
       } @else {
         <span [class]="${resolveClassRef('c.icon[state]')}"></span>
       }
@@ -370,7 +407,7 @@ import { CheckboxIconComponent } from './icons/CheckboxIcon.component.js';
     <ng-content />
   </label>\`,
 })
-export class RadioComponent implements OnInit, OnChanges {
+export class RadioComponent implements OnInit, OnChanges, DoCheck {
   @Input() ios?: boolean;
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
@@ -381,15 +418,16 @@ export class RadioComponent implements OnInit, OnChanges {
   @Input() disabled = false;
   @Input() readonly = false;
 
-  @Output() change = new EventEmitter<Event>();
+  @Output() checkedChange = new EventEmitter<Event>();
 
   c: Record<string, unknown> = {};
   state: 'checked' | 'notChecked' = 'notChecked';
   theme = 'ios';
 
-${resolveClassMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
+${resolveClassMethod}${interactiveDoCheckMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   ngOnInit(): void {
+    this.lastCtxDark = this.ctx.dark;
     this.syncClasses();
   }
 
@@ -433,14 +471,14 @@ ${resolveClassMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
       [attr.aria-valuemin]="min"
       [attr.aria-valuemax]="max"
       [attr.aria-valuenow]="currentValue"
-      (input)="input.emit($event)"
-      (change)="change.emit($event)"
+      (input)="onValueInput($event)"
+      (change)="onCheckedChange($event)"
       (focus)="focus.emit($event)"
       (blur)="blur.emit($event)"
     />
   </div>\`,
 })
-export class RangeComponent implements OnInit, OnChanges {
+export class RangeComponent implements OnInit, OnChanges, DoCheck {
   @Input() ios?: boolean;
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
@@ -454,8 +492,8 @@ export class RangeComponent implements OnInit, OnChanges {
   @Input() min = 0;
   @Input() max = 100;
 
-  @Output() input = new EventEmitter<Event>();
-  @Output() change = new EventEmitter<Event>();
+  @Output() valueChange = new EventEmitter<Event>();
+  @Output() checkedChange = new EventEmitter<Event>();
   @Output() focus = new EventEmitter<Event>();
   @Output() blur = new EventEmitter<Event>();
 
@@ -463,13 +501,14 @@ export class RangeComponent implements OnInit, OnChanges {
   valueWidth = 0;
   rangeInputClass = '';
 
-${resolveClassMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
+${resolveClassMethod}${interactiveDoCheckMethod}${valueInputMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   get currentValue(): number {
     return this.value ?? this.min;
   }
 
   ngOnInit(): void {
+    this.lastCtxDark = this.ctx.dark;
     this.syncClasses();
   }
 
@@ -511,7 +550,7 @@ import { DeleteIconComponent } from './icons/DeleteIcon.component.js';
   template: \`<div [class]="${resolveClassRef('c.base')}" role="search">
     <div [class]="${resolveClassRef('c.inner')}">
       <span [class]="${resolveClassRef('c.searchIconWrap')}">
-        <c-search-icon [class]="${resolveClassRef('c.searchIcon')}" />
+        <c-search-icon [ios]="ios" [material]="material" [class]="${resolveClassRef('c.searchIcon')}" />
       </span>
       <input
         #searchEl
@@ -522,8 +561,8 @@ import { DeleteIconComponent } from './icons/DeleteIcon.component.js';
         [placeholder]="placeholder"
         [value]="displayValue"
         [attr.aria-label]="placeholder"
-        (input)="input.emit($event)"
-        (change)="change.emit($event)"
+        (input)="onValueInput($event)"
+        (change)="onCheckedChange($event)"
         (focus)="onFocus($event)"
         (blur)="blur.emit($event)"
       />
@@ -541,7 +580,7 @@ import { DeleteIconComponent } from './icons/DeleteIcon.component.js';
     <ng-content />
   </div>\`,
 })
-export class SearchbarComponent implements OnInit, OnChanges {
+export class SearchbarComponent implements OnInit, OnChanges, DoCheck {
   @Input() ios?: boolean;
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
@@ -551,8 +590,8 @@ export class SearchbarComponent implements OnInit, OnChanges {
   @Input() inputId?: string;
   @Input() clearButton = true;
 
-  @Output() change = new EventEmitter<Event>();
-  @Output() input = new EventEmitter<Event>();
+  @Output() checkedChange = new EventEmitter<Event>();
+  @Output() valueChange = new EventEmitter<Event>();
   @Output() focus = new EventEmitter<Event>();
   @Output() blur = new EventEmitter<Event>();
   @Output() clear = new EventEmitter<Event>();
@@ -560,7 +599,7 @@ export class SearchbarComponent implements OnInit, OnChanges {
   c: Record<string, unknown> = {};
   isEnabled = false;
 
-${resolveClassMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
+${resolveClassMethod}${interactiveDoCheckMethod}${valueInputMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   get displayValue(): string {
     if (this.value === undefined || this.value === null) return '';
@@ -568,6 +607,7 @@ ${resolveClassMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
   }
 
   ngOnInit(): void {
+    this.lastCtxDark = this.ctx.dark;
     this.syncClasses();
   }
 
@@ -618,8 +658,8 @@ ${resolveClassMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
           [readOnly]="readonly"
           [required]="required"
           [attr.aria-label]="label || placeholder"
-          (input)="input.emit($event)"
-          (change)="change.emit($event)"
+          (input)="onValueInput($event)"
+          (change)="onCheckedChange($event)"
           (focus)="onFocus($event)"
           (blur)="onBlur($event)"
         >{{ textValue }}</textarea>
@@ -630,7 +670,7 @@ ${resolveClassMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
           [disabled]="disabled"
           [required]="required"
           [attr.aria-label]="label || placeholder"
-          (change)="change.emit($event)"
+          (change)="onCheckedChange($event)"
           (focus)="onFocus($event)"
           (blur)="onBlur($event)"
         >
@@ -647,8 +687,8 @@ ${resolveClassMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
           [required]="required"
           [value]="textValue"
           [attr.aria-label]="label || placeholder"
-          (input)="input.emit($event)"
-          (change)="change.emit($event)"
+          (input)="onValueInput($event)"
+          (change)="onCheckedChange($event)"
           (focus)="onFocus($event)"
           (blur)="onBlur($event)"
         />
@@ -657,7 +697,7 @@ ${resolveClassMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
     <ng-content />
   </li>\`,
 })
-export class ListInputComponent implements OnInit, OnChanges {
+export class ListInputComponent implements OnInit, OnChanges, DoCheck {
   @Input() ios?: boolean;
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
@@ -669,8 +709,8 @@ export class ListInputComponent implements OnInit, OnChanges {
   @Input() required = false;
   @Input() disabled = false;
 
-  @Output() change = new EventEmitter<Event>();
-  @Output() input = new EventEmitter<Event>();
+  @Output() checkedChange = new EventEmitter<Event>();
+  @Output() valueChange = new EventEmitter<Event>();
   @Output() focus = new EventEmitter<Event>();
   @Output() blur = new EventEmitter<Event>();
 
@@ -682,7 +722,7 @@ export class ListInputComponent implements OnInit, OnChanges {
   inputClass = '';
   focused = false;
 
-${resolveClassMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
+${resolveClassMethod}${interactiveDoCheckMethod}${valueInputMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   get textValue(): string {
     if (this.value === undefined || this.value === null) return '';
@@ -825,6 +865,7 @@ for (const name of names) {
   inject,
   OnInit,
   OnChanges,
+  DoCheck,
   HostBinding,
 } from '@angular/core';
 import { ${meta.classesFn} } from '../../shared/classes/${classFile}.js';
@@ -837,7 +878,7 @@ import { resolveTheme, themeClasses } from '../shared/use-theme-classes.js';
   standalone: true,
   template: '<ng-content />',
 })
-export class ${name}Component implements OnInit, OnChanges {
+export class ${name}Component implements OnInit, OnChanges, DoCheck {
   @Input() ios?: boolean;
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
@@ -850,6 +891,7 @@ export class ${name}Component implements OnInit, OnChanges {
   private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   ngOnInit(): void {
+    this.lastCtxDark = this.ctx.dark;
     this.syncHostClass();
   }
 
@@ -857,6 +899,7 @@ export class ${name}Component implements OnInit, OnChanges {
     this.syncHostClass();
   }
 
+${hostDoCheckMethod}
   private syncHostClass(): void {
     const theme = resolveTheme(this.ctx, this);
     ${colorsBlock}

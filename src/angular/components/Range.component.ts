@@ -6,6 +6,7 @@ import {
   inject,
   OnInit,
   OnChanges,
+  DoCheck,
   ViewChild,
   ElementRef,
   AfterViewInit,
@@ -36,14 +37,14 @@ import { cls } from '../../shared/cls.js';
       [attr.aria-valuemin]="min"
       [attr.aria-valuemax]="max"
       [attr.aria-valuenow]="currentValue"
-      (input)="input.emit($event)"
-      (change)="change.emit($event)"
+      (input)="onValueInput($event)"
+      (change)="onCheckedChange($event)"
       (focus)="focus.emit($event)"
       (blur)="blur.emit($event)"
     />
   </div>`,
 })
-export class RangeComponent implements OnInit, OnChanges {
+export class RangeComponent implements OnInit, OnChanges, DoCheck {
   @Input() ios?: boolean;
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
@@ -57,8 +58,8 @@ export class RangeComponent implements OnInit, OnChanges {
   @Input() min = 0;
   @Input() max = 100;
 
-  @Output() input = new EventEmitter<Event>();
-  @Output() change = new EventEmitter<Event>();
+  @Output() valueChange = new EventEmitter<Event>();
+  @Output() checkedChange = new EventEmitter<Event>();
   @Output() focus = new EventEmitter<Event>();
   @Output() blur = new EventEmitter<Event>();
 
@@ -82,6 +83,25 @@ export class RangeComponent implements OnInit, OnChanges {
     return this.resolveClass(bucket[state]);
   }
 
+  private lastCtxDark?: boolean;
+
+  ngDoCheck(): void {
+    if (this.lastCtxDark !== this.ctx.dark) {
+      this.lastCtxDark = this.ctx.dark;
+      this.syncClasses();
+    }
+  }
+
+  onCheckedChange(ev: Event): void {
+    ev.stopPropagation();
+    this.checkedChange.emit(ev);
+  }
+
+  onValueInput(ev: Event): void {
+    ev.stopPropagation();
+    this.valueChange.emit(ev);
+  }
+
   private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   get currentValue(): number {
@@ -89,6 +109,7 @@ export class RangeComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.lastCtxDark = this.ctx.dark;
     this.syncClasses();
   }
 

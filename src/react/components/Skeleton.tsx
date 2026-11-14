@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import React from 'react';
 import { SkeletonClasses } from '../../shared/classes/SkeletonClasses.js';
 import { SkeletonColors } from '../../shared/colors/SkeletonColors.js';

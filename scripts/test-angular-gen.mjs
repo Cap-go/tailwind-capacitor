@@ -16,8 +16,8 @@ for (const rel of required) {
     throw new Error(`missing generated Angular file: ${rel}`);
   }
   const source = readFileSync(path, 'utf8');
-  if (!source.includes('@Input(') || !source.includes('@Output(')) {
-    throw new Error(`${rel} must declare inputs and outputs`);
+  if (!source.includes('@Input(') || !source.includes('checkedChange')) {
+    throw new Error(`${rel} must declare inputs and checkedChange output`);
   }
 }
 

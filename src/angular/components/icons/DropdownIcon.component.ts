@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'c-dropdown-icon',
@@ -13,4 +13,16 @@ import { Component } from '@angular/core';
     <polygon fillRule="evenodd" points="0 0 8 0 4 5" />
   </svg>`,
 })
-export class DropdownIconComponent {}
+export class DropdownIconComponent {
+  @Input() theme?: 'ios' | 'material';
+  @Input() ios?: boolean;
+  @Input() material?: boolean;
+  @Input() fill?: string;
+
+  resolveTheme(): 'ios' | 'material' {
+    if (this.ios) return 'ios';
+    if (this.material) return 'material';
+    if (this.theme === 'ios' || this.theme === 'material') return this.theme;
+    return 'material';
+  }
+}
