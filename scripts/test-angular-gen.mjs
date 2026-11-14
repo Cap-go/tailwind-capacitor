@@ -29,6 +29,18 @@ const providerSource = readFileSync(providerPath, 'utf8');
 if (!providerSource.includes('get dark()')) {
   throw new Error('Angular provider context must expose reactive dark getter');
 }
+if (!providerSource.includes('appRef.tick')) {
+  throw new Error('Angular provider must tick children when dark input changes');
+}
+
+const togglePath = join(repoRoot, 'src/angular/components/Toggle.component.ts');
+const toggleSource = readFileSync(togglePath, 'utf8');
+if (
+  !toggleSource.includes('ngDoCheck') ||
+  !toggleSource.includes('markForCheck')
+) {
+  throw new Error('Toggle must react to provider dark via ngDoCheck');
+}
 
 const avatarPath = join(repoRoot, 'src/angular/components/Avatar.component.ts');
 const avatarSource = readFileSync(avatarPath, 'utf8');

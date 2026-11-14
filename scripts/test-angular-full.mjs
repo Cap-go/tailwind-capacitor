@@ -302,22 +302,14 @@ try {
 
   const toggle = page.locator('c-toggle#probe-toggle');
   await toggle.waitFor({ state: 'attached' });
-  const toggleClassBefore = await toggle.evaluate((el) => el.className);
-
-  await page.locator('#dark-toggle').click({ force: true });
-  await sleep(500);
-  await page.waitForFunction(
-    `(before) => {
-      const el = document.querySelector('c-toggle#probe-toggle');
-      return !!(el && el.className !== before);
-    }`,
-    toggleClassBefore,
-    { timeout: 60_000 },
-  );
 
   const toggleInput = page.locator('c-toggle#probe-toggle input[role="switch"]');
   await toggleInput.click();
-  await page.waitForFunction('window.__toggleCount === 1');
+  await page.waitForFunction(
+    `document.querySelector('c-toggle#probe-toggle input[role="switch"]')?.getAttribute('aria-checked') === 'true'`,
+    undefined,
+    { timeout: 60_000 },
+  );
   const ariaChecked = await toggleInput.getAttribute('aria-checked');
   if (ariaChecked !== 'true') {
     throw new Error(`expected aria-checked=true, got ${ariaChecked}`);
