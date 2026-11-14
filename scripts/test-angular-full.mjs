@@ -267,15 +267,25 @@ if (build.status !== 0) {
   process.exit(build.status ?? 1);
 }
 
-writeAppComponent({ includeAllTags: false });
+function resolveBrowserDist(dir) {
+  const candidates = [
+    join(dir, 'dist/full-app/browser'),
+    join(dir, 'dist/full-app'),
+  ];
+  for (const candidate of candidates) {
+    if (existsSync(join(candidate, 'index.html'))) return candidate;
+  }
+  throw new Error('missing ng build browser output');
+}
 
 spawnSync('fuser', ['-k', '4321/tcp'], { stdio: 'ignore' });
 const port = 4321;
 const baseUrl = `http://127.0.0.1:${port}/`;
+const distDir = resolveBrowserDist(appDir);
 const server = spawn(
   'npx',
-  ['ng', 'serve', '--port', String(port), '--host', '127.0.0.1', '--live-reload', 'false'],
-  { cwd: appDir, stdio: 'pipe' },
+  ['--yes', 'http-server@14.1.1', distDir, '-p', String(port), '-a', '127.0.0.1', '-c-1'],
+  { stdio: 'pipe' },
 );
 
 try {
