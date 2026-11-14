@@ -291,7 +291,7 @@ const distDir = resolveBrowserDist(appDir);
 const server = spawn(
   'npx',
   ['--yes', 'http-server@14.1.1', distDir, '-p', String(port), '-a', '127.0.0.1', '-c-1'],
-  { stdio: 'pipe' },
+  { stdio: 'ignore' },
 );
 
 try {
@@ -308,12 +308,11 @@ try {
 
   const toggleInput = page.locator('c-toggle#probe-toggle input[role="switch"]');
   await toggle.locator('input[role="switch"]').click({ force: true });
-  await page.waitForFunction('window.__toggleCount === 1', undefined, {
+  await page.waitForFunction('window.__toggleCount === 1', {
     timeout: 60_000,
   });
   await page.waitForFunction(
     `document.querySelector('c-toggle#probe-toggle input[role="switch"]')?.getAttribute('aria-checked') === 'true'`,
-    undefined,
     { timeout: 60_000 },
   );
   const ariaChecked = await toggleInput.getAttribute('aria-checked');
