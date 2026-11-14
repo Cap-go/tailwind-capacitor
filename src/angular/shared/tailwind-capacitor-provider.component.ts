@@ -1,6 +1,7 @@
 import {
   Component,
   Input,
+  inject,
   OnChanges,
   OnDestroy,
   OnInit,
@@ -16,12 +17,20 @@ import { CAPACITOR_CONTEXT } from './capacitor-context.js';
   providers: [
     {
       provide: CAPACITOR_CONTEXT,
-      useFactory: (parent: TailwindCapacitorProviderComponent) => ({
-        theme: parent.theme,
-        dark: parent.effectiveDark,
-        touchRipple: parent.touchRipple,
-      }),
-      deps: [TailwindCapacitorProviderComponent],
+      useFactory: () => {
+        const parent = inject(TailwindCapacitorProviderComponent);
+        return {
+          get theme() {
+            return parent.theme;
+          },
+          get dark() {
+            return parent.effectiveDark;
+          },
+          get touchRipple() {
+            return parent.touchRipple;
+          },
+        };
+      },
     },
   ],
 })

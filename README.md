@@ -45,13 +45,38 @@ The `dark` prop on `TailwindCapacitorProvider` is optional. When omitted, compon
 
 ## Angular
 
-[@spartan-ng/cli](https://www.spartan.ng/) does not install arbitrary remote registry JSON. Use `npx @capgo/tailwind-capacitor registry-add <url-or-path>` (or `node node_modules/@capgo/tailwind-capacitor/scripts/registry-add.mjs`) to copy items like shadcn. URLs and local JSON paths are supported; dependencies resolve within the framework folder (`public/r/angular/`).
+[@spartan-ng/cli](https://www.spartan.ng/) does not install arbitrary remote registry JSON. Copy items with `registry-add` (same idea as shadcn file install).
+
+**npm 4.0.0 (latest published today)** has no `registry-add` bin. Use the script entry:
 
 ```bash
-npx @capgo/tailwind-capacitor registry-add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json
-npx @capgo/tailwind-capacitor registry-add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json
-npx @capgo/tailwind-capacitor registry-add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json
-npx @capgo/tailwind-capacitor registry-add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-button.json
+node node_modules/@capgo/tailwind-capacitor/scripts/registry-add.mjs https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json
+node node_modules/@capgo/tailwind-capacitor/scripts/registry-add.mjs https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json
+node node_modules/@capgo/tailwind-capacitor/scripts/registry-add.mjs https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json
+node node_modules/@capgo/tailwind-capacitor/scripts/registry-add.mjs https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-button.json
+```
+
+**This repo (5.0.0 on disk)** also exposes a bin for local and GitHub installs:
+
+```bash
+node scripts/registry-add.mjs public/r/capacitor-tailwind.json
+node scripts/registry-add.mjs public/r/capacitor-shared.json
+node scripts/registry-add.mjs public/r/angular/capacitor-provider.json
+node scripts/registry-add.mjs public/r/angular/capacitor-button.json
+```
+
+After `@capgo/tailwind-capacitor@5.0.0` is published, the same URLs work as:
+
+```bash
+npx @capgo/tailwind-capacitor registry-add <url-or-path>
+```
+
+Set `REGISTRY_ROOT` to your checkout's `public/r` when using URLs so dependencies resolve to your local build instead of `main`.
+
+From a git clone without a global install:
+
+```bash
+npx --package github:Cap-go/tailwind-capacitor registry-add public/r/angular/capacitor-button.json
 ```
 
 ### Angular component scope

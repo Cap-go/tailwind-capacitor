@@ -1,4 +1,6 @@
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, toValue } from 'vue';
+
+import { effectiveDarkValue } from './effective-dark-value.js';
 
 export function useEffectiveDark(darkProp) {
   const prefersDark = ref(false);
@@ -29,10 +31,7 @@ export function useEffectiveDark(darkProp) {
     }
   });
 
-  return computed(() => {
-    if (darkProp === undefined || darkProp === null) {
-      return prefersDark.value;
-    }
-    return darkProp;
-  });
+  return computed(() =>
+    effectiveDarkValue(toValue(darkProp), prefersDark.value),
+  );
 }

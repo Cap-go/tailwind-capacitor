@@ -21,6 +21,15 @@ for (const rel of required) {
   }
 }
 
+const providerPath = join(
+  repoRoot,
+  'src/angular/shared/tailwind-capacitor-provider.component.ts',
+);
+const providerSource = readFileSync(providerPath, 'utf8');
+if (!providerSource.includes('get dark()')) {
+  throw new Error('Angular provider context must expose reactive dark getter');
+}
+
 const avatarPath = join(repoRoot, 'src/angular/components/Avatar.component.ts');
 const avatarSource = readFileSync(avatarPath, 'utf8');
 if (!avatarSource.includes('implements OnInit, OnChanges')) {

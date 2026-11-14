@@ -19,9 +19,9 @@ import { cls } from '../../shared/cls.js';
 @Component({
   selector: 'c-range',
   standalone: true,
-  template: `<div [class]="typeof c.base === 'string' ? c.base : (c.base as { default?: string })?.default || ''">
-    <span [class]="typeof c.trackBg === 'string' ? c.trackBg : (c.trackBg as { default?: string })?.default || ''"></span>
-    <span [class]="typeof c.trackValue === 'string' ? c.trackValue : (c.trackValue as { default?: string })?.default || ''" [style.width.%]="valueWidth"></span>
+  template: `<div [class]="resolveClass(c['base'])">
+    <span [class]="resolveClass(c['trackBg'])"></span>
+    <span [class]="resolveClass(c['trackValue'])" [style.width.%]="valueWidth"></span>
     <input
       [class]="rangeInputClass"
       type="range"
@@ -66,6 +66,22 @@ export class RangeComponent implements OnInit, OnChanges {
   valueWidth = 0;
   rangeInputClass = '';
 
+  resolveClass(value: unknown): string {
+    if (typeof value === 'string') return value;
+    if (value && typeof value === 'object') {
+      const obj = value as Record<string, unknown>;
+      const d = obj['default'];
+      if (typeof d === 'string') return d;
+    }
+    return '';
+  }
+
+  resolveStateClass(value: unknown, state: string): string {
+    if (!value || typeof value !== 'object') return '';
+    const bucket = value as Record<string, unknown>;
+    return this.resolveClass(bucket[state]);
+  }
+
   private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   get currentValue(): number {
@@ -93,9 +109,9 @@ export class RangeComponent implements OnInit, OnChanges {
       range > 0 ? Math.max(0, Math.min(100, ((val - this.min) / range) * 100)) : 0;
     const c = this.c;
     this.rangeInputClass = cls(
-      c.input as string,
-      c.inputThumb as string,
-      c.inputTrack as string,
+      c['input'] as string,
+      c['inputThumb'] as string,
+      c['inputTrack'] as string,
     );
   }
 }

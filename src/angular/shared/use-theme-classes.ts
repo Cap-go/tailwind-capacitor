@@ -7,7 +7,7 @@ const propClasses = (
 ) => {
   if (typeof classesObj === 'string') return classesObj;
   const arr = [
-    (classesObj as { common?: string }).common,
+    classesObj['common'],
     (classesObj as Record<string, string>)[theme],
   ];
   if (state && (classesObj as Record<string, unknown>)[state]) {
@@ -15,7 +15,7 @@ const propClasses = (
     if (typeof stateObj === 'string') arr.push(stateObj);
     else if (stateObj && typeof stateObj === 'object') {
       const so = stateObj as Record<string, string>;
-      arr.push(so.common, so[theme]);
+      arr.push(so['common'], so[theme]);
     }
   }
   return arr;
@@ -46,7 +46,10 @@ export const themeClasses = (
     }
     c[key] = {};
     const defaultStateClasses = propClasses(segment as Record<string, unknown>, theme);
-    (c[key] as Record<string, string>).default = cls(defaultStateClasses, addBaseClass);
+    (c[key] as Record<string, string>)['default'] = cls(
+      defaultStateClasses,
+      addBaseClass,
+    );
     Object.keys(segment as Record<string, unknown>)
       .filter((state) => !themeSubKeys.includes(state))
       .forEach((state) => {

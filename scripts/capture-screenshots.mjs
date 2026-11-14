@@ -11,6 +11,7 @@ const outDir = join(repoRoot, 'docs/screenshots');
 mkdirSync(outDir, { recursive: true });
 
 const AFTER_ONLY = process.env.CAPTURE_AFTER_ONLY === '1';
+const BEFORE_ONLY = process.env.CAPTURE_BEFORE_ONLY === '1';
 const BEFORE_REF =
   process.env.SCREENSHOT_BEFORE_REF || 'origin/main';
 
@@ -46,7 +47,7 @@ async function captureSet({ cwd, port, shots, preview = false, requireThemeChip 
     },
   );
   const url = `http://127.0.0.1:${port}/`;
-  await waitForUrl(url);
+  await waitForUrl(url, requireThemeChip ? 40 : 120);
 
   const browser = await chromium.launch();
   const page = await browser.newPage();
@@ -118,7 +119,7 @@ if (!AFTER_ONLY) {
   spawnSync('git', ['worktree', 'remove', '--force', beforeRoot], { cwd: repoRoot });
 }
 
-if (!process.env.SKIP_REGISTRY_SYNC) {
+if (!BEFORE_ONLY && !process.env.SKIP_REGISTRY_SYNC) {
   spawnSync('npm', ['run', 'sync:example'], { cwd: repoRoot, stdio: 'inherit' });
 }
 
@@ -138,6 +139,11 @@ for (const { key, query } of THEME_MATRIX) {
     query,
     fullPage: true,
   });
+}
+
+if (BEFORE_ONLY) {
+  console.log('capture: before-only complete');
+  process.exit(0);
 }
 
 spawnSync('npm', ['run', 'build'], {

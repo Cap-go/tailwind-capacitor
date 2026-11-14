@@ -1,28 +1,60 @@
+import { createHash } from 'node:crypto';
 import {
   mkdirSync,
   readFileSync,
   writeFileSync,
   existsSync,
+  rmSync,
 } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { dirname, isAbsolute, join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 const root = process.cwd();
 const installed = new Set();
-const urlCache = new Map();
+const registryRoot = process.env.REGISTRY_ROOT
+  ? resolve(process.env.REGISTRY_ROOT)
+  : null;
 
 function loadItem(path) {
   return JSON.parse(readFileSync(path, 'utf8'));
 }
 
+function publicRelFromUrl(url) {
+  const marker = '/public/r/';
+  const i = url.indexOf(marker);
+  if (i === -1) return null;
+  return url.slice(i + marker.length).split('?')[0];
+}
+
+function mapUrlToLocal(url) {
+  if (!registryRoot) return null;
+  const rel = publicRelFromUrl(url);
+  if (!rel) return null;
+  const direct = join(registryRoot, rel);
+  if (existsSync(direct)) return resolve(direct);
+  const name = rel.split('/').pop();
+  if (name) {
+    const atRoot = join(registryRoot, name);
+    if (existsSync(atRoot)) return resolve(atRoot);
+    const inVue = join(registryRoot, 'vue', name);
+    if (existsSync(inVue)) return resolve(inVue);
+    const inReact = join(registryRoot, 'react', name);
+    if (existsSync(inReact)) return resolve(inReact);
+    const inAngular = join(registryRoot, 'angular', name);
+    if (existsSync(inAngular)) return resolve(inAngular);
+  }
+  return null;
+}
+
 function cachePathForUrl(url) {
-  if (urlCache.has(url)) return urlCache.get(url);
+  const local = mapUrlToLocal(url);
+  if (local) return local;
+  const hash = createHash('sha256').update(url).digest('hex').slice(0, 32);
   const name = url.split('/').pop()?.split('?')[0] || 'item.json';
-  const cacheDir = join(root, '.registry-cache');
+  const cacheDir = join(tmpdir(), 'capgo-tailwind-registry-cache');
   mkdirSync(cacheDir, { recursive: true });
-  const target = join(cacheDir, name);
-  urlCache.set(url, target);
-  return target;
+  return join(cacheDir, `${hash}-${name}`);
 }
 
 async function materializeItemPath(arg) {
@@ -48,6 +80,8 @@ function resolveDep(dep, baseDir) {
     return dep;
   }
   if (dep.startsWith('http://') || dep.startsWith('https://')) {
+    const local = mapUrlToLocal(dep);
+    if (local) return local;
     return cachePathForUrl(dep);
   }
   if (dep.startsWith('./') || dep.startsWith('../')) {
@@ -60,6 +94,8 @@ function resolveDep(dep, baseDir) {
 }
 
 async function ensureRegistryDependency(dep) {
+  const local = mapUrlToLocal(dep);
+  if (local && existsSync(local)) return local;
   const target = cachePathForUrl(dep);
   if (!existsSync(target)) {
     const res = await fetch(dep);
@@ -134,8 +170,8 @@ async function prefetchItemGraph(itemPath) {
   if (!Array.isArray(item.registryDependencies)) return;
   for (const dep of item.registryDependencies) {
     if (typeof dep === 'string' && dep.startsWith('http')) {
-      await ensureRegistryDependency(dep);
-      await prefetchItemGraph(cachePathForUrl(dep));
+      const resolved = await ensureRegistryDependency(dep);
+      await prefetchItemGraph(resolved);
     } else if (typeof dep === 'string') {
       const resolved = resolveDep(dep, baseDir);
       if (existsSync(resolved)) {
@@ -145,7 +181,12 @@ async function prefetchItemGraph(itemPath) {
   }
 }
 
-const itemArg = process.argv[2];
+let argv = process.argv.slice(2);
+if (argv[0] === 'registry-add') {
+  argv = argv.slice(1);
+}
+const itemArg = argv[0];
+
 if (!itemArg) {
   console.error(
     'usage: node scripts/registry-add.mjs <registry-item.json|url>',
@@ -162,6 +203,13 @@ if (!itemPath) {
   process.exit(1);
 }
 
-await prefetchItemGraph(itemPath);
-await installItem(itemPath);
-console.log(`registry-add: ok (${installed.size} items)`);
+try {
+  await prefetchItemGraph(itemPath);
+  await installItem(itemPath);
+  console.log(`registry-add: ok (${installed.size} items)`);
+} finally {
+  const legacyCache = join(root, '.registry-cache');
+  if (existsSync(legacyCache)) {
+    rmSync(legacyCache, { recursive: true, force: true });
+  }
+}

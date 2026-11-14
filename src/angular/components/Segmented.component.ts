@@ -44,11 +44,13 @@ export class SegmentedComponent implements OnInit, OnChanges {
     const props = this as Record<string, unknown>;
     const raw = SegmentedClasses(props, colors, { className: this.class }, dark);
     const c = themeClasses(raw, theme, this.class);
-    const base = c.base;
+    const base = c['base'];
     if (typeof base === 'string') {
       this.hostClass = base;
     } else if (base && typeof base === 'object') {
-      this.hostClass = (base as { default?: string }).default || '';
+      const baseRecord = base as Record<string, unknown>;
+      const d = baseRecord['default'];
+      this.hostClass = typeof d === 'string' ? d : '';
     } else {
       this.hostClass = '';
     }

@@ -34,7 +34,11 @@ export const LinkClasses = (
       material: 'px-3 text-sm font-medium',
     },
     navbar: {
-      common: cls(`h-full max-h-12`, iconOnly && 'c-touch-ripple-inset'),
+      common: cls(
+        'inline-flex flex-row items-center gap-0.5 shrink-0',
+        `h-full max-h-12`,
+        iconOnly && 'c-touch-ripple-inset',
+      ),
       material: 'px-3',
     },
   };

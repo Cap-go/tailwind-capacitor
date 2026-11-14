@@ -19,20 +19,22 @@ import { cls } from '../../shared/cls.js';
 @Component({
   selector: 'c-toggle',
   standalone: true,
-  template: `<label [class]="typeof c.base[state] === 'string' ? c.base[state] : (c.base[state] as { default?: string })?.default || ''" [attr.aria-checked]="checked">
+  template: `<label [class]="resolveStateClass(c['base'], state)">
     <input
       type="checkbox"
-      [class]="typeof c.input === 'string' ? c.input : (c.input as { default?: string })?.default || ''"
+      role="switch"
+      [class]="resolveClass(c['input'])"
       [name]="name"
       [value]="value"
       [disabled]="disabled"
       [readOnly]="readonly"
       [checked]="checked"
+      [attr.aria-checked]="checked"
       (change)="change.emit($event)"
     />
-    <span [class]="typeof c.inner[state] === 'string' ? c.inner[state] : (c.inner[state] as { default?: string })?.default || ''"></span>
-    <span [class]="typeof c.thumbWrap[state] === 'string' ? c.thumbWrap[state] : (c.thumbWrap[state] as { default?: string })?.default || ''">
-      <span [class]="typeof c.thumb[state] === 'string' ? c.thumb[state] : (c.thumb[state] as { default?: string })?.default || ''"></span>
+    <span [class]="resolveStateClass(c['inner'], state)"></span>
+    <span [class]="resolveStateClass(c['thumbWrap'], state)">
+      <span [class]="resolveStateClass(c['thumb'], state)"></span>
     </span>
     <ng-content />
   </label>`,
@@ -52,6 +54,22 @@ export class ToggleComponent implements OnInit, OnChanges {
 
   c: Record<string, unknown> = {};
   state: 'checked' | 'notChecked' = 'notChecked';
+
+  resolveClass(value: unknown): string {
+    if (typeof value === 'string') return value;
+    if (value && typeof value === 'object') {
+      const obj = value as Record<string, unknown>;
+      const d = obj['default'];
+      if (typeof d === 'string') return d;
+    }
+    return '';
+  }
+
+  resolveStateClass(value: unknown, state: string): string {
+    if (!value || typeof value !== 'object') return '';
+    const bucket = value as Record<string, unknown>;
+    return this.resolveClass(bucket[state]);
+  }
 
   private readonly ctx = inject(CAPACITOR_CONTEXT);
 

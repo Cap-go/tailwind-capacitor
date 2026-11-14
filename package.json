@@ -4,6 +4,7 @@
   "description": "Tailwind plugin for Capacitor apps",
   "main": "index.js",
   "bin": {
+    "registry-add": "scripts/registry-add.mjs",
     "tailwind-capacitor-registry-add": "scripts/registry-add.mjs"
   },
   "exports": {
@@ -38,7 +39,7 @@
     "verify:registry-refs": "node scripts/verify-registry-refs.mjs",
     "postprocess:registry": "node scripts/postprocess-registry.mjs",
     "pretest": "npm run generate:css",
-    "test": "node scripts/verify-safe-area-selectors.js && node scripts/test-angular-gen.mjs",
+    "test": "node scripts/verify-safe-area-selectors.js && node scripts/test-use-effective-dark.mjs && node scripts/test-angular-gen.mjs",
     "test:registry-install": "npm run test:registry-install:vue && npm run test:registry-install:react && npm run test:registry-install:angular",
     "smoke:tailwind": "node scripts/smoke-tailwind-v4.mjs",
     "build:example": "npm run sync:example && npm run build:example:app",
@@ -80,6 +81,7 @@
     "@tailwindcss/vite": "^4.1.11",
     "eslint": "^9.28.0",
     "globals": "^16.2.0",
+    "@angular/cli": "^19.0.0",
     "@angular/compiler-cli": "^19.0.0",
     "playwright": "^1.51.0",
     "typescript": "^5.8.3",

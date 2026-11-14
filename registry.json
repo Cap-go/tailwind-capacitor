@@ -1760,6 +1760,11 @@
           "target": "src/capacitor/vue/shared/use-effective-dark.js"
         },
         {
+          "path": "src/vue/shared/effective-dark-value.js",
+          "type": "registry:file",
+          "target": "src/capacitor/vue/shared/effective-dark-value.js"
+        },
+        {
           "path": "src/vue/shared/use-context.js",
           "type": "registry:file",
           "target": "src/capacitor/vue/shared/use-context.js"

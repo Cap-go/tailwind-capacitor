@@ -21,10 +21,10 @@ import { CheckboxIconComponent } from './icons/CheckboxIcon.component.js';
   selector: 'c-radio',
   standalone: true,
   imports: [CheckboxIconComponent],
-  template: `<label [class]="typeof c.base === 'string' ? c.base : (c.base as { default?: string })?.default || ''" [attr.aria-checked]="checked">
+  template: `<label [class]="resolveClass(c['base'])" [attr.aria-checked]="checked">
     <input
       type="radio"
-      [class]="typeof c.input === 'string' ? c.input : (c.input as { default?: string })?.default || ''"
+      [class]="resolveClass(c['input'])"
       [name]="name"
       [value]="value"
       [disabled]="disabled"
@@ -32,11 +32,11 @@ import { CheckboxIconComponent } from './icons/CheckboxIcon.component.js';
       [checked]="checked"
       (change)="change.emit($event)"
     />
-    <i [class]="typeof c.iconWrap[state] === 'string' ? c.iconWrap[state] : (c.iconWrap[state] as { default?: string })?.default || ''">
+    <i [class]="resolveStateClass(c['iconWrap'], state)">
       @if (theme === 'ios') {
-        <c-checkbox-icon [class]="typeof c.icon[state] === 'string' ? c.icon[state] : (c.icon[state] as { default?: string })?.default || ''" />
+        <c-checkbox-icon [class]="resolveStateClass(c['icon'], state)" />
       } @else {
-        <span [class]="typeof c.icon[state] === 'string' ? c.icon[state] : (c.icon[state] as { default?: string })?.default || ''"></span>
+        <span [class]="resolveStateClass(c['icon'], state)"></span>
       }
     </i>
     <ng-content />
@@ -58,6 +58,22 @@ export class RadioComponent implements OnInit, OnChanges {
   c: Record<string, unknown> = {};
   state: 'checked' | 'notChecked' = 'notChecked';
   theme = 'ios';
+
+  resolveClass(value: unknown): string {
+    if (typeof value === 'string') return value;
+    if (value && typeof value === 'object') {
+      const obj = value as Record<string, unknown>;
+      const d = obj['default'];
+      if (typeof d === 'string') return d;
+    }
+    return '';
+  }
+
+  resolveStateClass(value: unknown, state: string): string {
+    if (!value || typeof value !== 'object') return '';
+    const bucket = value as Record<string, unknown>;
+    return this.resolveClass(bucket[state]);
+  }
 
   private readonly ctx = inject(CAPACITOR_CONTEXT);
 

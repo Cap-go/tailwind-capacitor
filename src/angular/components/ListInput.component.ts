@@ -101,6 +101,22 @@ export class ListInputComponent implements OnInit, OnChanges {
   inputClass = '';
   focused = false;
 
+  resolveClass(value: unknown): string {
+    if (typeof value === 'string') return value;
+    if (value && typeof value === 'object') {
+      const obj = value as Record<string, unknown>;
+      const d = obj['default'];
+      if (typeof d === 'string') return d;
+    }
+    return '';
+  }
+
+  resolveStateClass(value: unknown, state: string): string {
+    if (!value || typeof value !== 'object') return '';
+    const bucket = value as Record<string, unknown>;
+    return this.resolveClass(bucket[state]);
+  }
+
   private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   get textValue(): string {
@@ -132,7 +148,7 @@ export class ListInputComponent implements OnInit, OnChanges {
     if (typeof segment === 'string') return segment;
     if (segment && typeof segment === 'object') {
       const obj = segment as Record<string, string>;
-      return obj.default || obj.stacked || obj.notFloating || '';
+      return obj['default'] || obj['stacked'] || obj['notFloating'] || '';
     }
     return '';
   }
@@ -153,13 +169,14 @@ export class ListInputComponent implements OnInit, OnChanges {
     });
     this.c = themeClasses(raw, theme, this.class);
     const c = this.c as Record<string, unknown>;
-    this.baseClass = this.pickClass(c.base);
-    const label = c.label as Record<string, unknown> | undefined;
-    this.labelClass = this.pickClass(label?.stacked);
-    this.labelTextClass = this.pickClass(c.labelText);
-    const inputWrap = c.inputWrap as Record<string, unknown> | undefined;
-    this.inputWrapClass = this.pickClass(inputWrap?.stacked);
-    const input = c.input as Record<string, unknown> | undefined;
-    this.inputClass = this.pickClass(input?.notFloating) || this.pickClass(input);
+    this.baseClass = this.pickClass(c['base']);
+    const label = c['label'] as Record<string, unknown> | undefined;
+    this.labelClass = this.pickClass(label?.['stacked']);
+    this.labelTextClass = this.pickClass(c['labelText']);
+    const inputWrap = c['inputWrap'] as Record<string, unknown> | undefined;
+    this.inputWrapClass = this.pickClass(inputWrap?.['stacked']);
+    const input = c['input'] as Record<string, unknown> | undefined;
+    this.inputClass =
+      this.pickClass(input?.['notFloating']) || this.pickClass(input);
   }
 }

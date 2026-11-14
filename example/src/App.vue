@@ -59,11 +59,10 @@
               <Avatar>MD</Avatar>
               <Thumbnail class="demo-thumbnail">
                 <img
-                  src="https://picsum.photos/seed/capgo-demo/96/96"
+                  src="/demo-thumbnail.png"
                   alt="Sample thumbnail"
                   width="48"
                   height="48"
-                  loading="lazy"
                 />
               </Thumbnail>
             </div>
@@ -114,7 +113,7 @@
               <ListItem component="div" title="Sliding list item" />
             </ItemSliding>
             <Reorder class="p-1 mt-2">
-              <List strong inset>
+              <List strong inset margin="my-0" dividers dividers-ios>
                 <ListItem title="Reorder row 1" />
                 <ListItem title="Reorder row 2" />
               </List>

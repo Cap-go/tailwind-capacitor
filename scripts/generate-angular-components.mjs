@@ -138,9 +138,32 @@ function extraInputLines(name) {
     .join('\n  ');
 }
 
-function classBinding(path) {
-  return `typeof ${path} === 'string' ? ${path} : (${path} as { default?: string })?.default || ''`;
+function resolveClassRef(path) {
+  const stateMatch = path.match(/^c\.([a-zA-Z_]+)\[state\]$/);
+  if (stateMatch) {
+    return `resolveStateClass(c['${stateMatch[1]}'], state)`;
+  }
+  const bracketed = path.replace(/^c\.([a-zA-Z_]+)/, "c['$1']");
+  return `resolveClass(${bracketed})`;
 }
+
+const resolveClassMethod = `  resolveClass(value: unknown): string {
+    if (typeof value === 'string') return value;
+    if (value && typeof value === 'object') {
+      const obj = value as Record<string, unknown>;
+      const d = obj['default'];
+      if (typeof d === 'string') return d;
+    }
+    return '';
+  }
+
+  resolveStateClass(value: unknown, state: string): string {
+    if (!value || typeof value !== 'object') return '';
+    const bucket = value as Record<string, unknown>;
+    return this.resolveClass(bucket[state]);
+  }
+
+`;
 
 function interactiveComponent(name, meta, colorsFn) {
   const classFile = `${meta.file}Classes`;
@@ -175,20 +198,22 @@ import { cls } from '../../shared/cls.js';`;
 @Component({
   selector: 'c-toggle',
   standalone: true,
-  template: \`<label [class]="${classBinding('c.base[state]')}" [attr.aria-checked]="checked">
+  template: \`<label [class]="${resolveClassRef('c.base[state]')}">
     <input
       type="checkbox"
-      [class]="${classBinding('c.input')}"
+      role="switch"
+      [class]="${resolveClassRef('c.input')}"
       [name]="name"
       [value]="value"
       [disabled]="disabled"
       [readOnly]="readonly"
       [checked]="checked"
+      [attr.aria-checked]="checked"
       (change)="change.emit($event)"
     />
-    <span [class]="${classBinding('c.inner[state]')}"></span>
-    <span [class]="${classBinding('c.thumbWrap[state]')}">
-      <span [class]="${classBinding('c.thumb[state]')}"></span>
+    <span [class]="${resolveClassRef('c.inner[state]')}"></span>
+    <span [class]="${resolveClassRef('c.thumbWrap[state]')}">
+      <span [class]="${resolveClassRef('c.thumb[state]')}"></span>
     </span>
     <ng-content />
   </label>\`,
@@ -209,7 +234,7 @@ export class ToggleComponent implements OnInit, OnChanges {
   c: Record<string, unknown> = {};
   state: 'checked' | 'notChecked' = 'notChecked';
 
-  private readonly ctx = inject(CAPACITOR_CONTEXT);
+${resolveClassMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   ngOnInit(): void {
     this.syncClasses();
@@ -240,11 +265,11 @@ import { CheckboxIconComponent } from './icons/CheckboxIcon.component.js';
   selector: 'c-checkbox',
   standalone: true,
   imports: [CheckboxIconComponent],
-  template: \`<label [class]="${classBinding('c.base')}" [attr.aria-checked]="checked || indeterminate">
+  template: \`<label [class]="${resolveClassRef('c.base')}" [attr.aria-checked]="checked || indeterminate">
     <input
       #inputEl
       type="checkbox"
-      [class]="${classBinding('c.input')}"
+      [class]="${resolveClassRef('c.input')}"
       [name]="name"
       [value]="value"
       [disabled]="disabled"
@@ -252,11 +277,11 @@ import { CheckboxIconComponent } from './icons/CheckboxIcon.component.js';
       [checked]="checked"
       (change)="change.emit($event)"
     />
-    <i [class]="${classBinding('c.iconWrap[state]')}">
+    <i [class]="${resolveClassRef('c.iconWrap[state]')}">
       @if (indeterminate) {
-        <span [class]="${classBinding('c.indeterminateIcon')}"></span>
+        <span [class]="${resolveClassRef('c.indeterminateIcon')}"></span>
       } @else {
-        <c-checkbox-icon [ios]="ios" [material]="material" [class]="${classBinding('c.icon[state]')}" />
+        <c-checkbox-icon [ios]="ios" [material]="material" [class]="${resolveClassRef('c.icon[state]')}" />
       }
     </i>
     <ng-content />
@@ -281,7 +306,7 @@ export class CheckboxComponent implements OnInit, OnChanges, AfterViewInit {
   c: Record<string, unknown> = {};
   state: 'checked' | 'notChecked' = 'notChecked';
 
-  private readonly ctx = inject(CAPACITOR_CONTEXT);
+${resolveClassMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   ngOnInit(): void {
     this.syncClasses();
@@ -324,10 +349,10 @@ import { CheckboxIconComponent } from './icons/CheckboxIcon.component.js';
   selector: 'c-radio',
   standalone: true,
   imports: [CheckboxIconComponent],
-  template: \`<label [class]="${classBinding('c.base')}" [attr.aria-checked]="checked">
+  template: \`<label [class]="${resolveClassRef('c.base')}" [attr.aria-checked]="checked">
     <input
       type="radio"
-      [class]="${classBinding('c.input')}"
+      [class]="${resolveClassRef('c.input')}"
       [name]="name"
       [value]="value"
       [disabled]="disabled"
@@ -335,11 +360,11 @@ import { CheckboxIconComponent } from './icons/CheckboxIcon.component.js';
       [checked]="checked"
       (change)="change.emit($event)"
     />
-    <i [class]="${classBinding('c.iconWrap[state]')}">
+    <i [class]="${resolveClassRef('c.iconWrap[state]')}">
       @if (theme === 'ios') {
-        <c-checkbox-icon [class]="${classBinding('c.icon[state]')}" />
+        <c-checkbox-icon [class]="${resolveClassRef('c.icon[state]')}" />
       } @else {
-        <span [class]="${classBinding('c.icon[state]')}"></span>
+        <span [class]="${resolveClassRef('c.icon[state]')}"></span>
       }
     </i>
     <ng-content />
@@ -362,7 +387,7 @@ export class RadioComponent implements OnInit, OnChanges {
   state: 'checked' | 'notChecked' = 'notChecked';
   theme = 'ios';
 
-  private readonly ctx = inject(CAPACITOR_CONTEXT);
+${resolveClassMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   ngOnInit(): void {
     this.syncClasses();
@@ -391,9 +416,9 @@ export class RadioComponent implements OnInit, OnChanges {
 @Component({
   selector: 'c-range',
   standalone: true,
-  template: \`<div [class]="${classBinding('c.base')}">
-    <span [class]="${classBinding('c.trackBg')}"></span>
-    <span [class]="${classBinding('c.trackValue')}" [style.width.%]="valueWidth"></span>
+  template: \`<div [class]="${resolveClassRef('c.base')}">
+    <span [class]="${resolveClassRef('c.trackBg')}"></span>
+    <span [class]="${resolveClassRef('c.trackValue')}" [style.width.%]="valueWidth"></span>
     <input
       [class]="rangeInputClass"
       type="range"
@@ -438,7 +463,7 @@ export class RangeComponent implements OnInit, OnChanges {
   valueWidth = 0;
   rangeInputClass = '';
 
-  private readonly ctx = inject(CAPACITOR_CONTEXT);
+${resolveClassMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   get currentValue(): number {
     return this.value ?? this.min;
@@ -465,9 +490,9 @@ export class RangeComponent implements OnInit, OnChanges {
       range > 0 ? Math.max(0, Math.min(100, ((val - this.min) / range) * 100)) : 0;
     const c = this.c;
     this.rangeInputClass = cls(
-      c.input as string,
-      c.inputThumb as string,
-      c.inputTrack as string,
+      c['input'] as string,
+      c['inputThumb'] as string,
+      c['inputTrack'] as string,
     );
   }
 }
@@ -483,17 +508,17 @@ import { DeleteIconComponent } from './icons/DeleteIcon.component.js';
   selector: 'c-searchbar',
   standalone: true,
   imports: [SearchIconComponent, DeleteIconComponent],
-  template: \`<div [class]="${classBinding('c.base')}" role="search">
-    <div [class]="${classBinding('c.inner')}">
-      <span [class]="${classBinding('c.searchIconWrap')}">
-        <c-search-icon [class]="${classBinding('c.searchIcon')}" />
+  template: \`<div [class]="${resolveClassRef('c.base')}" role="search">
+    <div [class]="${resolveClassRef('c.inner')}">
+      <span [class]="${resolveClassRef('c.searchIconWrap')}">
+        <c-search-icon [class]="${resolveClassRef('c.searchIcon')}" />
       </span>
       <input
         #searchEl
         [attr.id]="inputId"
         type="search"
         name="search"
-        [class]="${classBinding('c.input')}"
+        [class]="${resolveClassRef('c.input')}"
         [placeholder]="placeholder"
         [value]="displayValue"
         [attr.aria-label]="placeholder"
@@ -505,11 +530,11 @@ import { DeleteIconComponent } from './icons/DeleteIcon.component.js';
       @if (displayValue && clearButton) {
         <button
           type="button"
-          [class]="${classBinding('c.clearButton')}"
+          [class]="${resolveClassRef('c.clearButton')}"
           [attr.aria-label]="'Clear search'"
           (click)="clear.emit($event)"
         >
-          <c-delete-icon [class]="${classBinding('c.deleteIcon')}" />
+          <c-delete-icon [class]="${resolveClassRef('c.deleteIcon')}" />
         </button>
       }
     </div>
@@ -535,7 +560,7 @@ export class SearchbarComponent implements OnInit, OnChanges {
   c: Record<string, unknown> = {};
   isEnabled = false;
 
-  private readonly ctx = inject(CAPACITOR_CONTEXT);
+${resolveClassMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   get displayValue(): string {
     if (this.value === undefined || this.value === null) return '';
@@ -657,7 +682,7 @@ export class ListInputComponent implements OnInit, OnChanges {
   inputClass = '';
   focused = false;
 
-  private readonly ctx = inject(CAPACITOR_CONTEXT);
+${resolveClassMethod}  private readonly ctx = inject(CAPACITOR_CONTEXT);
 
   get textValue(): string {
     if (this.value === undefined || this.value === null) return '';
@@ -688,7 +713,7 @@ export class ListInputComponent implements OnInit, OnChanges {
     if (typeof segment === 'string') return segment;
     if (segment && typeof segment === 'object') {
       const obj = segment as Record<string, string>;
-      return obj.default || obj.stacked || obj.notFloating || '';
+      return obj['default'] || obj['stacked'] || obj['notFloating'] || '';
     }
     return '';
   }
@@ -709,14 +734,15 @@ export class ListInputComponent implements OnInit, OnChanges {
     });
     this.c = themeClasses(raw, theme, this.class);
     const c = this.c as Record<string, unknown>;
-    this.baseClass = this.pickClass(c.base);
-    const label = c.label as Record<string, unknown> | undefined;
-    this.labelClass = this.pickClass(label?.stacked);
-    this.labelTextClass = this.pickClass(c.labelText);
-    const inputWrap = c.inputWrap as Record<string, unknown> | undefined;
-    this.inputWrapClass = this.pickClass(inputWrap?.stacked);
-    const input = c.input as Record<string, unknown> | undefined;
-    this.inputClass = this.pickClass(input?.notFloating) || this.pickClass(input);
+    this.baseClass = this.pickClass(c['base']);
+    const label = c['label'] as Record<string, unknown> | undefined;
+    this.labelClass = this.pickClass(label?.['stacked']);
+    this.labelTextClass = this.pickClass(c['labelText']);
+    const inputWrap = c['inputWrap'] as Record<string, unknown> | undefined;
+    this.inputWrapClass = this.pickClass(inputWrap?.['stacked']);
+    const input = c['input'] as Record<string, unknown> | undefined;
+    this.inputClass =
+      this.pickClass(input?.['notFloating']) || this.pickClass(input);
   }
 }
 `;
@@ -837,11 +863,13 @@ export class ${name}Component implements OnInit, OnChanges {
     const props = this as Record<string, unknown>;
     const raw = ${meta.classesFn}(props, colors, { className: this.class }, dark);
     const c = themeClasses(raw, theme, this.class);
-    const base = c.base;
+    const base = c['base'];
     if (typeof base === 'string') {
       this.hostClass = base;
     } else if (base && typeof base === 'object') {
-      this.hostClass = (base as { default?: string }).default || '';
+      const baseRecord = base as Record<string, unknown>;
+      const d = baseRecord['default'];
+      this.hostClass = typeof d === 'string' ? d : '';
     } else {
       this.hostClass = '';
     }
@@ -856,6 +884,7 @@ writeFileSync(
   `import {
   Component,
   Input,
+  inject,
   OnChanges,
   OnDestroy,
   OnInit,
@@ -871,12 +900,20 @@ import { CAPACITOR_CONTEXT } from './capacitor-context.js';
   providers: [
     {
       provide: CAPACITOR_CONTEXT,
-      useFactory: (parent: TailwindCapacitorProviderComponent) => ({
-        theme: parent.theme,
-        dark: parent.effectiveDark,
-        touchRipple: parent.touchRipple,
-      }),
-      deps: [TailwindCapacitorProviderComponent],
+      useFactory: () => {
+        const parent = inject(TailwindCapacitorProviderComponent);
+        return {
+          get theme() {
+            return parent.theme;
+          },
+          get dark() {
+            return parent.effectiveDark;
+          },
+          get touchRipple() {
+            return parent.touchRipple;
+          },
+        };
+      },
     },
   ],
 })

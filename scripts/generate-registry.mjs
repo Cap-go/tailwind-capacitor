@@ -89,6 +89,7 @@ const vueProviderFiles = [
   'src/vue/shared/TailwindCapacitorProvider.vue',
   'src/vue/shared/use-auto-theme.js',
   'src/vue/shared/use-effective-dark.js',
+  'src/vue/shared/effective-dark-value.js',
   'src/vue/shared/use-context.js',
   'src/vue/shared/use-dark-classes.js',
   'src/vue/shared/use-theme-classes.js',

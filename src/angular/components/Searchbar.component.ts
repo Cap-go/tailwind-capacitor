@@ -22,17 +22,17 @@ import { DeleteIconComponent } from './icons/DeleteIcon.component.js';
   selector: 'c-searchbar',
   standalone: true,
   imports: [SearchIconComponent, DeleteIconComponent],
-  template: `<div [class]="typeof c.base === 'string' ? c.base : (c.base as { default?: string })?.default || ''" role="search">
-    <div [class]="typeof c.inner === 'string' ? c.inner : (c.inner as { default?: string })?.default || ''">
-      <span [class]="typeof c.searchIconWrap === 'string' ? c.searchIconWrap : (c.searchIconWrap as { default?: string })?.default || ''">
-        <c-search-icon [class]="typeof c.searchIcon === 'string' ? c.searchIcon : (c.searchIcon as { default?: string })?.default || ''" />
+  template: `<div [class]="resolveClass(c['base'])" role="search">
+    <div [class]="resolveClass(c['inner'])">
+      <span [class]="resolveClass(c['searchIconWrap'])">
+        <c-search-icon [class]="resolveClass(c['searchIcon'])" />
       </span>
       <input
         #searchEl
         [attr.id]="inputId"
         type="search"
         name="search"
-        [class]="typeof c.input === 'string' ? c.input : (c.input as { default?: string })?.default || ''"
+        [class]="resolveClass(c['input'])"
         [placeholder]="placeholder"
         [value]="displayValue"
         [attr.aria-label]="placeholder"
@@ -44,11 +44,11 @@ import { DeleteIconComponent } from './icons/DeleteIcon.component.js';
       @if (displayValue && clearButton) {
         <button
           type="button"
-          [class]="typeof c.clearButton === 'string' ? c.clearButton : (c.clearButton as { default?: string })?.default || ''"
+          [class]="resolveClass(c['clearButton'])"
           [attr.aria-label]="'Clear search'"
           (click)="clear.emit($event)"
         >
-          <c-delete-icon [class]="typeof c.deleteIcon === 'string' ? c.deleteIcon : (c.deleteIcon as { default?: string })?.default || ''" />
+          <c-delete-icon [class]="resolveClass(c['deleteIcon'])" />
         </button>
       }
     </div>
@@ -73,6 +73,22 @@ export class SearchbarComponent implements OnInit, OnChanges {
 
   c: Record<string, unknown> = {};
   isEnabled = false;
+
+  resolveClass(value: unknown): string {
+    if (typeof value === 'string') return value;
+    if (value && typeof value === 'object') {
+      const obj = value as Record<string, unknown>;
+      const d = obj['default'];
+      if (typeof d === 'string') return d;
+    }
+    return '';
+  }
+
+  resolveStateClass(value: unknown, state: string): string {
+    if (!value || typeof value !== 'object') return '';
+    const bucket = value as Record<string, unknown>;
+    return this.resolveClass(bucket[state]);
+  }
 
   private readonly ctx = inject(CAPACITOR_CONTEXT);
 
