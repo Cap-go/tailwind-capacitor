@@ -5,7 +5,7 @@
   "title": "Tailwind Capacitor shared tokens",
   "description": "Shared class and color maps for capacitor components.",
   "registryDependencies": [
-    "../capacitor-tailwind.json"
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json"
   ],
   "files": [
     {
