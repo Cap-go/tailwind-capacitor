@@ -227,7 +227,7 @@ try {
   page.on('console', (msg) => {
     if (msg.type() === 'error') runtimeErrors.push(msg.text());
   });
-  await page.goto(baseUrl, { waitUntil: 'networkidle' });
+  await page.goto(baseUrl, { waitUntil: 'load', timeout: 120_000 });
   await page.waitForSelector('#smoke-root', {
     state: 'attached',
     timeout: 60_000,

@@ -274,7 +274,7 @@ const port = 4321;
 const baseUrl = `http://127.0.0.1:${port}/`;
 const server = spawn(
   'npx',
-  ['ng', 'serve', '--port', String(port), '--host', '127.0.0.1'],
+  ['ng', 'serve', '--port', String(port), '--host', '127.0.0.1', '--live-reload', 'false'],
   { cwd: appDir, stdio: 'pipe' },
 );
 
@@ -282,7 +282,7 @@ try {
   await waitForUrl(baseUrl);
   const browser = await chromium.launch();
   const page = await browser.newPage();
-  await page.goto(baseUrl, { waitUntil: 'networkidle' });
+  await page.goto(baseUrl, { waitUntil: 'domcontentloaded', timeout: 120_000 });
 
   const provider = page.locator('tailwind-capacitor-provider#tcp');
   await provider.waitFor({ state: 'attached' });

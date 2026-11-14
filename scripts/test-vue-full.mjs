@@ -178,7 +178,7 @@ try {
   await waitForUrl(baseUrl, 120);
   const browser = await chromium.launch();
   const page = await browser.newPage();
-  await page.goto(baseUrl, { waitUntil: 'networkidle' });
+  await page.goto(baseUrl, { waitUntil: 'load', timeout: 120_000 });
   await page.waitForSelector('#smoke-root', {
     state: 'attached',
     timeout: 60_000,
