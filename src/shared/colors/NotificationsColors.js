@@ -6,8 +6,8 @@ export const NotificationsColors = (colorsProp, dark) => {
     bgMaterial: cls('bg-md-light-surface-5', dark('dark:bg-md-dark-surface-5')),
     titleIos: cls('text-black', dark('dark:text-white')),
     titleRightIos: cls(
-      'text-opacity-45 text-black',
-      dark('dark:text-white dark:text-opacity-45')
+      'text-black/45',
+      dark('dark:text-white/45')
     ),
     titleRightMd: cls(
       'text-md-light-on-surface-variant before:bg-md-light-on-surface-variant',

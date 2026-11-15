@@ -52,7 +52,7 @@ export const ButtonClasses = (props, colors, classes, darkClasses) => {
         common: cls(
           disabled
             ? cls(colors.disabledText, colors.disabledBorder)
-            : cls('active:bg-opacity-15', colors.touchRipple)
+            : cls('active:bg-black/15', colors.touchRipple)
         ),
         ios: cls(
           !segmented && 'border-2',
@@ -69,7 +69,7 @@ export const ButtonClasses = (props, colors, classes, darkClasses) => {
         common: cls(
           disabled
             ? colors.disabledText
-            : `active:bg-opacity-15 ${colors.touchRipple}`
+            : `active:bg-black/15 ${colors.touchRipple}`
         ),
         ios: !disabled && cls(colors.textIos, colors.activeBgIos),
         material:
@@ -81,12 +81,7 @@ export const ButtonClasses = (props, colors, classes, darkClasses) => {
           : cls(colors.touchRipple),
         ios:
           !disabled &&
-          cls(
-            colors.tonalTextIos,
-            colors.tonalBgIos,
-            colors.activeBgIos,
-            'bg-opacity-15 active:bg-opacity-25'
-          ),
+          cls(colors.tonalTextIos, 'bg-primary/15 active:bg-primary/25'),
         material:
           !disabled &&
           cls(
@@ -99,9 +94,9 @@ export const ButtonClasses = (props, colors, classes, darkClasses) => {
         common: cls(
           '!bg-transparent shadow-none text-primary relative z-0',
           darkClasses('dark:text-white/55'),
-          `active:bg-black active:bg-opacity-10`,
+          `active:bg-black/10`,
           darkClasses(
-            'dark:active:bg-white dark:active:bg-opacity-10 dark:touch-ripple-white'
+            'dark:active:bg-white/10 dark:touch-ripple-white'
           ),
           colors.touchRipple
         ),

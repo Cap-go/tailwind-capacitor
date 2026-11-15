@@ -52,3 +52,39 @@ export async function assertOpenBackdropsTranslucent(page, probeSelector = '#bac
   }
   return result;
 }
+
+export async function assertRangeTrackTranslucent(page, probeSelector = '#opacity-probe') {
+  const selLit = JSON.stringify(probeSelector);
+  const result = await page.evaluate(`(() => {
+    const sel = ${selLit};
+    const root = document.querySelector(sel);
+    if (!root) {
+      return { ok: false, reason: 'missing probe ' + sel };
+    }
+    const track = root.querySelector('span');
+    if (!track) {
+      return { ok: false, reason: 'missing range track span under ' + sel };
+    }
+    const parseBackgroundAlpha = (bg) => {
+      const slash = bg.match(/\\/\\s*([\\d.]+)\\s*\\)\\s*$/);
+      if (slash) return Number.parseFloat(slash[1]);
+      const rgba = bg.match(/^rgba?\\(([^)]+)\\)/);
+      if (rgba) {
+        const parts = rgba[1].split(',').map((p) => p.trim());
+        if (parts.length === 4) return Number.parseFloat(parts[3]);
+        return 1;
+      }
+      return null;
+    };
+    const bg = getComputedStyle(track).backgroundColor;
+    const alpha = parseBackgroundAlpha(bg);
+    if (alpha === null || alpha >= 0.99) {
+      return { ok: false, reason: 'range track not translucent: ' + bg, alpha };
+    }
+    return { ok: true, bg, alpha };
+  })()`);
+  if (!result.ok) {
+    throw new Error(`range track translucency check failed: ${result.reason}`);
+  }
+  return result;
+}

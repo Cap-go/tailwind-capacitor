@@ -5,8 +5,8 @@ export const MessageColors = (colorsProp = {}, dark) => {
     messageSent: 'text-white',
     messageReceived: 'text-inherit',
     messageNameIos: cls(
-      'text-black text-opacity-45',
-      dark('dark:text-white dark:text-opacity-45')
+      'text-black/45',
+      dark('dark:text-white/45')
     ),
     messageNameMd: cls(
       'text-md-light-on-surface-variant',

@@ -15,7 +15,10 @@ import { setTimeout as sleep } from 'node:timers/promises';
 import { chromium } from 'playwright';
 import { repoRoot } from './repo-root.mjs';
 import { installPackInApp, packTgz } from './full-smoke-pack.mjs';
-import { assertOpenBackdropsTranslucent } from './smoke-backdrop-translucent.mjs';
+import {
+  assertOpenBackdropsTranslucent,
+  assertRangeTrackTranslucent,
+} from './smoke-backdrop-translucent.mjs';
 
 function readJsonc(path) {
   const raw = readFileSync(path, 'utf8');
@@ -209,6 +212,9 @@ ${componentImports}
           class="backdrop-probe-layer fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"
           aria-hidden="true"
         ></div>
+        <div id="opacity-probe">
+          <c-range material [value]="50" [min]="0" [max]="100"></c-range>
+        </div>
       </div>
     </tailwind-capacitor-provider>
   \`,
@@ -328,6 +334,7 @@ async function runBrowserChecks() {
     await page.evaluate(`window.dispatchEvent(new Event('smoke-open-backdrops'))`);
     await page.waitForSelector('#backdrop-probe', { state: 'attached', timeout: 60_000 });
     await assertOpenBackdropsTranslucent(page);
+    await assertRangeTrackTranslucent(page);
 
     if (errors.length) {
       throw new Error(`console or page errors: ${errors.join('; ')}`);

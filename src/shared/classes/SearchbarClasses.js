@@ -27,7 +27,7 @@ export const SearchbarClasses = (props, colors, { isEnabled, darkClasses }) => {
       ios: cls(
         'h-8 bg-black/10 pl-7 pr-7 rounded-lg text-base',
         darkClasses(
-          'dark:placeholder-white dark:placeholder-opacity-30 dark:bg-white/10'
+          'dark:placeholder-white/30 dark:bg-white/10'
         ),
         colors.placeholderIos,
         colors.inputBgIos

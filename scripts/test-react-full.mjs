@@ -15,7 +15,10 @@ import { setTimeout as sleep } from 'node:timers/promises';
 import { chromium } from 'playwright';
 import { repoRoot } from './repo-root.mjs';
 import { installPackInApp, packTgz } from './full-smoke-pack.mjs';
-import { assertOpenBackdropsTranslucent } from './smoke-backdrop-translucent.mjs';
+import {
+  assertOpenBackdropsTranslucent,
+  assertRangeTrackTranslucent,
+} from './smoke-backdrop-translucent.mjs';
 
 function prependNoCheck(rootDir) {
   const stack = [rootDir];
@@ -300,6 +303,9 @@ export default function App() {
                 <ActionsButton>ok</ActionsButton>
               </ActionsGroup>
             </Actions>
+            <div id="opacity-probe">
+              <Range material value={50} min={0} max={100} />
+            </div>
           </div>
         ) : null}
       </TailwindCapacitorProvider>
@@ -380,6 +386,7 @@ try {
   await page.evaluate(`window.dispatchEvent(new Event('smoke-open-backdrops'))`);
   await page.waitForSelector('#backdrop-probe', { state: 'attached', timeout: 60_000 });
   await assertOpenBackdropsTranslucent(page);
+  await assertRangeTrackTranslucent(page);
   if (runtimeErrors.length) {
     const body = await page.locator('#root').innerHTML().catch(() => '');
     throw new Error(`runtime errors: ${runtimeErrors.join('; ')} | root: ${body.slice(0, 500)}`);
