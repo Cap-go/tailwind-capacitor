@@ -197,14 +197,14 @@ ${imports}
 export default function App() {
   const [dark, setDark] = useState(false);
   return (
-    <TailwindCapacitorProvider theme="ios" dark={dark}>
-      <div id="smoke-root" className={dark ? 'dark' : ''}>
-        <button id="dark-toggle" type="button" onClick={() => setDark((v) => !v)}>
-          dark
-        </button>
+    <div id="smoke-root" className={dark ? 'dark' : ''}>
+      <button id="dark-toggle" type="button" onClick={() => setDark((v) => !v)}>
+        dark
+      </button>
+      <TailwindCapacitorProvider theme="ios" dark={dark}>
         ${tags}
-      </div>
-    </TailwindCapacitorProvider>
+      </TailwindCapacitorProvider>
+    </div>
   );
 }
 `,
