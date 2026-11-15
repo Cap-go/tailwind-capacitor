@@ -2,7 +2,7 @@ import { cls } from '../cls.js';
 
 export const ButtonColors = (colorsProp = {}, dark) => {
   return {
-    activeBgIos: 'active:bg-primary',
+    activeBgIos: 'active:bg-primary/15',
     activeBgMaterial: '',
     textIos: 'text-primary',
     textMaterial: cls('text-md-light-primary', 'dark:text-md-dark-primary'),
@@ -21,7 +21,8 @@ export const ButtonColors = (colorsProp = {}, dark) => {
       'border-md-light-outline',
       dark('dark:border-md-dark-outline')
     ),
-    tonalBgIos: 'bg-primary',
+    tonalBgIos: 'bg-primary/15',
+    tonalActiveBgIos: 'active:bg-primary/25',
     tonalBgMaterial: cls(
       'bg-md-light-secondary-container',
       dark('dark:bg-md-dark-secondary-container')

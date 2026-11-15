@@ -2,7 +2,7 @@ import { cls } from '../cls.js';
 
 export const StepperColors = (colorsProp = {}, dark) => {
   return {
-    activeBgIos: 'active:bg-primary',
+    activeBgIos: 'active:bg-primary/15',
     activeBgMaterial: '',
     textIos: 'text-primary',
     textMaterial: cls('text-md-light-primary', 'dark:text-md-dark-primary'),

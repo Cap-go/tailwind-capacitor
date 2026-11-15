@@ -50,9 +50,7 @@ export const ButtonClasses = (props, colors, classes, darkClasses) => {
       },
       outline: {
         common: cls(
-          disabled
-            ? cls(colors.disabledText, colors.disabledBorder)
-            : cls('active:bg-black/15', colors.touchRipple)
+          disabled ? cls(colors.disabledText, colors.disabledBorder) : colors.touchRipple
         ),
         ios: cls(
           !segmented && 'border-2',
@@ -66,11 +64,7 @@ export const ButtonClasses = (props, colors, classes, darkClasses) => {
         ),
       },
       clear: {
-        common: cls(
-          disabled
-            ? colors.disabledText
-            : `active:bg-black/15 ${colors.touchRipple}`
-        ),
+        common: cls(disabled ? colors.disabledText : colors.touchRipple),
         ios: !disabled && cls(colors.textIos, colors.activeBgIos),
         material:
           !disabled && cls(colors.textMaterial, colors.activeBgMaterial),
@@ -81,7 +75,7 @@ export const ButtonClasses = (props, colors, classes, darkClasses) => {
           : cls(colors.touchRipple),
         ios:
           !disabled &&
-          cls(colors.tonalTextIos, 'bg-primary/15 active:bg-primary/25'),
+          cls(colors.tonalTextIos, colors.tonalBgIos, colors.tonalActiveBgIos),
         material:
           !disabled &&
           cls(

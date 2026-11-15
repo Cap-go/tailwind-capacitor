@@ -59,7 +59,6 @@ export const StepperClasses = (props, colors) => {
       outline: {
         common: cls(
           colors.touchRipple,
-          'active:bg-black/15',
           buttonsOnly && 'first:border-r-0 rtl:last:border-r-0'
         ),
         ios: cls(
@@ -79,7 +78,7 @@ export const StepperClasses = (props, colors) => {
       },
 
       clear: {
-        common: `${colors.touchRipple} active:bg-black/15 last:border-l rtl:last:border-l-0 rtl:first:border-l border-black/10`,
+        common: `${colors.touchRipple} last:border-l rtl:last:border-l-0 rtl:first:border-l border-black/10`,
         ios: cls(colors.textIos, colors.activeBgIos),
         material: cls(colors.textMaterial, colors.activeBgMaterial),
       },
