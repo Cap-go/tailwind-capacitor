@@ -97,13 +97,14 @@ const rootItems = [
   join(publicRoot, 'capacitor-tailwind.json'),
   join(publicRoot, 'capacitor-shared.json'),
 ];
-const vueItems = readdirSync(vuePublic)
+const registryItemNames = readdirSync(vuePublic)
   .filter((name) => name.startsWith('capacitor-') && name.endsWith('.json'))
   .sort((a, b) => {
     const d = installOrderPriority(a) - installOrderPriority(b);
     return d !== 0 ? d : a.localeCompare(b);
-  })
-  .map((name) => join(vuePublic, name));
+  });
+const vueItems = registryItemNames.map((name) => join(vuePublic, name));
+const MIN_REGISTRY_COMPONENTS = registryItemNames.length - 2;
 
 for (const item of [...rootItems, ...vueItems]) {
   const result = spawnSync('node', [addScript, item], {
@@ -135,6 +136,19 @@ if (!componentFiles.length) {
   console.error('no vue components installed');
   process.exit(1);
 }
+if (registryItemNames.length < MIN_REGISTRY_COMPONENTS + 2) {
+  throw new Error(
+    `registry has ${registryItemNames.length} items, expected provider+icons+${MIN_REGISTRY_COMPONENTS} components`,
+  );
+}
+if (componentFiles.length < MIN_REGISTRY_COMPONENTS) {
+  throw new Error(
+    `installed ${componentFiles.length} component files from packed tgz, expected at least ${MIN_REGISTRY_COMPONENTS}`,
+  );
+}
+console.log(
+  `test-vue-full: installed ${componentFiles.length} components from ${registryItemNames.length} registry items`,
+);
 
 const importLines = componentFiles
   .map((name) => {
@@ -238,6 +252,10 @@ try {
     `document.querySelector('#smoke-root')?.classList.contains('dark')`,
     { timeout: 60_000 },
   );
+  const toggleLabel = page.locator('label').filter({ has: page.locator('input[type="checkbox"]') }).first();
+  if (await toggleLabel.count()) {
+    await toggleLabel.click();
+  }
   if (errors.length) {
     throw new Error(`runtime errors: ${errors.join('; ')}`);
   }

@@ -51,7 +51,7 @@ const Radio = (props) => {
   const state =
     checked || (defaultChecked && !onChange) ? 'checked' : 'notChecked';
 
-  const c = themeClasses(RadioClasses(props, colors, colors, colors, { className: className ?? '' }, dark), className);
+  const c = themeClasses(RadioClasses(props, colors, { className: className ?? '' }, dark), className);
 
   return (
     <Component

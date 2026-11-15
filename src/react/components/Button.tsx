@@ -109,7 +109,7 @@ const Button = (props) => {
   const colors = ButtonColors(colorsProp, dark);
 
   const c = themeClasses(
-    ButtonClasses({ ...props, ...themeProps }, colors, colors, colors, { className: className ?? '' }, dark)
+    ButtonClasses({ ...props, ...themeProps }, colors, { className: className ?? '' }, dark)
   );
 
   const classes = cls(

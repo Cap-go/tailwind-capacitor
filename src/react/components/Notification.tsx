@@ -48,7 +48,7 @@ const Notification = (props) => {
   const dark = useDarkClasses();
   const colors = NotificationsColors(colorsProp, dark);
 
-  const c = themeClasses(NotificationsClasses({ ...props }, colors), className);
+  const c = themeClasses(NotificationsClasses({ ...props }, colors, className), className);
 
   if (theme === 'ios')
     return (

@@ -38,8 +38,93 @@ function ensureDarkHook(src) {
       );
     }
     src = src.replace(
-      /(const theme(?:Classes|ClassesFn) = useThemeClasses\(\{ ios, material \}\);)/,
+      /(const theme(?:Classes|ClassesFn) = useThemeClasses\([^)]*\);)/,
       `$1\n  const dark = useDarkClasses();`,
+    );
+  }
+  return src;
+}
+
+function collapseDuplicateColors(src) {
+  let prev;
+  do {
+    prev = src;
+    src = src.replace(/,\s*colors(\s*,\s*colors)+/g, ', colors');
+  } while (src !== prev);
+  return src;
+}
+
+const classNameObj = "{ className: className ?? '' }";
+
+function fixClassesCalls(src, fn, params) {
+  const props = '(.+?)';
+  if (params.length === 4) {
+    src = src.replace(
+      new RegExp(
+        `${fn}\\(${props},\\s*colors(?:\\s*,\\s*colors)*\\s*,\\s*(\\{\\s*className[^}]+\\})\\s*,\\s*dark\\)`,
+        'gs',
+      ),
+      `${fn}($1, colors, $2, dark)`,
+    );
+    src = src.replace(
+      new RegExp(
+        `${fn}\\(${props},\\s*(\\{\\s*className[^}]+\\})\\s*,\\s*dark\\)`,
+        'gs',
+      ),
+      `${fn}($1, colors, $2, dark)`,
+    );
+  } else if (params.length === 3) {
+    const p2 = params[2];
+    if (p2 === 'darkClasses' || p2 === 'dark') {
+      src = src.replace(
+        new RegExp(
+          `${fn}\\(${props},\\s*colors(?:\\s*,\\s*colors)*\\s*,\\s*dark\\)`,
+          'gs',
+        ),
+        `${fn}($1, colors, dark)`,
+      );
+      src = src.replace(
+        new RegExp(
+          `${fn}\\(${props},\\s*(\\{\\s*className[^}]+\\})\\s*,\\s*dark\\)`,
+          'gs',
+        ),
+        `${fn}($1, colors, dark)`,
+      );
+    } else if (p2 === 'classes') {
+      src = src.replace(
+        new RegExp(
+          `${fn}\\(${props},\\s*colors\\s*,\\s*\\{\\s*className[^}]+\\}\\)`,
+          'gs',
+        ),
+        `${fn}($1, colors, className ?? '')`,
+      );
+      src = src.replace(
+        new RegExp(`${fn}\\(${props},\\s*colors\\)`, 'gs'),
+        `${fn}($1, colors, className ?? '')`,
+      );
+    } else {
+      src = src.replace(
+        new RegExp(
+          `${fn}\\(${props},\\s*(\\{\\s*className[^}]+\\})\\s*,\\s*dark\\)`,
+          'gs',
+        ),
+        `${fn}($1, colors, $2)`,
+      );
+      src = src.replace(
+        new RegExp(
+          `${fn}\\(${props},\\s*colors\\s*,\\s*dark\\)`,
+          'gs',
+        ),
+        `${fn}($1, colors, ${classNameObj})`,
+      );
+    }
+  } else if (params.length === 2) {
+    src = src.replace(
+      new RegExp(
+        `${fn}\\(${props},\\s*(\\{\\s*className[^}]+\\})(?:\\s*,\\s*dark)?\\)`,
+        'gs',
+      ),
+      `${fn}($1, colors)`,
     );
   }
   return src;
@@ -54,6 +139,8 @@ for (const file of readdirSync(componentsDir)) {
   let src = readFileSync(path, 'utf8');
   const before = src;
 
+  src = collapseDuplicateColors(src);
+
   const colorsM = src.match(
     /import \{ (\w+) \} from '\.\.\/\.\.\/shared\/colors\/(\w+)Colors\.js'/,
   );
@@ -63,48 +150,19 @@ for (const file of readdirSync(componentsDir)) {
 
   if (colorsM && colorsNeedsDark(colorsM[1])) {
     src = ensureDarkHook(src);
-    src = src.replace(
-      new RegExp(`${colorsM[1]}\\(colorsProp\\)`, 'g'),
-      `${colorsM[1]}(colorsProp, dark)`,
-    );
+    if (!src.includes(`${colorsM[1]}(colorsProp, dark)`)) {
+      src = src.replace(
+        new RegExp(`${colorsM[1]}\\(colorsProp\\)`, 'g'),
+        `${colorsM[1]}(colorsProp, dark)`,
+      );
+    }
   }
 
   if (classesM) {
     const fn = classesM[1];
     const params = classesArity(fn);
-    const classNameObj = '{ className: className ?? \'\' }';
-
-    if (params.length === 2) {
-      src = src.replace(
-        new RegExp(`${fn}\\(([^;]+?),\\s*\\{\\s*className[^}]+\\}\\s*(?:,\\s*dark\\s*)?\\)`, 'g'),
-        `${fn}($1, colors)`,
-      );
-    } else if (
-      params.length === 3 &&
-      (params[2] === 'darkClasses' || params[2] === 'dark')
-    ) {
-      src = src.replace(
-        new RegExp(`${fn}\\(([^;]+?),\\s*\\{\\s*className[^}]+\\}\\s*,\\s*dark\\)`, 'g'),
-        `${fn}($1, colors, dark)`,
-      );
-    } else if (params.length === 3) {
-      src = src.replace(
-        new RegExp(`${fn}\\(([^;]+?),\\s*\\{\\s*className[^}]+\\}\\s*,\\s*dark\\)`, 'g'),
-        `${fn}($1, colors, ${classNameObj})`,
-      );
-      src = src.replace(
-        new RegExp(`${fn}\\(([^;]+?),\\s*colors,\\s*dark\\)`, 'g'),
-        `${fn}($1, colors, ${classNameObj})`,
-      );
-    } else if (params.length === 4) {
-      src = src.replace(
-        new RegExp(
-          `${fn}\\(([^;]+?),\\s*\\{\\s*className[^}]+\\}\\s*,\\s*dark\\)`,
-          'g',
-        ),
-        `${fn}($1, colors, ${classNameObj}, dark)`,
-      );
-    }
+    src = fixClassesCalls(src, fn, params);
+    src = collapseDuplicateColors(src);
   }
 
   if (src !== before) {

@@ -59,6 +59,22 @@ function componentExportName(file) {
   return basename(file, '.tsx').replace(/Icon$/, 'Icon');
 }
 
+function listReactComponentFiles(dir) {
+  const out = [];
+  for (const name of readdirSync(dir)) {
+    const path = join(dir, name);
+    const st = statSync(path);
+    if (st.isDirectory()) {
+      out.push(...listReactComponentFiles(path));
+      continue;
+    }
+    if (!name.endsWith('.tsx')) continue;
+    if (name.endsWith('Context.tsx') || name === 'App.tsx') continue;
+    out.push(path);
+  }
+  return out.sort();
+}
+
 async function waitForUrl(url, attempts = 120) {
   for (let i = 0; i < attempts; i += 1) {
     try {
@@ -130,13 +146,14 @@ const rootItems = [
   join(publicRoot, 'capacitor-tailwind.json'),
   join(publicRoot, 'capacitor-shared.json'),
 ];
-const reactItems = readdirSync(reactPublic)
+const registryItemNames = readdirSync(reactPublic)
   .filter((name) => name.startsWith('capacitor-') && name.endsWith('.json'))
   .sort((a, b) => {
     const d = installOrderPriority(a) - installOrderPriority(b);
     return d !== 0 ? d : a.localeCompare(b);
-  })
-  .map((name) => join(reactPublic, name));
+  });
+const reactItems = registryItemNames.map((name) => join(reactPublic, name));
+const MIN_REGISTRY_COMPONENTS = registryItemNames.length - 2;
 
 for (const item of [...rootItems, ...reactItems]) {
   const result = spawnSync('node', [addScript, item], {
@@ -158,25 +175,39 @@ const capacitorSrc = join(appDir, 'src/capacitor');
 if (existsSync(capacitorSrc)) prependNoCheck(capacitorSrc);
 
 const componentsDir = join(appDir, 'src/capacitor/react/components');
-const componentFiles = readdirSync(componentsDir)
-  .filter((name) => {
-    if (!name.endsWith('.tsx')) return false;
-    if (name.endsWith('Context.tsx')) return false;
-    if (name === 'App.tsx') return false;
-    return statSync(join(componentsDir, name)).isFile();
-  })
-  .sort();
+const componentFiles = listReactComponentFiles(componentsDir);
 
 if (!componentFiles.length) {
   console.error('no react components installed');
   process.exit(1);
 }
+if (registryItemNames.length < MIN_REGISTRY_COMPONENTS + 2) {
+  throw new Error(
+    `registry has ${registryItemNames.length} items, expected provider+icons+${MIN_REGISTRY_COMPONENTS} components`,
+  );
+}
+if (componentFiles.length < MIN_REGISTRY_COMPONENTS) {
+  throw new Error(
+    `installed ${componentFiles.length} component files from packed tgz, expected at least ${MIN_REGISTRY_COMPONENTS}`,
+  );
+}
+console.log(
+  `test-react-full: installed ${componentFiles.length} components from ${registryItemNames.length} registry items`,
+);
+
+const relImport = (abs) =>
+  abs
+    .slice(componentsDir.length + 1)
+    .replace(/\.tsx$/, '');
 
 const imports = componentFiles
-  .map(
-    (f) =>
-      `import ${componentExportName(f)} from '@/capacitor/react/components/${f.replace(/\.tsx$/, '')}';`,
-  )
+  .map((f) => {
+    const rel = relImport(f);
+    const base = basename(f, '.tsx');
+    const exportName = componentExportName(f);
+    const importPath = rel.includes('/') ? rel.replace(/\//g, '/') : rel;
+    return `import ${exportName} from '@/capacitor/react/components/${importPath}';`;
+  })
   .join('\n');
 
 const tags = componentFiles
@@ -184,7 +215,7 @@ const tags = componentFiles
     const name = componentExportName(f);
     if (name === 'Button') return '<Button id="probe-button">ok</Button>';
     if (name === 'Toggle') return '<Toggle />';
-    return `<${name} />`;
+  return `<${name} />`;
   })
   .join('\n        ');
 
@@ -271,6 +302,10 @@ try {
     `document.querySelector('#smoke-root')?.classList.contains('dark')`,
     { timeout: 60_000 },
   );
+  const toggleLabel = page.locator('label').filter({ has: page.locator('input[type="checkbox"]') }).first();
+  if (await toggleLabel.count()) {
+    await toggleLabel.click();
+  }
   if (runtimeErrors.length) {
     const body = await page.locator('#root').innerHTML().catch(() => '');
     throw new Error(`runtime errors: ${runtimeErrors.join('; ')} | root: ${body.slice(0, 500)}`);
