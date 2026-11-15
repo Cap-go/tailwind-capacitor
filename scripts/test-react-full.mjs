@@ -15,6 +15,7 @@ import { setTimeout as sleep } from 'node:timers/promises';
 import { chromium } from 'playwright';
 import { repoRoot } from './repo-root.mjs';
 import { installPackInApp, packTgz } from './full-smoke-pack.mjs';
+import { assertOpenBackdropsTranslucent } from './smoke-backdrop-translucent.mjs';
 
 function prependNoCheck(rootDir) {
   const stack = [rootDir];
@@ -260,6 +261,12 @@ class SmokeBoundary extends React.Component<{ name: string; children: React.Reac
 
 export default function App() {
   const [dark, setDark] = useState(false);
+  const [backdropProbe, setBackdropProbe] = useState(false);
+  React.useEffect(() => {
+    const open = () => setBackdropProbe(true);
+    window.addEventListener('smoke-open-backdrops', open);
+    return () => window.removeEventListener('smoke-open-backdrops', open);
+  }, []);
   return (
     <div id="smoke-root" className={dark ? 'dark' : ''}>
       <button id="dark-toggle" type="button" onClick={() => setDark((v) => !v)}>
@@ -283,6 +290,18 @@ export default function App() {
           })
           .join('\n        ')}
         </div>
+        {backdropProbe ? (
+          <div id="backdrop-probe">
+            <Sheet opened material>
+              <div className="p-4">sheet</div>
+            </Sheet>
+            <Actions opened material>
+              <ActionsGroup>
+                <ActionsButton>ok</ActionsButton>
+              </ActionsGroup>
+            </Actions>
+          </div>
+        ) : null}
       </TailwindCapacitorProvider>
     </div>
   );
@@ -358,6 +377,9 @@ try {
     { timeout: 60_000 },
   );
   await page.locator('#probe-toggle').click();
+  await page.evaluate(`window.dispatchEvent(new Event('smoke-open-backdrops'))`);
+  await page.waitForSelector('#backdrop-probe', { state: 'attached', timeout: 60_000 });
+  await assertOpenBackdropsTranslucent(page);
   if (runtimeErrors.length) {
     const body = await page.locator('#root').innerHTML().catch(() => '');
     throw new Error(`runtime errors: ${runtimeErrors.join('; ')} | root: ${body.slice(0, 500)}`);

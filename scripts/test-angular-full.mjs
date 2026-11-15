@@ -15,6 +15,7 @@ import { setTimeout as sleep } from 'node:timers/promises';
 import { chromium } from 'playwright';
 import { repoRoot } from './repo-root.mjs';
 import { installPackInApp, packTgz } from './full-smoke-pack.mjs';
+import { assertOpenBackdropsTranslucent } from './smoke-backdrop-translucent.mjs';
 
 function readJsonc(path) {
   const raw = readFileSync(path, 'utf8');
@@ -199,6 +200,16 @@ ${componentImports}
       <div class="hidden" aria-hidden="true">
       ${templateTags}
       </div>
+      @if (backdropProbe) {
+        <div id="backdrop-probe">
+          <c-sheet [opened]="true"></c-sheet>
+          <c-actions [opened]="true">
+            <c-actions-group>
+              <c-actions-button>ok</c-actions-button>
+            </c-actions-group>
+          </c-actions>
+        </div>
+      }
     </tailwind-capacitor-provider>
   \`,
 })
@@ -206,8 +217,14 @@ export class AppComponent implements OnInit {
   private readonly cdr = inject(ChangeDetectorRef);
   dark = false;
   toggleChecked = false;
+  backdropProbe = false;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    window.addEventListener('smoke-open-backdrops', () => {
+      this.backdropProbe = true;
+      this.cdr.detectChanges();
+    });
+  }
 
   flipDark(): void {
     this.dark = !this.dark;
@@ -308,6 +325,9 @@ async function runBrowserChecks() {
     if (ariaChecked !== 'true') {
       throw new Error(`expected aria-checked=true, got ${ariaChecked}`);
     }
+    await page.evaluate(`window.dispatchEvent(new Event('smoke-open-backdrops'))`);
+    await page.waitForSelector('#backdrop-probe', { state: 'attached', timeout: 60_000 });
+    await assertOpenBackdropsTranslucent(page);
 
     if (errors.length) {
       throw new Error(`console or page errors: ${errors.join('; ')}`);

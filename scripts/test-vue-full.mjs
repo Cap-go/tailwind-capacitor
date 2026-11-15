@@ -14,6 +14,7 @@ import { setTimeout as sleep } from 'node:timers/promises';
 import { chromium } from 'playwright';
 import { repoRoot } from './repo-root.mjs';
 import { installPackInApp, packTgz } from './full-smoke-pack.mjs';
+import { assertOpenBackdropsTranslucent } from './smoke-backdrop-translucent.mjs';
 
 function installOrderPriority(name) {
   const order = [
@@ -182,7 +183,12 @@ export default {
   name: 'SmokeApp',
   components: { TailwindCapacitorProvider, ${registerNames.join(', ')} },
   data() {
-    return { dark: false };
+    return { dark: false, backdropProbe: false };
+  },
+  mounted() {
+    window.addEventListener('smoke-open-backdrops', () => {
+      this.backdropProbe = true;
+    });
   },
   methods: {
     flipDark() {
@@ -206,6 +212,14 @@ export default {
           return `<${base} />`;
         })
         .join('\n      ')}
+      </div>
+      <div v-if="backdropProbe" id="backdrop-probe">
+        <Sheet :opened="true" material>ok</Sheet>
+        <Actions :opened="true" material>
+          <ActionsGroup>
+            <ActionsButton>ok</ActionsButton>
+          </ActionsGroup>
+        </Actions>
       </div>
     </div>
   </TailwindCapacitorProvider>
@@ -279,6 +293,9 @@ try {
     { timeout: 60_000 },
   );
   await page.locator('#probe-toggle').click();
+  await page.evaluate(`window.dispatchEvent(new Event('smoke-open-backdrops'))`);
+  await page.waitForSelector('#backdrop-probe', { state: 'attached', timeout: 60_000 });
+  await assertOpenBackdropsTranslucent(page);
   if (errors.length) {
     throw new Error(`runtime errors: ${errors.join('; ')}`);
   }
