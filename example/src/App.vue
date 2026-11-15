@@ -1,6 +1,17 @@
 <template>
-  <TailwindCapacitorProvider :dark="darkMode" :theme="platformTheme">
-    <App :theme="platformTheme" :dark="darkMode">
+  <TailwindCapacitorProvider
+    :dark="darkMode"
+    :theme="platformTheme"
+    :auto-theme-detection="false"
+  >
+    <CaptureDemo
+      v-if="captureScene"
+      :scene="captureScene"
+      :platform-theme="platformTheme"
+      :dark-mode="darkMode"
+    />
+
+    <App v-else :theme="platformTheme" :dark="darkMode">
       <Page class="demo-page no-safe-areas-top">
         <Navbar title="Tailwind Capacitor Demo" />
 
@@ -139,6 +150,11 @@
               <span class="text-sm opacity-80">Loading spinner</span>
             </div>
             <Modal>Modal surface (inline demo)</Modal>
+            <div class="flex flex-wrap gap-2 pt-3">
+              <Button small outline @click="dialogVisible = true">Dialog</Button>
+              <Button small outline @click="sheetVisible = true">Sheet</Button>
+              <Button small outline @click="actionsVisible = true">Actions</Button>
+            </div>
           </Block>
 
           <Block strong inset>
@@ -165,6 +181,46 @@
             </TouchRipple>
           </Block>
         </div>
+
+        <Dialog
+          :opened="dialogVisible"
+          :ios="platformTheme === 'ios'"
+          :material="platformTheme === 'material'"
+          @backdropclick="dialogVisible = false"
+        >
+          <template #title>Confirm</template>
+          Sample dialog with dimmed backdrop.
+          <template #buttons>
+            <DialogButton @click="dialogVisible = false">Cancel</DialogButton>
+            <DialogButton strong @click="dialogVisible = false">OK</DialogButton>
+          </template>
+        </Dialog>
+
+        <Sheet
+          :opened="sheetVisible"
+          :ios="platformTheme === 'ios'"
+          :material="platformTheme === 'material'"
+          @backdropclick="sheetVisible = false"
+        >
+          <div class="p-6 text-center bg-white dark:bg-zinc-900">
+            Sheet content
+          </div>
+        </Sheet>
+
+        <Actions
+          :opened="actionsVisible"
+          :ios="platformTheme === 'ios'"
+          :material="platformTheme === 'material'"
+          @backdropclick="actionsVisible = false"
+        >
+          <ActionsGroup>
+            <ActionsButton>Action one</ActionsButton>
+            <ActionsButton destructive>Destructive</ActionsButton>
+          </ActionsGroup>
+          <ActionsGroup>
+            <ActionsButton>Cancel</ActionsButton>
+          </ActionsGroup>
+        </Actions>
       </Page>
     </App>
   </TailwindCapacitorProvider>
@@ -172,6 +228,7 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
+import CaptureDemo from './CaptureDemo.vue'
 import {
   TailwindCapacitorProvider,
   App,
@@ -183,7 +240,6 @@ import {
   Alert,
   Avatar,
   Thumbnail,
-  Skeleton,
   Note,
   Accordion,
   AccordionItem,
@@ -213,12 +269,36 @@ import {
   Footer,
   NavbarBackLink,
   TouchRipple,
+  Dialog,
+  DialogButton,
+  Sheet,
+  Actions,
+  ActionsGroup,
+  ActionsButton,
 } from '@/capacitor/index.js'
+
+const CAPTURE_SCENES = new Set([
+  'sheet',
+  'actions',
+  'dialog',
+  'popover',
+  'popup',
+  'panel',
+  'button-outline',
+  'button-clear',
+  'button-tonal',
+  'button-tonal-custom',
+  'range',
+])
 
 const platformTheme = ref('ios')
 const darkMode = ref(false)
+const captureScene = ref(null)
 const tab = ref('a')
 const tab2 = ref('one')
+const dialogVisible = ref(false)
+const sheetVisible = ref(false)
+const actionsVisible = ref(false)
 
 onMounted(() => {
   const params = new URLSearchParams(window.location.search)
@@ -229,5 +309,18 @@ onMounted(() => {
   const dark = params.get('dark')
   if (dark === '1' || dark === 'true') darkMode.value = true
   if (dark === '0' || dark === 'false') darkMode.value = false
+  const scene = params.get('scene')
+  if (scene && CAPTURE_SCENES.has(scene)) {
+    captureScene.value = scene
+  }
+  if (params.get('open') === 'dialog') {
+    dialogVisible.value = true
+  }
+  if (params.get('open') === 'sheet') {
+    sheetVisible.value = true
+  }
+  if (params.get('open') === 'actions') {
+    actionsVisible.value = true
+  }
 })
 </script>

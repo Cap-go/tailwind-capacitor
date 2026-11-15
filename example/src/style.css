@@ -61,13 +61,16 @@ body {
   min-height: 0 !important;
 }
 
-#app,
-#app > div,
-#app .c-app,
-#app .c-app > div,
-#app .min-h-full,
-#app .min-h-screen,
-#app .h-full {
+#app {
+  display: block;
+}
+
+#app > div:not(.fixed),
+#app .c-app:not(.fixed),
+#app .c-app > div:not(.fixed),
+#app .min-h-full:not(.fixed),
+#app .min-h-screen:not(.fixed),
+#app .h-full:not(.fixed) {
   display: block;
   position: relative !important;
   height: auto !important;
@@ -149,7 +152,7 @@ body {
   align-items: center !important;
 }
 
-.demo-page .h-full {
+.demo-page .h-full:not(.fixed) {
   height: auto !important;
 }
 
