@@ -213,7 +213,7 @@ ${componentImports}
           aria-hidden="true"
         ></div>
         <div id="opacity-probe">
-          <c-range material [value]="50" [min]="0" [max]="100"></c-range>
+          <c-range [material]="true" [value]="50" [min]="0" [max]="100"></c-range>
         </div>
       </div>
     </tailwind-capacitor-provider>
