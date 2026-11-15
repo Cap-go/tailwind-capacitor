@@ -9,9 +9,11 @@ export async function assertOpenBackdropsTranslucent(page, probeSelector = '#bac
     if (!root) {
       return { ok: false, reason: 'missing probe ' + sel };
     }
-    const backdrops = [...root.querySelectorAll('div')].filter(
-      (el) => getComputedStyle(el).position === 'fixed',
-    );
+    const backdrops = root.querySelectorAll('.backdrop-probe-layer').length
+      ? [...root.querySelectorAll('.backdrop-probe-layer')]
+      : [...root.querySelectorAll('div')].filter(
+          (el) => getComputedStyle(el).position === 'fixed',
+        );
     const parseBackgroundAlpha = (bg) => {
       const slash = bg.match(/\\/\\s*([\\d.]+)\\s*\\)\\s*$/);
       if (slash) return Number.parseFloat(slash[1]);
