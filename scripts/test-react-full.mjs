@@ -59,6 +59,23 @@ function componentExportName(file) {
   return basename(file, '.tsx').replace(/Icon$/, 'Icon');
 }
 
+function smokeProps(name) {
+  const propsByName = {
+    Dialog: 'opened={false}',
+    Modal: 'opened={false}',
+    Popover: 'opened={false}',
+    Popup: 'opened={false}',
+    Panel: 'opened={false}',
+    Sheet: 'opened={false}',
+    Toast: 'opened={false}',
+    Toggle: 'checked={false}',
+    Checkbox: 'checked={false}',
+    Radio: 'checked={false}',
+    Range: 'value={50}',
+  };
+  return propsByName[name] || '';
+}
+
 function listReactComponentFiles(dir) {
   const out = [];
   for (const name of readdirSync(dir)) {
@@ -95,8 +112,16 @@ const tgz = packTgz(work);
 
 const scaffold = spawnSync(
   'npm',
-  ['create', 'vite@latest', 'react-app', '--', '--template', 'react-ts'],
-  { cwd: work, stdio: 'inherit' },
+  [
+    'create',
+    'vite@latest',
+    'react-app',
+    '--',
+    '--template',
+    'react-ts',
+    '--no-interactive',
+  ],
+  { cwd: work, stdio: 'inherit', env: { ...process.env, CI: '1' } },
 );
 if (scaffold.status !== 0) process.exit(scaffold.status ?? 1);
 
@@ -210,20 +235,28 @@ const imports = componentFiles
   })
   .join('\n');
 
-const tags = componentFiles
-  .map((f) => {
-    const name = componentExportName(f);
-    if (name === 'Button') return '<Button id="probe-button">ok</Button>';
-    if (name === 'Toggle') return '<Toggle />';
-  return `<${name} />`;
-  })
-  .join('\n        ');
-
 writeFileSync(
   join(appDir, 'src/App.tsx'),
-  `import { useState } from 'react';
+  `import React, { useState } from 'react';
 import { TailwindCapacitorProvider } from '@/capacitor/react/shared/TailwindCapacitorProvider';
 ${imports}
+
+class SmokeBoundary extends React.Component<{ name: string; children: React.ReactNode }, { err: string | null }> {
+  state = { err: null as string | null };
+  static getDerivedStateFromError(err: unknown) {
+    return { err: String(err) };
+  }
+  componentDidCatch(err: unknown) {
+    const key = '__smokeRenderErrors';
+    const w = window as unknown as { [key: string]: string[] };
+    w[key] = w[key] || [];
+    w[key].push(\`\${this.props.name}: \${String(err)}\`);
+  }
+  render() {
+    if (this.state.err) return null;
+    return this.props.children;
+  }
+}
 
 export default function App() {
   const [dark, setDark] = useState(false);
@@ -232,8 +265,24 @@ export default function App() {
       <button id="dark-toggle" type="button" onClick={() => setDark((v) => !v)}>
         dark
       </button>
-      <TailwindCapacitorProvider theme="ios" dark={dark}>
-        ${tags}
+      <TailwindCapacitorProvider theme="material" dark={dark}>
+        <Toggle checked={false} id="probe-toggle" />
+        <div className="hidden" aria-hidden="true">
+        ${componentFiles
+          .filter((f) => basename(f) !== 'Toggle.tsx')
+          .map((f) => {
+            const name = componentExportName(f);
+            const extra = smokeProps(name);
+            const tag =
+              name === 'Button'
+                ? '<Button id="probe-button">ok</Button>'
+                : extra
+                  ? `<${name} ${extra} />`
+                  : `<${name} />`;
+            return `<SmokeBoundary name="${name}">${tag}</SmokeBoundary>`;
+          })
+          .join('\n        ')}
+        </div>
       </TailwindCapacitorProvider>
     </div>
   );
@@ -297,15 +346,18 @@ try {
   });
   await page.goto(baseUrl, { waitUntil: 'load', timeout: 120_000 });
   await page.waitForSelector('#smoke-root', { state: 'attached', timeout: 60_000 });
+  const boundaryErrors = await page.evaluate(
+    `(() => window.__smokeRenderErrors || [])()`,
+  );
+  if (boundaryErrors.length) {
+    throw new Error(`component render errors: ${boundaryErrors.join('; ')}`);
+  }
   await page.locator('#dark-toggle').click();
   await page.waitForFunction(
     `document.querySelector('#smoke-root')?.classList.contains('dark')`,
     { timeout: 60_000 },
   );
-  const toggleLabel = page.locator('label').filter({ has: page.locator('input[type="checkbox"]') }).first();
-  if (await toggleLabel.count()) {
-    await toggleLabel.click();
-  }
+  await page.locator('#probe-toggle').click();
   if (runtimeErrors.length) {
     const body = await page.locator('#root').innerHTML().catch(() => '');
     throw new Error(`runtime errors: ${runtimeErrors.join('; ')} | root: ${body.slice(0, 500)}`);

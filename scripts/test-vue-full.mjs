@@ -26,6 +26,22 @@ function installOrderPriority(name) {
   return idx === -1 ? 100 : idx;
 }
 
+function listVueComponentFiles(dir) {
+  const out = [];
+  for (const name of readdirSync(dir)) {
+    const path = join(dir, name);
+    const st = statSync(path);
+    if (st.isDirectory()) {
+      out.push(...listVueComponentFiles(path));
+      continue;
+    }
+    if (!name.endsWith('.vue')) continue;
+    if (name.endsWith('Context.vue')) continue;
+    out.push(path);
+  }
+  return out.sort();
+}
+
 async function waitForUrl(url, attempts = 80) {
   for (let i = 0; i < attempts; i += 1) {
     try {
@@ -46,8 +62,8 @@ const tgz = packTgz(work);
 
 const scaffold = spawnSync(
   'npm',
-  ['create', 'vite@latest', 'vue-app', '--', '--template', 'vue'],
-  { cwd: work, stdio: 'inherit' },
+  ['create', 'vite@latest', 'vue-app', '--', '--template', 'vue', '--no-interactive'],
+  { cwd: work, stdio: 'inherit', env: { ...process.env, CI: '1' } },
 );
 if (scaffold.status !== 0) process.exit(scaffold.status ?? 1);
 
@@ -123,14 +139,7 @@ for (const item of [...rootItems, ...vueItems]) {
 }
 
 const componentsDir = join(appDir, 'src/capacitor/vue/components');
-const componentFiles = readdirSync(componentsDir)
-  .filter(
-    (name) =>
-      name.endsWith('.vue') &&
-      statSync(join(componentsDir, name)).isFile() &&
-      !name.endsWith('Context.vue'),
-  )
-  .sort();
+const componentFiles = listVueComponentFiles(componentsDir);
 
 if (!componentFiles.length) {
   console.error('no vue components installed');
@@ -150,23 +159,18 @@ console.log(
   `test-vue-full: installed ${componentFiles.length} components from ${registryItemNames.length} registry items`,
 );
 
+const relVueImport = (abs) =>
+  abs.slice(componentsDir.length + 1).replace(/\.vue$/, '');
+
 const importLines = componentFiles
-  .map((name) => {
-    const base = basename(name, '.vue');
-    return `import ${base} from '@/capacitor/vue/components/${base}.vue';`;
+  .map((abs) => {
+    const base = basename(abs, '.vue');
+    const rel = relVueImport(abs);
+    return `import ${base} from '@/capacitor/vue/components/${rel}.vue';`;
   })
   .join('\n');
 
 const registerNames = componentFiles.map((n) => basename(n, '.vue'));
-
-const templateTags = componentFiles
-  .map((name) => {
-    const base = basename(name, '.vue');
-    if (base === 'Button') return '<Button id="probe-button">ok</Button>';
-    if (base === 'Toggle') return '<Toggle />';
-    return `<${base} />`;
-  })
-  .join('\n      ');
 
 writeFileSync(
   join(appDir, 'src/App.vue'),
@@ -192,7 +196,17 @@ export default {
   <TailwindCapacitorProvider :dark="dark">
     <div id="smoke-root" :class="{ dark }">
       <button id="dark-toggle" type="button" @click="flipDark">dark</button>
-      ${templateTags}
+      <Toggle id="probe-toggle" />
+      <div class="hidden" aria-hidden="true">
+      ${componentFiles
+        .filter((abs) => basename(abs, '.vue') !== 'Toggle')
+        .map((abs) => {
+          const base = basename(abs, '.vue');
+          if (base === 'Button') return '<Button id="probe-button">ok</Button>';
+          return `<${base} />`;
+        })
+        .join('\n      ')}
+      </div>
     </div>
   </TailwindCapacitorProvider>
 </template>
@@ -205,7 +219,13 @@ writeFileSync(
 import './style.css';
 import App from './App.vue';
 
-createApp(App).mount('#app');
+const app = createApp(App);
+app.config.errorHandler = (err) => {
+  const w = window;
+  w.__smokeRenderErrors = w.__smokeRenderErrors || [];
+  w.__smokeRenderErrors.push(String(err));
+};
+app.mount('#app');
 `,
 );
 
@@ -247,15 +267,18 @@ try {
     state: 'attached',
     timeout: 60_000,
   });
+  const boundaryErrors = await page.evaluate(
+    `(() => window.__smokeRenderErrors || [])()`,
+  );
+  if (boundaryErrors.length) {
+    throw new Error(`component render errors: ${boundaryErrors.join('; ')}`);
+  }
   await page.locator('#dark-toggle').click();
   await page.waitForFunction(
     `document.querySelector('#smoke-root')?.classList.contains('dark')`,
     { timeout: 60_000 },
   );
-  const toggleLabel = page.locator('label').filter({ has: page.locator('input[type="checkbox"]') }).first();
-  if (await toggleLabel.count()) {
-    await toggleLabel.click();
-  }
+  await page.locator('#probe-toggle').click();
   if (errors.length) {
     throw new Error(`runtime errors: ${errors.join('; ')}`);
   }

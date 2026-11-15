@@ -56,7 +56,9 @@ const Dialog = (props) => {
         titleFontSizeIos,
         titleFontSizeMaterial,
       },
-      colors
+      colors,
+      className ?? '',
+      { hasButtons: Boolean(buttons) },
     ),
     className
   );

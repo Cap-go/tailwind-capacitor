@@ -59,20 +59,49 @@ const classNameObj = "{ className: className ?? '' }";
 function fixClassesCalls(src, fn, params) {
   const props = '(.+?)';
   if (params.length === 4) {
-    src = src.replace(
-      new RegExp(
-        `${fn}\\(${props},\\s*colors(?:\\s*,\\s*colors)*\\s*,\\s*(\\{\\s*className[^}]+\\})\\s*,\\s*dark\\)`,
-        'gs',
-      ),
-      `${fn}($1, colors, $2, dark)`,
-    );
-    src = src.replace(
-      new RegExp(
-        `${fn}\\(${props},\\s*(\\{\\s*className[^}]+\\})\\s*,\\s*dark\\)`,
-        'gs',
-      ),
-      `${fn}($1, colors, $2, dark)`,
-    );
+    const p2 = params[2];
+    const p3 = params[3];
+    if (p2 === 'classes' && (p3 === 'darkClasses' || p3 === 'dark')) {
+      src = src.replace(
+        new RegExp(
+          `${fn}\\(${props},\\s*colors(?:\\s*,\\s*colors)*\\s*,\\s*\\{\\s*className[^}]+\\}\\s*,\\s*dark\\)`,
+          'gs',
+        ),
+        `${fn}($1, colors, className ?? '', dark)`,
+      );
+      src = src.replace(
+        new RegExp(
+          `${fn}\\(${props},\\s*colors(?:\\s*,\\s*colors)*\\s*,\\s*className\\s*,\\s*dark\\)`,
+          'gs',
+        ),
+        `${fn}($1, colors, className ?? '', dark)`,
+      );
+    } else if (p3.startsWith('{')) {
+      if (fn === 'DialogClasses') {
+        src = src.replace(
+          new RegExp(
+            `${fn}\\(${props},\\s*colors(?:\\s*,\\s*colors)*\\)(?!,)`,
+            'gs',
+          ),
+          `${fn}($1, colors, className ?? '', { hasButtons: Boolean(buttons) })`,
+        );
+      }
+      src = src.replace(
+        new RegExp(
+          `${fn}\\(${props},\\s*colors(?:\\s*,\\s*colors)*\\s*,\\s*(\\{\\s*className[^}]+\\})\\s*,\\s*dark\\)`,
+          'gs',
+        ),
+        `${fn}($1, colors, $2, dark)`,
+      );
+    } else {
+      src = src.replace(
+        new RegExp(
+          `${fn}\\(${props},\\s*colors(?:\\s*,\\s*colors)*\\s*,\\s*(\\{\\s*className[^}]+\\})\\s*,\\s*dark\\)`,
+          'gs',
+        ),
+        `${fn}($1, colors, $2, dark)`,
+      );
+    }
   } else if (params.length === 3) {
     const p2 = params[2];
     if (p2 === 'darkClasses' || p2 === 'dark') {
