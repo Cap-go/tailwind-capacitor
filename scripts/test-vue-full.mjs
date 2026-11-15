@@ -20,6 +20,7 @@ import {
   assertRangeTrackTranslucent,
 } from './smoke-backdrop-translucent.mjs';
 import { vueSmokeStyles, vueSmokeStylesNoSource } from './smoke-tailwind-styles.mjs';
+import { patchRangeClassesForBtf } from './smoke-btf-patch.mjs';
 
 function installOrderPriority(name) {
   const order = [
@@ -159,6 +160,8 @@ if (componentFiles.length < MIN_REGISTRY_COMPONENTS) {
 console.log(
   `test-vue-full: installed ${componentFiles.length} components from ${registryItemNames.length} registry items`,
 );
+
+patchRangeClassesForBtf(appDir);
 
 writeFileSync(
   join(appDir, 'src/style.css'),

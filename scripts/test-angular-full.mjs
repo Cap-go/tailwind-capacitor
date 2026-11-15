@@ -23,6 +23,7 @@ import {
   angularSmokeStyles,
   angularSmokeStylesNoSource,
 } from './smoke-tailwind-styles.mjs';
+import { patchRangeClassesForBtf } from './smoke-btf-patch.mjs';
 
 function readJsonc(path) {
   const raw = readFileSync(path, 'utf8');
@@ -145,6 +146,8 @@ for (const item of [...rootItems, ...angularItems]) {
     process.exit(1);
   }
 }
+
+patchRangeClassesForBtf(appDir);
 
 writeFileSync(
   join(appDir, 'src/styles.css'),
@@ -375,6 +378,10 @@ async function runBrowserChecks() {
 
 try {
   await runBrowserChecks();
+  console.log('test-angular-full: ok');
+} catch (error) {
+  console.error(error);
+  process.exitCode = 1;
 } finally {
   try {
     rmSync(work, {
@@ -386,6 +393,7 @@ try {
   } catch (error) {
     console.warn(`cleanup skipped: ${error.message}`);
   }
+  if (process.exitCode) {
+    process.exit(process.exitCode);
+  }
 }
-
-console.log('test-angular-full: ok');

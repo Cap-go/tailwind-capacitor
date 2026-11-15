@@ -21,6 +21,7 @@ import {
   assertRangeTrackTranslucent,
 } from './smoke-backdrop-translucent.mjs';
 import { reactSmokeStyles, reactSmokeStylesNoSource } from './smoke-tailwind-styles.mjs';
+import { patchRangeClassesForBtf } from './smoke-btf-patch.mjs';
 
 function prependNoCheck(rootDir) {
   const stack = [rootDir];
@@ -220,6 +221,8 @@ if (componentFiles.length < MIN_REGISTRY_COMPONENTS) {
 console.log(
   `test-react-full: installed ${componentFiles.length} components from ${registryItemNames.length} registry items`,
 );
+
+patchRangeClassesForBtf(appDir);
 
 writeFileSync(
   join(appDir, 'src/style.css'),
