@@ -202,12 +202,14 @@ ${componentImports}
       </div>
       @if (backdropProbe) {
         <div id="backdrop-probe">
-          <c-sheet [opened]="true"></c-sheet>
-          <c-actions [opened]="true">
-            <c-actions-group>
-              <c-actions-button>ok</c-actions-button>
-            </c-actions-group>
-          </c-actions>
+          <div
+            class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"
+            aria-hidden="true"
+          ></div>
+          <div
+            class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"
+            aria-hidden="true"
+          ></div>
         </div>
       }
     </tailwind-capacitor-provider>
