@@ -15,9 +15,11 @@ import { chromium } from 'playwright';
 import { repoRoot } from './repo-root.mjs';
 import { installPackInApp, packTgz } from './full-smoke-pack.mjs';
 import {
+  assertIosOutlineButtonActiveContrast,
   assertOpenBackdropsTranslucent,
   assertRangeTrackTranslucent,
 } from './smoke-backdrop-translucent.mjs';
+import { vueSmokeStyles, vueSmokeStylesNoSource } from './smoke-tailwind-styles.mjs';
 
 function installOrderPriority(name) {
   const order = [
@@ -80,11 +82,6 @@ const registryEnv = { ...process.env, REGISTRY_ROOT: publicRoot };
 
 cpSync(join(repoRoot, 'components-vue.json'), join(appDir, 'components.json'));
 cpSync(join(repoRoot, 'jsconfig.json'), join(appDir, 'jsconfig.json'));
-writeFileSync(
-  join(appDir, 'src/style.css'),
-  '@import "@/capacitor/styles/tailwind-capacitor.css";\n',
-);
-
 writeFileSync(
   join(appDir, 'vite.config.js'),
   `import { defineConfig } from 'vite';
@@ -163,6 +160,11 @@ console.log(
   `test-vue-full: installed ${componentFiles.length} components from ${registryItemNames.length} registry items`,
 );
 
+writeFileSync(
+  join(appDir, 'src/style.css'),
+  `${process.env.BTF_NO_SOURCE ? vueSmokeStylesNoSource : vueSmokeStyles}\n`,
+);
+
 const relVueImport = (abs) =>
   abs.slice(componentsDir.length + 1).replace(/\.vue$/, '');
 
@@ -206,6 +208,7 @@ export default {
     <div id="smoke-root" :class="{ dark }">
       <button id="dark-toggle" type="button" @click="flipDark">dark</button>
       <Toggle id="probe-toggle" />
+      <Button id="probe-outline-ios" :ios="true" :outline="true">outline</Button>
       <div class="hidden" aria-hidden="true">
       ${componentFiles
         .filter((abs) => basename(abs, '.vue') !== 'Toggle')
@@ -301,6 +304,7 @@ try {
   await page.locator('#probe-toggle').click();
   await page.evaluate(`window.dispatchEvent(new Event('smoke-open-backdrops'))`);
   await page.waitForSelector('#backdrop-probe', { state: 'attached', timeout: 60_000 });
+  await assertIosOutlineButtonActiveContrast(page);
   await assertOpenBackdropsTranslucent(page);
   await assertRangeTrackTranslucent(page);
   if (errors.length) {

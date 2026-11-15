@@ -19,6 +19,10 @@ import {
   assertOpenBackdropsTranslucent,
   assertRangeTrackTranslucent,
 } from './smoke-backdrop-translucent.mjs';
+import {
+  angularSmokeStyles,
+  angularSmokeStylesNoSource,
+} from './smoke-tailwind-styles.mjs';
 
 function readJsonc(path) {
   const raw = readFileSync(path, 'utf8');
@@ -99,11 +103,6 @@ const angularPublic = join(publicRoot, 'angular');
 cpSync(join(repoRoot, 'jsconfig.json'), join(appDir, 'jsconfig.json'));
 cpSync(join(repoRoot, 'components-angular.json'), join(appDir, 'components.json'));
 
-writeFileSync(
-  join(appDir, 'src/styles.css'),
-  `@import "@/capacitor/styles/tailwind-capacitor.css";\n`,
-);
-
 const tsconfigApp = join(appDir, 'tsconfig.json');
 const tsconfig = readJsonc(tsconfigApp);
 tsconfig.compilerOptions = tsconfig.compilerOptions || {};
@@ -147,6 +146,32 @@ for (const item of [...rootItems, ...angularItems]) {
   }
 }
 
+writeFileSync(
+  join(appDir, 'src/styles.css'),
+  `${process.env.BTF_NO_SOURCE ? angularSmokeStylesNoSource : angularSmokeStyles}\n`,
+);
+
+writeFileSync(
+  join(appDir, '.postcssrc.json'),
+  `${JSON.stringify({ plugins: { '@tailwindcss/postcss': {} } }, null, 2)}\n`,
+);
+
+const tailwindDeps = spawnSync(
+  'npm',
+  [
+    'install',
+    '-D',
+    'tailwindcss@^4.1.11',
+    '@tailwindcss/postcss@^4.1.11',
+    'postcss@^8.4.49',
+  ],
+  { cwd: appDir, stdio: 'inherit' },
+);
+if (tailwindDeps.status !== 0) {
+  rmSync(work, { recursive: true, force: true });
+  process.exit(tailwindDeps.status ?? 1);
+}
+
 const componentsDir = join(appDir, 'src/capacitor/angular/components');
 const metas = readdirSync(componentsDir)
   .filter(
@@ -188,13 +213,16 @@ function writeAppComponent({ uncontrolledToggle }) {
   writeFileSync(
     join(appDir, 'src/app/app.component.ts'),
     `import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { SheetClasses } from '@/capacitor/shared/classes/SheetClasses.js';
+import { ActionsClasses } from '@/capacitor/shared/classes/ActionsClasses.js';
 ${providerImport}
 ${componentImports}
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [${importNames.join(', ')}],
+  imports: [NgIf, ${importNames.join(', ')}],
   template: \`
     <tailwind-capacitor-provider [dark]="dark" theme="material" id="tcp">
       <button id="dark-toggle" type="button" (click)="flipDark()">dark</button>
@@ -203,15 +231,9 @@ ${componentImports}
       <div class="hidden" aria-hidden="true">
       ${templateTags}
       </div>
-      <div id="backdrop-probe" [hidden]="!backdropProbe">
-        <div
-          class="backdrop-probe-layer fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"
-          aria-hidden="true"
-        ></div>
-        <div
-          class="backdrop-probe-layer fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"
-          aria-hidden="true"
-        ></div>
+      <div id="backdrop-probe" *ngIf="backdropProbe">
+        <div [class]="sheetBackdropClass" class="backdrop-probe-layer"></div>
+        <div [class]="actionsBackdropClass" class="backdrop-probe-layer"></div>
         <div id="opacity-probe">
           <c-range [material]="true" [value]="50" [min]="0" [max]="100"></c-range>
         </div>
@@ -224,6 +246,8 @@ export class AppComponent implements OnInit {
   dark = false;
   toggleChecked = false;
   backdropProbe = false;
+  readonly sheetBackdropClass = SheetClasses({}, {}, '').backdrop.common;
+  readonly actionsBackdropClass = ActionsClasses({}, '').backdrop.common;
 
   ngOnInit(): void {
     window.addEventListener('smoke-open-backdrops', () => {
@@ -332,7 +356,10 @@ async function runBrowserChecks() {
       throw new Error(`expected aria-checked=true, got ${ariaChecked}`);
     }
     await page.evaluate(`window.dispatchEvent(new Event('smoke-open-backdrops'))`);
-    await page.waitForSelector('#backdrop-probe', { state: 'attached', timeout: 60_000 });
+    await page.waitForSelector('#backdrop-probe .backdrop-probe-layer', {
+      state: 'attached',
+      timeout: 60_000,
+    });
     await assertOpenBackdropsTranslucent(page);
     await assertRangeTrackTranslucent(page);
 

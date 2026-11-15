@@ -16,9 +16,11 @@ import { chromium } from 'playwright';
 import { repoRoot } from './repo-root.mjs';
 import { installPackInApp, packTgz } from './full-smoke-pack.mjs';
 import {
+  assertIosOutlineButtonActiveContrast,
   assertOpenBackdropsTranslucent,
   assertRangeTrackTranslucent,
 } from './smoke-backdrop-translucent.mjs';
+import { reactSmokeStyles, reactSmokeStylesNoSource } from './smoke-tailwind-styles.mjs';
 
 function prependNoCheck(rootDir) {
   const stack = [rootDir];
@@ -139,11 +141,6 @@ const registryEnv = { ...process.env, REGISTRY_ROOT: publicRoot };
 cpSync(join(repoRoot, 'components-react.json'), join(appDir, 'components.json'));
 cpSync(join(repoRoot, 'jsconfig.json'), join(appDir, 'jsconfig.json'));
 writeFileSync(
-  join(appDir, 'src/style.css'),
-  '@import "@/capacitor/styles/tailwind-capacitor.css";\n',
-);
-
-writeFileSync(
   join(appDir, 'vite.config.ts'),
   `import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
@@ -224,6 +221,11 @@ console.log(
   `test-react-full: installed ${componentFiles.length} components from ${registryItemNames.length} registry items`,
 );
 
+writeFileSync(
+  join(appDir, 'src/style.css'),
+  `${process.env.BTF_NO_SOURCE ? reactSmokeStylesNoSource : reactSmokeStyles}\n`,
+);
+
 const relImport = (abs) =>
   abs
     .slice(componentsDir.length + 1)
@@ -277,6 +279,9 @@ export default function App() {
       </button>
       <TailwindCapacitorProvider theme="material" dark={dark}>
         <Toggle checked={false} id="probe-toggle" />
+        <Button id="probe-outline-ios" ios outline>
+          outline
+        </Button>
         <div className="hidden" aria-hidden="true">
         ${componentFiles
           .filter((f) => basename(f) !== 'Toggle.tsx')
@@ -385,6 +390,7 @@ try {
   await page.locator('#probe-toggle').click();
   await page.evaluate(`window.dispatchEvent(new Event('smoke-open-backdrops'))`);
   await page.waitForSelector('#backdrop-probe', { state: 'attached', timeout: 60_000 });
+  await assertIosOutlineButtonActiveContrast(page);
   await assertOpenBackdropsTranslucent(page);
   await assertRangeTrackTranslucent(page);
   if (runtimeErrors.length) {
