@@ -56,7 +56,7 @@ export class MessagebarComponent implements OnInit, OnChanges, DoCheck {
     const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
     const colors = MessagebarColors(this.colors || {}, dark);
     const props = this as Record<string, unknown>;
-    const raw = MessagebarClasses(props, colors, { className: this.class }, dark);
+    const raw = MessagebarClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);
     const base = c['base'];
     if (typeof base === 'string') {

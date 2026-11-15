@@ -3,6 +3,7 @@ import React from 'react';
 import { FooterClasses } from '../../shared/classes/FooterClasses.js';
 import { FooterColors } from '../../shared/colors/FooterColors.js';
 import { useThemeClasses } from '../shared/use-theme-classes.js';
+import { useDarkClasses } from '../shared/use-dark-classes.js';
 
 const Footer = (props) => {
   const {
@@ -15,7 +16,8 @@ const Footer = (props) => {
     ...rest
   } = props;
   const themeClassesFn = useThemeClasses({ ios, material });
-  const colors = FooterColors(colorsProp);
+  const dark = useDarkClasses();
+  const colors = FooterColors(colorsProp, dark);
   const c = themeClassesFn(FooterClasses(props, colors, { className }), className);
   return (
     <Component className={c.base} {...rest}>

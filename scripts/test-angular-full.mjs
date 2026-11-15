@@ -14,6 +14,7 @@ import { spawn, spawnSync } from 'node:child_process';
 import { setTimeout as sleep } from 'node:timers/promises';
 import { chromium } from 'playwright';
 import { repoRoot } from './repo-root.mjs';
+import { installPackInApp, packTgz } from './full-smoke-pack.mjs';
 
 function readJsonc(path) {
   const raw = readFileSync(path, 'utf8');
@@ -64,11 +65,9 @@ async function waitForUrl(url, attempts = 80) {
 }
 
 const addScript = join(repoRoot, 'scripts/registry-add.mjs');
-const publicRoot = join(repoRoot, 'public/r');
-const angularPublic = join(publicRoot, 'angular');
 const work = mkdtempSync(join(tmpdir(), 'tc-angular-full-'));
 const appDir = join(work, 'full-app');
-const registryEnv = { ...process.env, REGISTRY_ROOT: publicRoot };
+const tgz = packTgz(work);
 
 const scaffold = spawnSync(
   'npx',
@@ -89,8 +88,17 @@ const scaffold = spawnSync(
 );
 if (scaffold.status !== 0) process.exit(scaffold.status ?? 1);
 
+const publicRoot = installPackInApp(appDir, tgz);
+const registryEnv = { ...process.env, REGISTRY_ROOT: publicRoot };
+const angularPublic = join(publicRoot, 'angular');
+
 cpSync(join(repoRoot, 'jsconfig.json'), join(appDir, 'jsconfig.json'));
 cpSync(join(repoRoot, 'components-angular.json'), join(appDir, 'components.json'));
+
+writeFileSync(
+  join(appDir, 'src/styles.css'),
+  `@import "@/capacitor/styles/tailwind-capacitor.css";\n`,
+);
 
 const tsconfigApp = join(appDir, 'tsconfig.json');
 const tsconfig = readJsonc(tsconfigApp);
@@ -119,9 +127,7 @@ const angularItems = readdirSync(angularPublic)
   })
   .map((name) => join(angularPublic, name));
 
-const installItems = [...rootItems, ...angularItems];
-
-for (const item of installItems) {
+for (const item of [...rootItems, ...angularItems]) {
   const result = spawnSync('node', [addScript, item], {
     cwd: appDir,
     stdio: 'pipe',
@@ -163,105 +169,64 @@ const importNames = [
 ];
 
 const templateTags = metas
-  .filter((m) => m.selector !== 'c-button' && m.selector !== 'c-toggle')
+  .filter((m) => m.selector !== 'c-toggle')
   .map((m) => `<${m.selector}></${m.selector}>`)
   .join('\n      ');
 
 const staleHtml = join(appDir, 'src/app/app.component.html');
 if (existsSync(staleHtml)) rmSync(staleHtml);
 
-function writeAppComponent({ includeAllTags }) {
-  const probeImports = [
-    'TailwindCapacitorProviderComponent',
-    'ButtonComponent',
-    'ToggleComponent',
-  ];
-  const probeImportLines = `import { TailwindCapacitorProviderComponent } from '../capacitor/angular/shared/tailwind-capacitor-provider.component';
-import { ButtonComponent } from '../capacitor/angular/components/Button.component';
-import { ToggleComponent } from '../capacitor/angular/components/Toggle.component';`;
-
-  const importsBlock = includeAllTags
-    ? `${providerImport}\n${componentImports}`
-    : probeImportLines;
-  const importsList = includeAllTags ? importNames : probeImports;
-  const extraTags = includeAllTags
-    ? `
-      <div class="hidden" aria-hidden="true">
-      ${templateTags}
-      </div>`
-    : '';
+function writeAppComponent({ uncontrolledToggle }) {
+  const toggleBlock = uncontrolledToggle
+    ? `<c-toggle id="probe-toggle" />`
+    : `<c-toggle id="probe-toggle" [checked]="toggleChecked" (checkedChange)="onToggle($event)" />`;
 
   writeFileSync(
     join(appDir, 'src/app/app.component.ts'),
-    `import { ApplicationRef, ChangeDetectorRef, Component, NgZone, OnInit, inject } from '@angular/core';
-${importsBlock}
-
-declare global {
-  interface Window {
-    __toggleCount?: number;
-    __setDark?: (value: boolean) => void;
-  }
-}
+    `import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+${providerImport}
+${componentImports}
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [${importsList.join(', ')}],
+  imports: [${importNames.join(', ')}],
   template: \`
     <tailwind-capacitor-provider [dark]="dark" theme="material" id="tcp">
       <button id="dark-toggle" type="button" (click)="flipDark()">dark</button>
       <c-button id="probe-button">ok</c-button>
-      <c-toggle
-        id="probe-toggle"
-        [checked]="toggleChecked"
-        (checkedChange)="onToggle($event)"
-      />${extraTags}
+      ${toggleBlock}
+      <div class="hidden" aria-hidden="true">
+      ${templateTags}
+      </div>
     </tailwind-capacitor-provider>
   \`,
 })
 export class AppComponent implements OnInit {
   private readonly cdr = inject(ChangeDetectorRef);
-  private readonly zone = inject(NgZone);
-  private readonly appRef = inject(ApplicationRef);
   dark = false;
   toggleChecked = false;
-  toggleCount = 0;
 
-  ngOnInit(): void {
-    window.__setDark = (value: boolean) => {
-      this.zone.run(() => {
-        this.dark = value;
-        this.cdr.detectChanges();
-        this.appRef.tick();
-      });
-    };
-  }
+  ngOnInit(): void {}
 
   flipDark(): void {
-    this.zone.run(() => {
-      this.dark = !this.dark;
-      this.cdr.detectChanges();
-      this.appRef.tick();
-    });
+    this.dark = !this.dark;
+    this.cdr.detectChanges();
   }
 
   onToggle(ev: Event): void {
-    this.zone.run(() => {
-      this.toggleCount += 1;
-      window.__toggleCount = this.toggleCount;
-      const input = ev.target as HTMLInputElement | null;
-      if (input && typeof input.checked === 'boolean') {
-        this.toggleChecked = input.checked;
-      }
-      this.cdr.detectChanges();
-    });
+    const input = ev.target as HTMLInputElement | null;
+    if (input && typeof input.checked === 'boolean') {
+      this.toggleChecked = input.checked;
+    }
+    this.cdr.detectChanges();
   }
 }
 `,
   );
 }
 
-writeAppComponent({ includeAllTags: true });
+writeAppComponent({ uncontrolledToggle: true });
 
 const build = spawnSync('npx', ['ng', 'build'], {
   cwd: appDir,
@@ -284,46 +249,79 @@ function resolveBrowserDist(dir) {
   throw new Error('missing ng build browser output');
 }
 
-spawnSync('fuser', ['-k', '4321/tcp'], { stdio: 'ignore' });
-const port = 4321;
-const baseUrl = `http://127.0.0.1:${port}/`;
-const distDir = resolveBrowserDist(appDir);
-const server = spawn(
-  'npx',
-  ['--yes', 'http-server@14.1.1', distDir, '-p', String(port), '-a', '127.0.0.1', '-c-1'],
-  { stdio: 'ignore' },
-);
+async function runBrowserChecks() {
+  const port = 46000 + Math.floor(Math.random() * 3000);
+  const baseUrl = `http://127.0.0.1:${port}/`;
+  const distDir = resolveBrowserDist(appDir);
+  const server = spawn(
+    'npx',
+    [
+      '--yes',
+      'http-server@14.1.1',
+      distDir,
+      '-p',
+      String(port),
+      '-a',
+      '127.0.0.1',
+      '-c-1',
+    ],
+    { stdio: ['ignore', 'ignore', 'inherit'] },
+  );
+
+  const errors = [];
+  try {
+    await waitForUrl(baseUrl);
+    const browser = await chromium.launch();
+    const page = await browser.newPage();
+    page.on('pageerror', (err) => errors.push(String(err)));
+    page.on('console', (msg) => {
+      if (msg.type() === 'error') errors.push(msg.text());
+    });
+
+    await page.goto(baseUrl, { waitUntil: 'domcontentloaded', timeout: 120_000 });
+
+    const provider = page.locator('tailwind-capacitor-provider#tcp');
+    await provider.waitFor({ state: 'attached' });
+
+    const darkShell = () =>
+      document.querySelector('tailwind-capacitor-provider#tcp div.dark');
+    const darkBefore = await page.evaluate(darkShell);
+    if (darkBefore) {
+      throw new Error('provider should start without .dark');
+    }
+    await page.locator('#dark-toggle').click();
+    await page.waitForFunction(
+      `!!document.querySelector('tailwind-capacitor-provider#tcp div.dark')`,
+      { timeout: 60_000 },
+    );
+
+    const toggle = page.locator('c-toggle#probe-toggle');
+    await toggle.waitFor({ state: 'attached' });
+    await toggle.locator('label').click();
+    await page.waitForFunction(
+      `document.querySelector('c-toggle#probe-toggle input[role="switch"]')?.getAttribute('aria-checked') === 'true'`,
+      { timeout: 60_000 },
+    );
+    const ariaChecked = await toggle
+      .locator('input[role="switch"]')
+      .getAttribute('aria-checked');
+    if (ariaChecked !== 'true') {
+      throw new Error(`expected aria-checked=true, got ${ariaChecked}`);
+    }
+
+    if (errors.length) {
+      throw new Error(`console or page errors: ${errors.join('; ')}`);
+    }
+    await browser.close();
+  } finally {
+    server.kill('SIGTERM');
+    await sleep(2000);
+  }
+}
 
 try {
-  await waitForUrl(baseUrl);
-  const browser = await chromium.launch();
-  const page = await browser.newPage();
-  await page.goto(baseUrl, { waitUntil: 'domcontentloaded', timeout: 120_000 });
-
-  const provider = page.locator('tailwind-capacitor-provider#tcp');
-  await provider.waitFor({ state: 'attached' });
-
-  const toggle = page.locator('c-toggle#probe-toggle');
-  await toggle.waitFor({ state: 'attached' });
-
-  const toggleInput = page.locator('c-toggle#probe-toggle input[role="switch"]');
-  await toggle.locator('input[role="switch"]').click({ force: true });
-  await page.waitForFunction('window.__toggleCount === 1', {
-    timeout: 60_000,
-  });
-  await page.waitForFunction(
-    `document.querySelector('c-toggle#probe-toggle input[role="switch"]')?.getAttribute('aria-checked') === 'true'`,
-    { timeout: 60_000 },
-  );
-  const ariaChecked = await toggleInput.getAttribute('aria-checked');
-  if (ariaChecked !== 'true') {
-    throw new Error(`expected aria-checked=true, got ${ariaChecked}`);
-  }
-
-  await browser.close();
+  await runBrowserChecks();
 } finally {
-  server.kill('SIGTERM');
-  await sleep(2000);
   try {
     rmSync(work, {
       recursive: true,

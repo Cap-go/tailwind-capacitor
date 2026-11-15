@@ -3,6 +3,7 @@ import React from 'react';
 import { DatetimeClasses } from '../../shared/classes/DatetimeClasses.js';
 import { DatetimeColors } from '../../shared/colors/DatetimeColors.js';
 import { useThemeClasses } from '../shared/use-theme-classes.js';
+import { useDarkClasses } from '../shared/use-dark-classes.js';
 
 const Datetime = (props) => {
   const {
@@ -15,7 +16,8 @@ const Datetime = (props) => {
     ...rest
   } = props;
   const themeClassesFn = useThemeClasses({ ios, material });
-  const colors = DatetimeColors(colorsProp);
+  const dark = useDarkClasses();
+  const colors = DatetimeColors(colorsProp, dark);
   const c = themeClassesFn(DatetimeClasses(props, colors, { className }), className);
   return (
     <Component className={c.base} {...rest}>

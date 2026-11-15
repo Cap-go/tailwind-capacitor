@@ -13,15 +13,24 @@ function kebab(name) {
     .toLowerCase();
 }
 
-function convertTemplate(inner) {
-  let t = inner
+function cleanVueSvg(svg) {
+  return svg
+    .replace(/\s+v-if="[^"]*"/g, '')
+    .replace(/\s+v-else\b/g, '')
+    .replace(/\bfillRule=/g, 'fill-rule=')
+    .replace(/\bclipRule=/g, 'clip-rule=')
     .replace(/:fill="([^"]+)"/g, '[attr.fill]="$1"')
     .replace(/:class="([^"]+)"/g, '[class]="$1"');
-  const svgs = [...t.matchAll(/<svg[\s\S]*?<\/svg>/g)].map((m) => m[0]);
-  if (t.includes("v-if=\"theme === 'ios'\"") && svgs.length >= 2) {
+}
+
+function convertTemplate(inner) {
+  const svgs = [...inner.matchAll(/<svg[\s\S]*?<\/svg>/g)].map((m) =>
+    cleanVueSvg(m[0]),
+  );
+  if (inner.includes("v-if=\"theme === 'ios'\"") && svgs.length >= 2) {
     return `@if (resolveTheme() === 'ios') {\n${svgs[0]}\n} @else {\n${svgs[1]}\n}`;
   }
-  return t.replace(/\s+v-if="([^"]+)"/g, ' @if ($1) {').replace(/\s+v-else/g, ' } @else {');
+  return cleanVueSvg(inner);
 }
 
 for (const file of readdirSync(iconsDir).filter((n) => n.endsWith('.vue'))) {

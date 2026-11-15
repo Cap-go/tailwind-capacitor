@@ -3,6 +3,7 @@ import React from 'react';
 import { ThumbnailClasses } from '../../shared/classes/ThumbnailClasses.js';
 import { ThumbnailColors } from '../../shared/colors/ThumbnailColors.js';
 import { useThemeClasses } from '../shared/use-theme-classes.js';
+import { useDarkClasses } from '../shared/use-dark-classes.js';
 
 const Thumbnail = (props) => {
   const {
@@ -15,7 +16,8 @@ const Thumbnail = (props) => {
     ...rest
   } = props;
   const themeClassesFn = useThemeClasses({ ios, material });
-  const colors = ThumbnailColors(colorsProp);
+  const dark = useDarkClasses();
+  const colors = ThumbnailColors(colorsProp, dark);
   const c = themeClassesFn(ThumbnailClasses(props, colors, { className }), className);
   return (
     <Component className={c.base} {...rest}>

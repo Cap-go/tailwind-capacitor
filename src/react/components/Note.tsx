@@ -3,6 +3,7 @@ import React from 'react';
 import { NoteClasses } from '../../shared/classes/NoteClasses.js';
 import { NoteColors } from '../../shared/colors/NoteColors.js';
 import { useThemeClasses } from '../shared/use-theme-classes.js';
+import { useDarkClasses } from '../shared/use-dark-classes.js';
 
 const Note = (props) => {
   const {
@@ -15,7 +16,8 @@ const Note = (props) => {
     ...rest
   } = props;
   const themeClassesFn = useThemeClasses({ ios, material });
-  const colors = NoteColors(colorsProp);
+  const dark = useDarkClasses();
+  const colors = NoteColors(colorsProp, dark);
   const c = themeClassesFn(NoteClasses(props, colors, { className }), className);
   return (
     <Component className={c.base} {...rest}>

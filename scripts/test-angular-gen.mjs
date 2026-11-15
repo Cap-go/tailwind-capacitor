@@ -29,8 +29,14 @@ const providerSource = readFileSync(providerPath, 'utf8');
 if (!providerSource.includes('get dark()')) {
   throw new Error('Angular provider context must expose reactive dark getter');
 }
-if (!providerSource.includes('appRef.tick')) {
-  throw new Error('Angular provider must tick children when dark input changes');
+if (providerSource.includes('appRef.tick')) {
+  throw new Error('Angular provider must not call appRef.tick (NG0101)');
+}
+if (
+  !providerSource.includes('ngOnChanges') ||
+  !providerSource.includes('refreshEffectiveDark')
+) {
+  throw new Error('Angular provider must refresh effectiveDark on input changes');
 }
 
 const togglePath = join(repoRoot, 'src/angular/components/Toggle.component.ts');

@@ -56,7 +56,7 @@ export class ListButtonComponent implements OnInit, OnChanges, DoCheck {
     const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
     const colors = ListButtonColors(this.colors || {}, dark);
     const props = this as Record<string, unknown>;
-    const raw = ListButtonClasses(props, colors, { className: this.class }, dark);
+    const raw = ListButtonClasses(props, colors, this.class);
     const c = themeClasses(raw, theme, this.class);
     const base = c['base'];
     if (typeof base === 'string') {

@@ -3,6 +3,7 @@ import React from 'react';
 import { ReorderClasses } from '../../shared/classes/ReorderClasses.js';
 import { ReorderColors } from '../../shared/colors/ReorderColors.js';
 import { useThemeClasses } from '../shared/use-theme-classes.js';
+import { useDarkClasses } from '../shared/use-dark-classes.js';
 
 const Reorder = (props) => {
   const {
@@ -15,7 +16,8 @@ const Reorder = (props) => {
     ...rest
   } = props;
   const themeClassesFn = useThemeClasses({ ios, material });
-  const colors = ReorderColors(colorsProp);
+  const dark = useDarkClasses();
+  const colors = ReorderColors(colorsProp, dark);
   const c = themeClassesFn(ReorderClasses(props, colors, { className }), className);
   return (
     <Component className={c.base} {...rest}>

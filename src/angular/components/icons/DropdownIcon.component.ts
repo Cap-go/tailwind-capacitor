@@ -10,7 +10,7 @@ import { Component, Input } from '@angular/core';
     viewBox="0 0 8 5"
     fill="currentcolor"
   >
-    <polygon fillRule="evenodd" points="0 0 8 0 4 5" />
+    <polygon fill-rule="evenodd" points="0 0 8 0 4 5" />
   </svg>`,
 })
 export class DropdownIconComponent {

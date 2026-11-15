@@ -3,6 +3,7 @@ import React from 'react';
 import { PickerClasses } from '../../shared/classes/PickerClasses.js';
 import { PickerColors } from '../../shared/colors/PickerColors.js';
 import { useThemeClasses } from '../shared/use-theme-classes.js';
+import { useDarkClasses } from '../shared/use-dark-classes.js';
 
 const Picker = (props) => {
   const {
@@ -15,7 +16,8 @@ const Picker = (props) => {
     ...rest
   } = props;
   const themeClassesFn = useThemeClasses({ ios, material });
-  const colors = PickerColors(colorsProp);
+  const dark = useDarkClasses();
+  const colors = PickerColors(colorsProp, dark);
   const c = themeClassesFn(PickerClasses(props, colors, { className }), className);
   return (
     <Component className={c.base} {...rest}>

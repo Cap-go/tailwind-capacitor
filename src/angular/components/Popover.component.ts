@@ -56,7 +56,7 @@ export class PopoverComponent implements OnInit, OnChanges, DoCheck {
     const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
     const colors = PopoverColors(this.colors || {}, dark);
     const props = this as Record<string, unknown>;
-    const raw = PopoverClasses(props, colors, { className: this.class }, dark);
+    const raw = PopoverClasses(props, colors, this.class);
     const c = themeClasses(raw, theme, this.class);
     const base = c['base'];
     if (typeof base === 'string') {

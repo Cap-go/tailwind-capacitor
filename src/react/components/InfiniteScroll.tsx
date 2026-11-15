@@ -3,6 +3,7 @@ import React from 'react';
 import { InfiniteScrollClasses } from '../../shared/classes/InfiniteScrollClasses.js';
 import { InfiniteScrollColors } from '../../shared/colors/InfiniteScrollColors.js';
 import { useThemeClasses } from '../shared/use-theme-classes.js';
+import { useDarkClasses } from '../shared/use-dark-classes.js';
 
 const InfiniteScroll = (props) => {
   const {
@@ -15,7 +16,8 @@ const InfiniteScroll = (props) => {
     ...rest
   } = props;
   const themeClassesFn = useThemeClasses({ ios, material });
-  const colors = InfiniteScrollColors(colorsProp);
+  const dark = useDarkClasses();
+  const colors = InfiniteScrollColors(colorsProp, dark);
   const c = themeClassesFn(InfiniteScrollClasses(props, colors, { className }), className);
   return (
     <Component className={c.base} {...rest}>

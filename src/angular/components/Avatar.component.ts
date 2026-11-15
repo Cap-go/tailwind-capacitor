@@ -56,7 +56,7 @@ export class AvatarComponent implements OnInit, OnChanges, DoCheck {
     const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
     const colors = AvatarColors(this.colors || {}, dark);
     const props = this as Record<string, unknown>;
-    const raw = AvatarClasses(props, colors, { className: this.class }, dark);
+    const raw = AvatarClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);
     const base = c['base'];
     if (typeof base === 'string') {

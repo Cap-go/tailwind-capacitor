@@ -3,6 +3,7 @@ import React from 'react';
 import { SkeletonClasses } from '../../shared/classes/SkeletonClasses.js';
 import { SkeletonColors } from '../../shared/colors/SkeletonColors.js';
 import { useThemeClasses } from '../shared/use-theme-classes.js';
+import { useDarkClasses } from '../shared/use-dark-classes.js';
 
 const Skeleton = (props) => {
   const {
@@ -15,7 +16,8 @@ const Skeleton = (props) => {
     ...rest
   } = props;
   const themeClassesFn = useThemeClasses({ ios, material });
-  const colors = SkeletonColors(colorsProp);
+  const dark = useDarkClasses();
+  const colors = SkeletonColors(colorsProp, dark);
   const c = themeClassesFn(SkeletonClasses(props, colors, { className }), className);
   return (
     <Component className={c.base} {...rest}>

@@ -5,7 +5,6 @@ import { Component, Input } from '@angular/core';
   standalone: true,
   template: `@if (resolveTheme() === 'ios') {
 <svg
-    v-if="theme === 'ios'"
     xmlns="http://www.w3.org/2000/svg"
     width="13"
     height="13"
@@ -18,7 +17,6 @@ import { Component, Input } from '@angular/core';
   </svg>
 } @else {
 <svg
-    v-else
     xmlns="http://www.w3.org/2000/svg"
     width="48"
     height="48"

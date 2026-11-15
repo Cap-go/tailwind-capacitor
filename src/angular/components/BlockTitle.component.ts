@@ -56,7 +56,7 @@ export class BlockTitleComponent implements OnInit, OnChanges, DoCheck {
     const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
     const colors = BlockTitleColors(this.colors || {}, dark);
     const props = this as Record<string, unknown>;
-    const raw = BlockTitleClasses(props, colors, { className: this.class }, dark);
+    const raw = BlockTitleClasses(props, colors);
     const c = themeClasses(raw, theme, this.class);
     const base = c['base'];
     if (typeof base === 'string') {

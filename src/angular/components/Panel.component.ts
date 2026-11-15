@@ -56,7 +56,7 @@ export class PanelComponent implements OnInit, OnChanges, DoCheck {
     const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
     const colors = PanelColors(this.colors || {}, dark);
     const props = this as Record<string, unknown>;
-    const raw = PanelClasses(props, colors, { className: this.class }, dark);
+    const raw = PanelClasses(props, colors, this.class);
     const c = themeClasses(raw, theme, this.class);
     const base = c['base'];
     if (typeof base === 'string') {

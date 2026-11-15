@@ -66,7 +66,7 @@ const Popover = (props) => {
   const colors = PopoverColors(colorsProp, dark);
 
   const c = themeClasses(
-    PopoverClasses({ ...props, angleClassName }, { className: className ?? '' }, dark),
+    PopoverClasses({ ...props, angleClassName }, colors, { className: className ?? '' }),
     className
   );
 

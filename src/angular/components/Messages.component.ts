@@ -56,7 +56,7 @@ export class MessagesComponent implements OnInit, OnChanges, DoCheck {
     const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
     const colors = {};
     const props = this as Record<string, unknown>;
-    const raw = MessagesClasses(props, colors, { className: this.class }, dark);
+    const raw = MessagesClasses(props, colors);
     const c = themeClasses(raw, theme, this.class);
     const base = c['base'];
     if (typeof base === 'string') {

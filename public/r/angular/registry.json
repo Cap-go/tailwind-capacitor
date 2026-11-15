@@ -9,7 +9,7 @@
       "title": "Tailwind Capacitor shared tokens",
       "description": "Shared class and color maps for capacitor components.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json"
+        "../capacitor-tailwind.json"
       ],
       "files": [
         {
@@ -1665,7 +1665,7 @@
       "title": "Tailwind Capacitor provider (Angular)",
       "description": "Root provider and Angular context for theme.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json"
+        "../capacitor-tailwind.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -1694,7 +1694,7 @@
       "title": "Tailwind Capacitor icons (Angular)",
       "description": "Inline SVG icon components used by capacitor UI.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json"
+        "./capacitor-provider.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -1748,9 +1748,9 @@
       "title": "Capacitor Accordion (Angular)",
       "description": "Capacitor Accordion Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -1769,9 +1769,9 @@
       "title": "Capacitor AccordionItem (Angular)",
       "description": "Capacitor AccordionItem Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -1790,9 +1790,9 @@
       "title": "Capacitor Actions (Angular)",
       "description": "Capacitor Actions Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -1811,9 +1811,9 @@
       "title": "Capacitor ActionsButton (Angular)",
       "description": "Capacitor ActionsButton Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -1832,9 +1832,9 @@
       "title": "Capacitor ActionsGroup (Angular)",
       "description": "Capacitor ActionsGroup Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -1853,9 +1853,9 @@
       "title": "Capacitor ActionsLabel (Angular)",
       "description": "Capacitor ActionsLabel Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -1874,9 +1874,9 @@
       "title": "Capacitor Alert (Angular)",
       "description": "Capacitor Alert Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -1895,9 +1895,9 @@
       "title": "Capacitor App (Angular)",
       "description": "Capacitor App Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -1916,9 +1916,9 @@
       "title": "Capacitor Avatar (Angular)",
       "description": "Capacitor Avatar Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -1937,9 +1937,9 @@
       "title": "Capacitor Badge (Angular)",
       "description": "Capacitor Badge Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -1958,9 +1958,9 @@
       "title": "Capacitor Block (Angular)",
       "description": "Capacitor Block Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -1979,9 +1979,9 @@
       "title": "Capacitor BlockFooter (Angular)",
       "description": "Capacitor BlockFooter Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2000,9 +2000,9 @@
       "title": "Capacitor BlockHeader (Angular)",
       "description": "Capacitor BlockHeader Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2021,9 +2021,9 @@
       "title": "Capacitor BlockTitle (Angular)",
       "description": "Capacitor BlockTitle Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2042,9 +2042,9 @@
       "title": "Capacitor Breadcrumbs (Angular)",
       "description": "Capacitor Breadcrumbs Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2063,9 +2063,9 @@
       "title": "Capacitor BreadcrumbsCollapsed (Angular)",
       "description": "Capacitor BreadcrumbsCollapsed Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2084,9 +2084,9 @@
       "title": "Capacitor BreadcrumbsItem (Angular)",
       "description": "Capacitor BreadcrumbsItem Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2105,9 +2105,9 @@
       "title": "Capacitor BreadcrumbsSeparator (Angular)",
       "description": "Capacitor BreadcrumbsSeparator Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2126,9 +2126,9 @@
       "title": "Capacitor Button (Angular)",
       "description": "Capacitor Button Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2147,9 +2147,9 @@
       "title": "Capacitor Card (Angular)",
       "description": "Capacitor Card Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2168,10 +2168,10 @@
       "title": "Capacitor Checkbox (Angular)",
       "description": "Capacitor Checkbox Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-icons.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json",
+        "./capacitor-icons.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2190,9 +2190,9 @@
       "title": "Capacitor Chip (Angular)",
       "description": "Capacitor Chip Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2211,9 +2211,9 @@
       "title": "Capacitor Datetime (Angular)",
       "description": "Capacitor Datetime Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2232,9 +2232,9 @@
       "title": "Capacitor Dialog (Angular)",
       "description": "Capacitor Dialog Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2253,9 +2253,9 @@
       "title": "Capacitor DialogButton (Angular)",
       "description": "Capacitor DialogButton Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2274,9 +2274,9 @@
       "title": "Capacitor Fab (Angular)",
       "description": "Capacitor Fab Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2295,9 +2295,9 @@
       "title": "Capacitor Footer (Angular)",
       "description": "Capacitor Footer Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2316,9 +2316,9 @@
       "title": "Capacitor Header (Angular)",
       "description": "Capacitor Header Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2337,9 +2337,9 @@
       "title": "Capacitor Icon (Angular)",
       "description": "Capacitor Icon Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2358,9 +2358,9 @@
       "title": "Capacitor InfiniteScroll (Angular)",
       "description": "Capacitor InfiniteScroll Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2379,9 +2379,9 @@
       "title": "Capacitor InputOtp (Angular)",
       "description": "Capacitor InputOtp Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2400,9 +2400,9 @@
       "title": "Capacitor ItemSliding (Angular)",
       "description": "Capacitor ItemSliding Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2421,9 +2421,9 @@
       "title": "Capacitor Link (Angular)",
       "description": "Capacitor Link Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2442,9 +2442,9 @@
       "title": "Capacitor List (Angular)",
       "description": "Capacitor List Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2463,9 +2463,9 @@
       "title": "Capacitor ListButton (Angular)",
       "description": "Capacitor ListButton Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2484,10 +2484,10 @@
       "title": "Capacitor ListGroup (Angular)",
       "description": "Capacitor ListGroup Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-list.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json",
+        "./capacitor-list.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2506,9 +2506,9 @@
       "title": "Capacitor ListInput (Angular)",
       "description": "Capacitor ListInput Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2527,9 +2527,9 @@
       "title": "Capacitor ListItem (Angular)",
       "description": "Capacitor ListItem Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2548,10 +2548,10 @@
       "title": "Capacitor MenuList (Angular)",
       "description": "Capacitor MenuList Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-list.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json",
+        "./capacitor-list.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2570,10 +2570,10 @@
       "title": "Capacitor MenuListItem (Angular)",
       "description": "Capacitor MenuListItem Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-list-item.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json",
+        "./capacitor-list-item.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2592,9 +2592,9 @@
       "title": "Capacitor Message (Angular)",
       "description": "Capacitor Message Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2613,9 +2613,9 @@
       "title": "Capacitor Messagebar (Angular)",
       "description": "Capacitor Messagebar Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2634,9 +2634,9 @@
       "title": "Capacitor Messages (Angular)",
       "description": "Capacitor Messages Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2655,9 +2655,9 @@
       "title": "Capacitor MessagesTitle (Angular)",
       "description": "Capacitor MessagesTitle Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2676,9 +2676,9 @@
       "title": "Capacitor Modal (Angular)",
       "description": "Capacitor Modal Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2697,9 +2697,9 @@
       "title": "Capacitor Navbar (Angular)",
       "description": "Capacitor Navbar Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2718,9 +2718,9 @@
       "title": "Capacitor NavbarBackLink (Angular)",
       "description": "Capacitor NavbarBackLink Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2739,9 +2739,9 @@
       "title": "Capacitor Note (Angular)",
       "description": "Capacitor Note Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2760,9 +2760,9 @@
       "title": "Capacitor Notification (Angular)",
       "description": "Capacitor Notification Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2781,9 +2781,9 @@
       "title": "Capacitor Page (Angular)",
       "description": "Capacitor Page Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2802,9 +2802,9 @@
       "title": "Capacitor Panel (Angular)",
       "description": "Capacitor Panel Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2823,9 +2823,9 @@
       "title": "Capacitor Picker (Angular)",
       "description": "Capacitor Picker Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2844,9 +2844,9 @@
       "title": "Capacitor Popover (Angular)",
       "description": "Capacitor Popover Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2865,9 +2865,9 @@
       "title": "Capacitor Popup (Angular)",
       "description": "Capacitor Popup Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2886,9 +2886,9 @@
       "title": "Capacitor Preloader (Angular)",
       "description": "Capacitor Preloader Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2907,9 +2907,9 @@
       "title": "Capacitor Progressbar (Angular)",
       "description": "Capacitor Progressbar Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2928,10 +2928,10 @@
       "title": "Capacitor Radio (Angular)",
       "description": "Capacitor Radio Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-icons.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json",
+        "./capacitor-icons.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2950,9 +2950,9 @@
       "title": "Capacitor Range (Angular)",
       "description": "Capacitor Range Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2971,9 +2971,9 @@
       "title": "Capacitor Refresher (Angular)",
       "description": "Capacitor Refresher Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -2992,9 +2992,9 @@
       "title": "Capacitor Reorder (Angular)",
       "description": "Capacitor Reorder Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3013,10 +3013,10 @@
       "title": "Capacitor Searchbar (Angular)",
       "description": "Capacitor Searchbar Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-icons.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json",
+        "./capacitor-icons.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3035,9 +3035,9 @@
       "title": "Capacitor Segmented (Angular)",
       "description": "Capacitor Segmented Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3056,10 +3056,10 @@
       "title": "Capacitor SegmentedButton (Angular)",
       "description": "Capacitor SegmentedButton Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-button.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json",
+        "./capacitor-button.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3078,11 +3078,11 @@
       "title": "Capacitor Select (Angular)",
       "description": "Capacitor Select Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-list.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-list-input.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json",
+        "./capacitor-list.json",
+        "./capacitor-list-input.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3101,9 +3101,9 @@
       "title": "Capacitor Sheet (Angular)",
       "description": "Capacitor Sheet Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3122,9 +3122,9 @@
       "title": "Capacitor Skeleton (Angular)",
       "description": "Capacitor Skeleton Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3143,9 +3143,9 @@
       "title": "Capacitor SplitPane (Angular)",
       "description": "Capacitor SplitPane Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3164,9 +3164,9 @@
       "title": "Capacitor Stepper (Angular)",
       "description": "Capacitor Stepper Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3185,10 +3185,10 @@
       "title": "Capacitor Tab (Angular)",
       "description": "Capacitor Tab Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-segmented-button.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json",
+        "./capacitor-segmented-button.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3207,10 +3207,10 @@
       "title": "Capacitor Tabbar (Angular)",
       "description": "Capacitor Tabbar Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-toolbar.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json",
+        "./capacitor-toolbar.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3229,9 +3229,9 @@
       "title": "Capacitor TabbarLink (Angular)",
       "description": "Capacitor TabbarLink Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3250,9 +3250,9 @@
       "title": "Capacitor Table (Angular)",
       "description": "Capacitor Table Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3271,9 +3271,9 @@
       "title": "Capacitor TableBody (Angular)",
       "description": "Capacitor TableBody Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3292,9 +3292,9 @@
       "title": "Capacitor TableCell (Angular)",
       "description": "Capacitor TableCell Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3313,9 +3313,9 @@
       "title": "Capacitor TableHead (Angular)",
       "description": "Capacitor TableHead Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3334,9 +3334,9 @@
       "title": "Capacitor TableRow (Angular)",
       "description": "Capacitor TableRow Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3355,10 +3355,10 @@
       "title": "Capacitor Tabs (Angular)",
       "description": "Capacitor Tabs Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-segmented.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json",
+        "./capacitor-segmented.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3377,11 +3377,11 @@
       "title": "Capacitor Textarea (Angular)",
       "description": "Capacitor Textarea Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-list.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-list-input.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json",
+        "./capacitor-list.json",
+        "./capacitor-list-input.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3400,9 +3400,9 @@
       "title": "Capacitor Thumbnail (Angular)",
       "description": "Capacitor Thumbnail Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3421,9 +3421,9 @@
       "title": "Capacitor Toast (Angular)",
       "description": "Capacitor Toast Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3442,9 +3442,9 @@
       "title": "Capacitor Toggle (Angular)",
       "description": "Capacitor Toggle Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3463,9 +3463,9 @@
       "title": "Capacitor Toolbar (Angular)",
       "description": "Capacitor Toolbar Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"
@@ -3484,9 +3484,9 @@
       "title": "Capacitor TouchRipple (Angular)",
       "description": "Capacitor TouchRipple Angular component.",
       "registryDependencies": [
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
-        "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+        "../capacitor-tailwind.json",
+        "./capacitor-provider.json",
+        "../capacitor-shared.json"
       ],
       "dependencies": [
         "@angular/core"

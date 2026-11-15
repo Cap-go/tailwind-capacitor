@@ -27,6 +27,39 @@ function parseColorsImport(source) {
   return m ? m[1] : null;
 }
 
+function classesArity(classesFn) {
+  const classPath = join(root, `src/shared/classes/${classesFn}.js`);
+  try {
+    const src = readFileSync(classPath, 'utf8');
+    const m = src.match(
+      new RegExp(`export const ${classesFn} = \\(([\\s\\S]*?)\\)\\s*=>`),
+    );
+    if (!m) return [];
+    return m[1]
+      .split(',')
+      .map((p) => p.trim().split('=')[0].trim())
+      .filter(Boolean);
+  } catch {
+    return [];
+  }
+}
+
+function angularClassesCall(classesFn) {
+  const params = classesArity(classesFn);
+  if (params.length <= 2) return `${classesFn}(props, colors)`;
+  if (params.length === 3) {
+    const p2 = params[2];
+    if (p2 === 'darkClasses' || p2 === 'dark') {
+      return `${classesFn}(props, colors, dark)`;
+    }
+    if (p2 === 'classes') {
+      return `${classesFn}(props, colors, this.class)`;
+    }
+    return `${classesFn}(props, colors, { className: this.class })`;
+  }
+  return `${classesFn}(props, colors, { className: this.class }, dark)`;
+}
+
 const wrappers = {
   ListGroup: {
     imports: "import { ListComponent } from './List.component.js';",
@@ -306,7 +339,7 @@ ${resolveClassMethod}${interactiveDoCheckMethod}${syncCheckedChangeMethod}  priv
     const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
     ${colorsDecl}
     const props = this as Record<string, unknown>;
-    const raw = ${meta.classesFn}(props, colors, { className: this.class }, dark);
+    const raw = ${angularClassesCall(meta.classesFn)};
     this.c = themeClasses(raw, theme, this.class);
   }
 }
@@ -391,7 +424,7 @@ ${resolveClassMethod}${interactiveDoCheckMethod}${syncCheckedChangeMethod}  priv
     const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
     ${colorsDecl}
     const props = this as Record<string, unknown>;
-    const raw = ${meta.classesFn}(props, colors, { className: this.class }, dark);
+    const raw = ${angularClassesCall(meta.classesFn)};
     this.c = themeClasses(raw, theme, this.class);
   }
 }
@@ -461,7 +494,7 @@ ${resolveClassMethod}${interactiveDoCheckMethod}${syncCheckedChangeMethod}  priv
     const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
     ${colorsDecl}
     const props = this as Record<string, unknown>;
-    const raw = ${meta.classesFn}(props, colors, { className: this.class }, dark);
+    const raw = ${angularClassesCall(meta.classesFn)};
     this.c = themeClasses(raw, this.theme, this.class);
   }
 }
@@ -541,7 +574,7 @@ ${resolveClassMethod}${interactiveDoCheckMethod}${relayCheckedChangeMethod}${val
     const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
     ${colorsDecl}
     const props = this as Record<string, unknown>;
-    const raw = ${meta.classesFn}(props, colors, dark);
+    const raw = ${angularClassesCall(meta.classesFn)};
     this.c = themeClasses(raw, theme, this.class);
     const range = this.max - this.min;
     const val = this.currentValue;
@@ -925,7 +958,7 @@ ${hostDoCheckMethod}
     const theme = resolveTheme(this.ctx, this);
     ${colorsBlock}
     const props = this as Record<string, unknown>;
-    const raw = ${meta.classesFn}(props, colors, { className: this.class }, dark);
+    const raw = ${angularClassesCall(meta.classesFn)};
     const c = themeClasses(raw, theme, this.class);
     const base = c['base'];
     if (typeof base === 'string') {
@@ -952,7 +985,6 @@ writeFileSync(
   OnChanges,
   OnDestroy,
   OnInit,
-  ApplicationRef,
   SimpleChanges,
 } from '@angular/core';
 import { CAPACITOR_CONTEXT } from './capacitor-context.js';
@@ -991,7 +1023,6 @@ export class TailwindCapacitorProviderComponent
 
   effectiveDark = false;
 
-  private readonly appRef = inject(ApplicationRef);
   private media?: MediaQueryList;
   private onSchemeChange?: () => void;
 
@@ -1011,7 +1042,6 @@ export class TailwindCapacitorProviderComponent
 
   ngOnChanges(_changes: SimpleChanges): void {
     this.refreshEffectiveDark();
-    this.appRef.tick();
   }
 
   ngOnDestroy(): void {

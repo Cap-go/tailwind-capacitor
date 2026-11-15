@@ -46,7 +46,7 @@ const Fab = (props) => {
 
   const colors = FabColors(colorsProp, dark);
 
-  const c = themeClasses(FabClasses(props, { className: className ?? '' }, dark), className);
+  const c = themeClasses(FabClasses(props, colors), className);
 
   return (
     <Glass

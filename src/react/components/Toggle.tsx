@@ -52,7 +52,7 @@ const Toggle = (props) => {
   const state =
     checked || (defaultChecked && !onChange) ? 'checked' : 'notChecked';
 
-  const c = themeClasses(ToggleClasses(props, { className: className ?? '' }, dark), className);
+  const c = themeClasses(ToggleClasses(props, colors, colors, colors, { className: className ?? '' }, dark), className);
 
   return (
     <Component

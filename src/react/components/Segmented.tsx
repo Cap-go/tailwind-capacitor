@@ -73,7 +73,7 @@ const Segmented = (props) => {
   const { navbar } = useNavbarContext();
 
   const c = themeClasses(
-    SegmentedClasses({ ...props, ...themeProps, navbar }, { className: className ?? '' }, dark)
+    SegmentedClasses({ ...props, ...themeProps, navbar }, colors, dark)
   );
 
   const Component = theme === 'ios' && navbar ? Glass : component;

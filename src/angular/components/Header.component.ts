@@ -56,7 +56,7 @@ export class HeaderComponent implements OnInit, OnChanges, DoCheck {
     const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
     const colors = HeaderColors(this.colors || {}, dark);
     const props = this as Record<string, unknown>;
-    const raw = HeaderClasses(props, colors, { className: this.class }, dark);
+    const raw = HeaderClasses(props, colors, { className: this.class });
     const c = themeClasses(raw, theme, this.class);
     const base = c['base'];
     if (typeof base === 'string') {

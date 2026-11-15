@@ -3,6 +3,7 @@ import React from 'react';
 import { InputOtpClasses } from '../../shared/classes/InputOtpClasses.js';
 import { InputOtpColors } from '../../shared/colors/InputOtpColors.js';
 import { useThemeClasses } from '../shared/use-theme-classes.js';
+import { useDarkClasses } from '../shared/use-dark-classes.js';
 
 const InputOtp = (props) => {
   const {
@@ -15,7 +16,8 @@ const InputOtp = (props) => {
     ...rest
   } = props;
   const themeClassesFn = useThemeClasses({ ios, material });
-  const colors = InputOtpColors(colorsProp);
+  const dark = useDarkClasses();
+  const colors = InputOtpColors(colorsProp, dark);
   const c = themeClassesFn(InputOtpClasses(props, colors, { className }), className);
   return (
     <Component className={c.base} {...rest}>

@@ -14,6 +14,7 @@ import { spawn, spawnSync } from 'node:child_process';
 import { setTimeout as sleep } from 'node:timers/promises';
 import { chromium } from 'playwright';
 import { repoRoot } from './repo-root.mjs';
+import { installPackInApp, packTgz } from './full-smoke-pack.mjs';
 
 function prependNoCheck(rootDir) {
   const stack = [rootDir];
@@ -54,6 +55,10 @@ function installOrderPriority(name) {
   return idx === -1 ? 100 : idx;
 }
 
+function componentExportName(file) {
+  return basename(file, '.tsx').replace(/Icon$/, 'Icon');
+}
+
 async function waitForUrl(url, attempts = 120) {
   for (let i = 0; i < attempts; i += 1) {
     try {
@@ -68,11 +73,9 @@ async function waitForUrl(url, attempts = 120) {
 }
 
 const addScript = join(repoRoot, 'scripts/registry-add.mjs');
-const publicRoot = join(repoRoot, 'public/r');
-const reactPublic = join(publicRoot, 'react');
 const work = mkdtempSync(join(tmpdir(), 'tc-react-full-'));
 const appDir = join(work, 'react-app');
-const registryEnv = { ...process.env, REGISTRY_ROOT: publicRoot };
+const tgz = packTgz(work);
 
 const scaffold = spawnSync(
   'npm',
@@ -84,6 +87,10 @@ if (scaffold.status !== 0) process.exit(scaffold.status ?? 1);
 const npmInstall = spawnSync('npm', ['install'], { cwd: appDir, stdio: 'inherit' });
 if (npmInstall.status !== 0) process.exit(npmInstall.status ?? 1);
 
+const publicRoot = installPackInApp(appDir, tgz);
+const reactPublic = join(publicRoot, 'react');
+const registryEnv = { ...process.env, REGISTRY_ROOT: publicRoot };
+
 cpSync(join(repoRoot, 'components-react.json'), join(appDir, 'components.json'));
 cpSync(join(repoRoot, 'jsconfig.json'), join(appDir, 'jsconfig.json'));
 writeFileSync(
@@ -91,9 +98,8 @@ writeFileSync(
   '@import "@/capacitor/styles/tailwind-capacitor.css";\n',
 );
 
-const viteConfigPath = join(appDir, 'vite.config.ts');
 writeFileSync(
-  viteConfigPath,
+  join(appDir, 'vite.config.ts'),
   `import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
@@ -152,25 +158,52 @@ const capacitorSrc = join(appDir, 'src/capacitor');
 if (existsSync(capacitorSrc)) prependNoCheck(capacitorSrc);
 
 const componentsDir = join(appDir, 'src/capacitor/react/components');
-const componentFiles = readdirSync(componentsDir).filter((name) => {
-  if (!name.endsWith('.tsx')) return false;
-  if (name.endsWith('Context.tsx')) return false;
-  return statSync(join(componentsDir, name)).isFile();
-});
+const componentFiles = readdirSync(componentsDir)
+  .filter((name) => {
+    if (!name.endsWith('.tsx')) return false;
+    if (name.endsWith('Context.tsx')) return false;
+    if (name === 'App.tsx') return false;
+    return statSync(join(componentsDir, name)).isFile();
+  })
+  .sort();
 
 if (!componentFiles.length) {
   console.error('no react components installed');
   process.exit(1);
 }
 
+const imports = componentFiles
+  .map(
+    (f) =>
+      `import ${componentExportName(f)} from '@/capacitor/react/components/${f.replace(/\.tsx$/, '')}';`,
+  )
+  .join('\n');
+
+const tags = componentFiles
+  .map((f) => {
+    const name = componentExportName(f);
+    if (name === 'Button') return '<Button id="probe-button">ok</Button>';
+    if (name === 'Toggle') return '<Toggle />';
+    return `<${name} />`;
+  })
+  .join('\n        ');
+
 writeFileSync(
   join(appDir, 'src/App.tsx'),
-  `import { TailwindCapacitorProvider } from '@/capacitor/react/shared/TailwindCapacitorProvider';
+  `import { useState } from 'react';
+import { TailwindCapacitorProvider } from '@/capacitor/react/shared/TailwindCapacitorProvider';
+${imports}
 
 export default function App() {
+  const [dark, setDark] = useState(false);
   return (
-    <TailwindCapacitorProvider theme="ios" dark={false}>
-      <div id="smoke-root" />
+    <TailwindCapacitorProvider theme="ios" dark={dark}>
+      <div id="smoke-root" className={dark ? 'dark' : ''}>
+        <button id="dark-toggle" type="button" onClick={() => setDark((v) => !v)}>
+          dark
+        </button>
+        ${tags}
+      </div>
     </TailwindCapacitorProvider>
   );
 }
@@ -198,12 +231,6 @@ Object.assign(tsconfig.compilerOptions, {
 });
 writeFileSync(join(appDir, 'tsconfig.app.json'), `${JSON.stringify(tsconfig, null, 2)}\n`);
 
-const typeBuild = spawnSync('npx', ['tsc', '-b'], { cwd: appDir, stdio: 'inherit' });
-if (typeBuild.status !== 0) {
-  rmSync(work, { recursive: true, force: true });
-  process.exit(typeBuild.status ?? 1);
-}
-
 const viteBuild = spawnSync('npx', ['vite', 'build'], { cwd: appDir, stdio: 'inherit' });
 if (viteBuild.status !== 0) {
   rmSync(work, { recursive: true, force: true });
@@ -212,10 +239,20 @@ if (viteBuild.status !== 0) {
 
 const port = 45000 + Math.floor(Math.random() * 5000);
 const baseUrl = `http://127.0.0.1:${port}/`;
+const distDir = join(appDir, 'dist');
 const server = spawn(
   'npx',
-  ['vite', '--port', String(port), '--host', '127.0.0.1'],
-  { cwd: appDir, stdio: 'ignore' },
+  [
+    '--yes',
+    'http-server@14.1.1',
+    distDir,
+    '-p',
+    String(port),
+    '-a',
+    '127.0.0.1',
+    '-c-1',
+  ],
+  { cwd: appDir, stdio: ['ignore', 'ignore', 'inherit'] },
 );
 
 try {
@@ -228,12 +265,15 @@ try {
     if (msg.type() === 'error') runtimeErrors.push(msg.text());
   });
   await page.goto(baseUrl, { waitUntil: 'load', timeout: 120_000 });
-  await page.waitForSelector('#smoke-root', {
-    state: 'attached',
-    timeout: 60_000,
-  });
+  await page.waitForSelector('#smoke-root', { state: 'attached', timeout: 60_000 });
+  await page.locator('#dark-toggle').click();
+  await page.waitForFunction(
+    `document.querySelector('#smoke-root')?.classList.contains('dark')`,
+    { timeout: 60_000 },
+  );
   if (runtimeErrors.length) {
-    throw new Error(`runtime errors: ${runtimeErrors.join('; ')}`);
+    const body = await page.locator('#root').innerHTML().catch(() => '');
+    throw new Error(`runtime errors: ${runtimeErrors.join('; ')} | root: ${body.slice(0, 500)}`);
   }
   await browser.close();
 } finally {

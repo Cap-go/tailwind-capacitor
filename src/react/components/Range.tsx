@@ -52,7 +52,7 @@ const Range = (props) => {
 
   const colors = RangeColors(colorsProp, dark);
 
-  const c = themeClasses(RangeClasses(props, { className: className ?? '' }, dark), className);
+  const c = themeClasses(RangeClasses(props, colors, dark), className);
 
   const valueWidth = (((value || 0) - min) / (max - min)) * 100;
 

@@ -3,6 +3,7 @@ import React from 'react';
 import { RefresherClasses } from '../../shared/classes/RefresherClasses.js';
 import { RefresherColors } from '../../shared/colors/RefresherColors.js';
 import { useThemeClasses } from '../shared/use-theme-classes.js';
+import { useDarkClasses } from '../shared/use-dark-classes.js';
 
 const Refresher = (props) => {
   const {
@@ -15,7 +16,8 @@ const Refresher = (props) => {
     ...rest
   } = props;
   const themeClassesFn = useThemeClasses({ ios, material });
-  const colors = RefresherColors(colorsProp);
+  const dark = useDarkClasses();
+  const colors = RefresherColors(colorsProp, dark);
   const c = themeClassesFn(RefresherClasses(props, colors, { className }), className);
   return (
     <Component className={c.base} {...rest}>

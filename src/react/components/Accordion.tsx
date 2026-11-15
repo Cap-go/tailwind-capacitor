@@ -3,6 +3,7 @@ import React from 'react';
 import { AccordionClasses } from '../../shared/classes/AccordionClasses.js';
 import { AccordionColors } from '../../shared/colors/AccordionColors.js';
 import { useThemeClasses } from '../shared/use-theme-classes.js';
+import { useDarkClasses } from '../shared/use-dark-classes.js';
 
 const Accordion = (props) => {
   const {
@@ -15,7 +16,8 @@ const Accordion = (props) => {
     ...rest
   } = props;
   const themeClassesFn = useThemeClasses({ ios, material });
-  const colors = AccordionColors(colorsProp);
+  const dark = useDarkClasses();
+  const colors = AccordionColors(colorsProp, dark);
   const c = themeClassesFn(AccordionClasses(props, colors, { className }), className);
   return (
     <Component className={c.base} {...rest}>
