@@ -283,9 +283,9 @@ async function runBrowserChecks() {
     const provider = page.locator('tailwind-capacitor-provider#tcp');
     await provider.waitFor({ state: 'attached' });
 
-    const darkShell = () =>
-      document.querySelector('tailwind-capacitor-provider#tcp div.dark');
-    const darkBefore = await page.evaluate(darkShell);
+    const darkBefore = await page.evaluate(
+      `!!document.querySelector('tailwind-capacitor-provider#tcp div.dark')`,
+    );
     if (darkBefore) {
       throw new Error('provider should start without .dark');
     }
