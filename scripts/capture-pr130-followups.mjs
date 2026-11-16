@@ -55,7 +55,7 @@ for (const scene of scenes) {
   });
   if (scene.key === 'navbar-mobile') {
     await page.waitForSelector('.demo-page .c-navbar', { timeout: 30_000 });
-    await page.evaluate(() => window.scrollTo(0, 420));
+    await page.evaluate('window.scrollTo(0, 420)');
     await sleep(200);
     await page.screenshot({
       path: join(outDir, `after-${scene.key}-mobile.png`),
