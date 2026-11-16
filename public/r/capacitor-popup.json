@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-popup",
   "type": "registry:item",
-  "title": "Capacitor Popup",
+  "title": "Capacitor Popup (Vue)",
   "description": "Capacitor Popup Vue component.",
   "dependencies": [
     "vue"

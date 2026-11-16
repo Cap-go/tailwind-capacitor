@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-breadcrumbs-collapsed",
+  "type": "registry:item",
+  "title": "Capacitor BreadcrumbsCollapsed (Vue)",
+  "description": "Capacitor BreadcrumbsCollapsed Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/BreadcrumbsCollapsed.vue",
+      "content": "<template>\n  <component\n    :is=\"component\"\n    :class=\"c.base\"\n    type=\"button\"\n    :aria-label=\"ariaLabel\"\n    role=\"button\"\n    tabindex=\"0\"\n  >\n    <span :class=\"c.dot\" />\n    <span :class=\"c.dot\" />\n    <span :class=\"c.dot\" />\n    <slot />\n  </component>\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { BreadcrumbsCollapsedClasses } from '../../shared/classes/BreadcrumbsCollapsedClasses.js';\n\n  import { BreadcrumbsCollapsedColors } from '../../shared/colors/BreadcrumbsCollapsedColors.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  export default {\n    name: 'c-breadcrumbs-collapsed',\n    props: {\n      component: {\n        type: String,\n        default: 'button',\n      },\n      ariaLabel: {\n        type: String,\n        default: 'Show more breadcrumbs',\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      colors: {\n        type: Object,\n      },\n    },\n    setup(props) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const colors = computed(() =>\n        BreadcrumbsCollapsedColors(props.colors, useDarkClasses)\n      );\n      const c = useThemeClasses(props, () =>\n        BreadcrumbsCollapsedClasses(props, colors.value)\n      );\n      return {\n        c,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/BreadcrumbsCollapsed.vue"
+    }
+  ]
+}

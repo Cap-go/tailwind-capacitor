@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-table-head",
+  "type": "registry:item",
+  "title": "Capacitor TableHead (React)",
+  "description": "Capacitor TableHead React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/TableHead.tsx",
+      "content": "// @ts-nocheck\nimport React, { useRef } from 'react';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { TableHeadClasses } from '../../shared/classes/TableHeadClasses.js';\n\nconst TableHead = (props) => {\n  const {\n    className,\n    ios,\n    material,\n\n    children,\n\n    ref,\n\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const themeClasses = useThemeClasses({ ios, material });\n  const c = themeClasses(TableHeadClasses({ ...props }));\n\n  const attrs = {\n    ...rest,\n  };\n\n  return (\n    <thead\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      className={c.base}\n      {...attrs}\n    >\n      {children}\n    </thead>\n  );\n};\n\nTableHead.displayName = 'TableHead';\nexport default TableHead;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/TableHead.tsx"
+    }
+  ]
+}

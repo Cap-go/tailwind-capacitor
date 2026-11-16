@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-panel",
   "type": "registry:item",
-  "title": "Capacitor Panel",
+  "title": "Capacitor Panel (Vue)",
   "description": "Capacitor Panel Vue component.",
   "dependencies": [
     "vue"

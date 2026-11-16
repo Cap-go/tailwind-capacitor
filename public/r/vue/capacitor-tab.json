@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-tab",
+  "type": "registry:item",
+  "title": "Capacitor Tab (Vue)",
+  "description": "Capacitor Tab Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-segmented-button.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Tab.vue",
+      "content": "<template>\n  <c-segmented-button v-bind=\"$attrs\" :active=\"active\" strong rounded>\n    <slot />\n  </c-segmented-button>\n</template>\n<script>\n  import cSegmentedButton from './SegmentedButton.vue';\n\n  export default {\n    name: 'c-tab',\n    components: { cSegmentedButton },\n    props: {\n      active: { type: Boolean, default: false },\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Tab.vue"
+    }
+  ]
+}

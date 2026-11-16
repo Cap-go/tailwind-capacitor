@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-dialog",
   "type": "registry:item",
-  "title": "Capacitor Dialog",
+  "title": "Capacitor Dialog (Vue)",
   "description": "Capacitor Dialog Vue component.",
   "dependencies": [
     "vue"

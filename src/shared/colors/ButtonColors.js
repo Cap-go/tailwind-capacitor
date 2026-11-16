@@ -2,7 +2,7 @@ import { cls } from '../cls.js';
 
 export const ButtonColors = (colorsProp = {}, dark) => {
   return {
-    activeBgIos: 'active:bg-primary',
+    activeBgIos: 'active:bg-primary/15',
     activeBgMaterial: '',
     textIos: 'text-primary',
     textMaterial: cls('text-md-light-primary', 'dark:text-md-dark-primary'),
@@ -21,7 +21,8 @@ export const ButtonColors = (colorsProp = {}, dark) => {
       'border-md-light-outline',
       dark('dark:border-md-dark-outline')
     ),
-    tonalBgIos: 'bg-primary',
+    tonalBgIos: 'bg-primary/15',
+    tonalActiveBgIos: 'active:bg-primary/25',
     tonalBgMaterial: cls(
       'bg-md-light-secondary-container',
       dark('dark:bg-md-dark-secondary-container')
@@ -33,16 +34,16 @@ export const ButtonColors = (colorsProp = {}, dark) => {
     ),
     touchRipple: 'touch-ripple-primary',
     disabledText: cls(
-      'text-black text-opacity-30',
-      dark('dark:text-white dark:text-opacity-30')
+      'text-black/30',
+      dark('dark:text-white/30')
     ),
     disabledBg: cls(
-      'bg-black bg-opacity-10',
-      dark('dark:bg-white dark:bg-opacity-10')
+      'bg-black/10',
+      dark('dark:bg-white/10')
     ),
     disabledBorder: cls(
-      'border-black border-opacity-10',
-      dark('dark:border-white dark:border-opacity-10')
+      'border-black/10',
+      dark('dark:border-white/10')
     ),
     ...colorsProp,
   };

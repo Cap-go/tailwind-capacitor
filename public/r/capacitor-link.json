@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-link",
   "type": "registry:item",
-  "title": "Capacitor Link",
+  "title": "Capacitor Link (Vue)",
   "description": "Capacitor Link Vue component.",
   "dependencies": [
     "vue"

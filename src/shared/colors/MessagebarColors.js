@@ -7,14 +7,14 @@ export const MessagebarColors = (colorsProp = {}, dark) => {
     inputBgIos: cls('bg-transparent'),
     borderIos: cls(
       'border-[#c8c8cd]',
-      dark('dark:border-white dark:border-opacity-30')
+      dark('dark:border-white/30')
     ),
     inputBgMd: cls(
       'bg-md-light-surface-2',
       dark('dark:bg-md-dark-surface-variant')
     ),
     placeholderIos: cls(
-      dark('dark:placeholder-white dark:placeholder-opacity-40')
+      dark('dark:placeholder-white/40')
     ),
     placeholderMd: cls(
       'placeholder-md-light-on-surface-variant',

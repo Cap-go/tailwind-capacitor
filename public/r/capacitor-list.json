@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-list",
   "type": "registry:item",
-  "title": "Capacitor List",
+  "title": "Capacitor List (Vue)",
   "description": "Capacitor List Vue component.",
   "dependencies": [
     "vue"

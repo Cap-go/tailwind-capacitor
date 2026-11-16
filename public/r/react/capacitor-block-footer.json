@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-block-footer",
+  "type": "registry:item",
+  "title": "Capacitor BlockFooter (React)",
+  "description": "Capacitor BlockFooter React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/BlockFooter.tsx",
+      "content": "// @ts-nocheck\nimport React, { useRef } from 'react';\nimport { BlockFooterClasses } from '../../shared/classes/BlockFooterClasses.js';\nimport { BlockFooterColors } from '../../shared/colors/BlockFooterColors.js';\nimport { useTheme } from '../shared/use-theme.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\n\nconst BlockFooter = (props) => {\n  const {\n    component = 'div',\n    className,\n    colors: colorsProp,\n\n    ios,\n    material,\n\n    inset,\n    insetIos,\n    insetMaterial,\n\n    // Children\n    children,\n\n    ref,\n\n    // Rest\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const theme = useTheme();\n\n  const isInset =\n    typeof inset === 'undefined'\n      ? theme === 'ios'\n        ? insetIos\n        : insetMaterial\n      : inset;\n\n  const Component = component;\n\n  const attrs = {\n    ...rest,\n  };\n\n  const themeClasses = useThemeClasses({ ios, material });\n  const dark = useDarkClasses();\n\n  const colors = BlockFooterColors(colorsProp, dark);\n\n  const c = themeClasses(\n    BlockFooterClasses({ ...props, inset: isInset }, colors),\n    className\n  );\n\n  return (\n    <Component\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      className={c.base}\n      {...attrs}\n    >\n      {children}\n    </Component>\n  );\n};\n\nBlockFooter.displayName = 'BlockFooter';\n\nexport default BlockFooter;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/BlockFooter.tsx"
+    }
+  ]
+}

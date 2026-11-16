@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-badge",
   "type": "registry:item",
-  "title": "Capacitor Badge",
+  "title": "Capacitor Badge (Vue)",
   "description": "Capacitor Badge Vue component.",
   "dependencies": [
     "vue"

@@ -3,12 +3,12 @@ import { cls } from '../cls.js';
 export const SegmentedColors = (colorsProp = {}, dark) => {
   return {
     strongBgIos: cls(
-      'bg-black bg-opacity-5',
-      dark('dark:bg-white dark:bg-opacity-10')
+      'bg-neutral-200/80',
+      dark('dark:bg-white/12 dark:border dark:border-white/20')
     ),
     strongBgMaterial: cls(
       'bg-md-light-surface-variant',
-      dark('dark:bg-md-dark-surface-variant')
+      dark('dark:bg-white/12 dark:border dark:border-white/20')
     ),
 
     borderIos: 'border-primary',

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-navbar-back-link",
+  "type": "registry:item",
+  "title": "Capacitor NavbarBackLink (React)",
+  "description": "Capacitor NavbarBackLink React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-icons.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-link.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/NavbarBackLink.tsx",
+      "content": "// @ts-nocheck\nimport React, { useRef } from 'react';\nimport { useTheme } from '../shared/use-theme.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\nimport BackIcon from './icons/BackIcon.tsx';\nimport Link from './Link.tsx';\nimport { NavbarBackLinkClasses } from '../../shared/classes/NavbarBackLinkClasses.js';\n\nconst NavbarBackLink = (props) => {\n  const {\n    component = 'a',\n    className,\n    text = 'Back',\n\n    showText,\n\n    ios,\n    material,\n\n    onClick,\n\n    // Children\n    children,\n\n    ref,\n\n    // Rest\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const attrs = {\n    ...rest,\n  };\n\n  const theme = useTheme({ ios, material });\n  const themeClasses = useThemeClasses({ ios, material });\n\n  const c = themeClasses(NavbarBackLinkClasses(), className);\n\n  return (\n    <Link\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      component={component}\n      className={c.base}\n      {...attrs}\n      onClick={onClick}\n    >\n      <span className={c.icon}>\n        <BackIcon theme={theme} />\n      </span>\n      {showText && <span>{text}</span>}\n      {children}\n    </Link>\n  );\n};\n\nNavbarBackLink.displayName = 'NavbarBackLink';\n\nexport default NavbarBackLink;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/NavbarBackLink.tsx"
+    }
+  ]
+}

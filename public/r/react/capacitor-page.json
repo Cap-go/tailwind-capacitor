@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-page",
+  "type": "registry:item",
+  "title": "Capacitor Page (React)",
+  "description": "Capacitor Page React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/Page.tsx",
+      "content": "// @ts-nocheck\nimport React, { useRef } from 'react';\nimport { PageClasses } from '../../shared/classes/PageClasses.js';\nimport { PageColors } from '../../shared/colors/PageColors.js';\nimport { useDarkClasses } from '../shared/use-dark-classes.js';\nimport { useThemeClasses } from '../shared/use-theme-classes.js';\n\nconst Page = (props) => {\n  const {\n    component = 'div',\n    className,\n    colors: colorsProp,\n    ios,\n    material,\n\n    // Children\n    children,\n\n    ref,\n\n    // Rest\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n\n  const Component = component;\n\n  const attrs = {\n    ...rest,\n  };\n\n  const themeClasses = useThemeClasses({ ios, material });\n  const dark = useDarkClasses();\n\n  const colors = PageColors(colorsProp, dark);\n\n  const c = themeClasses(PageClasses(props, colors, className));\n\n  return (\n    <Component\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      className={c.base}\n      {...attrs}\n    >\n      {children}\n    </Component>\n  );\n};\n\nPage.displayName = 'Page';\n\nexport default Page;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/Page.tsx"
+    }
+  ]
+}

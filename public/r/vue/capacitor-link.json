@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-link",
+  "type": "registry:item",
+  "title": "Capacitor Link (Vue)",
+  "description": "Capacitor Link Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Link.vue",
+      "content": "<template>\n  <component\n    :is=\"component\"\n    ref=\"rippleElRef\"\n    :class=\"classes\"\n    v-bind=\"linkProps\"\n    role=\"link\"\n    tabindex=\"0\"\n  >\n    <slot />\n  </component>\n</template>\n<script>\n  import { computed, ref } from 'vue';\n  import { cls } from '../../shared/cls.js';\n  import { useContext } from '../shared/use-context.js';\n\n  import { useTheme } from '../shared/use-theme.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  import { useTouchRipple } from '../shared/use-touch-ripple.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  import { LinkClasses } from '../../shared/classes/LinkClasses.js';\n\n  import { LinkColors } from '../../shared/colors/LinkColors.js';\n\n  export default {\n    name: 'c-link',\n    props: {\n      component: {\n        type: String,\n        default: 'a',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      linkProps: { type: Object, default: () => ({}) },\n\n      // Toolbar/navbar link\n      navbar: Boolean,\n      toolbar: Boolean,\n\n      iconOnly: Boolean,\n\n      tabbar: Boolean,\n      tabbarActive: Boolean,\n\n      touchRipple: { type: Boolean, default: undefined },\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const rippleElRef = ref(null);\n      const theme = useTheme(props, context);\n\n      const needsTouchRipple = computed(\n        () =>\n          theme.value === 'material' &&\n          (props.touchRipple ||\n            (typeof props.touchRipple === 'undefined' &&\n              (props.toolbar || props.tabbar || props.navbar)))\n      );\n\n      useTouchRipple(rippleElRef, props, {\n        context,\n        addCondition: () =>\n          props.touchRipple ||\n          (typeof props.touchRipple === 'undefined' &&\n            (props.toolbar || props.tabbar || props.navbar)),\n      });\n\n      const colors = computed(() =>\n        LinkColors(props.colors || {}, useDarkClasses)\n      );\n\n      // prettier-ignore\n      const themeTextColor = computed(() => props.navbar ?\n        (\n          theme.value === 'material' ? colors.value.navbarTextMaterial : colors.value.navbarTextIos\n        ) :\n        (\n          theme.value === 'material' ? colors.value.textMaterial : colors.value.textIos\n        )\n      );\n\n      const textColor = computed(() =>\n        props.tabbar && !props.tabbarActive\n          ? colors.value.tabbarInactive\n          : themeTextColor.value\n      );\n      const tabbarState = computed(() =>\n        props.tabbarActive ? 'active' : 'inactive'\n      );\n      const c = useThemeClasses(props, () =>\n        LinkClasses(\n          props,\n          {\n            textColor: textColor.value,\n            needsTouchRipple: needsTouchRipple.value,\n          },\n          ctx.attrs.class\n        )\n      );\n\n      const classes = computed(() =>\n        cls(\n          // base\n          c.value.base[props.tabbar ? 'default' : 'notTabbar'],\n\n          props.toolbar && c.value.toolbar,\n\n          props.navbar && c.value.navbar,\n\n          props.tabbar && c.value.tabbar[tabbarState.value]\n        )\n      );\n      return {\n        c,\n        classes,\n        rippleElRef,\n        theme,\n        tabbarState,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Link.vue"
+    }
+  ]
+}

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-progressbar",
   "type": "registry:item",
-  "title": "Capacitor Progressbar",
+  "title": "Capacitor Progressbar (Vue)",
   "description": "Capacitor Progressbar Vue component.",
   "dependencies": [
     "vue"

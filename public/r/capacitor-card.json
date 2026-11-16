@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-card",
   "type": "registry:item",
-  "title": "Capacitor Card",
+  "title": "Capacitor Card (Vue)",
   "description": "Capacitor Card Vue component.",
   "dependencies": [
     "vue"

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-message",
+  "type": "registry:item",
+  "title": "Capacitor Message (Vue)",
+  "description": "Capacitor Message Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Message.vue",
+      "content": "<template>\n  <component :is=\"component\" :id=\"id\" ref=\"elRef\" :class=\"classes\">\n    <div v-if=\"avatar || $slots.avatar\" :class=\"c.messageAvatar\">\n      {{ avatar }}<slot name=\"avatar\" />\n    </div>\n    <div :class=\"c.messageContent\">\n      <div v-if=\"name || $slots.name\" :class=\"c.messageName\">\n        {{ name }}<slot name=\"name\" />\n      </div>\n      <div v-if=\"header || $slots.header\" :class=\"c.messageHeader\">\n        {{ header }}<slot name=\"header\" />\n      </div>\n      <div :class=\"c.messageBubble\">\n        <div\n          v-if=\"textHeader || $slots.textHeader\"\n          :class=\"c.messageTextHeader\"\n        >\n          {{ textHeader }}<slot name=\"textHeader\" />\n        </div>\n        <div v-if=\"text || $slots.text\" :class=\"c.messageText\">\n          {{ text }}<slot name=\"text\" />\n        </div>\n        <div\n          v-if=\"textFooter || $slots.textFooter\"\n          :class=\"c.messageTextFooter\"\n        >\n          {{ textFooter }}<slot name=\"textFooter\" />\n        </div>\n        <div v-if=\"footer || $slots.footer\" :class=\"c.messageFooter\">\n          {{ footer }}<slot name=\"footer\" />\n        </div>\n      </div>\n    </div>\n  </component>\n</template>\n<script>\n  import { ref, computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { cls } from '../../shared/cls.js';\n\n  import { MessageClasses } from '../../shared/classes/MessageClasses.js';\n\n  import { MessageColors } from '../../shared/colors/MessageColors.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  export default {\n    name: 'c-message',\n    props: {\n      component: {\n        type: String,\n        default: 'div',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      id: String,\n      text: String,\n      name: String,\n      type: { type: String, default: 'sent' },\n      header: String,\n      footer: String,\n      textHeader: String,\n      textFooter: String,\n      avatar: { type: String, default: null },\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const elRef = ref(null);\n\n      const colors = computed(() =>\n        MessageColors(props.colors || {}, useDarkClasses)\n      );\n\n      const c = useThemeClasses(props, () =>\n        MessageClasses({ ...props }, colors.value)\n      );\n\n      const classes = computed(() =>\n        cls(\n          c.value.message,\n          props.type === 'sent' && c.value.messageSent,\n          props.type === 'received' && c.value.messageReceived\n        )\n      );\n      return {\n        c,\n        classes,\n        elRef,\n        slots: ctx.slots,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Message.vue"
+    }
+  ]
+}

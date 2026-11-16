@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-checkbox",
+  "type": "registry:item",
+  "title": "Capacitor Checkbox (Vue)",
+  "description": "Capacitor Checkbox Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-icons.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Checkbox.vue",
+      "content": "<template>\n  <component :is=\"component\" ref=\"elRef\" :class=\"c.base\">\n    <input\n      ref=\"inputElRef\"\n      type=\"checkbox\"\n      :name=\"name\"\n      :value=\"value\"\n      :disabled=\"disabled\"\n      :readonly=\"readonly\"\n      :checked=\"checked\"\n      :class=\"c.input\"\n      @change=\"onChange\"\n    />\n    <i :class=\"c.iconWrap[state]\">\n      <span v-if=\"indeterminate\" :class=\"c.indeterminateIcon\" />\n      <CheckboxIcon\n        v-else\n        :ios=\"ios\"\n        :material=\"material\"\n        :class=\"c.icon[state]\"\n      />\n    </i>\n    <slot />\n  </component>\n</template>\n<script>\n  import { computed, onMounted, ref, watch } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { CheckboxClasses } from '../../shared/classes/CheckboxClasses.js';\n\n  import { CheckboxColors } from '../../shared/colors/CheckboxColors.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  import { useTouchRipple } from '../shared/use-touch-ripple.js';\n  import CheckboxIcon from './icons/CheckboxIcon.vue';\n\n  export default {\n    name: 'c-checkbox',\n    components: { CheckboxIcon },\n    props: {\n      component: {\n        type: String,\n        default: 'label',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      touchRipple: {\n        type: Boolean,\n        default: true,\n      },\n      checked: { type: Boolean, default: false },\n      indeterminate: { type: Boolean, default: false },\n      name: { type: String, default: undefined },\n      value: { type: [Number, String], default: undefined },\n      disabled: { type: Boolean, default: false },\n      readonly: { type: Boolean, default: false },\n    },\n    emits: ['change'],\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const elRef = ref(null);\n      const inputElRef = ref(null);\n\n      useTouchRipple(elRef, props, { context });\n\n      const colors = computed(() =>\n        CheckboxColors(props.colors || {}, useDarkClasses)\n      );\n\n      const state = computed(() =>\n        props.checked || props.indeterminate ? 'checked' : 'notChecked'\n      );\n\n      const c = useThemeClasses(props, () =>\n        CheckboxClasses(props, colors.value, ctx.attrs.class, useDarkClasses)\n      );\n\n      watch(\n        () => props.indeterminate,\n        (newValue) => {\n          inputElRef.value.indeterminate = !!newValue;\n        }\n      );\n\n      onMounted(() => {\n        if (props.indeterminate)\n          inputElRef.value.indeterminate = !!props.indeterminate;\n      });\n\n      const onChange = (e) => {\n        ctx.emit('change', e);\n      };\n\n      return {\n        elRef,\n        inputElRef,\n        c,\n        state,\n        onChange,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Checkbox.vue"
+    }
+  ]
+}

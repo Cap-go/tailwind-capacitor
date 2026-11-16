@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-toast",
+  "type": "registry:item",
+  "title": "Capacitor Toast (Vue)",
+  "description": "Capacitor Toast Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/vue/capacitor-shared.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Toast.vue",
+      "content": "<template>\n  <component :is=\"component\" :class=\"c.base[position]\">\n    <div :class=\"c.content\">\n      <slot />\n      <div v-if=\"slots.button\" :class=\"c.button\"><slot name=\"button\" /></div>\n    </div>\n  </component>\n</template>\n<script>\n  import { computed } from 'vue';\n  import { useContext } from '../shared/use-context.js';\n\n  import { ToastClasses } from '../../shared/classes/ToastClasses.js';\n\n  import { ToastColors } from '../../shared/colors/ToastColors.js';\n\n  import { themeClasses } from '../shared/use-theme-classes.js';\n\n  import { darkClasses } from '../shared/use-dark-classes.js';\n\n  export default {\n    name: 'c-toast',\n    props: {\n      component: {\n        type: String,\n        default: 'div',\n      },\n      colors: {\n        type: Object,\n      },\n      ios: {\n        type: Boolean,\n        default: undefined,\n      },\n      material: {\n        type: Boolean,\n        default: undefined,\n      },\n      position: { type: String, default: 'left' },\n      opened: Boolean,\n      translucent: { type: Boolean, default: true },\n    },\n    setup(props, ctx) {\n      const context = useContext();\n      const useDarkClasses = darkClasses(context);\n      const useThemeClasses = themeClasses(context);\n      const colors = computed(() =>\n        ToastColors(props.colors || {}, useDarkClasses)\n      );\n      const c = useThemeClasses(props, () =>\n        ToastClasses(props, colors.value, ctx.attrs.class)\n      );\n\n      return {\n        c,\n        slots: ctx.slots,\n      };\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Toast.vue"
+    }
+  ]
+}

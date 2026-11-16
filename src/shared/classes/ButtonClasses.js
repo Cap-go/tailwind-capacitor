@@ -50,9 +50,7 @@ export const ButtonClasses = (props, colors, classes, darkClasses) => {
       },
       outline: {
         common: cls(
-          disabled
-            ? cls(colors.disabledText, colors.disabledBorder)
-            : cls('active:bg-opacity-15', colors.touchRipple)
+          disabled ? cls(colors.disabledText, colors.disabledBorder) : colors.touchRipple
         ),
         ios: cls(
           !segmented && 'border-2',
@@ -66,11 +64,7 @@ export const ButtonClasses = (props, colors, classes, darkClasses) => {
         ),
       },
       clear: {
-        common: cls(
-          disabled
-            ? colors.disabledText
-            : `active:bg-opacity-15 ${colors.touchRipple}`
-        ),
+        common: cls(disabled ? colors.disabledText : colors.touchRipple),
         ios: !disabled && cls(colors.textIos, colors.activeBgIos),
         material:
           !disabled && cls(colors.textMaterial, colors.activeBgMaterial),
@@ -81,12 +75,7 @@ export const ButtonClasses = (props, colors, classes, darkClasses) => {
           : cls(colors.touchRipple),
         ios:
           !disabled &&
-          cls(
-            colors.tonalTextIos,
-            colors.tonalBgIos,
-            colors.activeBgIos,
-            'bg-opacity-15 active:bg-opacity-25'
-          ),
+          cls(colors.tonalTextIos, colors.tonalBgIos, colors.tonalActiveBgIos),
         material:
           !disabled &&
           cls(
@@ -95,13 +84,36 @@ export const ButtonClasses = (props, colors, classes, darkClasses) => {
             colors.activeBgMaterial
           ),
       },
-      segmentedStrong: cls(
-        `active:bg-black active:bg-opacity-10`,
-        darkClasses(
-          'dark:active:bg-white dark:active:bg-opacity-5 dark:touch-ripple-white'
-        )
-      ),
-      segmentedStrongActive: 'duration-0',
+      segmentedStrong: {
+        common: cls(
+          '!bg-transparent shadow-none text-primary relative z-0',
+          darkClasses('dark:text-white/55'),
+          `active:bg-black/10`,
+          darkClasses(
+            'dark:active:bg-white/10 dark:touch-ripple-white'
+          ),
+          colors.touchRipple
+        ),
+        ios: cls(
+          !disabled && colors.textIos,
+          darkClasses('dark:text-white/55')
+        ),
+        material: cls(
+          !disabled && colors.textMaterial,
+          darkClasses('dark:text-white/55')
+        ),
+      },
+      segmentedStrongActive: {
+        common: 'duration-0 relative z-10 bg-transparent shadow-none',
+        ios: cls(
+          !disabled && 'text-black',
+          darkClasses('dark:text-white')
+        ),
+        material: cls(
+          !disabled && 'text-black',
+          darkClasses('dark:text-white')
+        ),
+      },
     },
     size: {
       small: {

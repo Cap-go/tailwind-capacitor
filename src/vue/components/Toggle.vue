@@ -2,11 +2,13 @@
   <component :is="component" ref="elRef" :class="c.base[state]">
     <input
       type="checkbox"
+      role="switch"
       :name="name"
       :value="value"
       :disabled="disabled"
       :readonly="readonly"
       :checked="checked"
+      :aria-checked="checked"
       :class="c.input"
     />
     <span :class="c.inner[state]" />

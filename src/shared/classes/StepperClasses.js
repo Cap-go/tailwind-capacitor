@@ -47,7 +47,7 @@ export const StepperClasses = (props, colors) => {
         common: cls(
           colors.fillTouchRipple,
           buttonsOnly &&
-            'first:border-r border-black border-opacity-10 rtl:first:border-l rtl:first:border-r-0'
+            'first:border-r border-black/10 rtl:first:border-l rtl:first:border-r-0'
         ),
         ios: cls(colors.fillBgIos, colors.fillTextIos, colors.fillActiveBgIos),
         material: cls(
@@ -59,7 +59,6 @@ export const StepperClasses = (props, colors) => {
       outline: {
         common: cls(
           colors.touchRipple,
-          'active:bg-opacity-15',
           buttonsOnly && 'first:border-r-0 rtl:last:border-r-0'
         ),
         ios: cls(
@@ -79,7 +78,7 @@ export const StepperClasses = (props, colors) => {
       },
 
       clear: {
-        common: `${colors.touchRipple} active:bg-opacity-15 last:border-l rtl:last:border-l-0 rtl:first:border-l border-black border-opacity-10`,
+        common: `${colors.touchRipple} last:border-l rtl:last:border-l-0 rtl:first:border-l border-black/10`,
         ios: cls(colors.textIos, colors.activeBgIos),
         material: cls(colors.textMaterial, colors.activeBgMaterial),
       },
@@ -101,7 +100,7 @@ export const StepperClasses = (props, colors) => {
         ios: `border-t-2 border-b-2 ${colors.outlineBorderIos}`,
         material: `border-t border-b ${colors.outlineBorderMaterial}`,
       },
-      clear: 'border-l border-black border-opacity-10',
+      clear: 'border-l border-black/10',
     },
     hBar: 'w-4 h-0.5 bg-current block',
     vBar: 'w-0.5 h-4 bg-current block absolute inset-1/2 transform -translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2',

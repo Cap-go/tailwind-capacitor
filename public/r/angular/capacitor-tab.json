@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-tab",
+  "type": "registry:item",
+  "title": "Capacitor Tab (Angular)",
+  "description": "Capacitor Tab Angular component.",
+  "dependencies": [
+    "@angular/core"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-segmented-button.json"
+  ],
+  "files": [
+    {
+      "path": "src/angular/components/Tab.component.ts",
+      "content": "import { Component, Input } from '@angular/core';\nimport { SegmentedButtonComponent } from './SegmentedButton.component.js';\n\n@Component({\n  selector: 'c-tab',\n  standalone: true,\n  imports: [SegmentedButtonComponent],\n  template: `<c-segmented-button [strong]=\"true\" [rounded]=\"true\" [active]=\"active\"><ng-content /></c-segmented-button>`,\n})\nexport class TabComponent {\n  @Input() active = false;\n}\n",
+      "type": "registry:file",
+      "target": "src/capacitor/angular/components/Tab.component.ts"
+    }
+  ]
+}

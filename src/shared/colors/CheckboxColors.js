@@ -3,8 +3,8 @@ import { cls } from '../cls.js';
 export const CheckboxColors = (colorsProp = {}, dark) => {
   return {
     borderIos: cls(
-      `border-black border-opacity-30`,
-      dark('dark:border-white dark:border-opacity-30')
+      `border-black/30`,
+      dark('dark:border-white/30')
     ),
     borderMaterial: cls(
       `border-md-light-outline`,

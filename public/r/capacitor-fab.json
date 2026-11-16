@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-fab",
   "type": "registry:item",
-  "title": "Capacitor Fab",
+  "title": "Capacitor Fab (Vue)",
   "description": "Capacitor Fab Vue component.",
   "dependencies": [
     "vue"

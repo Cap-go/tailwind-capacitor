@@ -3,8 +3,8 @@ import { cls } from '../cls.js';
 export const TabbarLinkColors = (colorsProp = {}, dark) => {
   return {
     textIos: cls(
-      'text-black text-opacity-40',
-      dark('dark:text-white dark:text-opacity-55')
+      'text-black/40',
+      dark('dark:text-white/55')
     ),
     textActiveIos: 'text-primary',
     textMaterial: cls(

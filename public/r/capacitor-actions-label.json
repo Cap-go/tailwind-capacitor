@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-actions-label",
   "type": "registry:item",
-  "title": "Capacitor ActionsLabel",
+  "title": "Capacitor ActionsLabel (Vue)",
   "description": "Capacitor ActionsLabel Vue component.",
   "dependencies": [
     "vue"

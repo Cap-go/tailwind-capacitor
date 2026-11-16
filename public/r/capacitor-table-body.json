@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-table-body",
   "type": "registry:item",
-  "title": "Capacitor TableBody",
+  "title": "Capacitor TableBody (Vue)",
   "description": "Capacitor TableBody Vue component.",
   "dependencies": [
     "vue"

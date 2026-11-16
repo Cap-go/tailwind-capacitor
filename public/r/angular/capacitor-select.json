@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-select",
+  "type": "registry:item",
+  "title": "Capacitor Select (Angular)",
+  "description": "Capacitor Select Angular component.",
+  "dependencies": [
+    "@angular/core"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-list.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-list-input.json"
+  ],
+  "files": [
+    {
+      "path": "src/angular/components/Select.component.ts",
+      "content": "import { Component, Input } from '@angular/core';\nimport { ListComponent } from './List.component.js';\nimport { ListInputComponent } from './ListInput.component.js';\n\n@Component({\n  selector: 'c-select',\n  standalone: true,\n  imports: [ListComponent, ListInputComponent],\n  template: `<c-list [strong]=\"true\" [inset]=\"true\"><c-list-input type=\"select\" [label]=\"label\"><ng-content /></c-list-input></c-list>`,\n})\nexport class SelectComponent {\n  @Input() label = \"Select\";\n}\n",
+      "type": "registry:file",
+      "target": "src/capacitor/angular/components/Select.component.ts"
+    }
+  ]
+}

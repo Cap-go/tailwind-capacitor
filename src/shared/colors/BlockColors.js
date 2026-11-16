@@ -3,8 +3,8 @@ import { cls } from '../cls.js';
 export const BlockColors = (colorsProp = {}, dark) => {
   return {
     outlineIos: cls(
-      'border-black border-opacity-20',
-      dark('dark:border-white dark:border-opacity-15')
+      'border-black/20',
+      dark('dark:border-white/15')
     ),
     outlineMaterial: cls(
       'border-md-light-outline',

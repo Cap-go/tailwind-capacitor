@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-tabbar",
+  "type": "registry:item",
+  "title": "Capacitor Tabbar (Angular)",
+  "description": "Capacitor Tabbar Angular component.",
+  "dependencies": [
+    "@angular/core"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular/capacitor-toolbar.json"
+  ],
+  "files": [
+    {
+      "path": "src/angular/components/Tabbar.component.ts",
+      "content": "import { Component, Input } from '@angular/core';\nimport { ToolbarComponent } from './Toolbar.component.js';\n\n@Component({\n  selector: 'c-tabbar',\n  standalone: true,\n  imports: [ToolbarComponent],\n  template: `<c-toolbar [tabbar]=\"true\"><ng-content /></c-toolbar>`,\n})\nexport class TabbarComponent {\n  \n}\n",
+      "type": "registry:file",
+      "target": "src/capacitor/angular/components/Tabbar.component.ts"
+    }
+  ]
+}

@@ -5,8 +5,8 @@ export const ActionsLabelColors = (colorsProp = {}, dark) => {
     bgIos: cls('bg-white', dark('dark:bg-neutral-800')),
     bgMaterial: cls('bg-md-light-surface-3', dark('dark:bg-md-dark-surface-3')),
     textIos: cls(
-      'text-black text-opacity-55',
-      dark('dark:text-white dark:text-opacity-55')
+      'text-black/55',
+      dark('dark:text-white/55')
     ),
     textMaterial: cls(
       'text-md-light-primary',

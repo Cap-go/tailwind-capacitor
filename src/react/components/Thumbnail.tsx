@@ -1,0 +1,30 @@
+// @ts-nocheck
+import React from 'react';
+import { ThumbnailClasses } from '../../shared/classes/ThumbnailClasses.js';
+import { ThumbnailColors } from '../../shared/colors/ThumbnailColors.js';
+import { useThemeClasses } from '../shared/use-theme-classes.js';
+import { useDarkClasses } from '../shared/use-dark-classes.js';
+
+const Thumbnail = (props) => {
+  const {
+    component: Component = 'div',
+    className,
+    colors: colorsProp,
+    ios,
+    material,
+    children,
+    ...rest
+  } = props;
+  const themeClassesFn = useThemeClasses({ ios, material });
+  const dark = useDarkClasses();
+  const colors = ThumbnailColors(colorsProp, dark);
+  const c = themeClassesFn(ThumbnailClasses(props, colors, { className }), className);
+  return (
+    <Component className={c.base} {...rest}>
+      {children}
+    </Component>
+  );
+};
+
+Thumbnail.displayName = 'Thumbnail';
+export default Thumbnail;

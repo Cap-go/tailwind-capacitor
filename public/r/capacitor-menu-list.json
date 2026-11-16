@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-menu-list",
   "type": "registry:item",
-  "title": "Capacitor MenuList",
+  "title": "Capacitor MenuList (Vue)",
   "description": "Capacitor MenuList Vue component.",
   "dependencies": [
     "vue"

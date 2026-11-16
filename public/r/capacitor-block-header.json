@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-block-header",
   "type": "registry:item",
-  "title": "Capacitor BlockHeader",
+  "title": "Capacitor BlockHeader (Vue)",
   "description": "Capacitor BlockHeader Vue component.",
   "dependencies": [
     "vue"

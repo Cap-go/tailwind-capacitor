@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-select",
+  "type": "registry:item",
+  "title": "Capacitor Select (Vue)",
+  "description": "Capacitor Select Vue component.",
+  "dependencies": [
+    "vue"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-list.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-list-input.json"
+  ],
+  "files": [
+    {
+      "path": "src/vue/components/Select.vue",
+      "content": "<template>\n  <c-list strong inset class=\"!my-0\">\n    <c-list-input type=\"select\" :label=\"label\">\n      <slot />\n    </c-list-input>\n  </c-list>\n</template>\n<script>\n  import cList from './List.vue';\n  import cListInput from './ListInput.vue';\n\n  export default {\n    name: 'c-select',\n    components: { cList, cListInput },\n    props: {\n      label: { type: String, default: 'Select' },\n    },\n  };\n</script>\n",
+      "type": "registry:file",
+      "target": "src/capacitor/vue/components/Select.vue"
+    }
+  ]
+}

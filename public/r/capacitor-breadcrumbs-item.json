@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-breadcrumbs-item",
   "type": "registry:item",
-  "title": "Capacitor BreadcrumbsItem",
+  "title": "Capacitor BreadcrumbsItem (Vue)",
   "description": "Capacitor BreadcrumbsItem Vue component.",
   "dependencies": [
     "vue"

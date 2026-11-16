@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "capacitor-segmented-button",
+  "type": "registry:item",
+  "title": "Capacitor SegmentedButton (React)",
+  "description": "Capacitor SegmentedButton React component.",
+  "dependencies": [
+    "react",
+    "react-dom"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-provider.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json",
+    "https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react/capacitor-button.json"
+  ],
+  "files": [
+    {
+      "path": "src/react/components/SegmentedButton.tsx",
+      "content": "// @ts-nocheck\nimport React, { useRef } from 'react';\nimport Button from './Button.tsx';\nimport { useSegmentedContext } from './SegmentedContext.tsx';\n\nconst SegmentedButton = (props) => {\n  const {\n    active,\n    children,\n    outline,\n    strong: buttonStrong,\n    rounded: buttonRounded,\n    raised: buttonRaised,\n    ref,\n    ...rest\n  } = props;\n\n  const elRef = useRef(null);\n  const { strong, rounded } = useSegmentedContext();\n\n  return (\n    <Button\n      ref={(el) => {\n        elRef.current = el;\n        if (ref && typeof ref === 'function') ref(el);\n        else if (ref) ref.current = el;\n      }}\n      segmented\n      segmentedActive={active}\n      segmentedStrong={strong}\n      rounded={rounded && strong}\n      {...rest}\n    >\n      {children}\n    </Button>\n  );\n};\n\nSegmentedButton.displayName = 'SegmentedButton';\n\nexport default SegmentedButton;\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/SegmentedButton.tsx"
+    },
+    {
+      "path": "src/react/components/SegmentedContext.tsx",
+      "content": "// @ts-nocheck\nimport { createContext, useContext } from 'react';\n\nexport const SegmentedContext = createContext({\n  strong: false,\n  outline: false,\n  rounded: false,\n  raised: false,\n});\n\nexport const useSegmentedContext = () => {\n  return useContext(SegmentedContext);\n};\n",
+      "type": "registry:file",
+      "target": "src/capacitor/react/components/SegmentedContext.tsx"
+    }
+  ]
+}

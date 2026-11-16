@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "capacitor-list-button",
   "type": "registry:item",
-  "title": "Capacitor ListButton",
+  "title": "Capacitor ListButton (Vue)",
   "description": "Capacitor ListButton Vue component.",
   "dependencies": [
     "vue"

@@ -249,9 +249,11 @@
           : isTonal.value
           ? 'tonal'
           : 'fill';
-        if (props.segmentedStrong) value = 'segmentedStrong';
-        if (props.segmentedStrong && props.segmentedActive)
+        if (props.segmentedStrong && props.segmentedActive) {
           value = 'segmentedStrongActive';
+        } else if (props.segmentedStrong) {
+          value = 'clear';
+        }
         return value;
       });
       const colors = computed(() =>

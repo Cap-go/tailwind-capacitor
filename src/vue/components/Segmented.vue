@@ -1,5 +1,5 @@
 <template>
-  <component :is="component" :class="classes">
+  <component :is="component" :class="[classes, 'c-segmented']">
     <span v-if="outline" :class="c.outlineInner"><slot /></span>
     <slot v-else />
     <span
