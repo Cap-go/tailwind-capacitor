@@ -16,7 +16,10 @@ import { chromium } from 'playwright';
 import { repoRoot } from './repo-root.mjs';
 import { installPackInApp, packTgz } from './full-smoke-pack.mjs';
 import {
+  assertIosOutlineButtonActiveContrast,
+  assertIosTonalButtonActivePress,
   assertOpenBackdropsTranslucent,
+  assertProgressbarMaterialTrack,
   assertRangeTrackTranslucent,
 } from './smoke-backdrop-translucent.mjs';
 import {
@@ -230,6 +233,10 @@ ${componentImports}
     <tailwind-capacitor-provider [dark]="dark" theme="material" id="tcp">
       <button id="dark-toggle" type="button" (click)="flipDark()">dark</button>
       <c-button id="probe-button">ok</c-button>
+      <c-button id="probe-outline-ios" [ios]="true" [outline]="true">outline</c-button>
+      <c-button id="probe-clear-ios" [ios]="true" [clear]="true">clear</c-button>
+      <c-button id="probe-tonal-ios" [ios]="true" [tonal]="true">tonal</c-button>
+      <c-progressbar id="probe-progressbar-material" [material]="true"></c-progressbar>
       ${toggleBlock}
       <div class="hidden" aria-hidden="true">
       ${templateTags}
@@ -363,8 +370,38 @@ async function runBrowserChecks() {
       state: 'attached',
       timeout: 60_000,
     });
+    const buttonVariants = await page.evaluate(`(() => {
+      const outline = document.querySelector('c-button#probe-outline-ios');
+      const clearBtn = document.querySelector('c-button#probe-clear-ios');
+      const tonal = document.querySelector('c-button#probe-tonal-ios');
+      if (!outline || !clearBtn || !tonal) {
+        return { ok: false, reason: 'missing angular button probes' };
+      }
+      const outlineCls = outline.className || '';
+      const clearCls = clearBtn.className || '';
+      const tonalCls = tonal.className || '';
+      if (!/\\bborder-2\\b/.test(outlineCls)) {
+        return { ok: false, reason: 'outline missing border-2: ' + outlineCls };
+      }
+      if (!/\\bbg-primary\\/15\\b/.test(tonalCls)) {
+        return { ok: false, reason: 'tonal missing bg-primary/15: ' + tonalCls };
+      }
+      if (/\\bborder-2\\b/.test(clearCls)) {
+        return { ok: false, reason: 'clear should not inherit outline border: ' + clearCls };
+      }
+      if (/(?:^|\\s)bg-primary\\/15(?:\\s|$)/.test(clearCls)) {
+        return { ok: false, reason: 'clear should not use tonal fill at rest: ' + clearCls };
+      }
+      return { ok: true };
+    })()`);
+    if (!buttonVariants.ok) {
+      throw new Error(`angular button variant check failed: ${buttonVariants.reason}`);
+    }
+    await assertIosOutlineButtonActiveContrast(page);
+    await assertIosTonalButtonActivePress(page);
     await assertOpenBackdropsTranslucent(page);
     await assertRangeTrackTranslucent(page);
+    await assertProgressbarMaterialTrack(page);
 
     if (errors.length) {
       throw new Error(`console or page errors: ${errors.join('; ')}`);

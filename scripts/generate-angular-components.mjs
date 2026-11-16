@@ -46,6 +46,7 @@ function classesArity(classesFn) {
 
 function angularClassesCall(classesFn) {
   const params = classesArity(classesFn);
+  if (params.length === 1) return `${classesFn}(colors)`;
   if (params.length <= 2) return `${classesFn}(props, colors)`;
   if (params.length === 3) {
     const p2 = params[2];
@@ -137,10 +138,18 @@ const extraInputs = {
   ],
   ListItem: [['menuListItem', false]],
   Button: [
-    ['segmented', false],
+    ['outline', undefined],
+    ['clear', undefined],
+    ['tonal', undefined],
     ['rounded', undefined],
+    ['small', undefined],
+    ['large', undefined],
+    ['raised', undefined],
+    ['inline', false],
+    ['segmented', false],
     ['segmentedActive', false],
     ['segmentedStrong', false],
+    ['disabled', false],
   ],
   Toolbar: [['tabbar', false]],
   Segmented: [
@@ -882,6 +891,9 @@ mkdirSync(join(root, 'src/angular/shared'), { recursive: true });
 for (const name of names) {
   if (wrappers[name]) {
     writeWrapper(name, wrappers[name]);
+    continue;
+  }
+  if (name === 'Button') {
     continue;
   }
   const source = readFileSync(join(vueDir, `${name}.vue`), 'utf8');

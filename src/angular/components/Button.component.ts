@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { ButtonClasses } from '../../shared/classes/ButtonClasses.js';
 import { ButtonColors } from '../../shared/colors/ButtonColors.js';
+import { cls } from '../../shared/cls.js';
 import { CAPACITOR_CONTEXT } from '../shared/capacitor-context.js';
 import { resolveTheme, themeClasses } from '../shared/use-theme-classes.js';
 
@@ -23,10 +24,32 @@ export class ButtonComponent implements OnInit, OnChanges, DoCheck {
   @Input() material?: boolean;
   @Input() colors?: Record<string, unknown>;
   @Input() class = '';
-  @Input() segmented = false;
+  @Input() outline?: boolean;
+  @Input() outlineIos?: boolean;
+  @Input() outlineMaterial?: boolean;
+  @Input() clear?: boolean;
+  @Input() clearIos?: boolean;
+  @Input() clearMaterial?: boolean;
+  @Input() tonal?: boolean;
+  @Input() tonalIos?: boolean;
+  @Input() tonalMaterial?: boolean;
   @Input() rounded?: boolean;
-  @Input() segmentedActive = false;
+  @Input() roundedIos?: boolean;
+  @Input() roundedMaterial?: boolean;
+  @Input() small?: boolean;
+  @Input() smallIos?: boolean;
+  @Input() smallMaterial?: boolean;
+  @Input() large?: boolean;
+  @Input() largeIos?: boolean;
+  @Input() largeMaterial?: boolean;
+  @Input() raised?: boolean;
+  @Input() raisedIos?: boolean;
+  @Input() raisedMaterial?: boolean;
+  @Input() inline = false;
+  @Input() segmented = false;
   @Input() segmentedStrong = false;
+  @Input() segmentedActive = false;
+  @Input() disabled = false;
 
   @HostBinding('class')
   hostClass = '';
@@ -53,23 +76,72 @@ export class ButtonComponent implements OnInit, OnChanges, DoCheck {
     }
   }
 
+  private themeFlag(
+    value: boolean | undefined,
+    iosFallback: boolean | undefined,
+    materialFallback: boolean | undefined,
+  ): boolean {
+    if (value !== undefined) return value;
+    const theme = resolveTheme(this.ctx, this);
+    return theme === 'ios' ? !!iosFallback : !!materialFallback;
+  }
 
   private syncHostClass(): void {
     const theme = resolveTheme(this.ctx, this);
     const dark = (classNames: string) => (this.ctx.dark ? classNames : '');
     const colors = ButtonColors(this.colors || {}, dark);
-    const props = this as Record<string, unknown>;
+    const isOutline = this.themeFlag(
+      this.outline,
+      this.outlineIos,
+      this.outlineMaterial,
+    );
+    const isClear = this.themeFlag(this.clear, this.clearIos, this.clearMaterial);
+    const isTonal = this.themeFlag(this.tonal, this.tonalIos, this.tonalMaterial);
+    const isRounded = this.themeFlag(
+      this.rounded,
+      this.roundedIos,
+      this.roundedMaterial,
+    );
+    const isSmall = this.themeFlag(this.small, this.smallIos, this.smallMaterial);
+    const isLarge = this.themeFlag(this.large, this.largeIos, this.largeMaterial);
+    const isRaised = this.themeFlag(this.raised, this.raisedIos, this.raisedMaterial);
+    const size = isLarge ? 'large' : isSmall ? 'small' : 'medium';
+    let style = isOutline
+      ? 'outline'
+      : isClear || (this.segmented && !this.segmentedActive)
+        ? 'clear'
+        : isTonal
+          ? 'tonal'
+          : 'fill';
+    if (this.segmentedStrong && this.segmentedActive) {
+      style = 'segmentedStrongActive';
+    } else if (this.segmentedStrong) {
+      style = 'clear';
+    }
+    const props = {
+      ...(this as Record<string, unknown>),
+      outline: isOutline,
+      clear: isClear,
+      tonal: isTonal,
+      rounded: isRounded,
+      small: isSmall,
+      large: isLarge,
+      raised: isRaised,
+    };
     const raw = ButtonClasses(props, colors, { className: this.class }, dark);
     const c = themeClasses(raw, theme, this.class);
-    const base = c['base'];
-    if (typeof base === 'string') {
-      this.hostClass = base;
-    } else if (base && typeof base === 'object') {
-      const baseRecord = base as Record<string, unknown>;
-      const d = baseRecord['default'];
-      this.hostClass = typeof d === 'string' ? d : '';
-    } else {
-      this.hostClass = '';
-    }
+    const base = c['base'] as Record<string, string> | string;
+    const baseShape =
+      typeof base === 'string'
+        ? base
+        : (base[isRounded ? 'rounded' : 'square'] as string);
+    const styleClasses = (
+      c['style'] as Record<string, string> | undefined
+    )?.[style];
+    const sizeClasses = (c['size'] as Record<string, string> | undefined)?.[
+      size
+    ];
+    const raisedClasses = isRaised ? (c['raised'] as string) : '';
+    this.hostClass = cls(baseShape, styleClasses, sizeClasses, raisedClasses);
   }
 }

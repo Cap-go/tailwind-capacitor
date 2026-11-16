@@ -115,9 +115,28 @@ body {
 }
 
 .demo-page .c-navbar {
-  position: relative !important;
-  top: auto !important;
+  position: sticky !important;
+  top: 0 !important;
   padding-top: 0 !important;
+  z-index: 30;
+  margin-bottom: 0.25rem;
+}
+
+@media (max-width: 640px) {
+  .demo-page .c-navbar > div:nth-child(2) {
+    overflow: hidden;
+  }
+
+  .demo-page .c-navbar .leading-tight {
+    max-width: calc(100vw - 4.5rem);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .demo-page .demo-shell {
+    position: relative;
+    z-index: 0;
+  }
 }
 
 .demo-page .c-navbar > div:nth-child(2),

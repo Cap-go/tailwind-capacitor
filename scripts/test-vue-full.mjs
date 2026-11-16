@@ -16,7 +16,9 @@ import { repoRoot } from './repo-root.mjs';
 import { installPackInApp, packTgz } from './full-smoke-pack.mjs';
 import {
   assertIosOutlineButtonActiveContrast,
+  assertIosTonalButtonActivePress,
   assertOpenBackdropsTranslucent,
+  assertProgressbarMaterialTrack,
   assertRangeTrackTranslucent,
 } from './smoke-backdrop-translucent.mjs';
 import { vueSmokeStyles, vueSmokeStylesNoSource } from './smoke-tailwind-styles.mjs';
@@ -212,6 +214,8 @@ export default {
       <button id="dark-toggle" type="button" @click="flipDark">dark</button>
       <Toggle id="probe-toggle" />
       <Button id="probe-outline-ios" :ios="true" :outline="true">outline</Button>
+      <Button id="probe-tonal-ios" :ios="true" :tonal="true">tonal</Button>
+      <Progressbar id="probe-progressbar-material" :material="true" class="w-48" :progress="40" />
       <div class="hidden" aria-hidden="true">
       ${componentFiles
         .filter((abs) => basename(abs, '.vue') !== 'Toggle')
@@ -308,8 +312,10 @@ try {
   await page.evaluate(`window.dispatchEvent(new Event('smoke-open-backdrops'))`);
   await page.waitForSelector('#backdrop-probe', { state: 'attached', timeout: 60_000 });
   await assertIosOutlineButtonActiveContrast(page);
+  await assertIosTonalButtonActivePress(page);
   await assertOpenBackdropsTranslucent(page);
   await assertRangeTrackTranslucent(page);
+  await assertProgressbarMaterialTrack(page);
   if (errors.length) {
     throw new Error(`runtime errors: ${errors.join('; ')}`);
   }

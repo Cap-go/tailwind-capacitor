@@ -152,6 +152,18 @@
         Tonal custom
       </Button>
 
+      <div
+        v-else-if="scene === 'progressbar-material'"
+        id="capture-progressbar"
+        class="w-full max-w-md px-6"
+      >
+        <Progressbar
+          :ios="platformTheme === 'ios'"
+          :material="platformTheme === 'material'"
+          :progress="0.45"
+        />
+      </div>
+
       <div v-else-if="scene === 'range'" id="capture-range" class="w-full max-w-md">
         <Range
           :ios="platformTheme === 'ios'"
@@ -177,6 +189,7 @@ import {
   Popup,
   Panel,
   Button,
+  Progressbar,
   Range,
 } from '@/capacitor/index.js'
 

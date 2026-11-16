@@ -1,7 +1,26 @@
 import { cls } from '../cls.js';
 
+function tonalActiveFromBg(tonalBgIos) {
+  const token = String(tonalBgIos)
+    .trim()
+    .split(/\s+/)
+    .find((part) => part.startsWith('bg-'));
+  if (!token) return 'active:bg-primary/25';
+  const slash = token.match(/^bg-(.+)\/(\d+)$/);
+  if (slash) {
+    const opacity = Math.min(
+      100,
+      Math.round((Number(slash[2]) * 25) / 15),
+    );
+    return `active:bg-${slash[1]}/${opacity}`;
+  }
+  const solid = token.match(/^bg-(.+)$/);
+  if (solid) return `active:bg-${solid[1]}/25`;
+  return 'active:bg-primary/25';
+}
+
 export const ButtonColors = (colorsProp = {}, dark) => {
-  return {
+  const defaults = {
     activeBgIos: 'active:bg-primary/15',
     activeBgMaterial: '',
     textIos: 'text-primary',
@@ -45,6 +64,13 @@ export const ButtonColors = (colorsProp = {}, dark) => {
       'border-black/10',
       dark('dark:border-white/10')
     ),
-    ...colorsProp,
   };
+  const merged = { ...defaults, ...colorsProp };
+  if (
+    Object.prototype.hasOwnProperty.call(colorsProp, 'tonalBgIos') &&
+    !Object.prototype.hasOwnProperty.call(colorsProp, 'tonalActiveBgIos')
+  ) {
+    merged.tonalActiveBgIos = tonalActiveFromBg(colorsProp.tonalBgIos);
+  }
+  return merged;
 };

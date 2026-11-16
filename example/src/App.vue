@@ -288,6 +288,7 @@ const CAPTURE_SCENES = new Set([
   'button-clear',
   'button-tonal',
   'button-tonal-custom',
+  'progressbar-material',
   'range',
 ])
 
