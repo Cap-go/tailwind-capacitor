@@ -54,7 +54,7 @@ for (const scene of scenes) {
     timeout: 120_000,
   });
   if (scene.key === 'navbar-mobile') {
-    await page.waitForSelector('.demo-page .c-navbar', { timeout: 30_000 });
+    await page.waitForSelector('.theme-chip', { timeout: 60_000 });
     await page.evaluate('window.scrollTo(0, 420)');
     await sleep(200);
     await page.screenshot({
