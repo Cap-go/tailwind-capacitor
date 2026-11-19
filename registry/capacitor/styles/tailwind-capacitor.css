@@ -5,6 +5,7 @@
 @import './safe-areas-generated.css';
 @import './utilities.css';
 @import './line-clamp.css';
+@import './tonal-active-flat.css';
 @plugin '../config/plugin-base.js';
 @plugin '../config/plugin-colors.js';
 @import './tonal-active-scan.css';
