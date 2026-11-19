@@ -116,7 +116,7 @@ export class ButtonComponent implements OnInit, OnChanges, DoCheck {
     if (this.segmentedStrong && this.segmentedActive) {
       style = 'segmentedStrongActive';
     } else if (this.segmentedStrong) {
-      style = 'clear';
+      style = 'segmentedStrong';
     }
     const props = {
       ...(this as Record<string, unknown>),

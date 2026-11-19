@@ -1,5 +1,9 @@
 import assert from 'node:assert/strict';
-import { ButtonColors } from '../src/shared/colors/ButtonColors.js';
+import { spawnSync } from 'node:child_process';
+import postcss from 'postcss';
+import tailwindcss from '@tailwindcss/postcss';
+import { ButtonColors, tonalActiveBgIosScanHints } from '../src/shared/colors/ButtonColors.js';
+import { repoRoot } from './repo-root.mjs';
 
 const dark = (classNames) => (classNames ? classNames : '');
 
@@ -29,5 +33,36 @@ const combined = ButtonColors(
   dark,
 );
 assert.match(combined.tonalActiveBgIos, /^active:bg-lime-500\//);
+
+assert.match(tonalActiveBgIosScanHints, /active:bg-primary\/25/);
+
+const sync = spawnSync('npm', ['run', 'generate:css'], {
+  cwd: repoRoot,
+  stdio: 'inherit',
+});
+if (sync.status !== 0) {
+  process.exit(sync.status ?? 1);
+}
+
+const stylesEntry = new URL(
+  '../registry/capacitor/styles/tailwind-capacitor.css',
+  import.meta.url,
+).pathname;
+const registryCss = await import('node:fs').then(({ readFileSync }) =>
+  readFileSync(stylesEntry, 'utf8'),
+);
+const result = await postcss([tailwindcss()]).process(registryCss, {
+  from: stylesEntry,
+});
+assert.match(
+  result.css,
+  /active\\:bg-primary\\\/25/,
+  'tailwind-capacitor.css must emit default tonal active utility',
+);
+assert.match(
+  result.css,
+  /active\\:bg-lime-500\\\/25/,
+  'tailwind-capacitor.css must emit lime tonal active utility',
+);
 
 console.log('test-button-tonal-colors: ok');

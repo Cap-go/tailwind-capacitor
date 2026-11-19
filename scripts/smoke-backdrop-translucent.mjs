@@ -19,6 +19,7 @@ async function assertStylesheetDefinesActiveUtility(page, utilityToken) {
   const result = await page.evaluate(`(() => {
     const token = ${tokenLit};
     const opacity = token.includes('25') ? '0.25' : '0.15';
+    const escaped = token.replace(/:/g, '\\\\:').replace(/\\//g, '\\\\/');
     const visit = (rules, matches) => {
       for (const rule of rules) {
         if (rule.cssRules && rule.cssRules.length) {
@@ -27,14 +28,15 @@ async function assertStylesheetDefinesActiveUtility(page, utilityToken) {
         const text = rule.cssText || '';
         const selector = rule.selectorText || '';
         if (!selector.includes(':active') && !text.includes(':active')) continue;
-        if (
-          text.includes('primary') &&
-          (text.includes(opacity) ||
-            text.includes(opacity.replace('0.', '')) ||
-            text.includes('color-mix'))
-        ) {
-          matches.push(selector || text.slice(0, 120));
-        }
+        const haystack = selector + text;
+        if (!haystack.includes(escaped) && !haystack.includes(token)) continue;
+        const decl = text.toLowerCase();
+        const opacityOk =
+          decl.includes(opacity) ||
+          decl.includes(opacity.replace('0.', '')) ||
+          decl.includes('color-mix');
+        if (!opacityOk) continue;
+        matches.push(selector || text.slice(0, 160));
       }
     };
     const matches = [];
@@ -204,20 +206,27 @@ export async function assertIosOutlineButtonActiveContrast(
       if (rgba) {
         const parts = rgba[1].split(',').map((p) => p.trim());
         if (parts.length === 4) return Number.parseFloat(parts[3]);
+        if (parts.length === 3) return 1;
       }
       return null;
     })();
-    if (alpha !== null && alpha >= 0.85) {
-      return { ok: false, reason: 'active press rendered solid fill: ' + bg };
+    if (alpha === null || alpha >= 0.85 || alpha <= 0) {
+      return {
+        ok: false,
+        reason: 'active press not translucent outline fill: ' + bg + ' alpha=' + alpha,
+      };
+    }
+    if (alpha < 0.12 || alpha > 0.2) {
+      return {
+        ok: false,
+        reason: 'active press alpha outside outline range: ' + alpha + ' bg=' + bg,
+      };
     }
     return { ok: true, bg, fg, alpha };
   })()`);
   await page.mouse.up();
   if (!result.ok) {
     throw new Error(`iOS outline active contrast check failed: ${result.reason}`);
-  }
-  if (result.alpha !== null && result.alpha >= 0.12 && result.alpha <= 0.2) {
-    return result;
   }
   return result;
 }
@@ -253,6 +262,11 @@ export async function assertIosTonalButtonActivePress(
     throw new Error(`iOS tonal active check failed: no bounding box for ${probeSelector}`);
   }
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  const restingBg = await page.evaluate(`(() => {
+    const host = document.querySelector(${selLit});
+    const el = host.matches('button,a') ? host : host.querySelector('button,a') || host;
+    return getComputedStyle(el).backgroundColor;
+  })()`);
   await page.mouse.down();
   const result = await page.evaluate(`(() => {
     const host = document.querySelector(${selLit});
@@ -266,7 +280,27 @@ export async function assertIosTonalButtonActivePress(
     if (!/(?:^|\\s)active:bg-primary\\/25(?:\\s|$)/.test(cls)) {
       return { ok: false, reason: 'missing active:bg-primary/25 class on press: ' + cls };
     }
-    return { ok: true, bg, cls };
+    const resting = ${JSON.stringify(restingBg)};
+    if (bg === resting) {
+      return { ok: false, reason: 'tonal press bg unchanged from rest: ' + bg };
+    }
+    const alpha = (() => {
+      const slash = bg.match(/\\/\\s*([\\d.]+)\\s*\\)\\s*$/);
+      if (slash) return Number.parseFloat(slash[1]);
+      const rgba = bg.match(/^rgba?\\(([^)]+)\\)/);
+      if (rgba) {
+        const parts = rgba[1].split(',').map((p) => p.trim());
+        if (parts.length === 4) return Number.parseFloat(parts[3]);
+      }
+      return null;
+    })();
+    if (alpha === null || alpha < 0.18 || alpha > 0.32) {
+      return {
+        ok: false,
+        reason: 'tonal press fill not in expected range: alpha=' + alpha + ' bg=' + bg,
+      };
+    }
+    return { ok: true, bg, cls, resting, alpha };
   })()`);
   await page.mouse.up();
   if (!result.ok) {

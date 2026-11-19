@@ -89,6 +89,10 @@ Tailwind v4 only emits utilities that appear in scanned sources. Angular apps th
 
 Without those lines, classes from `ButtonClasses.js` and other shared maps are missing at runtime (range tracks and material backdrops look opaque).
 
+### Custom iOS tonal button colors
+
+`ButtonColors` can derive `tonalActiveBgIos` when you set only `tonalBgIos`. Tailwind v4 still needs the resulting `active:bg-*` utility in a scanned source. Either set `tonalActiveBgIos` explicitly alongside `tonalBgIos`, or add the derived active class to your app CSS or Tailwind safelist. The defaults and common examples are listed as literals in `tonalActiveBgIosScanHints` inside `src/shared/colors/ButtonColors.js` for `@source` scanning.
+
 ## Styles
 
 ```css

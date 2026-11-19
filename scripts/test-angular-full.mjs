@@ -383,7 +383,7 @@ async function runBrowserChecks() {
       if (!/\\bborder-2\\b/.test(outlineCls)) {
         return { ok: false, reason: 'outline missing border-2: ' + outlineCls };
       }
-      if (!/\\bbg-primary\\/15\\b/.test(tonalCls)) {
+      if (!/(?:^|\\s)bg-primary\\/15(?:\\s|$)/.test(tonalCls)) {
         return { ok: false, reason: 'tonal missing bg-primary/15: ' + tonalCls };
       }
       if (/\\bborder-2\\b/.test(clearCls)) {

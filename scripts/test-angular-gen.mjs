@@ -60,11 +60,18 @@ ButtonColors({}, dark);
 const buttonPath = join(repoRoot, 'src/angular/components/Button.component.ts');
 if (existsSync(buttonPath)) {
   const buttonSource = readFileSync(buttonPath, 'utf8');
-  if (!buttonSource.includes('@Input() outline')) {
-    throw new Error('Angular Button must declare outline, clear, and tonal inputs');
+  const variantInputs = ['@Input() outline', '@Input() clear', '@Input() tonal'];
+  for (const needle of variantInputs) {
+    if (!buttonSource.includes(needle)) {
+      throw new Error('Angular Button must declare outline, clear, and tonal inputs');
+    }
   }
-  if (!buttonSource.includes("c['style']")) {
-    throw new Error('Angular Button must apply style segment classes, not base only');
+  if (
+    !buttonSource.includes("c['style']") ||
+    !buttonSource.includes('styleClasses') ||
+    !buttonSource.includes('?.[style]')
+  ) {
+    throw new Error('Angular Button must apply style segment classes on the host');
   }
 }
 

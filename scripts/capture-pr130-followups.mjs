@@ -28,11 +28,26 @@ async function waitForUrl(url, attempts = 60) {
   throw new Error(`server did not respond at ${url}`);
 }
 
-spawnSync('npm', ['run', 'sync:example'], { cwd: repoRoot, stdio: 'inherit' });
-spawnSync('npm', ['run', 'build'], {
+function assertSpawnOk(result, label) {
+  if (result.error) {
+    throw result.error;
+  }
+  if (result.status !== 0) {
+    throw new Error(`${label} exited with status ${result.status ?? 'unknown'}`);
+  }
+}
+
+const syncResult = spawnSync('npm', ['run', 'sync:example'], {
+  cwd: repoRoot,
+  stdio: 'inherit',
+});
+assertSpawnOk(syncResult, 'sync:example');
+
+const buildResult = spawnSync('npm', ['run', 'build'], {
   cwd: join(repoRoot, 'example'),
   stdio: 'inherit',
 });
+assertSpawnOk(buildResult, 'example build');
 
 const port = 4181;
 const server = spawn(
@@ -42,43 +57,49 @@ const server = spawn(
 );
 
 const baseUrl = `http://127.0.0.1:${port}/`;
-await waitForUrl(baseUrl, 80);
+let browser;
 
-const browser = await chromium.launch();
-const page = await browser.newPage();
+try {
+  await waitForUrl(baseUrl, 80);
+  browser = await chromium.launch();
+  const page = await browser.newPage();
 
-for (const scene of scenes) {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto(`${baseUrl}${scene.query}`, {
-    waitUntil: 'domcontentloaded',
-    timeout: 120_000,
-  });
-  if (scene.key === 'navbar-mobile') {
-    await page.waitForSelector('.theme-chip', { timeout: 60_000 });
-    await page.evaluate('window.scrollTo(0, 420)');
-    await sleep(200);
+  for (const scene of scenes) {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(`${baseUrl}${scene.query}`, {
+      waitUntil: 'domcontentloaded',
+      timeout: 120_000,
+    });
+    if (scene.key === 'navbar-mobile') {
+      await page.waitForSelector('.theme-chip', { timeout: 60_000 });
+      await page.evaluate('window.scrollTo(0, 420)');
+      await sleep(200);
+      await page.screenshot({
+        path: join(outDir, `after-${scene.key}-mobile.png`),
+      });
+      continue;
+    }
+    await sleep(250);
+    if (scene.key.includes('tonal') || scene.key.includes('angular')) {
+      const probe =
+        scene.key === 'tonal-custom' ? '#capture-tonal-custom' : '#capture-outline';
+      const box = await page.locator(probe).boundingBox();
+      if (box) {
+        await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+        await page.mouse.down();
+        await sleep(80);
+      }
+    }
     await page.screenshot({
       path: join(outDir, `after-${scene.key}-mobile.png`),
     });
-    continue;
+    await page.mouse.up();
   }
-  await sleep(250);
-  if (scene.key.includes('tonal') || scene.key.includes('angular')) {
-    const probe =
-      scene.key === 'tonal-custom' ? '#capture-tonal-custom' : '#capture-outline';
-    const box = await page.locator(probe).boundingBox();
-    if (box) {
-      await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
-      await page.mouse.down();
-      await sleep(80);
-    }
+} finally {
+  if (browser) {
+    await browser.close();
   }
-  await page.screenshot({
-    path: join(outDir, `after-${scene.key}-mobile.png`),
-  });
-  await page.mouse.up();
+  server.kill('SIGTERM');
 }
 
-await browser.close();
-server.kill('SIGTERM');
 console.log(`wrote follow-up screenshots to ${outDir}`);

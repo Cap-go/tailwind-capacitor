@@ -7,3 +7,7 @@
 @import './line-clamp.css';
 @plugin '../config/plugin-base.js';
 @plugin '../config/plugin-colors.js';
+@source inline("{active:,}bg-primary/25");
+@source inline("{active:,}bg-lime-500/25");
+@source inline("{active:,}bg-red-500/25");
+@source inline("{active:,}bg-cyan-600/25");
