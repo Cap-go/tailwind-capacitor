@@ -398,7 +398,7 @@ async function runBrowserChecks() {
       throw new Error(`angular button variant check failed: ${buttonVariants.reason}`);
     }
     await assertIosOutlineButtonActiveContrast(page);
-    await assertIosTonalButtonActivePress(page);
+    await assertIosTonalButtonActivePress(page, 'c-button#probe-tonal-ios button');
     await assertOpenBackdropsTranslucent(page);
     await assertRangeTrackTranslucent(page);
     await assertProgressbarMaterialTrack(page);
