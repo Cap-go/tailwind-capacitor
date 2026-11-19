@@ -377,20 +377,35 @@ async function runBrowserChecks() {
       if (!outline || !clearBtn || !tonal) {
         return { ok: false, reason: 'missing angular button probes' };
       }
-      const outlineCls = outline.className || '';
-      const clearCls = clearBtn.className || '';
-      const tonalCls = tonal.className || '';
+      const btnCls = (host) => host.querySelector('button')?.className || '';
+      const hostCls = (host) => host.className || '';
+      const outlineCls = btnCls(outline);
+      const clearHostCls = hostCls(clearBtn);
+      const clearBtnCls = btnCls(clearBtn);
+      const tonalCls = btnCls(tonal);
+      if (!/\\bcontents\\b/.test(hostCls(outline))) {
+        return { ok: false, reason: 'outline host missing contents: ' + hostCls(outline) };
+      }
       if (!/\\bborder-2\\b/.test(outlineCls)) {
         return { ok: false, reason: 'outline missing border-2: ' + outlineCls };
       }
       if (!/(?:^|\\s)bg-primary\\/15(?:\\s|$)/.test(tonalCls)) {
         return { ok: false, reason: 'tonal missing bg-primary/15: ' + tonalCls };
       }
-      if (/\\bborder-2\\b/.test(clearCls)) {
-        return { ok: false, reason: 'clear should not inherit outline border: ' + clearCls };
+      if (/\\bborder-2\\b/.test(clearHostCls) || /\\bborder-2\\b/.test(clearBtnCls)) {
+        return {
+          ok: false,
+          reason: 'clear should not inherit outline border: host=' + clearHostCls + ' btn=' + clearBtnCls,
+        };
       }
-      if (/(?:^|\\s)bg-primary\\/15(?:\\s|$)/.test(clearCls)) {
-        return { ok: false, reason: 'clear should not use tonal fill at rest: ' + clearCls };
+      if (
+        /(?:^|\\s)bg-primary\\/15(?:\\s|$)/.test(clearHostCls) ||
+        /(?:^|\\s)bg-primary\\/15(?:\\s|$)/.test(clearBtnCls)
+      ) {
+        return {
+          ok: false,
+          reason: 'clear should not use tonal fill at rest: host=' + clearHostCls + ' btn=' + clearBtnCls,
+        };
       }
       return { ok: true };
     })()`);
