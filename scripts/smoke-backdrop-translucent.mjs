@@ -274,12 +274,9 @@ export async function assertIosTonalButtonActivePress(
     throw new Error(`iOS tonal active check failed: no bounding box for ${probeSelector}`);
   }
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
-  const restingBg = hasInnerButton
-    ? await pressTarget.evaluate(
-        (el) => getComputedStyle(el).backgroundColor,
-      )
-    : await page.evaluate(`(() => {
+  const restingBg = await page.evaluate(`(() => {
     const host = document.querySelector(${selLit});
+    if (!host) return '';
     const el = host.matches('button,a') ? host : host.querySelector('button,a') || host;
     return getComputedStyle(el).backgroundColor;
   })()`);
