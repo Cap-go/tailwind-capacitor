@@ -246,6 +246,8 @@ export async function assertIosTonalButtonActivePress(
   const selLit = JSON.stringify(probeSelector);
   const host = page.locator(probeSelector);
   await host.waitFor({ state: 'attached', timeout: 60_000 });
+  const pressTarget = host.locator('button, a').first();
+  const hasInnerButton = (await pressTarget.count()) > 0;
   const armed = await page.evaluate(`(() => {
     const host = document.querySelector(${selLit});
     if (!host) {
@@ -265,19 +267,27 @@ export async function assertIosTonalButtonActivePress(
     throw new Error(`iOS tonal active check failed: ${armed.reason}`);
   }
   await assertStylesheetDefinesActiveUtility(page, 'active:bg-primary/25');
-  const box = await host.boundingBox();
+  const box = hasInnerButton
+    ? await pressTarget.boundingBox()
+    : await host.boundingBox();
   if (!box) {
     throw new Error(`iOS tonal active check failed: no bounding box for ${probeSelector}`);
   }
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
-  const restingBg = await page.evaluate(`(() => {
+  const restingBg = hasInnerButton
+    ? await pressTarget.evaluate(
+        (el) => getComputedStyle(el).backgroundColor,
+      )
+    : await page.evaluate(`(() => {
     const host = document.querySelector(${selLit});
     const el = host.matches('button,a') ? host : host.querySelector('button,a') || host;
     return getComputedStyle(el).backgroundColor;
   })()`);
   await page.mouse.down();
-  await sleep(150);
-  const result = await page.evaluate(`(() => {
+  let result;
+  for (let attempt = 0; attempt < 12; attempt += 1) {
+    await sleep(50);
+    result = await page.evaluate(`(() => {
     const host = document.querySelector(${selLit});
     const el = host.matches('button,a') ? host : host.querySelector('button,a') || host;
     const bg = getComputedStyle(el).backgroundColor;
@@ -311,6 +321,10 @@ export async function assertIosTonalButtonActivePress(
     }
     return { ok: true, bg, cls, resting, alpha };
   })()`);
+    if (result.ok || !result.reason?.includes('unchanged from rest')) {
+      break;
+    }
+  }
   await page.mouse.up();
   if (!result.ok) {
     throw new Error(`iOS tonal active check failed: ${result.reason}`);
