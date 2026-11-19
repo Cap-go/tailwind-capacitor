@@ -91,7 +91,7 @@ Without those lines, classes from `ButtonClasses.js` and other shared maps are m
 
 ### Custom iOS tonal button colors
 
-`ButtonColors` can derive `tonalActiveBgIos` when you set only `tonalBgIos`. Tailwind v4 still needs the resulting `active:bg-*` utility in a scanned source. Either set `tonalActiveBgIos` explicitly alongside `tonalBgIos`, or add the derived active class to your app CSS or Tailwind safelist. The defaults and common examples are listed as literals in `tonalActiveBgIosScanHints` inside `src/shared/colors/ButtonColors.js` for `@source` scanning.
+`ButtonColors` can derive `tonalActiveBgIos` when you set only `tonalBgIos`. Tailwind v4.1+ is required for `@source inline(...)` in `tailwind-capacitor.css` (common derived active utilities). Either set `tonalActiveBgIos` explicitly alongside `tonalBgIos`, or add the derived active class to your app CSS or Tailwind safelist. Arbitrary opacity tokens such as `bg-pink-500/[71.37%]` do not auto-derive: set `tonalActiveBgIos` explicitly. The defaults and common examples are also listed in `tonalActiveBgIosScanHints` inside `src/shared/colors/ButtonColors.js` for JS `@source` scanning.
 
 ## Styles
 

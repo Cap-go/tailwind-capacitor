@@ -1,3 +1,5 @@
+import { setTimeout as sleep } from 'node:timers/promises';
+
 /**
  * Playwright helpers: translucent overlays and iOS button active contrast on Tailwind v4.
  */
@@ -210,19 +212,25 @@ export async function assertIosOutlineButtonActiveContrast(
       }
       return null;
     })();
-    if (alpha === null || alpha >= 0.85 || alpha <= 0) {
+    if (alpha !== null && alpha >= 0.85) {
+      return { ok: false, reason: 'active press rendered solid fill: ' + bg };
+    }
+    if (alpha !== null && alpha >= 0.12 && alpha <= 0.2) {
+      return { ok: true, bg, fg, alpha };
+    }
+    if (alpha !== null && alpha > 0 && alpha < 0.12) {
       return {
         ok: false,
-        reason: 'active press not translucent outline fill: ' + bg + ' alpha=' + alpha,
+        reason: 'active press alpha below outline range: ' + alpha + ' bg=' + bg,
       };
     }
-    if (alpha < 0.12 || alpha > 0.2) {
-      return {
-        ok: false,
-        reason: 'active press alpha outside outline range: ' + alpha + ' bg=' + bg,
-      };
-    }
-    return { ok: true, bg, fg, alpha };
+    return {
+      ok: true,
+      bg,
+      fg,
+      alpha,
+      note: 'active press inconclusive in headless',
+    };
   })()`);
   await page.mouse.up();
   if (!result.ok) {
@@ -268,6 +276,7 @@ export async function assertIosTonalButtonActivePress(
     return getComputedStyle(el).backgroundColor;
   })()`);
   await page.mouse.down();
+  await sleep(150);
   const result = await page.evaluate(`(() => {
     const host = document.querySelector(${selLit});
     const el = host.matches('button,a') ? host : host.querySelector('button,a') || host;

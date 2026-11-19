@@ -11,6 +11,14 @@ function collectExports(source) {
   return [...new Set(names)];
 }
 
+function exportType(source, id) {
+  const stringConst = new RegExp(
+    `export const ${id}\\s*=\\s*(?:'[^']*'|\"[^\"]*\"|\`)`,
+  );
+  if (stringConst.test(source)) return 'string';
+  return '(...args: any[]) => any';
+}
+
 function writeDts(dir) {
   let count = 0;
   for (const name of readdirSync(dir)) {
@@ -20,7 +28,7 @@ function writeDts(dir) {
     const exports = collectExports(source);
     if (!exports.length) continue;
     const dts = `${exports
-      .map((id) => `export const ${id}: (...args: any[]) => any;`)
+      .map((id) => `export const ${id}: ${exportType(source, id)};`)
       .join('\n')}\n`;
     writeFileSync(jsPath.replace(/\.js$/, '.d.ts'), dts);
     count += 1;
@@ -35,8 +43,9 @@ const n2 = writeDts(colorsDir);
 
 function writeUtilityDts(file, exports) {
   const jsPath = join(root, 'src/shared', file);
+  const source = readFileSync(jsPath, 'utf8');
   const dts = `${exports
-    .map((id) => `export const ${id}: (...args: any[]) => any;`)
+    .map((id) => `export const ${id}: ${exportType(source, id)};`)
     .join('\n')}\n`;
   writeFileSync(jsPath.replace(/\.js$/, '.d.ts'), dts);
 }
