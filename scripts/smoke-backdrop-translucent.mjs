@@ -1,5 +1,3 @@
-import { setTimeout as sleep } from 'node:timers/promises';
-
 /**
  * Playwright helpers: translucent overlays and iOS button active contrast on Tailwind v4.
  */
@@ -14,6 +12,39 @@ function parseBackgroundAlpha(bg) {
     return 1;
   }
   return null;
+}
+
+async function withForcedPseudoState(page, selLit, forcedPseudoClasses, run) {
+  const cdp = await page.context().newCDPSession(page);
+  await cdp.send('DOM.enable');
+  await cdp.send('CSS.enable');
+  const { result } = await cdp.send('Runtime.evaluate', {
+    expression: `(() => {
+      const host = document.querySelector(${selLit});
+      if (!host) return null;
+      return host.matches('button,a') ? host : host.querySelector('button,a') || host;
+    })()`,
+  });
+  if (!result.objectId) {
+    await cdp.detach();
+    throw new Error('tonal press probe element not found for pseudo state');
+  }
+  const { nodeId } = await cdp.send('DOM.requestNode', { objectId: result.objectId });
+  try {
+    await cdp.send('CSS.forcePseudoState', { nodeId, forcedPseudoClasses });
+    return await run();
+  } finally {
+    try {
+      await cdp.send('CSS.forcePseudoState', { nodeId, forcedPseudoClasses: [] });
+    } catch {
+      // session may already be detached
+    }
+    try {
+      await cdp.detach();
+    } catch {
+      // ignore
+    }
+  }
 }
 
 async function assertStylesheetDefinesActiveUtility(page, utilityToken) {
@@ -271,68 +302,64 @@ export async function assertIosTonalButtonActivePress(
     throw new Error(`iOS tonal active check failed: ${armed.reason}`);
   }
   await assertStylesheetDefinesActiveUtility(page, 'active:bg-primary/25');
-  const box = await host.boundingBox();
-  if (!box) {
-    throw new Error(`iOS tonal active check failed: no bounding box for ${probeSelector}`);
-  }
-  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
-  await page.mouse.down();
-  const result = await page.evaluate(`(() => {
+  const restingBg = await page.evaluate(`(() => {
     const host = document.querySelector(${selLit});
+    if (!host) return '';
     const el = host.matches('button,a') ? host : host.querySelector('button,a') || host;
-    const bg = getComputedStyle(el).backgroundColor;
-    const fg = getComputedStyle(el).color;
-    if (bg === fg) {
-      return { ok: false, reason: 'tonal press text matches background: ' + bg };
-    }
-    const cls = el.className || '';
-    if (!/(?:^|\\s)active:bg-primary\\/25(?:\\s|$)/.test(cls)) {
-      return { ok: false, reason: 'missing active:bg-primary/25 class on press: ' + cls };
-    }
-    const parseAlpha = (color) => {
-      if (!color) return null;
-      const slash = color.match(/\\/\\s*([\\d.]+)\\s*\\)\\s*$/);
-      if (slash) return Number.parseFloat(slash[1]);
-      const rgba = color.match(/^rgba?\\(([^)]+)\\)/);
-      if (rgba) {
-        const parts = rgba[1].split(',').map((p) => p.trim());
-        if (parts.length === 4) return Number.parseFloat(parts[3]);
-        if (parts.length === 3) return 1;
-      }
-      return null;
-    };
-    const alpha = parseAlpha(bg);
-    if (alpha !== null && alpha >= 0.85) {
-      return { ok: false, reason: 'tonal press rendered solid fill: ' + bg };
-    }
-    if (alpha !== null && alpha >= 0.18 && alpha <= 0.32) {
-      return { ok: true, bg, fg, alpha };
-    }
-    if (el.matches(':active')) {
-      return {
-        ok: true,
-        bg,
-        fg,
-        alpha,
-        note: 'tonal press verified via :active in headless',
-      };
-    }
-    if (alpha !== null && alpha < 0.12) {
-      return {
-        ok: false,
-        reason: 'tonal press alpha below expected range: ' + alpha + ' bg=' + bg,
-      };
-    }
-    return {
-      ok: false,
-      reason: 'tonal press not active and fill not in range: alpha=' + alpha + ' bg=' + bg,
-    };
+    return getComputedStyle(el).backgroundColor;
   })()`);
-  await page.mouse.up();
-  if (!result.ok) {
-    throw new Error(`iOS tonal active check failed: ${result.reason}`);
+  const restingAlpha = parseBackgroundAlpha(restingBg);
+  if (restingAlpha === null || restingAlpha < 0.14 || restingAlpha > 0.16) {
+    throw new Error(
+      `iOS tonal active check failed: expected rest alpha ~0.15 (bg-primary/15), got ${restingAlpha} (${restingBg})`,
+    );
   }
-  return result;
+
+  const activeSnapshot = await withForcedPseudoState(page, selLit, ['active'], async () =>
+    page.evaluate(`(() => {
+      const host = document.querySelector(${selLit});
+      const el = host.matches('button,a') ? host : host.querySelector('button,a') || host;
+      const bg = getComputedStyle(el).backgroundColor;
+      const fg = getComputedStyle(el).color;
+      const cls = el.className || '';
+      if (bg === fg) {
+        return { ok: false, reason: 'tonal active text matches background: ' + bg };
+      }
+      if (!/(?:^|\\s)active:bg-primary\\/25(?:\\s|$)/.test(cls)) {
+        return { ok: false, reason: 'missing active:bg-primary/25 class: ' + cls };
+      }
+      return { ok: true, bg, fg, cls };
+    })()`),
+  );
+
+  if (!activeSnapshot.ok) {
+    throw new Error(`iOS tonal active check failed: ${activeSnapshot.reason}`);
+  }
+
+  const activeAlpha = parseBackgroundAlpha(activeSnapshot.bg);
+  if (activeAlpha === null || activeAlpha < 0.23 || activeAlpha > 0.27) {
+    throw new Error(
+      `iOS tonal active check failed: expected active alpha ~0.25 (active:bg-primary/25), got ${activeAlpha} (${activeSnapshot.bg})`,
+    );
+  }
+  if (activeSnapshot.bg === restingBg) {
+    throw new Error(
+      `iOS tonal active check failed: active background must differ from rest (${activeSnapshot.bg})`,
+    );
+  }
+  if (restingAlpha >= activeAlpha) {
+    throw new Error(
+      `iOS tonal active check failed: active alpha must exceed rest (${activeAlpha} vs ${restingAlpha})`,
+    );
+  }
+
+  return {
+    ok: true,
+    restingBg,
+    restingAlpha,
+    activeBg: activeSnapshot.bg,
+    activeAlpha,
+  };
 }
 
 export async function assertProgressbarMaterialTrack(
