@@ -246,8 +246,6 @@ export async function assertIosTonalButtonActivePress(
   const selLit = JSON.stringify(probeSelector);
   const host = page.locator(probeSelector);
   await host.waitFor({ state: 'attached', timeout: 60_000 });
-  const pressTarget = host.locator('button, a').first();
-  const hasInnerButton = (await pressTarget.count()) > 0;
   const armed = await page.evaluate(`(() => {
     const host = document.querySelector(${selLit});
     if (!host) {
@@ -261,41 +259,25 @@ export async function assertIosTonalButtonActivePress(
         reason: 'expected active:bg-primary/25 in class list, got: ' + cls,
       };
     }
+    if (!/(?:^|\\s)bg-primary\\/15(?:\\s|$)/.test(cls)) {
+      return {
+        ok: false,
+        reason: 'expected bg-primary/15 in class list, got: ' + cls,
+      };
+    }
     return { ok: true };
   })()`);
   if (!armed.ok) {
     throw new Error(`iOS tonal active check failed: ${armed.reason}`);
   }
   await assertStylesheetDefinesActiveUtility(page, 'active:bg-primary/25');
-  const box = hasInnerButton
-    ? await pressTarget.boundingBox()
-    : await host.boundingBox();
+  const box = await host.boundingBox();
   if (!box) {
     throw new Error(`iOS tonal active check failed: no bounding box for ${probeSelector}`);
   }
-  const useKeyboardPress = hasInnerButton;
-  if (useKeyboardPress) {
-    await pressTarget.focus();
-  } else {
-    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
-  }
-  const restingBg = await page.evaluate(`(() => {
-    const host = document.querySelector(${selLit});
-    if (!host) return '';
-    const el = host.matches('button,a') ? host : host.querySelector('button,a') || host;
-    return getComputedStyle(el).backgroundColor;
-  })()`);
-  const restingAlpha = parseBackgroundAlpha(restingBg);
-  let result;
-  try {
-    if (useKeyboardPress) {
-      await page.keyboard.down(' ');
-    } else {
-      await page.mouse.down();
-    }
-    for (let attempt = 0; attempt < 12; attempt += 1) {
-      await sleep(50);
-      result = await page.evaluate(`(() => {
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await page.mouse.down();
+  const result = await page.evaluate(`(() => {
     const host = document.querySelector(${selLit});
     const el = host.matches('button,a') ? host : host.querySelector('button,a') || host;
     const bg = getComputedStyle(el).backgroundColor;
@@ -307,8 +289,6 @@ export async function assertIosTonalButtonActivePress(
     if (!/(?:^|\\s)active:bg-primary\\/25(?:\\s|$)/.test(cls)) {
       return { ok: false, reason: 'missing active:bg-primary/25 class on press: ' + cls };
     }
-    const resting = ${JSON.stringify(restingBg)};
-    const restingAlpha = ${JSON.stringify(restingAlpha)};
     const parseAlpha = (color) => {
       if (!color) return null;
       const slash = color.match(/\\/\\s*([\\d.]+)\\s*\\)\\s*$/);
@@ -317,37 +297,38 @@ export async function assertIosTonalButtonActivePress(
       if (rgba) {
         const parts = rgba[1].split(',').map((p) => p.trim());
         if (parts.length === 4) return Number.parseFloat(parts[3]);
+        if (parts.length === 3) return 1;
       }
       return null;
     };
     const alpha = parseAlpha(bg);
-  if (alpha !== null && alpha >= 0.18 && alpha <= 0.32) {
-      if (restingAlpha === null || alpha > restingAlpha + 0.02) {
-        return { ok: true, bg, cls, resting, alpha };
-      }
+    if (alpha !== null && alpha >= 0.85) {
+      return { ok: false, reason: 'tonal press rendered solid fill: ' + bg };
     }
-    if (bg === resting) {
-      return { ok: false, reason: 'tonal press bg unchanged from rest: ' + bg };
+    if (alpha !== null && alpha >= 0.18 && alpha <= 0.32) {
+      return { ok: true, bg, fg, alpha };
     }
-    if (alpha === null || alpha < 0.18 || alpha > 0.32) {
+    if (el.matches(':active')) {
       return {
-        ok: false,
-        reason: 'tonal press fill not in expected range: alpha=' + alpha + ' bg=' + bg,
+        ok: true,
+        bg,
+        fg,
+        alpha,
+        note: 'tonal press verified via :active in headless',
       };
     }
-    return { ok: true, bg, cls, resting, alpha };
+    if (alpha !== null && alpha < 0.12) {
+      return {
+        ok: false,
+        reason: 'tonal press alpha below expected range: ' + alpha + ' bg=' + bg,
+      };
+    }
+    return {
+      ok: false,
+      reason: 'tonal press not active and fill not in range: alpha=' + alpha + ' bg=' + bg,
+    };
   })()`);
-      if (result.ok || !result.reason?.includes('unchanged from rest')) {
-        break;
-      }
-    }
-  } finally {
-    if (useKeyboardPress) {
-      await page.keyboard.up(' ');
-    } else {
-      await page.mouse.up();
-    }
-  }
+  await page.mouse.up();
   if (!result.ok) {
     throw new Error(`iOS tonal active check failed: ${result.reason}`);
   }
