@@ -1,0 +1,23 @@
+/**
+ * Flat :active selectors for iOS tonal press utilities. Tailwind v4 nests
+ * &:active inside the utility block; Chromium CDP CSS.forcePseudoState only
+ * applies flat selector rules reliably in headless smokes.
+ */
+@layer utilities {
+  .active\:bg-primary\/25:active,
+  .active\:\!bg-primary\/25:active {
+    background-color: color-mix(in srgb, var(--color-primary) 25%, transparent) !important;
+  }
+  .active\:bg-lime-500\/25:active,
+  .active\:\!bg-lime-500\/25:active {
+    background-color: color-mix(in srgb, var(--color-lime-500) 25%, transparent) !important;
+  }
+  .active\:bg-red-500\/25:active,
+  .active\:\!bg-red-500\/25:active {
+    background-color: color-mix(in srgb, var(--color-red-500) 25%, transparent) !important;
+  }
+  .active\:bg-cyan-600\/25:active,
+  .active\:\!bg-cyan-600\/25:active {
+    background-color: color-mix(in srgb, var(--color-cyan-600) 25%, transparent) !important;
+  }
+}
