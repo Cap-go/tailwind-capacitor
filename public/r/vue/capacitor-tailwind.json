@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/capacitor/styles/tailwind-capacitor.css",
-      "content": "@import 'tailwindcss';\n@import './theme-tokens.css';\n@import './variants.css';\n@import './safe-areas-base.css';\n@import './safe-areas-generated.css';\n@import './utilities.css';\n@import './line-clamp.css';\n@plugin '../config/plugin-base.js';\n@plugin '../config/plugin-colors.js';\n@import './tonal-active-scan.css';\n",
+      "content": "@import 'tailwindcss';\n@import './theme-tokens.css';\n@import './variants.css';\n@import './safe-areas-base.css';\n@import './safe-areas-generated.css';\n@import './utilities.css';\n@import './tonal-active-flat.css';\n@import './line-clamp.css';\n@plugin '../config/plugin-base.js';\n@plugin '../config/plugin-colors.js';\n@import './tonal-active-scan.css';\n",
       "type": "registry:file",
       "target": "src/capacitor/styles/tailwind-capacitor.css"
     },
