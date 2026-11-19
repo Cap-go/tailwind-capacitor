@@ -173,6 +173,21 @@
           :max="100"
         />
       </div>
+
+      <div
+        v-else-if="scene === 'navbar-scroll'"
+        id="capture-navbar"
+        class="demo-page no-safe-areas-top w-full min-h-[240vh]"
+      >
+        <Navbar title="Tailwind Capacitor Demo" />
+        <div
+          v-for="n in 24"
+          :key="n"
+          class="capture-scroll-block mx-4 my-3 rounded-lg border border-black/10 bg-white p-4 dark:border-white/10 dark:bg-zinc-900"
+        >
+          Scroll block {{ n }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -191,6 +206,7 @@ import {
   Button,
   Progressbar,
   Range,
+  Navbar,
 } from '@/capacitor/index.js'
 
 const props = defineProps({
@@ -212,10 +228,8 @@ const isOverlayScene = computed(() => OVERLAY_SCENES.has(props.scene))
 
 const tonalCustom = {
   tonalBgIos: 'bg-lime-500',
-  tonalActiveBgIos: 'active:bg-lime-700',
   tonalTextIos: 'text-lime-950',
   tonalBgMaterial: 'bg-lime-500',
-  tonalActiveBgMaterial: 'active:bg-lime-700',
   tonalTextMaterial: 'text-lime-950',
 }
 

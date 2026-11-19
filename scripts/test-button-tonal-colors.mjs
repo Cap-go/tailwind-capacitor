@@ -33,6 +33,9 @@ assert.equal(arbitraryOpacity.tonalActiveBgIos, 'active:!bg-primary/25');
 const arbitraryHex = ButtonColors({ tonalBgIos: 'bg-[#22c55e]' }, dark);
 assert.equal(arbitraryHex.tonalActiveBgIos, 'active:!bg-[#22c55e]/25');
 
+const pinkTonal = ButtonColors({ tonalBgIos: 'bg-pink-500/15' }, dark);
+assert.equal(pinkTonal.tonalActiveBgIos, 'active:!bg-pink-500/25');
+
 const combined = ButtonColors(
   {
     tonalBgIos: 'bg-lime-500',
@@ -68,6 +71,11 @@ assert.match(
   result.css,
   /active\\:\\!bg-lime-500\\\/25/,
   'tailwind-capacitor.css must emit lime tonal active utility',
+);
+assert.match(
+  result.css,
+  /active\\:\\!bg-pink-500\\\/25/,
+  'tailwind-capacitor.css must emit pink tonal active utility',
 );
 
 console.log('test-button-tonal-colors: ok');

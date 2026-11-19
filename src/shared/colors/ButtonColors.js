@@ -4,8 +4,9 @@ import { cls } from '../cls.js';
  * Literal utility strings for Tailwind v4 source scanning. Custom tonalBgIos
  * overrides still need tonalActiveBgIos or the same active:* token in a scanned file.
  */
+/** @see registry/capacitor/styles/tonal-active-scan.css (generated; full palette). */
 export const tonalActiveBgIosScanHints =
-  'active:!bg-primary/25 active:!bg-lime-500/25 active:!bg-red-500/25 active:!bg-cyan-600/25';
+  'active:!bg-primary/25 active:!bg-pink-500/25 active:!bg-lime-500/25';
 
 function tonalActiveFromBg(tonalBgIos) {
   const token = String(tonalBgIos)

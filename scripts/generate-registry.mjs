@@ -74,6 +74,7 @@ const styleCssFiles = [
   'registry/capacitor/styles/safe-areas-generated.css',
   'registry/capacitor/styles/utilities.css',
   'registry/capacitor/styles/line-clamp.css',
+  'registry/capacitor/styles/tonal-active-scan.css',
 ];
 
 const styleJsFiles = [
