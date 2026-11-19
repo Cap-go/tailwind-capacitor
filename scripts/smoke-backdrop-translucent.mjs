@@ -16,6 +16,15 @@ function parseBackgroundAlpha(bg) {
 
 const TONAL_PRESS_PROBE_ATTR = 'data-tc-tonal-press-probe';
 
+async function probePressTarget(page, probeSelector) {
+  const host = page.locator(probeSelector);
+  await host.waitFor({ state: 'attached', timeout: 60_000 });
+  const inner = host.locator('button, a').first();
+  const target = (await inner.count()) > 0 ? inner : host;
+  await target.waitFor({ state: 'visible', timeout: 60_000 });
+  return target;
+}
+
 async function withForcedPseudoState(page, cssSelector, forcedPseudoClasses, run) {
   const cdp = await page.context().newCDPSession(page);
   await cdp.send('DOM.enable');
@@ -192,8 +201,7 @@ export async function assertIosOutlineButtonActiveContrast(
   probeSelector = '#probe-outline-ios',
 ) {
   const selLit = JSON.stringify(probeSelector);
-  const host = page.locator(probeSelector);
-  await host.waitFor({ state: 'attached', timeout: 60_000 });
+  const pressTarget = await probePressTarget(page, probeSelector);
   const armed = await page.evaluate(`(() => {
     const host = document.querySelector(${selLit});
     if (!host) {
@@ -219,9 +227,11 @@ export async function assertIosOutlineButtonActiveContrast(
     throw new Error(`iOS outline active contrast check failed: ${armed.reason}`);
   }
   await assertStylesheetDefinesActiveUtility(page, 'active:bg-primary/15');
-  const box = await host.boundingBox();
+  const box = await pressTarget.boundingBox();
   if (!box) {
-    throw new Error(`iOS outline active contrast check failed: no bounding box for ${probeSelector}`);
+    throw new Error(
+      `iOS outline active contrast check failed: no bounding box for ${probeSelector}`,
+    );
   }
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
   await page.mouse.down();
