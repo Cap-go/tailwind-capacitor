@@ -17,7 +17,8 @@ import { resolveTheme, themeClasses } from '../shared/use-theme-classes.js';
 @Component({
   selector: 'c-button',
   standalone: true,
-  template: '<ng-content />',
+  template:
+    '<button type="button" [class]="buttonClass" [disabled]="disabled"><ng-content /></button>',
 })
 export class ButtonComponent implements OnInit, OnChanges, DoCheck {
   @Input() ios?: boolean;
@@ -51,8 +52,12 @@ export class ButtonComponent implements OnInit, OnChanges, DoCheck {
   @Input() segmentedActive = false;
   @Input() disabled = false;
 
+  buttonClass = '';
+
   @HostBinding('class')
-  hostClass = '';
+  get hostClass(): string {
+    return cls('contents', this.buttonClass);
+  }
 
   private readonly ctx = inject(CAPACITOR_CONTEXT);
 
@@ -142,6 +147,6 @@ export class ButtonComponent implements OnInit, OnChanges, DoCheck {
       size
     ];
     const raisedClasses = isRaised ? (c['raised'] as string) : '';
-    this.hostClass = cls(baseShape, styleClasses, sizeClasses, raisedClasses);
+    this.buttonClass = cls(baseShape, styleClasses, sizeClasses, raisedClasses);
   }
 }
