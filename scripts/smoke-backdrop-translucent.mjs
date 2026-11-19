@@ -273,18 +273,29 @@ export async function assertIosTonalButtonActivePress(
   if (!box) {
     throw new Error(`iOS tonal active check failed: no bounding box for ${probeSelector}`);
   }
-  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  const useKeyboardPress = hasInnerButton;
+  if (useKeyboardPress) {
+    await pressTarget.focus();
+  } else {
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  }
   const restingBg = await page.evaluate(`(() => {
     const host = document.querySelector(${selLit});
     if (!host) return '';
     const el = host.matches('button,a') ? host : host.querySelector('button,a') || host;
     return getComputedStyle(el).backgroundColor;
   })()`);
-  await page.mouse.down();
+  const restingAlpha = parseBackgroundAlpha(restingBg);
   let result;
-  for (let attempt = 0; attempt < 12; attempt += 1) {
-    await sleep(50);
-    result = await page.evaluate(`(() => {
+  try {
+    if (useKeyboardPress) {
+      await page.keyboard.down(' ');
+    } else {
+      await page.mouse.down();
+    }
+    for (let attempt = 0; attempt < 12; attempt += 1) {
+      await sleep(50);
+      result = await page.evaluate(`(() => {
     const host = document.querySelector(${selLit});
     const el = host.matches('button,a') ? host : host.querySelector('button,a') || host;
     const bg = getComputedStyle(el).backgroundColor;
@@ -297,19 +308,27 @@ export async function assertIosTonalButtonActivePress(
       return { ok: false, reason: 'missing active:bg-primary/25 class on press: ' + cls };
     }
     const resting = ${JSON.stringify(restingBg)};
-    if (bg === resting) {
-      return { ok: false, reason: 'tonal press bg unchanged from rest: ' + bg };
-    }
-    const alpha = (() => {
-      const slash = bg.match(/\\/\\s*([\\d.]+)\\s*\\)\\s*$/);
+    const restingAlpha = ${JSON.stringify(restingAlpha)};
+    const parseAlpha = (color) => {
+      if (!color) return null;
+      const slash = color.match(/\\/\\s*([\\d.]+)\\s*\\)\\s*$/);
       if (slash) return Number.parseFloat(slash[1]);
-      const rgba = bg.match(/^rgba?\\(([^)]+)\\)/);
+      const rgba = color.match(/^rgba?\\(([^)]+)\\)/);
       if (rgba) {
         const parts = rgba[1].split(',').map((p) => p.trim());
         if (parts.length === 4) return Number.parseFloat(parts[3]);
       }
       return null;
-    })();
+    };
+    const alpha = parseAlpha(bg);
+  if (alpha !== null && alpha >= 0.18 && alpha <= 0.32) {
+      if (restingAlpha === null || alpha > restingAlpha + 0.02) {
+        return { ok: true, bg, cls, resting, alpha };
+      }
+    }
+    if (bg === resting) {
+      return { ok: false, reason: 'tonal press bg unchanged from rest: ' + bg };
+    }
     if (alpha === null || alpha < 0.18 || alpha > 0.32) {
       return {
         ok: false,
@@ -318,11 +337,17 @@ export async function assertIosTonalButtonActivePress(
     }
     return { ok: true, bg, cls, resting, alpha };
   })()`);
-    if (result.ok || !result.reason?.includes('unchanged from rest')) {
-      break;
+      if (result.ok || !result.reason?.includes('unchanged from rest')) {
+        break;
+      }
+    }
+  } finally {
+    if (useKeyboardPress) {
+      await page.keyboard.up(' ');
+    } else {
+      await page.mouse.up();
     }
   }
-  await page.mouse.up();
   if (!result.ok) {
     throw new Error(`iOS tonal active check failed: ${result.reason}`);
   }
