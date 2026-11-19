@@ -13,7 +13,7 @@ function collectExports(source) {
 
 function exportType(source, id) {
   const stringConst = new RegExp(
-    `export const ${id}\\s*=\\s*(?:'[^']*'|\"[^\"]*\"|\`)`,
+    `export const ${id}\\s*=\\s*(?:'[^']*'|"[^"]*")`,
   );
   if (stringConst.test(source)) return 'string';
   return '(...args: any[]) => any';
