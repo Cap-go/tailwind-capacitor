@@ -193,16 +193,12 @@ if (!skipBefore) {
   console.log('capture: skipping before (CAPTURE_SKIP_BEFORE=1)');
 }
 
-try {
-  prepareExampleRoot(repoRoot, false);
-  await captureSet({
-    exampleCwd: join(repoRoot, 'example'),
-    port: 4283,
-    destDir: afterDir,
-  });
-} catch (error) {
-  throw error;
-}
+prepareExampleRoot(repoRoot, false);
+await captureSet({
+  exampleCwd: join(repoRoot, 'example'),
+  port: 4283,
+  destDir: afterDir,
+});
 
 console.log(`wrote before shots to ${beforeDir}`);
 console.log(`wrote after shots to ${afterDir}`);
