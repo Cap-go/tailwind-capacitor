@@ -24,6 +24,8 @@ function tonalActiveFromBg(tonalBgIos) {
   if (token.includes('/[')) {
     return 'active:!bg-primary/25';
   }
+  const bracket = token.match(/^bg-(\[[^\]]+\])$/);
+  if (bracket) return `active:!bg-${bracket[1]}/25`;
   const solid = token.match(/^bg-([a-zA-Z0-9-]+)$/);
   if (solid) return `active:!bg-${solid[1]}/25`;
   return 'active:!bg-primary/25';

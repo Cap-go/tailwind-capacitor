@@ -30,6 +30,9 @@ assert.equal(slashOverride.tonalActiveBgIos, 'active:!bg-red-500/25');
 const arbitraryOpacity = ButtonColors({ tonalBgIos: 'bg-pink-500/[71.37%]' }, dark);
 assert.equal(arbitraryOpacity.tonalActiveBgIos, 'active:!bg-primary/25');
 
+const arbitraryHex = ButtonColors({ tonalBgIos: 'bg-[#22c55e]' }, dark);
+assert.equal(arbitraryHex.tonalActiveBgIos, 'active:!bg-[#22c55e]/25');
+
 const combined = ButtonColors(
   {
     tonalBgIos: 'bg-lime-500',

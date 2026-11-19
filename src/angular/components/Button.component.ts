@@ -53,10 +53,31 @@ export class ButtonComponent implements OnInit, OnChanges, DoCheck {
   @Input() disabled = false;
 
   buttonClass = '';
+  private hostWrapperClass = '';
 
   @HostBinding('class')
   get hostClass(): string {
-    return cls('contents', this.buttonClass);
+    return this.hostWrapperClass;
+  }
+
+  private splitSegmentHostRounding(baseShape: string): {
+    host: string;
+    button: string;
+  } {
+    if (!this.segmented || this.segmentedStrong) {
+      return { host: '', button: baseShape };
+    }
+    const tokens = baseShape.split(/\s+/).filter(Boolean);
+    const host = tokens
+      .filter((t) => t.startsWith('first:') || t.startsWith('last:'))
+      .join(' ');
+    const button = tokens
+      .filter((t) => !t.startsWith('first:') && !t.startsWith('last:'))
+      .join(' ');
+    return {
+      host,
+      button: cls(button || 'rounded-none'),
+    };
   }
 
   private readonly ctx = inject(CAPACITOR_CONTEXT);
@@ -147,6 +168,18 @@ export class ButtonComponent implements OnInit, OnChanges, DoCheck {
       size
     ];
     const raisedClasses = isRaised ? (c['raised'] as string) : '';
-    this.buttonClass = cls(baseShape, styleClasses, sizeClasses, raisedClasses);
+    const { host, button } = this.splitSegmentHostRounding(baseShape);
+    if (this.segmented && !this.segmentedStrong) {
+      this.hostWrapperClass = cls('overflow-hidden', host, this.class);
+      this.buttonClass = cls(button, styleClasses, sizeClasses, raisedClasses);
+    } else {
+      this.hostWrapperClass = cls('contents', this.class);
+      this.buttonClass = cls(
+        baseShape,
+        styleClasses,
+        sizeClasses,
+        raisedClasses,
+      );
+    }
   }
 }
