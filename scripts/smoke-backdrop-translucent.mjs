@@ -14,22 +14,23 @@ function parseBackgroundAlpha(bg) {
   return null;
 }
 
-async function withForcedPseudoState(page, selLit, forcedPseudoClasses, run) {
+const TONAL_PRESS_PROBE_ATTR = 'data-tc-tonal-press-probe';
+
+async function withForcedPseudoState(page, cssSelector, forcedPseudoClasses, run) {
   const cdp = await page.context().newCDPSession(page);
   await cdp.send('DOM.enable');
   await cdp.send('CSS.enable');
-  const { result } = await cdp.send('Runtime.evaluate', {
-    expression: `(() => {
-      const host = document.querySelector(${selLit});
-      if (!host) return null;
-      return host.matches('button,a') ? host : host.querySelector('button,a') || host;
-    })()`,
+  const {
+    root: { nodeId: docId },
+  } = await cdp.send('DOM.getDocument');
+  const { nodeId } = await cdp.send('DOM.querySelector', {
+    nodeId: docId,
+    selector: cssSelector,
   });
-  if (!result.objectId) {
+  if (!nodeId) {
     await cdp.detach();
-    throw new Error('tonal press probe element not found for pseudo state');
+    throw new Error(`press probe not found for pseudo state: ${cssSelector}`);
   }
-  const { nodeId } = await cdp.send('DOM.requestNode', { objectId: result.objectId });
   try {
     await cdp.send('CSS.forcePseudoState', { nodeId, forcedPseudoClasses });
     return await run();
@@ -37,7 +38,7 @@ async function withForcedPseudoState(page, selLit, forcedPseudoClasses, run) {
     try {
       await cdp.send('CSS.forcePseudoState', { nodeId, forcedPseudoClasses: [] });
     } catch {
-      // session may already be detached
+      // node or session may already be gone
     }
     try {
       await cdp.detach();
@@ -315,10 +316,28 @@ export async function assertIosTonalButtonActivePress(
     );
   }
 
-  const activeSnapshot = await withForcedPseudoState(page, selLit, ['active'], async () =>
-    page.evaluate(`(() => {
-      const host = document.querySelector(${selLit});
-      const el = host.matches('button,a') ? host : host.querySelector('button,a') || host;
+  const pressProbeSel = `[${TONAL_PRESS_PROBE_ATTR}="1"]`;
+  const marked = await page.evaluate(`(() => {
+    const host = document.querySelector(${selLit});
+    if (!host) {
+      return { ok: false, reason: 'missing ' + ${selLit} };
+    }
+    const el = host.matches('button,a') ? host : host.querySelector('button,a') || host;
+    el.setAttribute(${JSON.stringify(TONAL_PRESS_PROBE_ATTR)}, '1');
+    return { ok: true };
+  })()`);
+  if (!marked.ok) {
+    throw new Error(`iOS tonal active check failed: ${marked.reason}`);
+  }
+
+  let activeSnapshot;
+  try {
+    activeSnapshot = await withForcedPseudoState(page, pressProbeSel, ['active'], async () =>
+      page.evaluate(`(() => {
+      const el = document.querySelector(${JSON.stringify(pressProbeSel)});
+      if (!el) {
+        return { ok: false, reason: 'missing tonal press probe node' };
+      }
       const bg = getComputedStyle(el).backgroundColor;
       const fg = getComputedStyle(el).color;
       const cls = el.className || '';
@@ -330,7 +349,13 @@ export async function assertIosTonalButtonActivePress(
       }
       return { ok: true, bg, fg, cls };
     })()`),
-  );
+    );
+  } finally {
+    await page.evaluate(`(() => {
+      const el = document.querySelector(${JSON.stringify(pressProbeSel)});
+      el?.removeAttribute(${JSON.stringify(TONAL_PRESS_PROBE_ATTR)});
+    })()`);
+  }
 
   if (!activeSnapshot.ok) {
     throw new Error(`iOS tonal active check failed: ${activeSnapshot.reason}`);
