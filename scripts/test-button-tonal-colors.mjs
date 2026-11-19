@@ -10,10 +10,10 @@ import { repoRoot } from './repo-root.mjs';
 const dark = (classNames) => (classNames ? classNames : '');
 
 const defaults = ButtonColors({}, dark);
-assert.equal(defaults.tonalActiveBgIos, 'active:bg-primary/25');
+assert.equal(defaults.tonalActiveBgIos, 'active:!bg-primary/25');
 
 const limeOnly = ButtonColors({ tonalBgIos: 'bg-lime-500' }, dark);
-assert.equal(limeOnly.tonalActiveBgIos, 'active:bg-lime-500/25');
+assert.equal(limeOnly.tonalActiveBgIos, 'active:!bg-lime-500/25');
 
 const limeExplicit = ButtonColors(
   {
@@ -25,10 +25,10 @@ const limeExplicit = ButtonColors(
 assert.equal(limeExplicit.tonalActiveBgIos, 'active:bg-lime-700');
 
 const slashOverride = ButtonColors({ tonalBgIos: 'bg-red-500/15' }, dark);
-assert.equal(slashOverride.tonalActiveBgIos, 'active:bg-red-500/25');
+assert.equal(slashOverride.tonalActiveBgIos, 'active:!bg-red-500/25');
 
 const arbitraryOpacity = ButtonColors({ tonalBgIos: 'bg-pink-500/[71.37%]' }, dark);
-assert.equal(arbitraryOpacity.tonalActiveBgIos, 'active:bg-primary/25');
+assert.equal(arbitraryOpacity.tonalActiveBgIos, 'active:!bg-primary/25');
 
 const combined = ButtonColors(
   {
@@ -37,9 +37,9 @@ const combined = ButtonColors(
   },
   dark,
 );
-assert.match(combined.tonalActiveBgIos, /^active:bg-lime-500\//);
+assert.match(combined.tonalActiveBgIos, /^active:!bg-lime-500\//);
 
-assert.match(tonalActiveBgIosScanHints, /active:bg-primary\/25/);
+assert.match(tonalActiveBgIosScanHints, /active:!bg-primary\/25/);
 
 const sync = spawnSync('npm', ['run', 'generate:css'], {
   cwd: repoRoot,
@@ -58,12 +58,12 @@ const result = await postcss([tailwindcss()]).process(registryCss, {
 });
 assert.match(
   result.css,
-  /active\\:bg-primary\\\/25/,
+  /active\\:\\!bg-primary\\\/25/,
   'tailwind-capacitor.css must emit default tonal active utility',
 );
 assert.match(
   result.css,
-  /active\\:bg-lime-500\\\/25/,
+  /active\\:\\!bg-lime-500\\\/25/,
   'tailwind-capacitor.css must emit lime tonal active utility',
 );
 

@@ -285,10 +285,10 @@ export async function assertIosTonalButtonActivePress(
     }
     const el = host.matches('button,a') ? host : host.querySelector('button,a') || host;
     const cls = el.className || '';
-    if (!/(?:^|\\s)active:bg-primary\\/25(?:\\s|$)/.test(cls)) {
+    if (!/(?:^|\\s)active:!?bg-primary\\/25(?:\\s|$)/.test(cls)) {
       return {
         ok: false,
-        reason: 'expected active:bg-primary/25 in class list, got: ' + cls,
+        reason: 'expected active:!bg-primary/25 in class list, got: ' + cls,
       };
     }
     if (!/(?:^|\\s)bg-primary\\/15(?:\\s|$)/.test(cls)) {
@@ -302,7 +302,7 @@ export async function assertIosTonalButtonActivePress(
   if (!armed.ok) {
     throw new Error(`iOS tonal active check failed: ${armed.reason}`);
   }
-  await assertStylesheetDefinesActiveUtility(page, 'active:bg-primary/25');
+  await assertStylesheetDefinesActiveUtility(page, 'active:!bg-primary/25');
   const restingBg = await page.evaluate(`(() => {
     const host = document.querySelector(${selLit});
     if (!host) return '';
@@ -344,8 +344,8 @@ export async function assertIosTonalButtonActivePress(
       if (bg === fg) {
         return { ok: false, reason: 'tonal active text matches background: ' + bg };
       }
-      if (!/(?:^|\\s)active:bg-primary\\/25(?:\\s|$)/.test(cls)) {
-        return { ok: false, reason: 'missing active:bg-primary/25 class: ' + cls };
+      if (!/(?:^|\\s)active:!?bg-primary\\/25(?:\\s|$)/.test(cls)) {
+        return { ok: false, reason: 'missing active:!bg-primary/25 class: ' + cls };
       }
       return { ok: true, bg, fg, cls };
     })()`),
@@ -362,32 +362,20 @@ export async function assertIosTonalButtonActivePress(
   }
 
   const activeAlpha = parseBackgroundAlpha(activeSnapshot.bg);
-  const activeFillMatches =
-    activeAlpha !== null &&
-    activeAlpha >= 0.23 &&
-    activeAlpha <= 0.27 &&
-    activeSnapshot.bg !== restingBg &&
-    restingAlpha !== null &&
-    activeAlpha > restingAlpha;
-  if (!activeFillMatches) {
-    const headlessUnchanged =
-      activeSnapshot.bg === restingBg &&
-      restingAlpha !== null &&
-      restingAlpha >= 0.14 &&
-      restingAlpha <= 0.16;
-    if (!headlessUnchanged) {
-      throw new Error(
-        `iOS tonal active check failed: expected active alpha ~0.25 (active:bg-primary/25), got ${activeAlpha} (${activeSnapshot.bg})`,
-      );
-    }
-    return {
-      ok: true,
-      restingBg,
-      restingAlpha,
-      activeBg: activeSnapshot.bg,
-      activeAlpha,
-      note: 'headless forced :active left computed fill at rest; class and stylesheet already verified',
-    };
+  if (activeAlpha === null || activeAlpha < 0.23 || activeAlpha > 0.27) {
+    throw new Error(
+      `iOS tonal active check failed: expected active alpha ~0.25 (active:!bg-primary/25), got ${activeAlpha} (${activeSnapshot.bg})`,
+    );
+  }
+  if (activeSnapshot.bg === restingBg) {
+    throw new Error(
+      `iOS tonal active check failed: active background must differ from rest (${activeSnapshot.bg})`,
+    );
+  }
+  if (restingAlpha !== null && activeAlpha <= restingAlpha) {
+    throw new Error(
+      `iOS tonal active check failed: active alpha must exceed rest (${activeAlpha} vs ${restingAlpha})`,
+    );
   }
 
   return {

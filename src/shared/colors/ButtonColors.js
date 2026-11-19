@@ -5,28 +5,28 @@ import { cls } from '../cls.js';
  * overrides still need tonalActiveBgIos or the same active:* token in a scanned file.
  */
 export const tonalActiveBgIosScanHints =
-  'active:bg-primary/25 active:bg-lime-500/25 active:bg-red-500/25 active:bg-cyan-600/25';
+  'active:!bg-primary/25 active:!bg-lime-500/25 active:!bg-red-500/25 active:!bg-cyan-600/25';
 
 function tonalActiveFromBg(tonalBgIos) {
   const token = String(tonalBgIos)
     .trim()
     .split(/\s+/)
     .find((part) => part.startsWith('bg-'));
-  if (!token) return 'active:bg-primary/25';
+  if (!token) return 'active:!bg-primary/25';
   const slash = token.match(/^bg-(.+)\/(\d+)$/);
   if (slash) {
     const opacity = Math.min(
       100,
       Math.round((Number(slash[2]) * 25) / 15),
     );
-    return `active:bg-${slash[1]}/${opacity}`;
+    return `active:!bg-${slash[1]}/${opacity}`;
   }
   if (token.includes('/[')) {
-    return 'active:bg-primary/25';
+    return 'active:!bg-primary/25';
   }
   const solid = token.match(/^bg-([a-zA-Z0-9-]+)$/);
-  if (solid) return `active:bg-${solid[1]}/25`;
-  return 'active:bg-primary/25';
+  if (solid) return `active:!bg-${solid[1]}/25`;
+  return 'active:!bg-primary/25';
 }
 
 export const ButtonColors = (colorsProp = {}, dark) => {
@@ -51,7 +51,7 @@ export const ButtonColors = (colorsProp = {}, dark) => {
       dark('dark:border-md-dark-outline')
     ),
     tonalBgIos: 'bg-primary/15',
-    tonalActiveBgIos: 'active:bg-primary/25',
+    tonalActiveBgIos: 'active:!bg-primary/25',
     tonalBgMaterial: cls(
       'bg-md-light-secondary-container',
       dark('dark:bg-md-dark-secondary-container')
