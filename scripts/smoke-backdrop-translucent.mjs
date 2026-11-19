@@ -62,7 +62,15 @@ async function assertStylesheetDefinesActiveUtility(page, utilityToken) {
   const result = await page.evaluate(`(() => {
     const token = ${tokenLit};
     const opacity = token.includes('25') ? '0.25' : '0.15';
-    const escaped = token.replace(/:/g, '\\\\:').replace(/\\//g, '\\\\/');
+    const plain = token.replace(/!/g, '');
+    const escaped = plain
+      .replace(/:/g, '\\\\:')
+      .replace(/\\//g, '\\\\/')
+      .replace(/!/g, '\\\\!');
+    const escapedImportant = plain
+      .replace(/:/g, '\\\\:')
+      .replace(/\\//g, '\\\\/')
+      .replace('active\\\\:', 'active\\\\:\\\\!');
     const visit = (rules, matches) => {
       for (const rule of rules) {
         if (rule.cssRules && rule.cssRules.length) {
@@ -72,7 +80,14 @@ async function assertStylesheetDefinesActiveUtility(page, utilityToken) {
         const selector = rule.selectorText || '';
         if (!selector.includes(':active') && !text.includes(':active')) continue;
         const haystack = selector + text;
-        if (!haystack.includes(escaped) && !haystack.includes(token)) continue;
+        if (
+          !haystack.includes(escapedImportant) &&
+          !haystack.includes(escaped) &&
+          !haystack.includes(token) &&
+          !haystack.includes(plain)
+        ) {
+          continue;
+        }
         const decl = text.toLowerCase();
         const opacityOk =
           decl.includes(opacity) ||
