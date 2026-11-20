@@ -26,7 +26,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "generate:css": "node scripts/copy-capacitor-config.mjs && node scripts/generate-line-clamp-css.mjs && node scripts/generate-safe-area-css.mjs",
+    "generate:css": "node scripts/copy-capacitor-config.mjs && node scripts/generate-line-clamp-css.mjs && node scripts/generate-safe-area-css.mjs && node scripts/generate-tonal-active-scan.mjs && node scripts/generate-progressbar-material-scan.mjs",
     "generate:registry": "node scripts/scaffold-ionic-additions.mjs && node scripts/port-konsta-react.mjs && node scripts/fix-react-konsta-dark.mjs && node scripts/generate-shared-dts.mjs && node scripts/generate-angular-components.mjs && node scripts/generate-angular-icons.mjs && node scripts/generate-registry.mjs",
     "build:registry:vue": "npx shadcn build -o public/r registry.json",
     "build:registry:react": "npx shadcn build -o public/r/react registry-react.json",
@@ -43,7 +43,7 @@
     "verify:registry-refs": "node scripts/verify-registry-refs.mjs",
     "postprocess:registry": "node scripts/postprocess-registry.mjs",
     "pretest": "npm run generate:css",
-    "test": "node scripts/verify-safe-area-selectors.js && node scripts/test-use-effective-dark.mjs && node scripts/test-angular-gen.mjs",
+    "test": "node scripts/verify-safe-area-selectors.js && node scripts/test-use-effective-dark.mjs && node scripts/test-button-tonal-colors.mjs && node scripts/test-progressbar-material-colors.mjs && node scripts/test-angular-gen.mjs",
     "test:registry-install": "npm run test:registry-install:vue && npm run test:registry-install:react && npm run test:registry-install:angular",
     "smoke:tailwind": "node scripts/smoke-tailwind-v4.mjs",
     "build:example": "npm run sync:example && npm run build:example:app",
@@ -69,7 +69,7 @@
   },
   "homepage": "https://github.com/Cap-go/tailwind-capacitor#readme",
   "peerDependencies": {
-    "tailwindcss": "^4.0.0"
+    "tailwindcss": "^4.1.0"
   },
   "files": [
     "index.js",

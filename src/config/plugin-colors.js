@@ -34,31 +34,58 @@ module.exports = plugin(function({ addUtilities, theme, addBase }) {
   // Generate color utilities that use the CSS custom properties
   const colorUtilities = {};
   
+  const addPaletteUtilities = (palette) => {
+    Object.keys(palette).forEach((colorName) => {
+      const colorValue = palette[colorName];
+      if (typeof colorValue === 'string' && colorValue.startsWith('#')) {
+        colorUtilities[`.text-${colorName}`] = {
+          color: `rgb(var(--c-color-${colorName}) / 1)`,
+        };
+        colorUtilities[`.bg-${colorName}`] = {
+          backgroundColor: `rgb(var(--c-color-${colorName}) / 1)`,
+        };
+        colorUtilities[`.border-${colorName}`] = {
+          borderColor: `rgb(var(--c-color-${colorName}) / 1)`,
+        };
+      }
+    });
+  };
+
   Object.keys(themeColors).forEach((colorName) => {
     const colorValue = themeColors[colorName];
     if (typeof colorValue === 'string' && colorVariables[`--c-color-${colorName}`]) {
       colorUtilities[`.text-${colorName}`] = {
-        color: `rgba(var(--c-color-${colorName}), 1)`
+        color: `rgb(var(--c-color-${colorName}) / 1)`
       };
       colorUtilities[`.bg-${colorName}`] = {
-        backgroundColor: `rgba(var(--c-color-${colorName}), 1)`
+        backgroundColor: `rgb(var(--c-color-${colorName}) / 1)`
       };
       colorUtilities[`.border-${colorName}`] = {
-        borderColor: `rgba(var(--c-color-${colorName}), 1)`
+        borderColor: `rgb(var(--c-color-${colorName}) / 1)`
       };
     } else if (typeof colorValue === 'object') {
       Object.keys(colorValue).forEach((shade) => {
         colorUtilities[`.text-${colorName}-${shade}`] = {
-          color: `rgba(var(--c-color-${colorName}-${shade}), 1)`
+          color: `rgb(var(--c-color-${colorName}-${shade}) / 1)`
         };
         colorUtilities[`.bg-${colorName}-${shade}`] = {
-          backgroundColor: `rgba(var(--c-color-${colorName}-${shade}), 1)`
+          backgroundColor: `rgb(var(--c-color-${colorName}-${shade}) / 1)`
         };
         colorUtilities[`.border-${colorName}-${shade}`] = {
-          borderColor: `rgba(var(--c-color-${colorName}-${shade}), 1)`
+          borderColor: `rgb(var(--c-color-${colorName}-${shade}) / 1)`
         };
       });
     }
+  });
+
+  const themePrimary = theme('colors.primary');
+  const primaryForMd =
+    typeof themePrimary === 'string' && themePrimary.startsWith('#')
+      ? themePrimary
+      : '#3b82f6';
+  addPaletteUtilities({
+    ...iosColors(primaryForMd),
+    ...mdColors(primaryForMd),
   });
 
   addUtilities(colorUtilities);

@@ -76,6 +76,23 @@ npx --package github:Cap-go/tailwind-capacitor registry-add public/r/angular/cap
 
 Most Angular registry items are class host wrappers around shared Konsta class maps (theme and `dark:*` styling). These items ship interactive controls with real DOM, inputs, outputs, and ARIA: `Toggle`, `Checkbox`, `Radio`, `Range`, `Searchbar`, and `ListInput`. `Preloader` and similar animation shells only apply theme classes on the host (no SVG spinner logic in Angular). Use Vue or React registry items when you need full Konsta behavior out of the box.
 
+### Angular PostCSS and `@source`
+
+Tailwind v4 only emits utilities that appear in scanned sources. Angular apps that use PostCSS instead of `@tailwindcss/vite` must point `@source` at the installed capacitor shared JS and Angular component files, for example:
+
+```css
+@import '@/capacitor/styles/tailwind-capacitor.css';
+@source "./capacitor/shared/**/*.js";
+@source "./capacitor/angular/**/*.ts";
+@source "./app/**/*.ts";
+```
+
+Without those lines, classes from `ButtonClasses.js` and other shared maps are missing at runtime (range tracks and material backdrops look opaque).
+
+### Custom iOS tonal button colors
+
+`ButtonColors` can derive `tonalActiveBgIos` when you set only `tonalBgIos`. Tailwind v4.1+ is required for `@source inline(...)` in `tailwind-capacitor.css` (common derived active utilities). Either set `tonalActiveBgIos` explicitly alongside `tonalBgIos`, or add the derived active class to your app CSS or Tailwind safelist. Arbitrary opacity tokens such as `bg-pink-500/[71.37%]` do not auto-derive: set `tonalActiveBgIos` explicitly. The defaults and common examples are also listed in `tonalActiveBgIosScanHints` inside `src/shared/colors/ButtonColors.js` for JS `@source` scanning.
+
 ## Styles
 
 ```css

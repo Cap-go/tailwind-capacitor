@@ -17,7 +17,9 @@ import { repoRoot } from './repo-root.mjs';
 import { installPackInApp, packTgz } from './full-smoke-pack.mjs';
 import {
   assertIosOutlineButtonActiveContrast,
+  assertIosTonalButtonActivePress,
   assertOpenBackdropsTranslucent,
+  assertProgressbarMaterialTrack,
   assertRangeTrackTranslucent,
 } from './smoke-backdrop-translucent.mjs';
 import { reactSmokeStyles, reactSmokeStylesNoSource } from './smoke-tailwind-styles.mjs';
@@ -285,6 +287,10 @@ export default function App() {
         <Button id="probe-outline-ios" ios outline>
           outline
         </Button>
+        <Button id="probe-tonal-ios" ios tonal>
+          tonal
+        </Button>
+        <Progressbar id="probe-progressbar-material" material className="w-48" progress={40} />
         <div className="hidden" aria-hidden="true">
         ${componentFiles
           .filter((f) => basename(f) !== 'Toggle.tsx')
@@ -394,8 +400,10 @@ try {
   await page.evaluate(`window.dispatchEvent(new Event('smoke-open-backdrops'))`);
   await page.waitForSelector('#backdrop-probe', { state: 'attached', timeout: 60_000 });
   await assertIosOutlineButtonActiveContrast(page);
+  await assertIosTonalButtonActivePress(page);
   await assertOpenBackdropsTranslucent(page);
   await assertRangeTrackTranslucent(page);
+  await assertProgressbarMaterialTrack(page);
   if (runtimeErrors.length) {
     const body = await page.locator('#root').innerHTML().catch(() => '');
     throw new Error(`runtime errors: ${runtimeErrors.join('; ')} | root: ${body.slice(0, 500)}`);

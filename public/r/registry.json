@@ -45,6 +45,21 @@
           "target": "src/capacitor/styles/line-clamp.css"
         },
         {
+          "path": "registry/capacitor/styles/tonal-active-scan.css",
+          "type": "registry:file",
+          "target": "src/capacitor/styles/tonal-active-scan.css"
+        },
+        {
+          "path": "registry/capacitor/styles/tonal-active-flat.css",
+          "type": "registry:file",
+          "target": "src/capacitor/styles/tonal-active-flat.css"
+        },
+        {
+          "path": "registry/capacitor/styles/progressbar-material-scan.css",
+          "type": "registry:file",
+          "target": "src/capacitor/styles/progressbar-material-scan.css"
+        },
+        {
           "path": "registry/capacitor/config/plugin-base.js",
           "type": "registry:file",
           "target": "src/capacitor/config/plugin-base.js"

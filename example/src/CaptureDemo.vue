@@ -152,6 +152,19 @@
         Tonal custom
       </Button>
 
+      <div
+        v-else-if="scene === 'progressbar-material'"
+        id="capture-progressbar"
+        class="w-full max-w-md rounded-xl px-6 py-6 bg-md-light-surface dark:bg-md-dark-surface"
+      >
+        <Progressbar
+          :ios="platformTheme === 'ios'"
+          :material="platformTheme === 'material'"
+          :progress="0.45"
+          class="!h-2 w-full"
+        />
+      </div>
+
       <div v-else-if="scene === 'range'" id="capture-range" class="w-full max-w-md">
         <Range
           :ios="platformTheme === 'ios'"
@@ -160,6 +173,21 @@
           :min="0"
           :max="100"
         />
+      </div>
+
+      <div
+        v-else-if="scene === 'navbar-scroll'"
+        id="capture-navbar"
+        class="demo-page no-safe-areas-top w-full min-h-[240vh]"
+      >
+        <Navbar title="Tailwind Capacitor Demo" />
+        <div
+          v-for="n in 24"
+          :key="n"
+          class="capture-scroll-block mx-4 my-3 rounded-lg border border-black/10 bg-white p-4 dark:border-white/10 dark:bg-zinc-900"
+        >
+          Scroll block {{ n }}
+        </div>
       </div>
     </div>
   </div>
@@ -177,7 +205,9 @@ import {
   Popup,
   Panel,
   Button,
+  Progressbar,
   Range,
+  Navbar,
 } from '@/capacitor/index.js'
 
 const props = defineProps({
@@ -199,10 +229,8 @@ const isOverlayScene = computed(() => OVERLAY_SCENES.has(props.scene))
 
 const tonalCustom = {
   tonalBgIos: 'bg-lime-500',
-  tonalActiveBgIos: 'active:bg-lime-700',
   tonalTextIos: 'text-lime-950',
   tonalBgMaterial: 'bg-lime-500',
-  tonalActiveBgMaterial: 'active:bg-lime-700',
   tonalTextMaterial: 'text-lime-950',
 }
 
