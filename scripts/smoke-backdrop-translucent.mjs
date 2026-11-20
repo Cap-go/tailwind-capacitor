@@ -349,6 +349,7 @@ export async function assertIosTonalButtonActivePress(
     }
     const el = host.matches('button,a') ? host : host.querySelector('button,a') || host;
     el.setAttribute(${JSON.stringify(TONAL_PRESS_PROBE_ATTR)}, '1');
+    el.style.setProperty('transition', 'none', 'important');
     return { ok: true };
   })()`);
   if (!marked.ok) {
@@ -378,7 +379,9 @@ export async function assertIosTonalButtonActivePress(
   } finally {
     await page.evaluate(`(() => {
       const el = document.querySelector(${JSON.stringify(pressProbeSel)});
-      el?.removeAttribute(${JSON.stringify(TONAL_PRESS_PROBE_ATTR)});
+      if (!el) return;
+      el.removeAttribute(${JSON.stringify(TONAL_PRESS_PROBE_ATTR)});
+      el.style.removeProperty('transition');
     })()`);
   }
 
@@ -386,50 +389,12 @@ export async function assertIosTonalButtonActivePress(
     throw new Error(`iOS tonal active check failed: ${activeSnapshot.reason}`);
   }
 
-  let activeBg = activeSnapshot.bg;
-  let activeAlpha = parseBackgroundAlpha(activeBg);
-  const tonalPressAlphaOk = (alpha) => alpha !== null && alpha >= 0.23 && alpha <= 0.27;
-  if (!tonalPressAlphaOk(activeAlpha) || activeBg === restingBg) {
-    const pressTarget = await probePressTarget(page, probeSelector);
-    const box = await pressTarget.boundingBox();
-    if (box) {
-      await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
-      await page.mouse.down();
-      const mouseSnapshot = await page.evaluate(`(() => {
-        const host = document.querySelector(${selLit});
-        const el = host.matches('button,a') ? host : host.querySelector('button,a') || host;
-        return {
-          bg: getComputedStyle(el).backgroundColor,
-          cls: el.className || '',
-        };
-      })()`);
-      await page.mouse.up();
-      const mouseAlpha = parseBackgroundAlpha(mouseSnapshot.bg);
-      if (tonalPressAlphaOk(mouseAlpha) && mouseSnapshot.bg !== restingBg) {
-        activeBg = mouseSnapshot.bg;
-        activeAlpha = mouseAlpha;
-      }
-    }
-  }
-  if (!tonalPressAlphaOk(activeAlpha)) {
-    const headlessFallback =
-      /(?:^|\s)active:!bg-primary\/25(?:\s|$)/.test(activeSnapshot.cls) &&
-      activeAlpha !== null &&
-      restingAlpha !== null &&
-      Math.abs(activeAlpha - restingAlpha) < 0.02;
-    if (!headlessFallback) {
-      throw new Error(
-        `iOS tonal active check failed: expected active alpha ~0.25 (active:!bg-primary/25), got ${activeAlpha} (${activeBg})`,
-      );
-    }
-    return {
-      ok: true,
-      restingBg,
-      restingAlpha,
-      activeBg,
-      activeAlpha,
-      note: 'headless :active did not override tonal press; class and stylesheet verified',
-    };
+  const activeBg = activeSnapshot.bg;
+  const activeAlpha = parseBackgroundAlpha(activeBg);
+  if (activeAlpha === null || activeAlpha < 0.23 || activeAlpha > 0.27) {
+    throw new Error(
+      `iOS tonal active check failed: expected active alpha ~0.25 (active:!bg-primary/25), got ${activeAlpha} (${activeBg})`,
+    );
   }
   if (activeBg === restingBg) {
     throw new Error(

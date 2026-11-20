@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/capacitor/styles/tailwind-capacitor.css",
-      "content": "@import 'tailwindcss';\n@import './theme-tokens.css';\n@import './variants.css';\n@import './safe-areas-base.css';\n@import './safe-areas-generated.css';\n@import './utilities.css';\n@import './line-clamp.css';\n@import './tonal-active-flat.css';\n@plugin '../config/plugin-base.js';\n@plugin '../config/plugin-colors.js';\n@import './tonal-active-scan.css';\n@import './progressbar-material-scan.css';\n",
+      "content": "@import 'tailwindcss';\n@import './theme-tokens.css';\n@import './variants.css';\n@import './safe-areas-base.css';\n@import './safe-areas-generated.css';\n@import './utilities.css';\n@import './line-clamp.css';\n@plugin '../config/plugin-base.js';\n@plugin '../config/plugin-colors.js';\n@import './tonal-active-scan.css';\n@import './progressbar-material-scan.css';\n@import './tonal-active-flat.css';\n",
       "type": "registry:file",
       "target": "src/capacitor/styles/tailwind-capacitor.css"
     },
@@ -55,7 +55,7 @@
     },
     {
       "path": "registry/capacitor/styles/tonal-active-flat.css",
-      "content": "/**\n * Flat :active selectors for iOS tonal press utilities. Tailwind v4 nests\n * &:active inside the utility block; Chromium CDP CSS.forcePseudoState only\n * applies flat selector rules reliably in headless smokes.\n */\n@layer utilities {\n  .active\\:bg-primary\\/25:active,\n  .active\\:\\!bg-primary\\/25:active {\n    background-color: color-mix(in srgb, var(--color-primary) 25%, transparent) !important;\n  }\n  .active\\:bg-lime-500\\/25:active,\n  .active\\:\\!bg-lime-500\\/25:active {\n    background-color: color-mix(in srgb, var(--color-lime-500) 25%, transparent) !important;\n  }\n  .active\\:bg-red-500\\/25:active,\n  .active\\:\\!bg-red-500\\/25:active {\n    background-color: color-mix(in srgb, var(--color-red-500) 25%, transparent) !important;\n  }\n  .active\\:bg-cyan-600\\/25:active,\n  .active\\:\\!bg-cyan-600\\/25:active {\n    background-color: color-mix(in srgb, var(--color-cyan-600) 25%, transparent) !important;\n  }\n}",
+      "content": "/**\n * Flat :active selectors for iOS tonal press utilities. Tailwind v4 nests\n * &:active inside the utility block; Chromium CDP CSS.forcePseudoState only\n * applies flat selector rules reliably in headless smokes.\n */\n.active\\:bg-primary\\/25:active,\n.active\\:\\!bg-primary\\/25:active {\n  background-color: color-mix(in srgb, var(--color-primary) 25%, transparent) !important;\n}\n.active\\:bg-lime-500\\/25:active,\n.active\\:\\!bg-lime-500\\/25:active {\n  background-color: color-mix(in srgb, var(--color-lime-500) 25%, transparent) !important;\n}\n.active\\:bg-red-500\\/25:active,\n.active\\:\\!bg-red-500\\/25:active {\n  background-color: color-mix(in srgb, var(--color-red-500) 25%, transparent) !important;\n}\n.active\\:bg-cyan-600\\/25:active,\n.active\\:\\!bg-cyan-600\\/25:active {\n  background-color: color-mix(in srgb, var(--color-cyan-600) 25%, transparent) !important;\n}",
       "type": "registry:file",
       "target": "src/capacitor/styles/tonal-active-flat.css"
     },
