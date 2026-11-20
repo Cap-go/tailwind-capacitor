@@ -76,6 +76,7 @@ const styleCssFiles = [
   'registry/capacitor/styles/line-clamp.css',
   'registry/capacitor/styles/tonal-active-scan.css',
   'registry/capacitor/styles/tonal-active-flat.css',
+  'registry/capacitor/styles/progressbar-material-scan.css',
 ];
 
 const styleJsFiles = [

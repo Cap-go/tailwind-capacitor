@@ -155,12 +155,13 @@
       <div
         v-else-if="scene === 'progressbar-material'"
         id="capture-progressbar"
-        class="w-full max-w-md px-6"
+        class="w-full max-w-md rounded-xl px-6 py-6 bg-md-light-surface dark:bg-md-dark-surface"
       >
         <Progressbar
           :ios="platformTheme === 'ios'"
           :material="platformTheme === 'material'"
           :progress="0.45"
+          class="!h-2 w-full"
         />
       </div>
 

@@ -9,3 +9,4 @@
 @plugin '../config/plugin-base.js';
 @plugin '../config/plugin-colors.js';
 @import './tonal-active-scan.css';
+@import './progressbar-material-scan.css';
